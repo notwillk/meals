@@ -1,0 +1,66 @@
+name: Chamomile panna cotta
+inspiration:
+  - https://tastecooking.com/recipes/chamomile-honey-panna-cotta-2/
+  - https://www.jamesbeard.org/recipes/chamomile-panna-cotta
+phases:
+  - name: make-panne-cotta
+    description: Make Panne Cotta
+    ingredients:
+      - name: heavy cream
+        qty: 2
+        unit: cup
+      - name: fresh chamomile flowers, stems and leaves removed
+        qty: 1/2
+        unit: cup
+        note: Can also use 2 chamomile tea bags instead of fresh flowers
+      - name: whole milk
+        qty: 1
+        unit: cup
+      - name: unflavored powdered gelatin
+        qty: 1
+        unit: envelope
+      - name: honey
+        qty: 1/4
+        unit: cup
+        note: Mild-flavored honey, like clover or wildflower
+      - name: vanilla extract
+        qty: 1/2
+        unit: teaspoon
+      - name: salt
+        qty: 1
+        unit: pinch
+      - name: chopped pistachios, to serve
+        qty: 1/2
+        unit: cup
+    steps:
+      - Bloom the gelatin: Soak 2 sheets in cold water for ~5 min until soft. Gently squeeze and set aside.
+      - Infuse the cream: In a vacuum-safe bag, combine cream, sugar, and chamomile.  Sous-vide at 176–180 °F (80–82 °C) for 60–75 minutes
+      - Strain & finish: Remove from bath, open bag. Quickly strain through a fine mesh to remove chamomile solids. Whisk in softened gelatin until fully dissolved.
+      - Chill to set: Pour into individual molds or glasses. Chill in fridge 2–4 hours until firm.
+  - nam#: make-garnish
+    description: Make Candied Fennel Seeds
+    ingredients:
+      - name: Fennel seeds
+        qty: 1
+        unit: tablespoon
+      - name: Sugar
+        qty: 20
+        unit: gram
+      - name: Salt
+        qty: 1
+        unit: pinch
+    steps:
+      - Toast fennel seeds lightly (just fragrant, ~1–2 min)
+      - In a small pan, melt sugar to light amber
+      - Stir in fennel seeds
+      - Pour thinly onto parchment. cool completely
+      - Break and grind to a coarse dust (spice grinder or mortar)
+    storage: Store in an airtight container at room temperature for up to 1 week
+  - description: Plating
+    final: true
+    follows:
+      - make-panne-cotta
+      - make-garnish
+    steps:
+      - Garnish with light dusting of Candied Fennel Seeds
+      - Serve immediately

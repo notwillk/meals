@@ -1,0 +1,23 @@
+name: Charred endive with balsamic glaze
+phases:
+  - name: Plating
+    description: Make vegetable stock
+    ingredients:
+      - name: endive
+        qty: 3
+        unit: count
+      - name: Aceto Balsamico di Modena (IGP)
+        qty: 1
+        unit: teaspoon
+      - name: neutral oil
+        qty: 1
+        unit: teaspoon
+      - name: Maldon salt
+    steps:
+      - Halve endive lengthwise
+      - Lightly oil the cut face
+      - In cast iron skillet on medium heat, sear cut-side down until deeply golden with some blistering, ~2–4 minutes
+      - Let it cool 1–2 minutes
+      - Brush very lightly with IGP balsamic
+      - Finish with Maldon salt
+      - Searve immediately in appetizer dish

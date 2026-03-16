@@ -1,0 +1,41 @@
+name: Hot clear mushroom–kombu tea
+inspiration:
+  - https://www.nauticalfarms.com/blogs/kelp-recipes/3-herbal-tea-blends-using-kelp-flakes
+  - https://www.oklahomafungi.com/blog/how-to-make-mushroom-tea
+phases:
+  - name: make-syrup
+    description: Make Maple and Soy Syrup
+    ingredients:
+      - name: maple syrup, grade A 
+        qty: 100
+        unit: gram
+      - name: light soy sauce
+        qty: 1/2
+        unit: teaspoon
+      - name: water
+        qty: 40
+        unit: gram
+      - name: rice vinegar
+        qty: 2
+        unit: drops
+    steps:
+      - Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
+    storage: Store the syrup in the sous vide bag in the refrigerator for up to 1 week
+  - name: Plating
+    description: Make Tea
+    ingredients:
+      - name: Dried Lion’s mane mushrooms
+        qty: 15
+        unit: gram
+      - name: Kombu flakes
+        qty: 3
+        unit: gram
+      - name: Water
+        qty: 1200
+        unit: milliliter
+      - name: syrup
+        qty: 5
+        unit: teaspoon
+    steps:
+      - Add water, Lion’s mane mushrooms, Kombu flakes, and syrup to a sous vide bag and cook at 150°F for 20 minutes
+      - Strain and serve hot in tea cup

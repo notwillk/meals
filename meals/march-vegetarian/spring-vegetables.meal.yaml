@@ -1,0 +1,45 @@
+name: Spring Vegetables
+date: 2026-03-15
+
+courses:
+  - name: Amuse-Bouche
+    description: Warm roasted celeriac velouté shooter
+    plating: Served in a small shooter glass with a drizzle of chili oil on top
+    recipes:
+      - "&recipes/celeriac-veloute"
+  - name: Salad
+    description: Watercress salad
+    plating: Large plate
+    recipes:
+      - "&recipes/watercress-salad"
+  - name: Appetizer
+    description: Ricotta and Herb Caramelle
+    plating: Bread Plate
+    recipes:
+      - "&recipes/ricotta-herb-caramelle"
+  - name: Intermezzo
+    hidden: true
+    description: Hot clear mushroom–kombu tea
+    plating: Tea cup
+    recipes:
+      - "&recipes/mushroom-kombu-tea"
+  - name: Entrée
+    description: Asparagus soufflé with Gruyère & Robiola
+    plating: Ramekin with small plate
+    recipes:
+      - "&recipes/asparagus-soufflé-with-gruyere-and-robiola"
+  - name: Bitter Interlude
+    description: Charred endive
+    plating: Small plate
+    recipes:
+      - "&recipes/charred-endive"
+  - name: Dessert
+    description: Chamomile panna cotta
+    plating: Small plate
+    recipes:
+      - "&recipes/chamomile-panna-cotta"
+  - name: Mignardise
+    description: Honey & orange pâte de fruit
+    plating: Charcuterie tray
+    recipes:
+      - "&recipes/honey-orange-pate-de-fruit"
