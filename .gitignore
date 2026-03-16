@@ -15,3 +15,7 @@ out/
 # Dependencies
 node_modules/
 vendor/
+
+# Schemas
+.schemas/
+!.schemas/.gitkeep
