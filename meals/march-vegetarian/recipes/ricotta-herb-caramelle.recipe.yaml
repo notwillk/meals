@@ -15,9 +15,9 @@ phases:
         unit: count
       - name: salt
     steps:
-      - Mix together the eggs, flour and a pinch of salt using volcano method
-      - Knead the dough for about 10 minutes until smooth and elastic
-      - Wrap in plastic wrap and let rest for 30 minutes
+      - instruction: Mix together the eggs, flour and a pinch of salt using volcano method
+      - instruction: Knead the dough for about 10 minutes until smooth and elastic
+      - instruction: Wrap in plastic wrap and let rest for 30 minutes
     storage: Wrap pasta dough in plastic wrap and store in the refrigerator for up to 2 days
   - name: make-filling
     description: Make filling
@@ -41,10 +41,10 @@ phases:
         qty: 1
         unit: tablespoon
     steps:
-      - Blanch the herbs in boiling water, chill immediately in an ice bath
-      - Drain th
-      - Mix with a little melted butter
-      - Finely chop and mix with the remaining ingredients
+      - instruction: Blanch the herbs in boiling water, chill immediately in an ice bath
+      - instruction: Drain them
+      - instruction: Mix with a little melted butter
+      - instruction: Finely chop and mix with the remaining ingredients
     storage: Store filling in an airtight container in the refrigerator for up to 2 days
   - name: make-caramelles
     description: Assemble caramelles
@@ -52,37 +52,37 @@ phases:
       - make-dough
       - make-filling
     steps:
-      - Allow dough to return to room temperature
-      - Divide it into two pieces
-      - Roll out each piece of dough into a thin sheet (you should be able to see your hand through it)
-      - Place small spoonfuls of filling on one sheet, spacing them evenly
-      - Fill and shape the Caramelles
+      - instruction: Allow dough to return to room temperature
+      - instruction: Divide it into two pieces
+      - instruction: Roll out each piece of dough into a thin sheet (you should be able to see your hand through it)
+      - instruction: Place small spoonfuls of filling on one sheet, spacing them evenly
+      - instruction: Fill and shape the Caramelles
     storage: Store assembled caramelles in an airtight container in the refrigerator, use same day
   - name: make-sauce
     description: Make Mushroom Cream Sauce
     ingredients:
-      - Cremini Mushrooms
-      - White wine (Sauvignon Blanc or Pinot Gris)
-      - Fresh Herbs, thyme and rosemary
-      - Parmesan Cheese
-      - Cream
+      - name: Cremini Mushrooms
+      - name: White wine (Sauvignon Blanc or Pinot Gris)
+      - name: Fresh Herbs, thyme and rosemary
+      - name: Parmesan Cheese
+      - name: Cream
     steps:
-      - Brown the mushrooms in a large skillet over a medium-high heat until golden brown. Leave them alone after tossing in the oil and butter, turning only once or twice. Turn the heat down if browning too quick
-      - Turn down to a medium heat and add the herbs and garlic and a big pinch of salt. Let it cook for a minute
-      - Add the wine and let it reduce slightly for 2-3 minutes. Scrape up any brown bits from the bottom of the pan
-      - Add the cream and bring to a very gentle simmer. Turn the heat down to a low heat, it should barely be bubbling
-      - Push the mushrooms to one side and add the parmesan cheese in 2 or 3 seperate lots, letting it melt in between. Add the black pepper
+      - instruction: Brown the mushrooms in a large skillet over a medium-high heat until golden brown. Leave them alone after tossing in the oil and butter, turning only once or twice. Turn the heat down if browning too quick
+      - instruction: Turn down to a medium heat and add the herbs and garlic and a big pinch of salt. Let it cook for a minute
+      - instruction: Add the wine and let it reduce slightly for 2-3 minutes. Scrape up any brown bits from the bottom of the pan
+      - instruction: Add the cream and bring to a very gentle simmer. Turn the heat down to a low heat, it should barely be bubbling
+      - instruction: Push the mushrooms to one side and add the parmesan cheese in 2 or 3 seperate lots, letting it melt in between. Add the black pepper
     storage: Store sauce in an airtight container in the refrigerator, use same day
   - description: Plating
     final: true
     ingredients:
-      - Lemon juice
+      - name: Lemon juice
     follows:
       - make-caramelles
       - make-sauce
     steps:
-      - Boil the caramelles in salted water until they float to the top, about 3-4 minutes
-      - Reheat mushroom cream sauce in saute pan over low heat
-      - Add a splash of lemon juice and whisk in quickly
-      - Add the drained caramelles to the reheated mushroom cream sauce and toss gently to coat
-      - Serve the caramelles coated in the mushroom cream sauce immediately
+      - instruction: Boil the caramelles in salted water until they float to the top, about 3-4 minutes
+      - instruction: Reheat mushroom cream sauce in saute pan over low heat
+      - instruction: Add a splash of lemon juice and whisk in quickly
+      - instruction: Add the drained caramelles to the reheated mushroom cream sauce and toss gently to coat
+      - instruction: Serve the caramelles coated in the mushroom cream sauce immediately

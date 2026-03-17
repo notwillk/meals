@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/meal.schema.json",
+  "title": "Meal",
+  "type": "object",
+  "required": ["name", "date", "courses"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the meal"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the meal (YYYY-MM-DD)"
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "recipes"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the course (e.g., Amuse-Bouche, Salad, Appetizer)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the course"
+          },
+          "plating": {
+            "type": "string",
+            "description": "Plating instructions or vessel"
+          },
+          "recipes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of recipe references (paths or anchors like '&recipes/celeriac-veloute')"
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Whether this course is hidden (e.g., Intermezzo)"
+          }
+        }
+      }
+    }
+  }
+}

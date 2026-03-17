@@ -16,6 +16,14 @@
     {
       "fileMatch": [".swimlane.yaml"],
       "url": "./.schemas/swimlane-config.json"
+    },
+    {
+      "fileMatch": ["*.meal.yaml"],
+      "url": "./.schemas/meal.schema.json"
+    },
+    {
+      "fileMatch": ["*.recipe.yaml"],
+      "url": "./.schemas/recipe.schema.json"
     }
-  }
+  ]
 }

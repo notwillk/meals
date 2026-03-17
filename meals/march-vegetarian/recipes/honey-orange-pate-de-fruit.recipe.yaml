@@ -5,10 +5,10 @@ phases:
   - name: make-pate-de-fruit
     description: Make honey/orange pâte de fruit
     ingredients:
-      - name: whole blood orange, washed 
+      - name: whole blood orange, washed
         qty: 1/2
         unit: count
-        notes: ~160 gram
+        note: ~160 gram
       - name: freshly squeezed blood orange juice
         qty: 166
         unit: gram
@@ -24,19 +24,19 @@ phases:
         note: 1 pouch of Certo brand liquid pectin
       - name: granulated sugar
     steps:
-      - Grease and line an 8x8-inch square pan with parchment, making sure that the parchment runs up the sides
-      - Bring a medium pot of water to boil, and boil the whole orange for about 10 minutes to soften the peel, let cool slightly
-      - Deseed the orange and purée in food processor for at least one minute, add orange juice as needed to help the purée blend smoothly
-      - Transfer the fruit purée to a large pot, along with the juice, and honey. Bring the mixture to a boil on high, stirring constantly, and monitoring temperature closely
-      - When the mixture hits 118ºF (48ºC), add the butter, and continue to stir and cook the mixture until it hits 223-224ºF (106ºC)
-      - When you reach the final cooking temperature, immediately take the pot off the stove and dump in the liquid pectin. Stir well to make sure it gets evenly mixed in, then transfer the hot mixture to the prepared pan
-      - Let the pâte de fruit set overnight, uncovered, until it is completely set throughout
-      - Unmold the pâte de fruit, and cut it into 1-inch squares with a large, oiled kitchen knife and, 
+      - instruction: Grease and line an 8x8-inch square pan with parchment, making sure that the parchment runs up the sides
+      - instruction: Bring a medium pot of water to boil, and boil the whole orange for about 10 minutes to soften the peel, let cool slightly
+      - instruction: Deseed the orange and purée in food processor for at least one minute, add orange juice as needed to help the purée blend smoothly
+      - instruction: Transfer the fruit purée to a large pot, along with the juice, and honey. Bring the mixture to a boil on high, stirring constantly, and monitoring temperature closely
+      - instruction: When the mixture hits 118ºF (48ºC), add the butter, and continue to stir and cook the mixture until it hits 223-224ºF (106ºC)
+      - instruction: When you reach the final cooking temperature, immediately take the pot off the stove and dump in the liquid pectin. Stir well to make sure it gets evenly mixed in, then transfer the hot mixture to the prepared pan
+      - instruction: Let the pâte de fruit set overnight, uncovered, until it is completely set throughout
+      - instruction: Unmold the pâté de fruit, and cut it into 1-inch squares with a large, oiled kitchen knife
     storage: Store the uncoated pâte de fruit between parchment sheets in an airtight container in the refrigerator for up to 1 week
   - description: Plating
     final: true
     follows:
       - make-pate-de-fruit
     steps:
-      - Toss the cubes in granulated sugar to coat them
-      - Align the pâte de fruit squares in a row on a charcuterie tray
+      - instruction: Toss the cubes in granulated sugar to coat them
+      - instruction: Align the pâte de fruit squares in a row on a charcuterie tray

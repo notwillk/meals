@@ -1,0 +1,91 @@
+name: Asparagus soufflé with Gruyère & Robiola
+inspiration:
+  - https://www.simplyrecipes.com/recipes/asparagus_souffle
+  - https://www.youtube.com/watch?v=rU5u9UzZnEU
+phases:
+  - name: prep-souffle
+    description: Prepare the soufflé base
+    ingredients:
+      - name: asparagus spears
+        qty: 1
+        unit: pound
+        note: Trimmed and peeled, cut into 1-inch pieces
+      - name: kosher salt
+      - name: shallots
+        qty: 1/4
+        unit: cup
+        note: Finely chopped
+      - name: garlic
+        qty: 1
+        unit: clove
+        note: chopped
+      - name: fresh thyme
+        qty: 1
+        unit: teaspoon
+        note: chopped (or 1/2 teaspoon dried)
+      - name: unsalted butter
+        qty: 4
+        unit: tablespoon
+      - name: cake flour
+        qty: 3
+        unit: tablespoon
+        note: can substitute all-purpose flour
+      - name: whole milk
+        qty: 1-1/4
+        unit: cup
+      - name: ground nutmeg
+        qty: 1/4
+        unit: teaspoon
+      - name: dry ground mustard
+      - name: ground cumin
+      - name: ground ginger
+      - name: freshly ground black pepper
+      - name: freshly grated Gruyere cheese
+        qty: 1/4
+        unit: cup
+      - name: freshly grated Robiola cheese
+        qty: 1/4
+        unit: cup
+      - name: egg yolks, large
+        qty: 3
+        unit: count
+      - name: egg whites, large
+        qty: 5
+        unit: count
+    steps:
+      - instruction: Blanch the asparagus for 2 minutes in boiling salted water. Rinse immediately in ice water to stop cooking. Drain and set aside to let cool
+      - instruction: Melt 1 tablespoon of butter in saucepan on medium heat. Add shallots, garlic, and thyme. Cook gently until soft, do not let brown. About 4 to 5 minutes. Remove from heat
+      - instruction: Purée asparagus and shallots, garlic and thyme together in a blender
+      - instruction: Over medium-low heat, make a white roux from 3 tablespoons butter and 3 tablespoons cake flour
+      - instruction: Add the milk to the mixture, little by little, whisking constantly to make a béchamel
+      - instruction: Stir in salt, nutmeg, cumin, mustard, ginger, and some fresh ground black pepper
+      - instruction: Lower the heat to low and let cook for 15 minutes, stirring occasionally to keep the mixture from sticking to the pan
+      - instruction: Remove the béchamel from the heat and stir in the cheese.
+      - instruction: Combine the mornay and the asparagus mixture in a large mixing bowl. Taste the mixture and adjust the seasonings
+      - instruction: Adjust for seasoning before adding the eggs
+      - instruction: Stir in the egg yolks until well combined.
+    storage: Refrigerate to store for up to two days. Return to room temperature before proceeding.
+  - final: true
+    description: Plating
+    follows:
+      - prep-souffle
+    ingredients:
+      - name: unsalted butter
+      - name: kosher salt
+      - name: xanthan gum
+      - name: breadcrumbs
+        qty: 1/2
+        unit: cup
+        note: finely ground
+    steps:
+      - instruction: Preheat oven to 400°F
+      - instruction: Butter six 8-ounce ramekins. Coat well with breadcrumbs
+      - instruction: Add salt (~0.1% of egg whites by weight) and xantham gum (0.1–0.15% of egg whites by weight) to the egg whites
+      - instruction: Beat the egg whites with a pinch of salt to soft peaks, shy of stiff peaks
+      - instruction: Fold the egg whites into the soufflé base using a rubber spatula, first folding in one quarter of the beaten egg whites, then the remaining three-quarters without deflating the egg whites
+      - instruction: Fill ramekins with the mixture up to a quarter-inch from the top
+      - instruction: Place the ramekins on baking sheet on the middle rack in the oven
+      - instruction: Until done, do not open the oven door, else you anger the gods of soufflé
+      - instruction: Bake for 10 minutes, reduce the heat to 350°F
+      - instruction: Bake an additional until puffed up and golden brown, ~15 minutes
+      - instruction: Serve immediately

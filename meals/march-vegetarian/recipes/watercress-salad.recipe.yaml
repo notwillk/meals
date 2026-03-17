@@ -6,7 +6,7 @@ phases:
   - name: salad-dressing
     description: Make salad dressing
     ingredients:
-      - name: olive oil 
+      - name: olive oil
         qty: 1/4
         unit: cup
       - name: lemon juice
@@ -21,13 +21,13 @@ phases:
       - name: Salt
       - name: Pepper
     steps:
-      - Combine olive oil, lemon juice, Dijon mustard, honey, salt, and pepper in a small bowl.
-      - Whisk until well combined.
+      - instruction: Combine olive oil, lemon juice, Dijon mustard, honey, salt, and pepper in a small bowl.
+      - instruction: Whisk until well combined.
     storage: Store dressing in an airtight container in the refrigerator for up to 1 week.
   - description: Plating
     final: true
     follows:
       - salad-dressing
     steps:
-      - Toss watercress with the prepared dressing.
-      - Top with ricotta herb caramelle.
+      - instruction: Toss watercress with the prepared dressing.
+      - instruction: Top with ricotta herb caramelle.

@@ -8,19 +8,19 @@ rules:
     severity: info
 
   - name: just is available
-    check: 'which just > /dev/null 2>&1'
+    check: "which just > /dev/null 2>&1"
     severity: error
 
   - name: jq is available
-    check: 'which jq > /dev/null 2>&1'
+    check: "which jq > /dev/null 2>&1"
     severity: error
 
   - name: watchexec is available
-    check: 'which watchexec > /dev/null 2>&1'
+    check: "which watchexec > /dev/null 2>&1"
     severity: error
 
   - name: opencode is available
-    check: 'which opencode > /dev/null 2>&1'
+    check: "which opencode > /dev/null 2>&1"
     severity: error
 
   - name: Opencode config set to workspace

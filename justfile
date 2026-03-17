@@ -24,8 +24,8 @@ doctor *args:
 [no-exit-message]
 format *args:
     @case "{{args}}" in \
-        "") echo "formatting..." ;; \
-        "--check") echo "checking format..." ;; \
+        "") prettier --write $(git ls-files -- "*.yaml") ;; \
+        "--check") prettier --check $(git ls-files -- "*.yaml") ;; \
         *) echo "Usage: just format [--check]" >&2; exit 1 ;; \
     esac
 
