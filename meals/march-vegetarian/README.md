@@ -1,10 +1,10 @@
-| Course            | Theme      | Temperature | Item                                                                                        |
-| ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------- |
-| Amuse bouche      | Roots      | Warm        | Warm roasted celeriac velouté shooter (brown butter · toasted hazelnut · chive oil)         |
-| Salad             | Shoots     | Cool        | Watercress salad (shaved fennel (quick-pickled) · green apple · young pecorino · olive oil) |
-| Appetizer         | Herbal     | Warm        | Ricotta & herb Caramelle (morel cream · black pepper · lemon zest)                          |
-| Secret Intermezzo | Renewal    | Hot         | Hot clear mushroom–kombu tea (light soy · tiny maple note)                                  |
-| Entree            | Garden     | Hot         | Asparagus soufflé with Gruyère & Robiola                                                    |
-| Bitter Interlude  | Leaf       | Warm        | Charred endive                                                                              |
-| Dessert           | Blossom    | Cold        | Chamomile panna cotta                                                                       |
-| Mignardise        | Pollinator | Room temp   | Honey/orange pâte de fruit                                                                  |
+| Course            | Theme      | Temperature | Item                                                                                       |
+| ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------ |
+| Amuse-Bouche      | Roots      | Warm        | Warm roasted celeriac velouté shooter                                                      |
+| Salad             | Shoots     | Cool        | Watercress, Fennel & Green Apple Salad                                                    |
+| Appetizer         | Herbal     | Warm        | Ricotta & nettle toast with hazelnut pangrattato                                           |
+| Intermezzo        | Renewal    | Hot         | Hot clear mushroom–kombu tea                                                               |
+| Green Tonic       | Leaf       | Warm        | Charred endive                                                                             |
+| Entrée            | Garden     | Hot         | Asparagus soufflé with Gruyère & Robiola                                                  |
+| Dessert           | Blossom    | Cold        | Carrot Sponge with Chamomile Cream                                                         |
+| Mignardise        | Pollinator | Room temp   | Honey & orange pâte de fruit                                                               |
