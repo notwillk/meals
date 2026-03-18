@@ -13,33 +13,33 @@ courses:
     recipes:
       - "&recipes/watercress-salad"
   - name: Appetizer
-    description: Ricotta and Herb Caramelle
+    description: Ricotta and nettle toast with hazelnut pangrattato
     plating: Bread Plate
     recipes:
-      - "&recipes/ricotta-herb-caramelle"
+      - "&recipes/ricotta-and-nettle-toast-with-hazelnut-pangrattato"
   - name: Intermezzo
     hidden: true
     description: Hot clear mushroom–kombu tea
     plating: Tea cup
     recipes:
       - "&recipes/mushroom-kombu-tea"
+  - name: Green Tonic
+    description: Charred endive
+    plating: Small plate
+    recipes:
+      - "&recipes/charred-endive"
   - name: Entrée
     description: Asparagus soufflé with Gruyère & Robiola
     plating: Ramekin with small plate
     recipes:
       - "&recipes/asparagus-soufflé-with-gruyere-and-robiola"
-  - name: Bitter Interlude
-    description: Charred endive
-    plating: Small plate
-    recipes:
-      - "&recipes/charred-endive"
   - name: Dessert
-    description: Chamomile panna cotta
+    description: Carrot Sponge with Chamomile Cream
     plating: Small plate
     recipes:
-      - "&recipes/chamomile-panna-cotta"
+      - "&recipes/carrot-sponge-chamomile-cream"
   - name: Mignardise
     description: Honey & orange pâte de fruit
-    plating: Charcuterie tray
+    plating: Oval serving dish
     recipes:
       - "&recipes/honey-orange-pate-de-fruit"

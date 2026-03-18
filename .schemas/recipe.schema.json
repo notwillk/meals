@@ -67,6 +67,10 @@
                     {"type": "string"}
                   ],
                   "description": "Quantity (can be a number or fraction string like '1 1/2')"
+                },
+                "homemade": {
+                  "type": "boolean",
+                  "description": "Whether the ingredient is homemade"
                 }
               },
               "required": ["name"]
@@ -81,6 +85,10 @@
                 "instruction": {
                   "type": "string",
                   "description": "The step instruction"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "Optional note about the step"
                 },
                 "equipment": {
                   "type": "array",
@@ -117,6 +125,10 @@
                           {"type": "string"}
                         ],
                         "description": "Quantity"
+                      },
+                      "homemade": {
+                        "type": "boolean",
+                        "description": "Whether the ingredient is homemade"
                       }
                     },
                     "required": ["name"]
@@ -134,7 +146,7 @@
           },
           "final": {
             "type": "boolean",
-            "description": "Whether this is the final plating phase"
+            "description": "Whether this is the final service phase"
           }
         }
       }

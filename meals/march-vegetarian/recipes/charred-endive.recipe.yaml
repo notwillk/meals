@@ -1,23 +1,49 @@
-name: Charred endive with balsamic glaze
+name: Charred Endive with Lemon & Olive Oil
 phases:
-  - name: Plating
-    description: Make vegetable stock
-    ingredients:
-      - name: endive
-        qty: 3
-        unit: count
-      - name: Aceto Balsamico di Modena (IGP)
-        qty: 1
-        unit: teaspoon
-      - name: neutral oil
-        qty: 1
-        unit: teaspoon
-      - name: Maldon salt
+  - name: prep-endive
     steps:
-      - instruction: Halve endive lengthwise
-      - instruction: Lightly oil the cut face
-      - instruction: In cast iron skillet on medium heat, sear cut-side down until deeply golden with some blistering, ~2–4 minutes
-      - instruction: Let it cool 1–2 minutes
-      - instruction: Brush very lightly with IGP balsamic
+      - instruction: Trim and halve the endive lengthwise, keeping the core intact so each half holds together
+        ingredients:
+          - name: endive
+            qty: 3
+            unit: count
+      - instruction: Lightly oil the cut face of each endive and season lightly with salt
+        ingredients:
+          - name: Kosher salt
+          - name: neutral oil
+            qty: 1
+            unit: teaspoon
+      - instruction: Heat a cast iron pan over medium-high heat
+      - instruction: Without moving, sear endive in cast iron pan, cut-side down until deeply golden brown, about 3–5 minutes
+      - instruction: Flip and cook for 30–60 seconds on the second side to warm through
+      - instruction: Remove from pan and allow to cool completely, cut-side up. Hold at room temperature for up to ~1 hour
+    storage: Hold at room temperature, uncovered, for up to ~1 hour
+
+  - name: make-dressing
+    steps:
+      - instruction: In squeeze bottle, combine lemon juice and olive oil
+        ingredients:
+          - name: lemon juice, fresh
+            qty: 2
+            unit: teaspoon
+          - name: extra virgin olive oil
+            qty: 3
+            unit: teaspoon
+      - instruction: Shake to combine and reserve
+    storage: Refrigerate in squeeze bottle for up to 3 days
+
+  - name: Service
+    follows:
+      - prep-endive
+      - make-dressing
+    final: true
+    steps:
+      - instruction: Return dressing to room temperature if refrigerated
+      - instruction: Torch the cut face and edges of the endive to create light, localized char
+        equipment:
+          - kitchen torch
+      - instruction: Immediately brush or spoon a thin layer of the lemon–olive oil dressing onto the cut face
       - instruction: Finish with Maldon salt
-      - instruction: Serve immediately in appetizer dish
+        ingredients:
+          - name: Maldon salt
+      - instruction: Serve immediately
