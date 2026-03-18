@@ -19,3 +19,11 @@ vendor/
 # Schemas
 .schemas/
 !.schemas/.gitkeep
+
+# Generated files
+artifacts/
+!artifacts/.gitkeep
+
+# Temp files
+.tmp/
+!.tmp/.gitkeep

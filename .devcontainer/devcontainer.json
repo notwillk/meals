@@ -2,10 +2,10 @@
   "name": "dev",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": {},
     "ghcr.io/notwillk/devcontainer-features/check-jsonschema": {},
     "ghcr.io/notwillk/checksy/checksy": {},
     "ghcr.io/notwillk/swimlane/swimlane": {},
-    "ghcr.io/devcontainers/features/docker-in-docker": {},
     "ghcr.io/notwillk/devcontainer-features/github-cli": {},
     "ghcr.io/notwillk/devcontainer-features/just": {},
     "ghcr.io/notwillk/devcontainer-features/jq": {},
@@ -13,7 +13,8 @@
     "ghcr.io/notwillk/devcontainer-features/opencode": {},
     "ghcr.io/notwillk/devcontainer-features/prettier": {},
     "ghcr.io/notwillk/devcontainer-features/watchexec": {},
-    "ghcr.io/notwillk/devcontainer-features/yamllint": {}
+    "ghcr.io/notwillk/devcontainer-features/yamllint": {},
+    "ghcr.io/rocker-org/devcontainer-features/pandoc": {}
   },
   "containerEnv": {
     "DEVCONTAINER": "true",
