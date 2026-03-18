@@ -43,11 +43,11 @@ rules:
       jq --argjson u "$UNION" '.customizations.vscode.extensions = $u' .devcontainer/devcontainer.json > /tmp/_dc_ext.json && mv /tmp/_dc_ext.json .devcontainer/devcontainer.json
 
   - name: swimlane schema-json config exists
-    check: '[ -f .schemas/swimlane-config.json ]'
+    check: "[ -f .schemas/swimlane-config.json ]"
     severity: error
     fix: swimlane schema-json config > .schemas/swimlane-config.json
 
   - name: swimlane schema-json ticket exists
-    check: '[ -f .schemas/swimlane-ticket.json ]'
+    check: "[ -f .schemas/swimlane-ticket.json ]"
     severity: error
     fix: swimlane schema-json ticket > .schemas/swimlane-ticket.json
