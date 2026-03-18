@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/errand.schema.json",
+  "title": "Errand",
+  "type": "object",
+  "required": ["name"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the errand (e.g., 'Go grocery shopping')"
+    },
+    "time": {
+      "type": "string",
+      "description": "ISO 24-hour format - when errand starts (e.g., '09:00')"
+    },
+    "duration": {
+      "type": "number",
+      "description": "Duration in minutes (e.g., 60)"
+    },
+    "day": {
+      "type": "number",
+      "description": "Day number for multi-day events (default: 1)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the errand"
+    }
+  }
+}

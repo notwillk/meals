@@ -147,6 +147,18 @@
           "final": {
             "type": "boolean",
             "description": "Whether this is the final service phase"
+          },
+          "time": {
+            "type": "string",
+            "description": "ISO 24-hour format - when phase starts (e.g., '08:00')"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Duration in minutes (e.g., 60)"
+          },
+          "day": {
+            "type": "number",
+            "description": "Day number for multi-day events (default: 1)"
           }
         }
       }
