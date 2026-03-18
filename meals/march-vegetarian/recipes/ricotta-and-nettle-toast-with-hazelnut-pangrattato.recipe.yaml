@@ -1,0 +1,159 @@
+name: Ricotta and nettle toast with hazelnut pangrattato
+inspiration:
+  - https://www.cuisine.co.nz/recipe/brussels-sprouts-with-hazelnut-pangrattato/
+  - https://www.bonappetit.com/recipe/ricotta-and-nettle-toast-with-hazelnut-pangrattato
+  - https://blog.mountainroseherbs.com/nettle-pesto-recipe
+
+phases:
+  - name: make-spread
+    description: Make ricotta and nettle spread
+    steps:
+      - instruction: If ricotta is very wet, drain briefly before using
+        ingredients:
+          - name: ricotta cheese
+            qty: 1/2
+            unit: cup
+      - instruction: Blanch the nettle leaves in boiling water for 45 seconds to 2 minutes until wilted (older nettles require more time)
+        ingredients:
+          - name: nettle leaves, fresh
+            qty: 5
+            unit: ounce
+            note: substitute 2 cups dried organic nettle leaf, if necessary
+      - instruction: Reserve some of the nettle water for the mushroom-kombu tea recipe
+      - instruction: Move to ice bath to stop the cooking and preserve the color
+      - instruction: Allow cool for at least 5 minutes, drain and squeeze out as much water as possible using a tea towel
+      - instruction: Combine nettle, pine nuts, Parmigiano Reggiano, salt in a food processor
+        ingredients:
+          - name: pine nuts
+            qty: 4
+            unit: tablespoon
+            note: toasted or raw, depending on availability
+          - name: Parmigiano Reggiano, grated
+            qty: 3
+            unit: ounce
+          - name: Kosher salt
+            qty: 1/2
+            unit: teaspoon
+            note: to taste
+      - instruction: Pulse until the mixture is coarse pesto texture and well combined, scraping down the sides as needed
+      - instruction: Add ricotta cheese and lemon juice, pulse until combined
+        ingredients:
+          - name: lemon juice, fresh
+            qty: 1
+            unit: teaspoon
+      - instruction: With the blender or food processor running, slowly pour in oil until desired consistency is reached
+        ingredients:
+          - name: organic extra virgin olive oil
+            qty: 2
+            unit: tablespoon
+            note: or to desired consistency
+      - instruction: Taste and adjust salt, pepper, lemon juice, and lemon zest; if slightly bitter, add a very small pinch of sugar
+        ingredients:
+          - name: Kosher Salt
+          - name: Pepper
+          - name: lemon juice, fresh
+          - name: sugar
+          - name: lemon zest
+            qty: 1
+            unit: pinch
+    storage: Store the spread in an airtight container in the refrigerator for up to 3 days
+
+  - name: make-pangrattato
+    description: Make hazelnut pangrattato
+    steps:
+      - instruction: Toast the hazelnuts in 200°C oven for 7-8 minutes until golden brown
+        ingredients:
+          - name: hazelnuts
+            qty: ⅓
+            unit: cup
+      - instruction: allow to cool, then rub the hazelnuts inside a clean tea towel to remove their skins
+      - instruction: Chop the hazelnuts roughly
+      - instruction: Blitz sourdough in a food processor to create fresh, chunky breadcrumbs
+        ingredients:
+          - name: sourdough bread
+            qty: 1
+            unit: slice
+            note: or other good quality bread, gluten-free if required
+      - instruction: Starting in a cold frying pan, cook garlic and evoo, bringing to medium-low heat
+        ingredients:
+          - name: olive oil
+            qty: 2
+            unit: tablespoon
+          - name: garlic, finely chopped
+            qty: 3
+            unit: cloves
+      - instruction: Once fragrant (not browned), immediately add hazelnuts, breadcrumbs, and sage, cook, stirring frequently, until golden and crisp (~5 minutes)
+        ingredients:
+          - name: fresh sage, finely chopped
+            qty: 1
+            unit: tablespoon
+            note: or 1 teaspoon dried sage
+      - instruction: Season with a little salt and pepper
+        ingredients:
+          - name: Kosher salt
+          - name: Black pepper, freshly ground
+    storage: Store the pangrattato in an airtight container at room temperature for up to 2 days
+
+  - name: make-shrub-garnish
+    description: Green apple shrub (lightly structured)
+    ingredients:
+      - name: Granny Smith apples
+        qty: 0.7
+        unit: pound
+        note: 70% Granny Smith + 30% Honeycrisp (or Pink Lady)
+      - name: Honeycrisp apples
+        qty: 0.3
+        unit: pound
+        note: or Pink Lady
+      - name: white wine vinegar
+        qty: 1
+        unit: cup
+        note: or champagne vinegar for softer acidity
+      - name: sugar
+        qty: 1.5
+        unit: tablespoon
+      - name: kosher salt
+        qty: 1
+        unit: pinch
+      - name: xanthan gum
+        qty: 0.5
+        unit: gram
+        note: ~0.1% by weight
+    steps:
+      - instruction: Core and roughly chop apples (leave skins on for structure and tannin)
+      - instruction: Combine apples, sugar, and salt in a bowl. Toss and let macerate 30–60 minutes until lightly juicy
+      - instruction: Add vinegar and blend until fully broken down
+      - instruction: Strain through fine mesh or cheesecloth, pressing gently (do not over-extract pulp)
+      - instruction: Transfer liquid to a container
+      - instruction: Using an immersion blender, blend in xanthan gum until fully dispersed and slightly thickened
+      - instruction: Rest 15 minutes to hydrate and stabilize
+      - instruction: "Taste and adjust (optional: tiny splash water if too sharp)"
+
+    storage: Refrigerate up to 2 weeks
+
+  - name: Service
+    description: Service
+    follows:
+      - make-spread
+      - make-pangrattato
+      - make-shrub-garnish
+    steps:
+      - instruction: Taste the spread once more before plating and adjust if needed
+      - instruction: Slice the bread along the bias with pieces that are around 4" long and 0.75" thick
+        ingredients:
+          - name: baguette
+            qty: 1
+            unit: slice
+            note: or other good quality bread
+      - instruction: Toast the bread until golden and crisp
+      - instruction: Spread the ricotta and nettle mixture on the toasted bread, then sprinkle with hazelnut pangrattato
+      - instruction: Add small dots of the green apple shrub over the toast, then garnish with lemon zest
+        ingredients:
+          - name: green apple shrub
+            qty: 1/4
+            unit: teaspoon
+            homemade: true
+          - name: lemon zest
+            qty: 1/2
+            unit: teaspoon
+    storage: Serve immediately

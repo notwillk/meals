@@ -1,0 +1,87 @@
+name: Watercress, Fennel & Green Apple Salad
+inspiration:
+  - https://www.cookeatworld.com/fennel-apple-salad/
+
+phases:
+  - name: make-salad-dressing
+    description: Make salad dressing
+    steps:
+      - instruction: Combine olive oil, lemon juice, and salt in a salad dressing shaker
+        ingredients:
+          - name: olive oil
+            qty: 3
+            unit: teaspoon
+          - name: lemon juice, fresh
+            qty: 2
+            unit: teaspoon
+          - name: Kosher salt
+      - instruction: Shake shake shake, shake shake shake, shake your booty, shake your body, shake shake shake, shake shake shake, shake it all around
+    storage: Store dressing in salad dressing shaker in the refrigerator for up to 2-3 days.
+
+  - name: mise-en-place-fennel
+    description: Prep the fennel
+    steps:
+      - instruction: Trim the fennel bulb and remove the thick outer stalks. Reserve the fronds for garnish. Using a mandoline or very sharp knife, thinly shave the fennel bulb
+        ingredients:
+          - name: fennel bulb, very thinly shaved
+            qty: 40
+            unit: gram
+            note: ~1/2 a bulb
+    storage: Store shaved fennel and reserved fronds in an airtight containers in the refrigerator for up to 2 days.
+
+  - name: mise-en-place-apple
+    description: Prep the apple
+    steps:
+      - instruction: Core the apple and cut into matchsticks using julienne blade on mandoline
+        ingredients:
+          - name: green apple, julienned (matchsticks)
+            qty: 25
+            unit: gram
+      - instruction: Toss with a squeeze of lemon juice to prevent browning
+        ingredients:
+          - name: lemon juice
+    storage: Store apples in an airtight container in the refrigerator for up to 4-6 hours
+
+  - name: mise-en-place-watercress
+    description: Prep the watercress
+    steps:
+      - instruction: Wash and trim the watercress, removing thick stems. Spin dry in a salad spinner or pat dry with tea towels
+        ingredients:
+          - name: watercress, trimmed (thick stems removed)
+            qty: 90
+            unit: gram
+            note: ~60% of total volume
+    storage: Store in refrigerator in a paper towel-lined container for up to 6 hours
+
+  - name: service
+    follows:
+      - make-salad-dressing
+      - mise-en-place-fennel
+      - mise-en-place-apple
+      - mise-en-place-watercress
+    final: true
+    steps:
+      - instruction: Allow salad dressing to return to room temperature and shake well before using
+        ingredients:
+          - name: salad dressing
+            homemade: true
+      - instruction: Without over dressing, dress fennel and apples until lightly coated. Season with kosher salt to taste
+        ingredients:
+          - name: Kosher salt
+          - name: prepped fennel
+            homemade: true
+          - name: prepped apple
+            homemade: true
+      - instruction: In a bowl, very gently fold the dressed fennel and apples with the watercress until just combined. Season with kosher salt to taste
+        ingredients:
+          - name: Kosher salt
+          - name: prepped watercress
+            homemade: true
+      - instruction: Plate salad on a large plate and garnish with fennel fronds, flower petals, and Maldon salt
+        ingredients:
+          - name: fennel fronds
+            homemade: true
+          - name: Edible flower petals
+            note: colorful, included for contrast not flavor
+          - name: Maldon salt
+    storage: Serve immediately

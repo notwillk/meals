@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/recipe.schema.json",
+  "title": "Recipe",
+  "type": "object",
+  "required": ["name", "phases"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the recipe"
+    },
+    "inspiration": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "URL sources of inspiration for the recipe"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name identifier for the phase"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what this phase does"
+          },
+          "follows": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of phase names that must be completed before this phase"
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the ingredient"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "Additional notes about the ingredient"
+                },
+                "preparation": {
+                  "type": "string",
+                  "description": "Preparation instructions for the ingredient"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of measurement (e.g., cup, tablespoon, count, ounce)"
+                },
+                "qty": {
+                  "oneOf": [
+                    {"type": "number"},
+                    {"type": "string"}
+                  ],
+                  "description": "Quantity (can be a number or fraction string like '1 1/2')"
+                },
+                "homemade": {
+                  "type": "boolean",
+                  "description": "Whether the ingredient is homemade"
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "instruction": {
+                  "type": "string",
+                  "description": "The step instruction"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "Optional note about the step"
+                },
+                "equipment": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Equipment needed for this step"
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the ingredient"
+                      },
+                      "note": {
+                        "type": "string",
+                        "description": "Additional notes about the ingredient"
+                      },
+                      "preparation": {
+                        "type": "string",
+                        "description": "Preparation instructions for the ingredient"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Unit of measurement"
+                      },
+                      "qty": {
+                        "oneOf": [
+                          {"type": "number"},
+                          {"type": "string"}
+                        ],
+                        "description": "Quantity"
+                      },
+                      "homemade": {
+                        "type": "boolean",
+                        "description": "Whether the ingredient is homemade"
+                      }
+                    },
+                    "required": ["name"]
+                  },
+                  "description": "Ingredients specific to this step"
+                }
+              },
+              "required": ["instruction"]
+            },
+            "description": "Steps to complete this phase"
+          },
+          "storage": {
+            "type": "string",
+            "description": "Storage instructions for the phase output"
+          },
+          "final": {
+            "type": "boolean",
+            "description": "Whether this is the final service phase"
+          }
+        }
+      }
+    }
+  }
+}

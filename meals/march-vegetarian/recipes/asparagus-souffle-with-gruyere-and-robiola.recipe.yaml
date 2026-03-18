@@ -1,0 +1,110 @@
+name: Asparagus soufflé with Gruyère & Robiola
+inspiration:
+  - https://www.simplyrecipes.com/recipes/asparagus_souffle
+  - https://www.youtube.com/watch?v=rU5u9UzZnEU
+phases:
+  - name: prep-souffle
+    description: Prepare the soufflé base
+    steps:
+      - instruction: Blanch the asparagus for 2 minutes in boiling salted water. Rinse immediately in ice water to stop cooking. Drain and set aside to let cool
+        ingredients:
+          - name: asparagus spears
+            qty: 1
+            unit: pound
+            note: Trimmed and peeled, cut into 1-inch pieces
+      - instruction: Melt butter in saucepan on medium heat. Add shallots, garlic, and thyme. Cook gently until soft, do not let brown. About 4 to 5 minutes. Remove from heat
+        ingredients:
+          - name: shallots
+            qty: 1/4
+            unit: cup
+            note: Finely chopped
+          - name: garlic
+            qty: 1
+            unit: clove
+            note: chopped
+          - name: fresh thyme
+            qty: 1
+            unit: teaspoon
+            note: chopped (or 1/2 teaspoon dried)
+          - name: unsalted butter
+            qty: 1
+            unit: tablespoon
+      - instruction: Purée asparagus and shallots, garlic and thyme together in a blender
+      - instruction: Over medium-low heat, make a white roux from butter and cake flour
+        ingredients:
+          - name: unsalted butter
+            qty: 3
+            unit: tablespoon
+          - name: cake flour
+            qty: 3
+            unit: tablespoon
+            note: can substitute all-purpose flour
+      - instruction: Add the milk to the mixture, little by little, whisking constantly to make a béchamel
+        ingredients:
+          - name: whole milk
+            qty: 1-1/4
+            unit: cup
+      - instruction: Stir in salt, nutmeg, cumin, mustard, ginger, and some fresh ground black pepper
+        ingredients:
+          - name: kosher salt
+          - name: ground nutmeg
+            qty: 1/4
+            unit: teaspoon
+          - name: dry ground mustard
+          - name: ground cumin
+          - name: ground ginger
+          - name: freshly ground black pepper
+      - instruction: Lower the heat to low and let cook for 15 minutes, stirring occasionally to keep the mixture from sticking to the pan
+      - instruction: Remove the béchamel from the heat and stir in the cheese.
+        ingredients:
+          - name: freshly grated Gruyere cheese
+            qty: 1/4
+            unit: cup
+          - name: freshly grated Robiola cheese
+            qty: 1/4
+            unit: cup
+      - instruction: Combine the mornay and the asparagus mixture in a large mixing bowl. Taste the mixture and adjust the seasonings
+      - instruction: Adjust for seasoning before adding the eggs
+        ingredients:
+          - name: kosher salt
+          - name: freshly ground black pepper
+      - instruction: Stir in the egg yolks until well combined.
+        ingredients:
+          - name: egg yolks, large
+            qty: 3
+            unit: count
+    storage: Refrigerate to store for up to two days. Return to room temperature before proceeding.
+
+  - final: true
+    description: Service
+    follows:
+      - prep-souffle
+    steps:
+      - instruction: Ensure the soufflé base is at room temperature before folding in egg whites
+      - instruction: Preheat oven to 400°F
+      - instruction: Butter six 8-ounce ramekins with upward strokes. Coat well with finely grated parmesan cheese, tapping out the excess. Place the ramekins on a baking sheet and set aside
+        ingredients:
+          - name: unsalted butter
+          - name: parmesan cheese
+            qty: 1/2
+            unit: cup
+            note: finely ground
+      - instruction: Beat the egg whites until foamy (small, uniform bubbles)
+        ingredients:
+          - name: egg whites, large
+            qty: 5
+            unit: count
+      - instruction: Sprinkle in salt (~0.1% of egg whites by weight) and xanthan gum (0.1–0.15%) evenly while mixing on low speed
+        ingredients:
+          - name: kosher salt
+            note: ~0.15g (for ~150g of egg whites)
+          - name: xanthan gum
+            note: ~0.15–0.225g (for ~150g of egg whites)
+      - instruction: Increase speed and beat until glossy, just shy of stiff peaks
+      - instruction: Fold one quarter of the egg whites into the base to lighten it, then gently fold in the remaining whites in two additions, cutting down the center and sweeping up the sides while rotating the bowl
+      - instruction: Fill ramekins with the mixture up to a quarter-inch from the top
+      - instruction: Run a thumb around the inside rim of each ramekin to create a small gap (“top hat” effect)
+      - instruction: Place the filled ramekins on a baking sheet, then tap the sheet lightly to remove large air pockets
+      - instruction: Transfer to the middle rack of the oven. Do not open the oven door during baking
+      - instruction: Bake an additional 12–15 minutes until puffed, golden, and just set in the center (slight jiggle, not liquid)
+      - instruction: Serve immediately

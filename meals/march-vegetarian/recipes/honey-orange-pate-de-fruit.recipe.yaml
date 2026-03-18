@@ -1,0 +1,59 @@
+name: Grapefruit honey pâte de fruit
+inspiration:
+  - https://bakeschool.com/grapefruit-honey-pate-de-fruit/
+phases:
+  - name: make-pate-de-fruit
+    description: Make pâte de fruit
+    steps:
+      - instruction: Prepare an 8x8 baking pan by greasing and lininge with parchment, using double sling method
+      - instruction: Open the liquid pectin packets and stand them up in a mug or a glass by the stove for later
+        ingredients:
+          - name: Certo liquid pectin
+            qty: 170
+            unit: mL
+            note: 2 pouches
+      - instruction: Bring a medium pot of water to boil, and boil the whole grapefruit for about an hour to ensure the peel has softened
+        ingredients:
+          - name: Whole grapefruit, washed
+            qty: 1
+            unit: count
+      - instruction: Let cool slightly, then cut the boiled grapefruit in half, wrap for unrelated future use
+      - instruction: Cut remaining grapefruit half in large chunks, removing any seeds along the way
+      - instruction: Place the grapefruit (pith, zest, and flesh) in a food processor and blend for at least a full minute to completely purée the fruit and to chop all the fibers/skin
+      - instruction: Transfer the fruit purée to a large pot, along with the juice, honey, and granulated sugar. Bring the mixture to a boil on high, stirring constantly
+        ingredients:
+          - name: Pink grapefruit, freshly squeezed juice
+            qty: 333
+            unit: gram
+            note: about 2 large pink grapefruits
+          - name: honey
+            qty: 200
+            unit: gram
+          - name: light corn syrup
+            qty: 1
+            unit: tablespoon
+          - name: granulated sugar
+            qty: 400
+            unit: gram
+            note: about 2 cups
+      - instruction: When the mixture hits 118ºF (48ºC), add the butter, and continue to stir and cook the mixture until it hits 223-224ºF (106ºC)
+        ingredients:
+          - name: unsalted butter
+            qty: 14
+            unit: gram
+            note: about 1 tablespoon
+      - instruction: Immediately take the pot off the stove and dump in the liquid pectin. Stir well to make sure it gets evenly mixed in, then transfer the hot mixture to the prepared pan
+      - instruction: Let the pâte de fruit set overnight, uncovered, until it is completely set
+      - instruction: Unmold the pâte de fruit, and cut it into 1-inch squares with a large, oiled kitchen knife
+    storage: Store the uncoated pâte de fruit between parchment sheets in an airtight container in the refrigerator for up to 1 week
+
+  - description: Service
+    final: true
+    follows:
+      - make-pate-de-fruit
+    steps:
+      - instruction: Toss the squares in granulated sugar to coat them
+        ingredients:
+          - name: granulated sugar
+      - instruction: Align the pâte de fruit squares in a row on a charcuterie tray
+    storage: Serve within a few hours of tossing the pâte de fruit in sugar

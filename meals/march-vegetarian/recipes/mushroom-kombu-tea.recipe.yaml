@@ -1,0 +1,58 @@
+name: Hot clear mushroom–kombu tea
+inspiration:
+  - https://www.nauticalfarms.com/blogs/kelp-recipes/3-herbal-tea-blends-using-kelp-flakes
+  - https://www.oklahomafungi.com/blog/how-to-make-mushroom-tea
+phases:
+  - name: make-tea
+    description: Make tea ahead of time
+    steps:
+      - instruction: Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
+        ingredients:
+          - name: maple syrup, grade A
+            qty: 100
+            unit: gram
+          - name: light soy sauce
+            qty: 1/2
+            unit: teaspoon
+          - name: water
+            qty: 40
+            unit: gram
+            note: include up to 8 grams of nettle water, taste to ensure it's not too bitter
+          - name: rice vinegar
+            qty: 2
+            unit: drops
+      - instruction: In a new vacuum bag, add the dried mushrooms, dried kombu, water, and 5 teaspoons of the soy mixture, seal and cook at 150°F for precisely 20 minutes without going longer than 20 minutes (use second bath if the first one is still too hot)
+        ingredients:
+          - name: soy mixture
+            homemade: true
+            qty: 5
+            unit: teaspoon
+          - name: Dried Lion’s mane mushrooms
+            qty: 15
+            unit: gram
+          - name: dried kombu, broken into small pieces
+            qty: 2.5
+            unit: gram
+          - name: water
+            qty: 1200
+            unit: milliliter
+      - instruction: Immediately transfer to an ice bath and chill until the liquid is no longer warm to the touch (at least 5 minutes)
+      - instruction: Strain to ensure no solids remain in the liquid, then store in new vacuum bag
+    storage: Store in bag in the refrigerator for up to 24 hours
+
+  - name: Service
+    description: Make Tea
+    steps:
+      - instruction: Reheat via sous vide at 150°F until hot (~20 minutes). Hold at temperature for up to 60 minutes if absolutely needed (flavor will gradually dull over time).
+      - instruction: Prep a "refresher" bag with dried kombu and water only
+        ingredients:
+          - name: dried kombu, broken into small pieces
+            qty: 0.5
+            unit: gram
+          - name: water
+            qty: 100
+            unit: milliliter
+      - instruction: During the last 5–10 minutes (do not exceed 10 minutes) of reheating, add the refresher bag to the bath to to extract a light kombu infusion
+      - instruction: Strain the refresher contents
+      - instruction: Start by adding ~5–10% of the refresher. Adjust incrementally to taste until balanced (flat/dull → more refresher; too bitter → a small amount of refresher; too strong/ocean-y → dilute with water)
+      - instruction: Serve hot in a tea cup
