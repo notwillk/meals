@@ -15,20 +15,24 @@ phases:
             qty: 1
             unit: pound
             note: Trimmed and peeled, cut into 1-inch pieces
+            source: Rainbow Grocery
       - instruction: Melt butter in saucepan on medium heat. Add shallots, garlic, and thyme. Cook gently until soft, do not let brown. About 4 to 5 minutes. Remove from heat
         ingredients:
           - name: shallots
             qty: 1/4
             unit: cup
             note: Finely chopped
+            source: Rainbow Grocery
           - name: garlic
             qty: 1
             unit: clove
             note: chopped
+            source: Rainbow Grocery
           - name: fresh thyme
             qty: 1
             unit: teaspoon
             note: chopped (or 1/2 teaspoon dried)
+            source: Rainbow Grocery
           - name: unsalted butter
             qty: 1
             unit: tablespoon
@@ -47,6 +51,7 @@ phases:
           - name: whole milk
             qty: 1-1/4
             unit: cup
+            source: Farmer's Market
       - instruction: Stir in salt, nutmeg, cumin, mustard, ginger, and some fresh ground black pepper
         ingredients:
           - name: kosher salt
@@ -63,9 +68,11 @@ phases:
           - name: freshly grated Gruyere cheese
             qty: 1/4
             unit: cup
+            source: Rainbow Grocery
           - name: freshly grated Robiola cheese
             qty: 1/4
             unit: cup
+            source: Rainbow Grocery
       - instruction: Combine the mornay and the asparagus mixture in a large mixing bowl. Taste the mixture and adjust the seasonings
       - instruction: Adjust for seasoning before adding the eggs
         ingredients:
@@ -76,6 +83,7 @@ phases:
           - name: egg yolks, large
             qty: 3
             unit: count
+            source: Farmer's Market
     storage: Refrigerate to store for up to two days. Return to room temperature before proceeding.
 
   - id: service
@@ -95,17 +103,20 @@ phases:
             qty: 1/2
             unit: cup
             note: finely ground
+            source: Rainbow Grocery
       - instruction: Beat the egg whites until foamy (small, uniform bubbles)
         ingredients:
           - name: egg whites, large
             qty: 5
             unit: count
+            source: Farmer's Market
       - instruction: Sprinkle in salt (~0.1% of egg whites by weight) and xanthan gum (0.1–0.15%) evenly while mixing on low speed
         ingredients:
           - name: kosher salt
             note: ~0.15g (for ~150g of egg whites)
           - name: xanthan gum
             note: ~0.15–0.225g (for ~150g of egg whites)
+            source: Amazon
       - instruction: Increase speed and beat until glossy, just shy of stiff peaks
       - instruction: Fold one quarter of the egg whites into the base to lighten it, then gently fold in the remaining whites in two additions, cutting down the center and sweeping up the sides while rotating the bowl
       - instruction: Fill ramekins with the mixture up to a quarter-inch from the top

@@ -17,6 +17,7 @@ phases:
           - name: lemon juice, fresh
             qty: 2
             unit: teaspoon
+            source: Rainbow Grocery
           - name: Kosher salt
       - instruction: Shake shake shake, shake shake shake, shake your booty, shake your body, shake shake shake, shake shake shake, shake it all around
     storage: Store dressing in salad dressing shaker in the refrigerator for up to 2-3 days.
@@ -32,11 +33,12 @@ phases:
             qty: 40
             unit: gram
             note: ~1/2 a bulb
+            source: Rainbow Grocery
     storage: Store shaved fennel and reserved fronds in an airtight containers in the refrigerator for up to 2 days.
 
   - id: mise-en-place-apple
     description: Prep the apple
-    time: "2026-03-22T09:00:00"
+    time: "2026-03-22T10:00:00"
     duration: "PT10M"
     steps:
       - instruction: Core the apple and cut into matchsticks using julienne blade on mandoline
@@ -44,14 +46,16 @@ phases:
           - name: green apple, julienned (matchsticks)
             qty: 25
             unit: gram
+            source: Rainbow Grocery (Sunday)
       - instruction: Toss with a squeeze of lemon juice to prevent browning
         ingredients:
           - name: lemon juice
+            source: Rainbow Grocery
     storage: Store apples in an airtight container in the refrigerator for up to 4-6 hours
 
   - id: mise-en-place-watercress
     description: Prep the watercress
-    time: "2026-03-22T09:10:00"
+    time: "2026-03-22T10:10:00"
     duration: "PT10M"
     steps:
       - instruction: Wash and trim the watercress, removing thick stems. Spin dry in a salad spinner or pat dry with tea towels
@@ -60,6 +64,7 @@ phases:
             qty: 90
             unit: gram
             note: ~60% of total volume
+            source: Rainbow Grocery (Sunday)
     storage: Store in refrigerator in a paper towel-lined container for up to 6 hours
 
   - id: service
@@ -95,5 +100,6 @@ phases:
             homemade: true
           - name: Edible flower petals
             note: colorful, included for contrast not flavor
+            source: Farmer's Market
           - name: Maldon salt
     storage: Serve immediately

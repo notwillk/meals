@@ -7,4 +7,4 @@
 | Second Salad       | Leaf       | Warm        | Charred endive                                                                             |
 | Entrée            | Garden     | Hot         | Asparagus soufflé with Gruyère & Robiola                                                  |
 | Dessert           | Blossom    | Cold        | Carrot Sponge with Chamomile Cream                                                         |
-| Mignardise        | Pollinator | Room temp   | Honey & orange pâte de fruit                                                               |
+| Mignardise        | Pollinator | Room temp   | Honey grapefruit pâte de fruit                                                               |

@@ -10,14 +10,6 @@ phases:
     description: Make the carrot sponge base
     duration: PT1H45M
     time: "2026-03-21T14:00:00"
-    ingredients:
-      - name: honey
-        qty: 20
-        unit: gram
-      - name: neutral oil
-        qty: 100
-        unit: gram
-        note: vegetable or grapeseed oil
     steps:
       - instruction: Peel and finely grate the carrots with microplane
         equipment:
@@ -27,6 +19,7 @@ phases:
             preparation: peeled and very finely grated
             unit: lbs
             qty: 0.5
+            source: Rainbow Grocery
       - instruction: Vacuum seal carrots and salt, let sit for 30 minutes, gently squeeze to remove excess liquid (carrots should remain moist, not dry)
         equipment:
           - vacuum sealer
@@ -77,6 +70,7 @@ phases:
           - name: large eggs
             qty: 2
             unit: count
+            source: Farmer's Market
           - name: granulated sugar
             qty: 110
             unit: gram
@@ -117,6 +111,7 @@ phases:
             preparation: peeled
             unit: count
             qty: 1
+            source: Rainbow Grocery
       - instruction: In a small saucepan on high heat, bring lemon juice, water, and sugar to a boil, stirring until sugar has dissolved
         equipment:
           - small saucepan
@@ -124,6 +119,7 @@ phases:
           - name: lemon juice, fresh
             qty: 1.5
             unit: tablespoon
+            source: Rainbow Grocery
           - name: water
             qty: 0.5
             unit: cup
@@ -163,6 +159,7 @@ phases:
           - name: chamomile
             qty: 8
             unit: gram
+            source: Rainbow Grocery
       - instruction: Cook sealed bag in sous vide bath at 60°C / 140°F for 45–60 minutes.
         equipment:
           - sous vide immersion circulator
@@ -180,6 +177,7 @@ phases:
           - name: mascarpone
             qty: 30
             unit: gram
+            source: Whole Foods
       - instruction: Add remaining cold cream and whisk until fully combined
         ingredients:
           - name: heavy cream

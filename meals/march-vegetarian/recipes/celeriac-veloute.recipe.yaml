@@ -8,10 +8,11 @@ phases:
     description: Make vegetable stock
     duration: PT1H30M
     time: "2026-03-20T18:00:00"
-    ingredients:
-      - name: various vegetables, such as carrots, celery, onion, garlic, and herbs (whatever looks good)
     steps:
       - instruction: Chop all the vegetables into large chunks
+        ingredients:
+          - name: various vegetables, such as carrots, celery, onion, garlic, and herbs (whatever looks good)
+            source: Rainbow Grocery
       - instruction: Place the vegetables in instant pot and cover with water
       - instruction: Cook at pressure for 45 minutes, with natural release
       - instruction: Strain the vegetables, reserving the liquid as vegetable stock.
@@ -37,10 +38,12 @@ phases:
             preparation: cleaned, peeled and cut into relatively equal cubes
             unit: count
             qty: 1
+            source: Rainbow Grocery
           - name: sweet onion, large
             preparation: cut into quarters
             unit: count
             qty: 1/2
+            source: Rainbow Grocery
       - instruction: Place in the oven and roast until tender and lightly browned at the edges, about 30 to 40 minutes.
       - instruction: Add the EVOO to a small ramekin and place the garlic cut side down. Salt with sea salt. Cover with aluminum foil and bake with the rest of the vegetables until cloves are soft and lightly golden, about 35–45 minutes.
         equipment:
@@ -50,6 +53,7 @@ phases:
             preparation: bottom chopped off and excess skin removed
             unit: count
             qty: 1
+            source: Rainbow Grocery
           - name: extra virgin olive oil
             qty: 3
             unit: tablespoon
@@ -84,6 +88,7 @@ phases:
             qty: 1
             unit: teaspoon
             note: to taste
+            source: Rainbow Grocery
     storage: Store soup in an airtight container in the refrigerator for up to 1 week.
 
   - id: service
@@ -93,13 +98,14 @@ phases:
       - make-veloute
     time: "2026-03-22T12:15:00"
     duration: "PT5M"
-    ingredients:
-      - name: chili oil
     steps:
       - instruction: Reheat the soup
       - instruction: Taste and adjust seasoning if needed before serving
         ingredients:
           - name: lemon juice, fresh
+            source: Rainbow Grocery
           - name: Kosher Salt
           - name: Pepper
       - instruction: Serve in a small shooter glass with a drizzle of chili oil on top
+        ingredients:
+          - name: chili oil

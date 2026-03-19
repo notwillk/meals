@@ -16,12 +16,14 @@ phases:
           - name: ricotta cheese
             qty: 1/2
             unit: cup
+            source: Farmer's Market
       - instruction: Blanch the nettle leaves in boiling water for 45 seconds to 2 minutes until wilted (older nettles require more time)
         ingredients:
           - name: nettle leaves, fresh
             qty: 5
             unit: ounce
             note: substitute 2 cups dried organic nettle leaf, if necessary
+            source: Farmer's Market
       - instruction: Reserve some of the nettle water for the mushroom-kombu tea recipe
       - instruction: Move to ice bath to stop the cooking and preserve the color
       - instruction: Allow cool for at least 5 minutes, drain and squeeze out as much water as possible using a tea towel
@@ -34,6 +36,7 @@ phases:
           - name: Parmigiano Reggiano, grated
             qty: 3
             unit: ounce
+            source: Rainbow Grocery
           - name: Kosher salt
             qty: 1/2
             unit: teaspoon
@@ -44,6 +47,7 @@ phases:
           - name: lemon juice, fresh
             qty: 1
             unit: teaspoon
+            source: Rainbow Grocery
       - instruction: With the blender or food processor running, slowly pour in oil until desired consistency is reached
         ingredients:
           - name: organic extra virgin olive oil
@@ -55,10 +59,12 @@ phases:
           - name: Kosher Salt
           - name: Pepper
           - name: lemon juice, fresh
+            source: Rainbow Grocery
           - name: sugar
           - name: lemon zest
             qty: 1
             unit: pinch
+            source: Rainbow Grocery
     storage: Store the spread in an airtight container in the refrigerator for up to 3 days
 
   - id: make-pangrattato
@@ -71,6 +77,7 @@ phases:
           - name: hazelnuts
             qty: ⅓
             unit: cup
+            source: Rainbow Grocery
       - instruction: allow to cool, then rub the hazelnuts inside a clean tea towel to remove their skins
       - instruction: Chop the hazelnuts roughly
       - instruction: Blitz sourdough in a food processor to create fresh, chunky breadcrumbs
@@ -87,12 +94,14 @@ phases:
           - name: garlic, finely chopped
             qty: 3
             unit: cloves
+            source: Rainbow Grocery
       - instruction: Once fragrant (not browned), immediately add hazelnuts, breadcrumbs, and sage, cook, stirring frequently, until golden and crisp (~5 minutes)
         ingredients:
           - name: fresh sage, finely chopped
             qty: 1
             unit: tablespoon
             note: or 1 teaspoon dried sage
+            source: Rainbow Grocery
       - instruction: Season with a little salt and pepper
         ingredients:
           - name: Kosher salt
@@ -103,36 +112,42 @@ phases:
     description: Green apple shrub (lightly structured)
     time: "2026-03-20T19:30:00"
     duration: "PT1H30M"
-    ingredients:
-      - name: Granny Smith apples
-        qty: 0.7
-        unit: pound
-        note: 70% Granny Smith + 30% Honeycrisp (or Pink Lady)
-      - name: Honeycrisp apples
-        qty: 0.3
-        unit: pound
-        note: or Pink Lady
-      - name: white wine vinegar
-        qty: 1
-        unit: cup
-        note: or champagne vinegar for softer acidity
-      - name: sugar
-        qty: 1.5
-        unit: tablespoon
-      - name: kosher salt
-        qty: 1
-        unit: pinch
-      - name: xanthan gum
-        qty: 0.5
-        unit: gram
-        note: ~0.1% by weight
     steps:
       - instruction: Core and roughly chop apples (leave skins on for structure and tannin)
+        ingredients:
+          - name: Granny Smith apples
+            qty: 0.7
+            unit: pound
+            note: 70% Granny Smith + 30% Honeycrisp (or Pink Lady)
+            source: Rainbow Grocery
+          - name: Honeycrisp apples
+            qty: 0.3
+            unit: pound
+            note: or Pink Lady
+            source: Rainbow Grocery
       - instruction: Combine apples, sugar, and salt in a bowl. Toss and let macerate 30–60 minutes until lightly juicy
+        ingredients:
+          - name: sugar
+            qty: 1.5
+            unit: tablespoon
+          - name: kosher salt
+            qty: 1
+            unit: pinch
       - instruction: Add vinegar and blend until fully broken down
+        ingredients:
+          - name: white wine vinegar
+            qty: 1
+            unit: cup
+            note: or champagne vinegar for softer acidity
       - instruction: Strain through fine mesh or cheesecloth, pressing gently (do not over-extract pulp)
       - instruction: Transfer liquid to a container
       - instruction: Using an immersion blender, blend in xanthan gum until fully dispersed and slightly thickened
+        ingredients:
+          - name: xanthan gum
+            qty: 0.5
+            unit: gram
+            note: ~0.1% by weight
+            source: Amazon
       - instruction: Rest 15 minutes to hydrate and stabilize
       - instruction: "Taste and adjust (optional: tiny splash water if too sharp)"
 
@@ -155,6 +170,7 @@ phases:
             qty: 1
             unit: slice
             note: or other good quality bread
+            source: Rainbow Grocery (Sunday)
       - instruction: Toast the bread until golden and crisp
       - instruction: Spread the ricotta and nettle mixture on the toasted bread, then sprinkle with hazelnut pangrattato
       - instruction: Add small dots of the green apple shrub over the toast, then garnish with lemon zest
@@ -166,4 +182,5 @@ phases:
           - name: lemon zest
             qty: 1/2
             unit: teaspoon
+            source: Rainbow Grocery
     storage: Serve immediately

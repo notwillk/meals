@@ -11,6 +11,7 @@ phases:
           - name: endive
             qty: 3
             unit: count
+            source: Rainbow Grocery
       - instruction: Lightly oil the cut face of each endive and season lightly with salt
         ingredients:
           - name: Kosher salt
@@ -33,6 +34,7 @@ phases:
           - name: lemon juice, fresh
             qty: 2
             unit: teaspoon
+            source: Rainbow Grocery
           - name: extra virgin olive oil
             qty: 3
             unit: teaspoon

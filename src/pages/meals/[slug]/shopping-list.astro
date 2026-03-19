@@ -23,8 +23,8 @@ function parseQty(qty) {
   return 0;
 }
 
-function collectIngredients(meal) {
-  const ingredientMap = new Map();
+function collectIngredientsBySource(meal) {
+  const sourceGroups = new Map();
 
   for (const course of meal.courses) {
     if (course.hidden) continue;
@@ -35,31 +35,45 @@ function collectIngredients(meal) {
       for (const phase of recipe.phases) {
         const phaseIngredients = phase.ingredients || [];
         for (const ing of phaseIngredients) {
-            addIngredient(ingredientMap, ing, recipe.description);
+          addIngredientBySource(sourceGroups, ing, recipe.description);
         }
 
         const stepIngredients = phase.steps || [];
         for (const step of stepIngredients) {
           const stepIngs = step.ingredients || [];
           for (const ing of stepIngs) {
-          addIngredient(ingredientMap, ing, recipe.description);
+            addIngredientBySource(sourceGroups, ing, recipe.description);
           }
         }
       }
     }
   }
 
-  return Array.from(ingredientMap.values())
-    .filter(item => !item.homemade)
-    .sort((a, b) => 
-      a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-    );
+  const result = new Map();
+  
+  for (const [source, ingredientMap] of sourceGroups) {
+    const items = Array.from(ingredientMap.values())
+      .filter(item => !item.homemade)
+      .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+    
+    if (items.length > 0) {
+      result.set(source, items);
+    }
+  }
+
+  return result;
 }
 
-function addIngredient(map, ing, recipeName) {
+function addIngredientBySource(sourceGroups, ing, recipeName) {
+  const source = (ing.source && ing.source.trim()) ? ing.source.trim() : 'Grocery Store';
   const key = ing.name.toLowerCase();
   const ingUnit = ing.unit || '';
   const ingQty = parseQty(ing.qty);
+  
+  if (!sourceGroups.has(source)) {
+    sourceGroups.set(source, new Map());
+  }
+  const map = sourceGroups.get(source);
   
   if (!map.has(key)) {
     map.set(key, {
@@ -128,43 +142,50 @@ if (!meal) {
   return Astro.redirect('/404');
 }
 
-const shoppingList = collectIngredients(meal);
+const shoppingListBySource = collectIngredientsBySource(meal);
 ---
 
 <Layout title={`${meal.name} - Shopping List`}>
   <nav class="breadcrumbs">
-    <a href="/">All Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>Shopping List</span>
+    <a href="/">Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>Shopping List</span>
   </nav>
   <h1>{meal.name} - Shopping List</h1>
   
-  {shoppingList.length === 0 ? (
+  {shoppingListBySource.size === 0 ? (
     <p>No ingredients found.</p>
   ) : (
-    <table>
-      <thead>
-        <tr>
-          <th>Ingredient</th>
-          <th>Quantity</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {shoppingList.map(item => (
-          <tr>
-            <td>
-              {item.name}
-              {item.preparation && <span class="prep"> ({item.preparation})</span>}
-            </td>
-            <td>
-              {item.unitQuantities && item.unitQuantities.length > 0 
-                ? item.unitQuantities.filter(uq => uq[0] > 0).map(uq => `${uq[0]} ${uq[1]}`).join(' + ')
-                : (item.qty > 0 ? item.qty : '')}
-            </td>
-            <td>{item.note}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div class="source-groups">
+      {Array.from(shoppingListBySource.entries()).map(([source, items]) => (
+        <div class="source-group">
+          <h2>{source}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map(item => (
+                <tr>
+                  <td>
+                    {item.name}
+                    {item.preparation && <span class="prep"> ({item.preparation})</span>}
+                  </td>
+                  <td>
+                    {item.unitQuantities && item.unitQuantities.length > 0 
+                      ? item.unitQuantities.filter(uq => uq[0] > 0).map(uq => `${uq[0]} ${uq[1]}`).join(' + ')
+                      : (item.qty > 0 ? item.qty : '')}
+                  </td>
+                  <td>{item.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </div>
   )}
 </Layout>
 
@@ -187,5 +208,29 @@ const shoppingList = collectIngredients(meal);
   }
   .breadcrumbs span {
     color: #333;
+  }
+  .source-group {
+    margin-bottom: 2rem;
+  }
+  .source-group h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  th {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.875rem;
+    text-align: left;
+    padding-left: 0.5rem;
   }
 </style>

@@ -1,5 +1,5 @@
-id: honey-orange-pate-de-fruit
-description: Grapefruit honey pâte de fruit
+id: honey-grapefruit-pate-de-fruit
+description: Honey grapefruit pâte de fruit
 inspiration:
   - https://bakeschool.com/grapefruit-honey-pate-de-fruit/
 phases:
@@ -15,11 +15,13 @@ phases:
             qty: 170
             unit: mL
             note: 2 pouches
+            source: Amazon
       - instruction: Bring a medium pot of water to boil, and boil the whole grapefruit for about an hour to ensure the peel has softened
         ingredients:
           - name: Whole grapefruit, washed
             qty: 1
             unit: count
+            source: Rainbow Grocery
       - instruction: Let cool slightly, then cut the boiled grapefruit in half, wrap for unrelated future use
       - instruction: Cut remaining grapefruit half in large chunks, removing any seeds along the way
       - instruction: Place the grapefruit (pith, zest, and flesh) in a food processor and blend for at least a full minute to completely purée the fruit and to chop all the fibers/skin
@@ -29,6 +31,7 @@ phases:
             qty: 333
             unit: gram
             note: about 2 large pink grapefruits
+            source: Rainbow Grocery
           - name: honey
             qty: 200
             unit: gram
