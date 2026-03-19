@@ -50,12 +50,6 @@ if (!meal) {
 
 const serviceTime = meal.start_time ? new Date(meal.start_time).getTime() : new Date().getTime();
 
-function minutesToTime(minutes: number): string {
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-}
-
 function formatDateHeader(dateStr: string): string {
   const dt = new Date(dateStr);
   const dayName = dt.toLocaleDateString('en-US', { weekday: 'long' });
@@ -183,9 +177,11 @@ const sortedDates: string[] = Object.keys(itemsByDate).sort();
 
 <Layout title={`${meal.name} - Schedule`}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>Schedule</span>
+    <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>Schedule</span>
   </nav>
-  <h1>{meal.name} - Schedule</h1>
+  
+  <h1>Schedule</h1>
+  <p class="subtitle muted mono">{meal.name}</p>
   
   {dependencyViolations.length > 0 && (
     <div class="warning warning-red">
@@ -216,74 +212,122 @@ const sortedDates: string[] = Object.keys(itemsByDate).sort();
   )}
   
   {sortedDates.map(date => (
-    <div class="schedule-section">
+    <section class="day-section">
       <h2>{formatDateHeader(date)}</h2>
       <table>
         <thead>
           <tr>
-            <th>T-Offset</th>
+            <th>Offset</th>
             <th>Time</th>
-            <th>Name</th>
+            <th>Task</th>
           </tr>
         </thead>
-          <tbody>
+        <tbody>
           {itemsByDate[date].map(item => (
             <tr>
-              <td class="time-cell">{getPhaseOffsetStr(item.time, serviceTime)}</td>
-              <td class="time-cell">{getPhaseTimeStr(item.time)}</td>
+              <td class="mono">{getPhaseOffsetStr(item.time, serviceTime)}</td>
+              <td class="mono muted">{getPhaseTimeStr(item.time)}</td>
               <td>
                 {item.type === 'phase' ? (
-                  <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>{item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}</a>
+                  <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>
+                    {item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}
+                  </a>
                 ) : (
-                  <strong>{item.name}</strong>
+                  <span>{item.name}</span>
                 )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </section>
   ))}
+  
+  <style>
+    h1 {
+      margin-top: var(--space-md);
+    }
+
+    .subtitle {
+      margin-top: calc(var(--space-xs) * -1);
+      margin-bottom: var(--space-xl);
+      font-size: 0.9rem;
+    }
+    
+    .day-section {
+      margin-bottom: var(--space-xl);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .day-section h2 {
+      margin: 0;
+      padding: 0.6em 1em;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    table {
+      font-size: 0.95rem;
+      margin: 0;
+      background: white;
+      width: 100%;
+    }
+
+    tbody tr:first-child td {
+      padding-top: 0.7em;
+    }
+
+    tbody tr:last-child td {
+      padding-bottom: 0.7em;
+    }
+
+    td {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    th {
+      text-align: left;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    th:first-child {
+      width: 6rem;
+    }
+
+    th:nth-child(2) {
+      width: 5rem;
+    }
+
+    @media (max-width: 600px) {
+      th:first-child, th:nth-child(2) {
+        width: auto;
+      }
+    }
+
+    @media print {
+      .breadcrumbs {
+        display: none;
+      }
+
+      .day-section {
+        border-color: black;
+      }
+
+      .day-section h2 {
+        font-size: 11pt;
+        background: none;
+      }
+
+      table {
+        font-size: 10pt;
+      }
+    }
+  </style>
 </Layout>
-
-<style>
-  .schedule-section {
-    margin-bottom: 2rem;
-  }
-
-  .time-cell {
-    font-family: monospace;
-    font-size: 0.875rem;
-  }
-
-  .breadcrumbs {
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-    color: #666;
-  }
-  .breadcrumbs a {
-    color: #0066cc;
-  }
-  .breadcrumbs span {
-    color: #333;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 0.5rem;
-    border-bottom: 1px solid #eee;
-  }
-  
-  th {
-    font-weight: 600;
-    color: #666;
-    font-size: 0.875rem;
-    text-align: left;
-    padding-left: 0.5rem;
-  }
-</style>

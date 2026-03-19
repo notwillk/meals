@@ -86,7 +86,6 @@ function getPhaseOffset(phaseTime: string): string | null {
   return `${offsetStr} (${month}/${day} ${hours}:${minutes}${ampm})`;
 }
 
-// Get all equipment used in a phase
 function getPhaseEquipment(phase: Phase): string[] {
   const equipment = new Set<string>();
   if (phase.steps) {
@@ -99,155 +98,398 @@ function getPhaseEquipment(phase: Phase): string[] {
   return Array.from(equipment);
 }
 
-// Get step ingredients
-function getStepIngredients(step: Step): Ingredient[] {
-  return step.ingredients || [];
+function parseQty(qty: number | string | undefined): number | null {
+  if (qty === undefined) return null;
+  if (typeof qty === 'number') return qty;
+  // Handle fraction strings like "1/2", "3/4"
+  if (typeof qty === 'string') {
+    const trimmed = qty.trim();
+    if (trimmed.includes('/')) {
+      const parts = trimmed.split('/');
+      if (parts.length === 2) {
+        const num = parseFloat(parts[0]);
+        const denom = parseFloat(parts[1]);
+        if (!isNaN(num) && !isNaN(denom) && denom !== 0) {
+          return num / denom;
+        }
+      }
+    }
+    const parsed = parseFloat(trimmed);
+    return isNaN(parsed) ? null : parsed;
+  }
+  return null;
 }
+
+function getStepIngredients(step: Step): Ingredient[] {
+  const ingredients = step.ingredients || [];
+  return [...ingredients].sort((a, b) => {
+    const aVal = parseQty(a.qty);
+    const bVal = parseQty(b.qty);
+    if (aVal === null && bVal === null) return 0;
+    if (aVal === null) return 1;
+    if (bVal === null) return -1;
+    return bVal - aVal;
+  });
+}
+
 ---
 
 <Layout title={recipe.description}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>{recipe.description}</span>
+    <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>{recipe.description}</span>
   </nav>
-  <h1>{recipe.description}</h1>
+  
+  <header class="recipe-header">
+    <h1>{recipe.description}</h1>
+  </header>
   
   {recipe.phases && recipe.phases.map((phase: Phase) => (
-    <div class="phase" id={phase.id}>
-      <h2>{phase.description || phase.id}</h2>
-      
-      {(phase.time || phase.duration) && (
-        <p class="phase-meta">
-          {phase.time && <span><strong>Start:</strong> {getPhaseOffset(phase.time)}</span>}
-          {phase.time && phase.duration && <span> | </span>}
-          {phase.duration && <span><strong>Duration:</strong> {formatDuration(phase.duration)}</span>}
-        </p>
-      )}
-      
-      {phase.follows && (
-        <p><strong>Follows:</strong> {phase.follows.join(', ')}</p>
-      )}
-      
-      {phase.storage && (
-        <p><strong>Storage:</strong> {phase.storage}</p>
-      )}
-      
-      {getPhaseEquipment(phase).length > 0 && (
-        <p><strong>Equipment:</strong> {getPhaseEquipment(phase).join(', ')}</p>
-      )}
+    <article class="phase" id={phase.id}>
+      <header class="phase-header">
+        <div class="phase-title-row">
+          <h2 class="phase-title">{phase.description || phase.id}</h2>
+          {(phase.time || phase.duration) && (
+            <p class="phase-meta mono">
+              {phase.time && (
+                <span class="offset">{getPhaseOffset(phase.time)}</span>
+              )}
+              {phase.duration && (
+                <span class="duration"> &middot; {formatDuration(phase.duration)}</span>
+              )}
+            </p>
+          )}
+        </div>
+        
+        {phase.storage && (
+          <p class="phase-storage">
+            <strong>Storage:</strong> {phase.storage}
+          </p>
+        )}
+        
+        {getPhaseEquipment(phase).length > 0 && (
+          <p class="phase-equipment muted">
+            <strong>Equipment:</strong> {getPhaseEquipment(phase).join(', ')}
+          </p>
+        )}
+      </header>
       
       {phase.steps && phase.steps.length > 0 && (
-        <table class="steps-table">
-          <thead>
-            <tr>
-              <th style="width: 35%;">Ingredients</th>
-              <th style="width: 65%;">Steps</th>
-            </tr>
-          </thead>
-          <tbody>
-            {phase.steps.map((step: Step, idx: number) => (
-              <tr>
-                <td class="ingredients-cell">
-                  {getStepIngredients(step).length > 0 && (
-                    <ul>
-                      {getStepIngredients(step).map((ing: Ingredient) => (
-                        <li>
-                          {ing.qty} {ing.unit} {ing.name}
-                          {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}
-                          {ing.note && <span style="color: #666;"> ({ing.note})</span>}
-                          {ing.homemade && <span style="color: #666;"> (see above)</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </td>
-                <td class="instruction-cell">
-                  <strong>{idx + 1}.</strong> {step.instruction}
-                  {step.note && <p style="color: #666; font-style: italic; margin-top: 0.5rem;">{step.note}</p>}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div class="steps">
+          {phase.steps.map((step: Step, idx: number) => (
+            <div class="step">
+              <div class="step-number">{idx + 1}</div>
+              <div class="step-content">
+                {getStepIngredients(step).length > 0 && (
+                  <ul class="step-ingredients">
+                    {getStepIngredients(step).map((ing: Ingredient) => (
+                      <li class="ingredient">
+                        {ing.qty && <span class="mono">{ing.qty} </span>}
+                        {ing.unit && <span>{ing.unit} </span>}
+                        <span class="ingredient-name">{ing.name}</span>
+                        {ing.preparation && <span class="ingredient-prep muted"> ({ing.preparation})</span>}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p class={`step-instruction${getStepIngredients(step).length > 0 ? ' after-ingredients' : ''}`}>{step.instruction}</p>
+                {step.note && <p class="step-note muted">{step.note}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
-    </div>
+    </article>
   ))}
   
   <style>
+    .recipe-header {
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .recipe-header h1 {
+      margin-bottom: var(--space-sm);
+    }
+    
     .phase {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .phase-meta {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      break-inside: avoid;
+      page-break-inside: avoid;
+      background: var(--color-surface);
     }
     
-    .steps-table {
-      margin-top: 1rem;
+    .phase-header {
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--color-border);
     }
     
-    .steps-table th {
-      background: #f0f0f0;
-      text-align: left;
-      padding-left: 0.5rem;
+    .phase-title-row {
+      margin-bottom: var(--space-sm);
     }
     
-    .steps-table td {
-      border-bottom: 1px dashed #bbb;
-      padding: 0.25rem 0
-    }
-
-    .steps-table tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .ingredients-cell {
-      vertical-align: top;
+    .phase-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-md);
+      flex-wrap: wrap;
     }
     
-    .ingredients-cell ul {
+    .phase-title {
       margin: 0;
-      padding-left: 1.25rem;
+      font-size: 1.25rem;
+      font-family: var(--font-body);
+      font-weight: 600;
     }
     
-    .ingredients-cell li {
-      margin-bottom: 0.25rem;
+    .phase-meta {
+      margin: 0;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     
-    .instruction-cell {
-      vertical-align: top;
+    .offset {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+    
+    .phase-storage,
+    .phase-equipment {
+      margin: var(--space-xs) 0 0 0;
+      font-size: 0.9rem;
+    }
+    
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    
+    .step {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr;
+      gap: var(--space-lg);
+    }
+    
+    .step-number {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--color-accent);
+      text-align: right;
+      padding-right: var(--space-sm);
+      border-right: 2px solid var(--color-accent);
+    }
+    
+    .step-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .step-ingredients {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-xs);
+    }
+    
+    .step-ingredients li::before {
+      content: "\0020";
+      display: inline-block;
+      width: 1.2em;
+      margin-left: -1.2em;
+      color: var(--color-text-muted);
+    }
+    
+    .step-ingredients {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    
+    .step-ingredients li::before {
+      content: "\0020";
+      display: inline-block;
+      width: 1.2em;
+      margin-left: -1.2em;
+      color: var(--color-text-muted);
+    }
+    
+    .ingredient {
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+    
+    .ingredient-name {
+      font-weight: 500;
+    }
+    
+    .ingredient-prep {
+      font-style: italic;
+    }
+    
+    .step-instruction {
+      margin: 0;
+      line-height: 1.6;
+      text-align: left;
+      align-self: flex-start;
+      width: 100%;
+    }
+    
+    .step-instruction.after-ingredients {
+      margin-top: var(--space-md);
+    }
+    
+    .step-note {
+      margin: 0;
+      font-size: 0.9rem;
+      font-style: italic;
     }
     
     @media (max-width: 600px) {
-      .steps-table th:first-child {
-        width: 40%;
-      }
-      .steps-table th:last-child {
-        width: 60%;
+      .phase {
+        padding: var(--space-md);
       }
     }
     
-    .breadcrumbs {
-      margin-bottom: 1rem;
-      font-size: 0.875rem;
-      color: #666;
-    }
-    .breadcrumbs a {
-      color: #0066cc;
-    }
-    .breadcrumbs span {
-      color: #333;
-    }
-    
-    .phase {
-      border: 1px solid #ddd;
-      padding: 0 1rem;
-      margin-bottom: 1.5rem;
-      border-radius: 20px;
-      break-inside: avoid;
+    @media print {
+      .breadcrumbs {
+        display: none;
+      }
+      
+      .recipe-header h1 {
+        font-size: 16pt;
+        margin-bottom: 0.5rem;
+      }
+      
+      .phase {
+        border: 1pt solid #000;
+        border-radius: 0;
+        padding: 0.6rem;
+        margin-bottom: 0.6rem;
+        background: white !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      
+      .phase-header {
+        border-bottom: 0.5pt solid #999;
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.4rem;
+      }
+      
+      .phase-title-row {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .phase-title {
+        font-size: 12pt;
+        margin-bottom: 0;
+      }
+      
+      .phase-meta {
+        font-size: 9pt;
+        color: #333;
+      }
+      
+      .offset {
+        color: black;
+        font-weight: 600;
+      }
+      
+      .phase-storage,
+      .phase-equipment {
+        font-size: 9pt;
+        color: #333;
+      }
+      
+      .muted {
+        color: #333;
+      }
+      
+      .step {
+        gap: 0.5rem;
+      }
+      
+      .step-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .step-ingredients {
+        font-size: 9pt;
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        gap: 0.15rem;
+        align-items: flex-start;
+      }
+      
+      .step-ingredients li::before {
+        content: "\0020";
+        display: inline-block;
+        width: 1.2em;
+        margin-left: -1.2em;
+        color: #333;
+      }
+      
+      .step-number {
+        color: black;
+        font-weight: 600;
+        padding-right: 0.3rem;
+        border-right: 0.5pt solid black;
+      }
+      
+      .step-ingredients {
+        font-size: 9pt;
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        gap: 0.15rem;
+      }
+      
+      .step-ingredients li::before {
+        content: "\0020";
+        display: inline-block;
+        width: 1.2em;
+        margin-left: -1.2em;
+        color: #333;
+      }
+      
+      .ingredient {
+        font-size: 9pt;
+      }
+      
+      .step-instruction {
+        font-size: 10pt;
+        text-align: left;
+        align-self: flex-start;
+        width: 100%;
+      }
+      
+      .step-instruction.after-ingredients {
+        margin-top: 0.4rem;
+      }
+      
+      .step-note {
+        font-size: 9pt;
+        color: #333;
+      }
     }
   </style>
 </Layout>

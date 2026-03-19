@@ -17,13 +17,88 @@ function formatDate(dateStr: string): string {
   {meals.length === 0 ? (
     <p>No meals found.</p>
   ) : (
-    <ul>
+    <ul class="meal-list">
       {meals.map(meal => (
-        <li>
-          {meal.date && <span>{formatDate(meal.date)} - </span>}
-          <a href={`/meals/${meal.slug}`}>{meal.name}</a>
+        <li class="meal-item">
+          <a href={`/meals/${meal.slug}`}>
+            <span class="meal-date mono">{meal.date && formatDate(meal.date)}</span>
+            <span class="meal-name">{meal.name}</span>
+          </a>
         </li>
       ))}
     </ul>
   )}
+  
+  <style>
+    .meal-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .meal-item {
+      margin-bottom: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      transition: border-color 0.15s ease;
+    }
+    
+    .meal-item:hover {
+      border-color: var(--color-accent);
+    }
+    
+    .meal-item a {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    
+    .meal-item a:hover {
+      text-decoration: none;
+      opacity: 1;
+    }
+    
+    .meal-date {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      min-width: 5.5rem;
+      flex-shrink: 0;
+    }
+    
+    .meal-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 600px) {
+      .meal-item a {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+    }
+    
+    @media print {
+      .meal-item {
+        background: white;
+        border: none;
+        border-bottom: 0.5pt solid #999;
+        border-radius: 0;
+        padding: 0.4rem 0;
+        margin-bottom: 0.2rem;
+      }
+      
+      .meal-item a {
+        flex-direction: row;
+        gap: 1rem;
+      }
+      
+      .meal-item:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
 </Layout>

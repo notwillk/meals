@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
-import type { Meal, Course } from '../../../types/index.ts';
+import type { Meal, Course, Recipe } from '../../../types/index.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();
@@ -19,7 +19,7 @@ if (!meal) {
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 }
 
 function formatTime(dateStr: string): string {
@@ -37,10 +37,10 @@ function parseDurationMins(durationStr: string | undefined): number {
 }
 
 function formatServiceOffset(minutes: number): string {
-  if (minutes === 0) return 'T+0m';
+  if (minutes === 0) return 'T=0';
   const prefix = minutes > 0 ? 'T+' : 'T-';
   const absMins = Math.abs(minutes);
-  const num = parseFloat(absMins.toFixed(2));
+  const num = parseFloat(absMins.toFixed(1));
   return `${prefix}${num}m`;
 }
 
@@ -55,7 +55,6 @@ let offsetFromFirst = 0;
 const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
   let serviceOffset: number;
   if (idx < firstCourseIndex) {
-    // Calculate negative offset from first course
     let preOffset = 0;
     for (let i = idx; i < firstCourseIndex; i++) {
       preOffset -= parseDurationMins(visibleCourses[i].duration);
@@ -73,51 +72,161 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
 
 <Layout title={meal.name}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a> / <span>{meal.name}</span>
+    <a href="/">Meals</a><span class="sep">/</span><span>{meal.name}</span>
   </nav>
-  <h1>{meal.name}</h1>
-  {meal.date && <p><strong>Date:</strong> {formatDate(meal.date)}</p>}
-  {meal.start_time && <p><strong>Service:</strong> {formatTime(meal.start_time)}</p>}
-   
-  <h2>Courses</h2>
-  <ul>
-    {coursesWithOffset.map(course => (
-      <li>
-        <span class="offset">{formatServiceOffset(course.serviceOffset)} - </span>
-        <strong>{course.name}</strong>{course.description && ` (${course.description})`}
-        <ul>
-          {course.recipes.map(recipe => (
-            <li>
-              <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.description}</a>
-            </li>
-          ))}
-        </ul>
-      </li>
-    ))}
-  </ul>
   
-  <h2>Links</h2>
-  <ul>
-    <li><a href={`/meals/${slug}/schedule`}>Schedule</a></li>
-    <li><a href={`/meals/${slug}/shopping-list`}>Shopping List</a></li>
-  </ul>
-</Layout>
+  <header class="meal-header">
+    <h1>{meal.name}</h1>
+    <div class="meal-meta">
+      {meal.date && <span class="mono">{formatDate(meal.date)}</span>}
+      {meal.start_time && (
+        <span class="muted"> &middot; Service at {formatTime(meal.start_time)}</span>
+      )}
+    </div>
+  </header>
+  
+  <nav class="page-links">
+    <a href={`/meals/${slug}/schedule`}>Schedule</a>
+    <span class="dot muted">&middot;</span>
+    <a href={`/meals/${slug}/shopping-list`}>Shopping List</a>
+  </nav>
 
-<style>
-  .breadcrumbs {
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-    color: #666;
-  }
-  .breadcrumbs a {
-    color: #0066cc;
-  }
-  .breadcrumbs span {
-    color: #333;
-  }
-  .offset {
-    font-family: monospace;
-    font-weight: 600;
-    color: #666;
-  }
-</style>
+  <section class="courses">
+    <ul class="course-list">
+      {coursesWithOffset.map(course => (
+        <li class="course-item">
+          <div class="course-header">
+            <span class="offset mono">{formatServiceOffset(course.serviceOffset)}</span>
+            <span class="course-name">{course.name}</span>
+            {course.description && (
+              <span class="course-desc muted">{course.description}</span>
+            )}
+          </div>
+          <div class="course-recipes">
+            {course.recipes.map((recipe: Recipe, i: number) => (
+              <>
+                {i > 0 && <span class="dot muted">&middot;</span>}
+                <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.description}</a>
+              </>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+  
+  <style>
+    .breadcrumbs {
+      margin-bottom: var(--space-lg);
+    }
+
+    .meal-header {
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .meal-header h1 {
+      margin-bottom: var(--space-sm);
+    }
+    
+    .meal-meta {
+      font-size: 0.95rem;
+    }
+    
+    .page-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4em;
+      margin-top: var(--space-xs);
+      margin-bottom: var(--space-md);
+      font-size: 0.95rem;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .course-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+    
+    .course-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      width: 100%;
+    }
+
+    .offset {
+      color: var(--color-accent);
+      font-weight: 500;
+      min-width: 3rem;
+    }
+
+    .course-name {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .course-desc {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-left: auto;
+    }
+
+    .course-recipes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4em;
+      margin-top: var(--space-xs);
+      font-size: 0.95rem;
+    }
+
+    .dot {
+      margin: 0 0.2em;
+    }
+
+    @media (max-width: 600px) {
+      .course-header {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+
+      .offset {
+        min-width: auto;
+      }
+    }
+
+    @media print {
+      .breadcrumbs,
+      .page-links {
+        display: none;
+      }
+
+      .course-item {
+        background: white;
+        border: 0.5pt solid #999;
+        border-radius: 0;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        break-inside: avoid;
+      }
+
+      .course-header {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+
+      .offset {
+        color: black;
+      }
+    }
+  </style>
+</Layout>
