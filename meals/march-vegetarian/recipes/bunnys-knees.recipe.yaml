@@ -23,6 +23,7 @@ phases:
           - name: lemon juice, fresh
             qty: 0.75
             unit: ounce
+            source: Rainbow Grocery
           - name: 20% saline solution
             homemade: true
             qty: 5

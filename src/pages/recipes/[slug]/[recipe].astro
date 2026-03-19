@@ -129,7 +129,7 @@ function getStepIngredients(step) {
 
 <Layout title={recipe.description}>
   <nav class="breadcrumbs">
-    <a href="/">All Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>{recipe.description}</span>
+    <a href="/">Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>{recipe.description}</span>
   </nav>
   <h1>{recipe.description}</h1>
   
@@ -176,7 +176,7 @@ function getStepIngredients(step) {
                           {ing.qty} {ing.unit} {ing.name}
                           {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}
                           {ing.note && <span style="color: #666;"> ({ing.note})</span>}
-                          {ing.homemade && <span style="color: #0066cc;"> (see above)</span>}
+                          {ing.homemade && <span style="color: #666;"> (see above)</span>}
                         </li>
                       ))}
                     </ul>
@@ -200,7 +200,7 @@ function getStepIngredients(step) {
       padding-bottom: 1rem;
       border-bottom: 1px solid #eee;
     }
-    
+
     .phase-meta {
       color: #666;
       font-size: 0.9rem;
@@ -213,8 +213,19 @@ function getStepIngredients(step) {
     
     .steps-table th {
       background: #f0f0f0;
+      text-align: left;
+      padding-left: 0.5rem;
     }
     
+    .steps-table td {
+      border-bottom: 1px dashed #bbb;
+      padding: 0.25rem 0
+    }
+
+    .steps-table tr:last-child td {
+      border-bottom: 0;
+    }
+
     .ingredients-cell {
       vertical-align: top;
     }
@@ -251,6 +262,14 @@ function getStepIngredients(step) {
     }
     .breadcrumbs span {
       color: #333;
+    }
+    
+    .phase {
+      border: 1px solid #ddd;
+      padding: 0 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      break-after: avoid;
     }
   </style>
 </Layout>
