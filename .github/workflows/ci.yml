@@ -7,27 +7,31 @@ on:
   pull_request:
 
 jobs:
+  compute-image-tag:
+    name: Compute Image Tag
+    uses: ./.github/workflows/_compute_image_tag.yml
+
   devcontainer:
     name: Build Devcontainer
+    needs: compute-image-tag
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     outputs:
-      image_tag: ${{ steps.image_tag.outputs.image_tag }}
+      image_tag: ${{ needs.compute-image-tag.outputs.image_tag }}
     steps:
       - uses: actions/checkout@v4
-      - name: Compute image tag
-        id: image_tag
-        run: echo "image_tag=${{ hashFiles('.devcontainer/**') }}" >> "$GITHUB_OUTPUT"
+
       - name: Login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Build and push devcontainer
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
-          imageTag: ${{ steps.image_tag.outputs.image_tag }}
-          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer:${{ steps.image_tag.outputs.image_tag }}
+          imageTag: ${{ needs.compute-image-tag.outputs.image_tag }}
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer:${{ needs.compute-image-tag.outputs.image_tag }}
           push: always
 
   static:

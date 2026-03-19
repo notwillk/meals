@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  compute-image-tag:
+    name: Compute Image Tag
+    uses: ./.github/workflows/_compute_image_tag.yml
+
+  build:
+    needs: compute-image-tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      image_tag: ${{ needs.compute-image-tag.outputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build in devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainer
+          imageTag: ${{ needs.compute-image-tag.outputs.image_tag }}
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer:${{ needs.compute-image-tag.outputs.image_tag }}
+          push: never
+          runCmd: |
+            just static
+            just test
+            just build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
