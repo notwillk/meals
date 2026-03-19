@@ -1,9 +1,10 @@
-name: Hot clear mushroom–kombu tea
+id: mushroom-kombu-tea
+description: Hot clear mushroom–kombu tea
 inspiration:
   - https://www.nauticalfarms.com/blogs/kelp-recipes/3-herbal-tea-blends-using-kelp-flakes
   - https://www.oklahomafungi.com/blog/how-to-make-mushroom-tea
 phases:
-  - name: make-tea
+  - id: make-tea
     description: Make tea ahead of time
     steps:
       - instruction: Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
@@ -40,8 +41,11 @@ phases:
       - instruction: Strain to ensure no solids remain in the liquid, then store in new vacuum bag
     storage: Store in bag in the refrigerator for up to 24 hours
 
-  - name: Service
-    description: Make Tea
+  - id: Service
+    description: Service
+    final: true
+    time: "2026-03-22T13:40:00"
+    duration: "PT5M"
     steps:
       - instruction: Reheat via sous vide at 150°F until hot (~20 minutes). Hold at temperature for up to 60 minutes if absolutely needed (flavor will gradually dull over time).
       - instruction: Prep a "refresher" bag with dried kombu and water only

@@ -1,10 +1,13 @@
-name: Watercress, Fennel & Green Apple Salad
+id: watercress-salad
+description: Watercress, Fennel & Green Apple Salad
 inspiration:
   - https://www.cookeatworld.com/fennel-apple-salad/
 
 phases:
-  - name: make-salad-dressing
+  - id: make-salad-dressing
     description: Make salad dressing
+    time: "2026-03-20T19:00:00"
+    duration: "PT5M"
     steps:
       - instruction: Combine olive oil, lemon juice, and salt in a salad dressing shaker
         ingredients:
@@ -18,8 +21,10 @@ phases:
       - instruction: Shake shake shake, shake shake shake, shake your booty, shake your body, shake shake shake, shake shake shake, shake it all around
     storage: Store dressing in salad dressing shaker in the refrigerator for up to 2-3 days.
 
-  - name: mise-en-place-fennel
+  - id: mise-en-place-fennel
     description: Prep the fennel
+    time: "2026-03-21T18:50:00"
+    duration: "PT10M"
     steps:
       - instruction: Trim the fennel bulb and remove the thick outer stalks. Reserve the fronds for garnish. Using a mandoline or very sharp knife, thinly shave the fennel bulb
         ingredients:
@@ -29,8 +34,10 @@ phases:
             note: ~1/2 a bulb
     storage: Store shaved fennel and reserved fronds in an airtight containers in the refrigerator for up to 2 days.
 
-  - name: mise-en-place-apple
+  - id: mise-en-place-apple
     description: Prep the apple
+    time: "2026-03-22T09:00:00"
+    duration: "PT10M"
     steps:
       - instruction: Core the apple and cut into matchsticks using julienne blade on mandoline
         ingredients:
@@ -42,8 +49,10 @@ phases:
           - name: lemon juice
     storage: Store apples in an airtight container in the refrigerator for up to 4-6 hours
 
-  - name: mise-en-place-watercress
+  - id: mise-en-place-watercress
     description: Prep the watercress
+    time: "2026-03-22T09:10:00"
+    duration: "PT10M"
     steps:
       - instruction: Wash and trim the watercress, removing thick stems. Spin dry in a salad spinner or pat dry with tea towels
         ingredients:
@@ -53,13 +62,16 @@ phases:
             note: ~60% of total volume
     storage: Store in refrigerator in a paper towel-lined container for up to 6 hours
 
-  - name: service
+  - id: service
+    description: Assemble and serve the salad
     follows:
       - make-salad-dressing
       - mise-en-place-fennel
       - mise-en-place-apple
       - mise-en-place-watercress
     final: true
+    time: "2026-03-22T13:00:00"
+    duration: "PT5M"
     steps:
       - instruction: Allow salad dressing to return to room temperature and shake well before using
         ingredients:

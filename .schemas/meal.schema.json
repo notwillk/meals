@@ -3,27 +3,23 @@
   "$id": "https://example.com/schemas/meal.schema.json",
   "title": "Meal",
   "type": "object",
-  "required": ["name", "date", "courses"],
+  "required": ["name", "start_time", "courses"],
   "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string",
       "description": "The name of the meal"
     },
-    "date": {
+    "start_time": {
       "type": "string",
-      "format": "date",
-      "description": "Date of the meal (YYYY-MM-DD)"
-    },
-    "service_time": {
-      "type": "string",
-      "description": "Service time in ISO 24-hour format (e.g., '19:00')"
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}(?::\\d{2})?(?:\\.\\d+)?(?:[+-]\\d{2}:?\\d{2}|Z)?$",
+      "description": "ISO 8601 datetime - when the meal service starts (e.g., '2026-03-22T19:00:00')"
     },
     "courses": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "description", "recipes"],
+        "required": ["name", "recipes"],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -52,9 +48,21 @@
           "service_offset": {
             "type": "string",
             "description": "Service offset relative to service time (e.g., 'T+10min', 'T+2hr', 'T-20min')"
+          },
+          "duration": {
+            "type": "string",
+            "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "ISO 8601 duration - how long the course takes (e.g., 'PT10M' for 10 minutes, 'PT1H' for 1 hour)"
+          },
+          "first_course": {
+            "type": "boolean",
+            "description": "Mark this course as the first course at service time (T=0). Only one course should have this."
           }
         }
       }
+    },
+    "errands": {
+      "$ref": "errand.schema.json"
     }
   }
 }

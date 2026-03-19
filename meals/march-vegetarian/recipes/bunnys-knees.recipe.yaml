@@ -1,6 +1,8 @@
-name: Rodillas de Conejo
+id: bunnys-knees
+description: Rodillas de Conejo
 phases:
-  - final: true
+  - id: service
+    final: true
     description: Service
     steps:
       - instruction: Combine mezcal, vodka, carrot syrup, lemon juice, and saline solution in a cocktail shaker with ice. Shake until well chilled, about 15 seconds

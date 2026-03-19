@@ -1,9 +1,10 @@
-name: Asparagus soufflé with Gruyère & Robiola
+id: asparagus-souffle-with-gruyere-and-robiola
+description: Asparagus soufflé with Gruyère & Robiola
 inspiration:
   - https://www.simplyrecipes.com/recipes/asparagus_souffle
   - https://www.youtube.com/watch?v=rU5u9UzZnEU
 phases:
-  - name: prep-souffle
+  - id: prep-souffle
     description: Prepare the soufflé base
     steps:
       - instruction: Blanch the asparagus for 2 minutes in boiling salted water. Rinse immediately in ice water to stop cooking. Drain and set aside to let cool
@@ -75,10 +76,13 @@ phases:
             unit: count
     storage: Refrigerate to store for up to two days. Return to room temperature before proceeding.
 
-  - final: true
+  - id: service
+    final: true
     description: Service
     follows:
       - prep-souffle
+    time: "2026-03-22T14:00:00"
+    duration: "PT5M"
     steps:
       - instruction: Ensure the soufflé base is at room temperature before folding in egg whites
       - instruction: Preheat oven to 400°F

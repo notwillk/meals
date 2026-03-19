@@ -21,25 +21,73 @@ function formatDate(dateStr) {
   return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+function formatTime(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+}
+
+function parseDurationMins(durationStr) {
+  if (!durationStr) return 0;
+  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?/);
+  if (!match) return 0;
+  const hours = parseInt(match[1] || 0);
+  const minutes = parseInt(match[2] || 0);
+  return hours * 60 + minutes;
+}
+
+function formatServiceOffset(minutes) {
+  if (minutes === 0) return 'T+0m';
+  const prefix = minutes > 0 ? 'T+' : 'T-';
+  const absMins = Math.abs(minutes);
+  const num = parseFloat(absMins.toFixed(2));
+  return `${prefix}${num}m`;
+}
+
 // Filter visible courses (not hidden)
 const visibleCourses = meal.courses.filter(c => !c.hidden);
+
+// Find the first_course (T=0)
+const firstCourseIndex = visibleCourses.findIndex(c => c.first_course);
+
+// Calculate offsets relative to first_course
+let offsetFromFirst = 0;
+const coursesWithOffset = visibleCourses.map((course, idx) => {
+  let serviceOffset;
+  if (idx < firstCourseIndex) {
+    // Calculate negative offset from first course
+    let preOffset = 0;
+    for (let i = idx; i < firstCourseIndex; i++) {
+      preOffset -= parseDurationMins(visibleCourses[i].duration);
+    }
+    serviceOffset = preOffset;
+  } else if (idx === firstCourseIndex) {
+    serviceOffset = 0;
+  } else {
+    serviceOffset = offsetFromFirst;
+    offsetFromFirst += parseDurationMins(course.duration);
+  }
+  return { ...course, serviceOffset };
+});
 ---
 
 <Layout title={meal.name}>
+  <nav class="breadcrumbs">
+    <a href="/">All Meals</a> / <span>{meal.name}</span>
+  </nav>
   <h1>{meal.name}</h1>
   {meal.date && <p><strong>Date:</strong> {formatDate(meal.date)}</p>}
-  {meal.service_time && <p><strong>Service:</strong> {meal.service_time}</p>}
-  
+  {meal.start_time && <p><strong>Service:</strong> {formatTime(meal.start_time)}</p>}
+   
   <h2>Courses</h2>
   <ul>
-    {visibleCourses.map(course => (
+    {coursesWithOffset.map(course => (
       <li>
+        <span class="offset">{formatServiceOffset(course.serviceOffset)} - </span>
         <strong>{course.name}</strong>{course.description && ` (${course.description})`}
-        {course.service_offset && <span> ({course.service_offset})</span>}
         <ul>
           {course.recipes.map(recipe => (
             <li>
-              <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.name}</a>
+              <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.description}</a>
             </li>
           ))}
         </ul>
@@ -53,3 +101,22 @@ const visibleCourses = meal.courses.filter(c => !c.hidden);
     <li><a href={`/meals/${slug}/shopping-list`}>Shopping List</a></li>
   </ul>
 </Layout>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+  }
+  .breadcrumbs a {
+    color: #0066cc;
+  }
+  .breadcrumbs span {
+    color: #333;
+  }
+  .offset {
+    font-family: monospace;
+    font-weight: 600;
+    color: #666;
+  }
+</style>

@@ -35,14 +35,14 @@ function collectIngredients(meal) {
       for (const phase of recipe.phases) {
         const phaseIngredients = phase.ingredients || [];
         for (const ing of phaseIngredients) {
-          addIngredient(ingredientMap, ing, recipe.name);
+            addIngredient(ingredientMap, ing, recipe.description);
         }
 
         const stepIngredients = phase.steps || [];
         for (const step of stepIngredients) {
           const stepIngs = step.ingredients || [];
           for (const ing of stepIngs) {
-            addIngredient(ingredientMap, ing, recipe.name);
+          addIngredient(ingredientMap, ing, recipe.description);
           }
         }
       }
@@ -132,6 +132,9 @@ const shoppingList = collectIngredients(meal);
 ---
 
 <Layout title={`${meal.name} - Shopping List`}>
+  <nav class="breadcrumbs">
+    <a href="/">All Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>Shopping List</span>
+  </nav>
   <h1>{meal.name} - Shopping List</h1>
   
   {shoppingList.length === 0 ? (
@@ -173,5 +176,16 @@ const shoppingList = collectIngredients(meal);
   .homemade {
     color: #0066cc;
     font-weight: 500;
+  }
+  .breadcrumbs {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+  }
+  .breadcrumbs a {
+    color: #0066cc;
+  }
+  .breadcrumbs span {
+    color: #333;
   }
 </style>

@@ -12,11 +12,13 @@
     },
     "time": {
       "type": "string",
-      "description": "ISO 24-hour format - when errand starts (e.g., '09:00')"
+      "pattern": "^\\d{2}:\\d{2}$",
+      "description": "24-hour time - when errand starts (e.g., '14:30')"
     },
     "duration": {
-      "type": "number",
-      "description": "Duration in minutes (e.g., 60)"
+      "type": "string",
+      "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+      "description": "ISO 8601 duration - how long the errand takes (e.g., 'PT5M' for 5 minutes, 'PT1H' for 1 hour)"
     },
     "day": {
       "type": "number",
