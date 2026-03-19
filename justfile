@@ -28,8 +28,8 @@ doctor *args:
 [no-exit-message]
 format *args:
     @case "{{args}}" in \
-        "") prettier --write $(git ls-files -- "*.yaml") ;; \
-        "--check") prettier --check $(git ls-files -- "*.yaml") ;; \
+        "") git ls-files -- "*.yaml" | grep -v -F -f .formatignore 2>/dev/null | xargs prettier --write ;; \
+        "--check") git ls-files -- "*.yaml" | grep -v -F -f .formatignore 2>/dev/null | xargs prettier --check ;; \
         *) echo "Usage: just format [--check]" >&2; exit 1 ;; \
     esac
 
