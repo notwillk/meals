@@ -1,0 +1,208 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllMeals, getMeal } from '../../../data/loader.js';
+
+export function getStaticPaths() {
+  const meals = getAllMeals();
+  return meals.map(meal => ({
+    params: { slug: meal.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const meal = getMeal(slug);
+
+if (!meal) {
+  return Astro.redirect('/404');
+}
+
+const serviceTime = meal.service_time || '19:00';
+const [serviceHours, serviceMinutes] = serviceTime.split(':').map(Number);
+
+function timeToMinutes(time) {
+  const [h, m] = time.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function minutesToTime(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+}
+
+function formatOffset(minutes) {
+  if (minutes === 0) return 'T=0';
+  const prefix = minutes > 0 ? 'T+' : 'T-';
+  const absMins = Math.abs(minutes);
+  if (absMins >= 60) {
+    const hrs = Math.floor(absMins / 60);
+    const mins = absMins % 60;
+    return mins > 0 ? `${prefix}${hrs}hr ${mins}min` : `${prefix}${hrs}hr`;
+  }
+  return `${prefix}${absMins}min`;
+}
+
+const serviceMinutesOfDay = serviceHours * 60 + serviceMinutes;
+
+// Collect all phases and errands with time/duration
+const scheduledItems = [];
+const unscheduledItems = [];
+const dependencyViolations = [];
+
+// Build phase lookup
+const phaseLookup = {};
+meal.courses.forEach(course => {
+  course.recipes.forEach(recipe => {
+    if (recipe.phases) {
+      recipe.phases.forEach(phase => {
+        phaseLookup[`${recipe.slug}:${phase.name}`] = phase;
+      });
+    }
+  });
+});
+
+// Check phases
+meal.courses.forEach(course => {
+  course.recipes.forEach(recipe => {
+    if (recipe.phases) {
+      recipe.phases.forEach(phase => {
+        if (phase.time && phase.duration) {
+          const startMinutes = timeToMinutes(phase.time);
+          const endMinutes = startMinutes + phase.duration;
+          
+          // Check dependency violations
+          if (phase.follows) {
+            phase.follows.forEach(dep => {
+              const depPhase = phaseLookup[`${recipe.slug}:${dep}`];
+              if (depPhase && depPhase.time && depPhase.duration) {
+                const depEnd = timeToMinutes(depPhase.time) + depPhase.duration;
+                if (startMinutes < depEnd) {
+                  dependencyViolations.push({
+                    phase: phase.name,
+                    recipe: recipe.name,
+                    dependency: dep,
+                    issue: `Starts at ${phase.time} but ${dep} ends at ${minutesToTime(depEnd)}`
+                  });
+                }
+              }
+            });
+          }
+          
+          scheduledItems.push({
+            type: 'phase',
+            name: phase.name,
+            recipe: recipe.name,
+            time: phase.time,
+            startMinutes,
+            endMinutes,
+            duration: phase.duration,
+            day: phase.day || 1
+          });
+        } else {
+          unscheduledItems.push({
+            type: 'phase',
+            name: phase.name,
+            source: recipe.name
+          });
+        }
+      });
+    }
+  });
+});
+
+// Check errands
+if (meal.errands) {
+  meal.errands.forEach(errand => {
+    if (errand.time && errand.duration) {
+      const startMinutes = timeToMinutes(errand.time);
+      scheduledItems.push({
+        type: 'errand',
+        name: errand.name,
+        recipe: 'Errands',
+        time: errand.time,
+        startMinutes,
+        endMinutes: startMinutes + errand.duration,
+        duration: errand.duration,
+        day: errand.day || 1
+      });
+    } else {
+      unscheduledItems.push({
+        type: 'errand',
+        name: errand.name,
+        source: 'Errands'
+      });
+    }
+  });
+}
+
+// Group by day
+const itemsByDay = {};
+scheduledItems.forEach(item => {
+  if (!itemsByDay[item.day]) itemsByDay[item.day] = [];
+  itemsByDay[item.day].push(item);
+});
+
+Object.keys(itemsByDay).forEach(day => {
+  itemsByDay[day].sort((a, b) => a.startMinutes - b.startMinutes);
+});
+---
+
+<Layout title={`${meal.name} - Schedule`}>
+  <h1>{meal.name} - Schedule</h1>
+  <p><strong>Service Time:</strong> {serviceTime}</p>
+  
+  {dependencyViolations.length > 0 && (
+    <div class="warning warning-red">
+      <h3>Dependency Violations</h3>
+      <ul>
+        {dependencyViolations.map(v => (
+          <li><strong>{v.phase}</strong> ({v.recipe}): {v.issue}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+  {unscheduledItems.length > 0 && (
+    <div class="warning warning-yellow">
+      <h3>Unscheduled Items</h3>
+      <ul>
+        {unscheduledItems.map(item => (
+          <li><strong>{item.name}</strong> ({item.source}) - missing time or duration</li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+  {Object.keys(itemsByDay).map(day => (
+    <div>
+      <h2>Day {day}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Time</th>
+            <th>Duration</th>
+            <th>T-Offset</th>
+          </tr>
+        </thead>
+        <tbody>
+          {itemsByDay[day].map(item => {
+            const offsetMinutes = item.startMinutes - serviceMinutesOfDay;
+            return (
+              <tr>
+                <td>
+                  {item.type === 'errand' ? '🚗 ' : ''}
+                  <strong>{item.name}</strong>
+                  <br/><small>{item.recipe}</small>
+                </td>
+                <td>{item.time}</td>
+                <td>{item.duration} min</td>
+                <td>{formatOffset(offsetMinutes)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  ))}
+</Layout>

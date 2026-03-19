@@ -9,7 +9,7 @@
     "ghcr.io/notwillk/devcontainer-features/github-cli": {},
     "ghcr.io/notwillk/devcontainer-features/just": {},
     "ghcr.io/notwillk/devcontainer-features/jq": {},
-    "ghcr.io/notwillk/devcontainer-features/node": {},
+    "ghcr.io/notwillk/devcontainer-features/pnpm": {},
     "ghcr.io/notwillk/devcontainer-features/opencode": {},
     "ghcr.io/notwillk/devcontainer-features/prettier": {},
     "ghcr.io/notwillk/devcontainer-features/watchexec": {},
@@ -17,6 +17,7 @@
     "ghcr.io/rocker-org/devcontainer-features/pandoc": {}
   },
   "containerEnv": {
+    "ASTRO_TELEMETRY_DISABLED": "1",
     "DEVCONTAINER": "true",
     "FIREWORKS_API_KEY": "${localEnv:FIREWORKS_API_KEY}",
     "OPENCODE_CONFIG": "${containerWorkspaceFolder}/.opencode/config.json",
@@ -33,5 +34,5 @@
   },
   "remoteUser": "vscode",
   "postCreateCommand": "just doctor --fix",
-  "postStartCommand": "just doctor"
+  "postAttachCommand": "just doctor"
 }

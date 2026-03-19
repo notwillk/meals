@@ -51,3 +51,8 @@ rules:
     check: "[ -f .schemas/swimlane-ticket.json ]"
     severity: error
     fix: swimlane schema-json ticket > .schemas/swimlane-ticket.json
+
+  - name: pnpm packages installed
+    check: pnpm install --frozen-lockfile --prefer-offline
+    severity: error
+    fix: pnpm install --frozen-lockfile

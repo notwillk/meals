@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getAllMeals } from '../data/loader.js';
+
+const meals = getAllMeals();
+---
+
+<Layout title="Meals">
+  <h1>Meals</h1>
+  
+  {meals.length === 0 ? (
+    <p>No meals found.</p>
+  ) : (
+    <ul>
+      {meals.map(meal => (
+        <li>
+          <a href={`/meals/${meal.slug}`}>{meal.name}</a>
+          {meal.date && <span> - {meal.date}</span>}
+        </li>
+      ))}
+    </ul>
+  )}
+</Layout>

@@ -1,0 +1,23 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllMeals, getMeal } from '../../../data/loader.js';
+
+export function getStaticPaths() {
+  const meals = getAllMeals();
+  return meals.map(meal => ({
+    params: { slug: meal.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const meal = getMeal(slug);
+
+if (!meal) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={`${meal.name} - Shopping List`}>
+  <h1>{meal.name} - Shopping List</h1>
+  <p><em>Shopping list generation coming soon</em></p>
+</Layout>

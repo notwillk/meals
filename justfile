@@ -1,16 +1,20 @@
 [no-exit-message]
 build *args:
     @case "{{args}}" in \
-        "") echo "building..." ;; \
-        "--watch") echo "building (with watch)..." ;; \
+        "") pnpm run build ;; \
+        "--watch") pnpm run dev ;; \
         *) echo "Usage: just build [--watch]" >&2; exit 1 ;; \
     esac
+
+[no-exit-message]
+dev:
+    pnpm run dev
 
 [no-exit-message]
 clean *args:
     @case "{{args}}" in \
         "") echo "cleaning..." ;; \
-        "--deep") echo "cleaning..." && echo "deep cleaning..." && rm -f .schemas/*.json ;; \
+        "--deep") echo "cleaning..." && echo "deep cleaning..." && rm -rf node_modules && rm -rf .pnpm-store ;; \
         *) echo "Usage: just clean [--deep]" >&2; exit 1 ;; \
     esac
 

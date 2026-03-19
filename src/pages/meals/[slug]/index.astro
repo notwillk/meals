@@ -1,0 +1,51 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllMeals, getMeal } from '../../../data/loader.js';
+
+export function getStaticPaths() {
+  const meals = getAllMeals();
+  return meals.map(meal => ({
+    params: { slug: meal.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const meal = getMeal(slug);
+
+if (!meal) {
+  return Astro.redirect('/404');
+}
+
+// Filter visible courses (not hidden)
+const visibleCourses = meal.courses.filter(c => !c.hidden);
+---
+
+<Layout title={meal.name}>
+  <h1>{meal.name}</h1>
+  {meal.date && <p><strong>Date:</strong> {meal.date}</p>}
+  {meal.service_time && <p><strong>Service:</strong> {meal.service_time}</p>}
+  
+  <h2>Courses</h2>
+  <ul>
+    {visibleCourses.map(course => (
+      <li>
+        <strong>{course.name}</strong>
+        {course.service_offset && <span> ({course.service_offset})</span>}
+        <p>{course.description}</p>
+        <ul>
+          {course.recipes.map(recipe => (
+            <li>
+              <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.name}</a>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+  
+  <h2>Links</h2>
+  <ul>
+    <li><a href={`/meals/${slug}/schedule`}>Schedule</a></li>
+    <li><a href={`/meals/${slug}/shopping-list`}>Shopping List</a></li>
+  </ul>
+</Layout>

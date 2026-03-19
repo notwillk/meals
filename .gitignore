@@ -28,3 +28,9 @@ artifacts/
 # Temp files
 .tmp/
 !.tmp/.gitkeep
+
+# pnpm
+.pnpm-store
+
+# astro
+.astro/*
