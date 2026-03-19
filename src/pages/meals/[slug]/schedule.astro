@@ -149,7 +149,8 @@ Object.keys(itemsByDay).forEach(day => {
 
 <Layout title={`${meal.name} - Schedule`}>
   <h1>{meal.name} - Schedule</h1>
-  <p><strong>Service Time:</strong> {serviceTime}</p>
+  {meal.date && <p><strong>Date:</strong> {meal.date}</p>}
+  <p><strong>Service Time:</strong> {serviceTime} (T=0)</p>
   
   {dependencyViolations.length > 0 && (
     <div class="warning warning-red">
@@ -174,35 +175,211 @@ Object.keys(itemsByDay).forEach(day => {
   )}
   
   {Object.keys(itemsByDay).map(day => (
-    <div>
+    <div class="day-schedule">
       <h2>Day {day}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Time</th>
-            <th>Duration</th>
-            <th>T-Offset</th>
-          </tr>
-        </thead>
-        <tbody>
+      
+      <div class="gantt-container">
+        <div class="gantt-header">
+          <div class="gantt-label-header"></div>
+          {(() => {
+            const times = [];
+            const dayStart = Math.min(...itemsByDay[day].map(i => i.startMinutes)) - 60;
+            const dayEnd = Math.max(...itemsByDay[day].map(i => i.endMinutes)) + 60;
+            for (let t = Math.floor(dayStart / 60) * 60; t <= dayEnd; t += 60) {
+              times.push(t);
+            }
+            return times.map(t => (
+              <div class="gantt-hour" style="flex: 1;">
+                {minutesToTime(t)}
+              </div>
+            ));
+          })()}
+        </div>
+        
+        <div class="gantt-body">
           {itemsByDay[day].map(item => {
-            const offsetMinutes = item.startMinutes - serviceMinutesOfDay;
+            const dayStart = Math.min(...itemsByDay[day].map(i => i.startMinutes)) - 60;
+            const dayEnd = Math.max(...itemsByDay[day].map(i => i.endMinutes)) + 60;
+            const totalMinutes = dayEnd - dayStart;
+            const startOffset = item.startMinutes - dayStart;
+            const widthPercent = (item.duration / totalMinutes) * 100;
+            const leftPercent = (startOffset / totalMinutes) * 100;
+            
             return (
-              <tr>
-                <td>
-                  {item.type === 'errand' ? '🚗 ' : ''}
-                  <strong>{item.name}</strong>
-                  <br/><small>{item.recipe}</small>
-                </td>
-                <td>{item.time}</td>
-                <td>{item.duration} min</td>
-                <td>{formatOffset(offsetMinutes)}</td>
-              </tr>
+              <div class="gantt-row">
+                <div class="gantt-label">
+                  <span class="item-name">{item.name}</span>
+                  <span class="item-recipe">{item.recipe}</span>
+                </div>
+                <div class="gantt-bar-container">
+                  <div 
+                    class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
+                    style={`left: ${leftPercent}%; width: ${widthPercent}%;`}
+                    title={`${item.name} (${item.time} - ${minutesToTime(item.endMinutes)}, ${item.duration}min)`}
+                  >
+                    <span class="bar-label">{formatOffset(item.startMinutes - serviceMinutesOfDay)}</span>
+                  </div>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
+      
+      <details>
+        <summary>View table</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Time</th>
+              <th>Duration</th>
+              <th>T-Offset</th>
+            </tr>
+          </thead>
+          <tbody>
+            {itemsByDay[day].map(item => {
+              const offsetMinutes = item.startMinutes - serviceMinutesOfDay;
+              return (
+                <tr>
+                  <td>
+                    {item.type === 'errand' ? '🚗 ' : ''}
+                    <strong>{item.name}</strong>
+                    <br/><small>{item.recipe}</small>
+                  </td>
+                  <td>{item.time}</td>
+                  <td>{item.duration} min</td>
+                  <td>{formatOffset(offsetMinutes)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </details>
     </div>
   ))}
 </Layout>
+
+<style>
+  .day-schedule {
+    margin-bottom: 2rem;
+  }
+  
+  .gantt-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .gantt-header {
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .gantt-label-header {
+    width: 150px;
+    min-width: 150px;
+    padding: 0.5rem;
+    font-weight: 600;
+    border-right: 1px solid #ddd;
+  }
+  
+  .gantt-hour {
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #666;
+    border-right: 1px solid #eee;
+  }
+  
+  .gantt-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .gantt-row:last-child {
+    border-bottom: none;
+  }
+  
+  .gantt-label {
+    width: 150px;
+    min-width: 150px;
+    padding: 0.5rem;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    background: #fafafa;
+  }
+  
+  .item-name {
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+  
+  .item-recipe {
+    font-size: 0.75rem;
+    color: #666;
+  }
+  
+  .gantt-bar-container {
+    flex: 1;
+    position: relative;
+    padding: 0.5rem 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19%,
+      #f0f0f0 19%,
+      #f0f0f0 20%
+    );
+  }
+  
+  .gantt-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  
+  .gantt-bar.phase {
+    background: #4a90d9;
+  }
+  
+  .gantt-bar.errand {
+    background: #d98c4a;
+  }
+  
+  .gantt-bar:hover {
+    opacity: 0.9;
+  }
+  
+  summary {
+    cursor: pointer;
+    color: #0066cc;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 600px) {
+    .gantt-label-header,
+    .gantt-label {
+      width: 100px;
+      min-width: 100px;
+    }
+    
+    .item-recipe {
+      display: none;
+    }
+  }
+</style>
