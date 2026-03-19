@@ -2,6 +2,89 @@
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.js';
 
+function parseQty(qty) {
+  if (typeof qty === 'number') return qty;
+  if (typeof qty === 'string') {
+    if (qty.includes('/')) {
+      const parts = qty.split(' ');
+      let total = 0;
+      for (const part of parts) {
+        if (part.includes('/')) {
+          const [num, den] = part.split('/');
+          total += parseFloat(num) / parseFloat(den);
+        } else {
+          total += parseFloat(part);
+        }
+      }
+      return total;
+    }
+    return parseFloat(qty) || 0;
+  }
+  return 0;
+}
+
+function collectIngredients(meal) {
+  const ingredientMap = new Map();
+
+  for (const course of meal.courses) {
+    if (course.hidden) continue;
+    
+    for (const recipe of course.recipes) {
+      if (!recipe.phases) continue;
+
+      for (const phase of recipe.phases) {
+        const phaseIngredients = phase.ingredients || [];
+        for (const ing of phaseIngredients) {
+          addIngredient(ingredientMap, ing, recipe.name);
+        }
+
+        const stepIngredients = phase.steps || [];
+        for (const step of stepIngredients) {
+          const stepIngs = step.ingredients || [];
+          for (const ing of stepIngs) {
+            addIngredient(ingredientMap, ing, recipe.name);
+          }
+        }
+      }
+    }
+  }
+
+  return Array.from(ingredientMap.values()).sort((a, b) => 
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
+}
+
+function addIngredient(map, ing, recipeName) {
+  const key = `${ing.name.toLowerCase()}-${(ing.unit || '').toLowerCase()}`;
+  
+  if (!map.has(key)) {
+    map.set(key, {
+      name: ing.name,
+      qty: parseQty(ing.qty),
+      unit: ing.unit || '',
+      note: ing.note || '',
+      preparation: ing.preparation || '',
+      homemade: ing.homemade || false,
+      recipes: [recipeName]
+    });
+  } else {
+    const existing = map.get(key);
+    existing.qty += parseQty(ing.qty);
+    if (ing.note && !existing.note.includes(ing.note)) {
+      existing.note = existing.note ? `${existing.note}; ${ing.note}` : ing.note;
+    }
+    if (ing.preparation && !existing.preparation.includes(ing.preparation)) {
+      existing.preparation = existing.preparation ? `${existing.preparation}; ${ing.preparation}` : ing.preparation;
+    }
+    if (ing.homemade) {
+      existing.homemade = true;
+    }
+    if (!existing.recipes.includes(recipeName)) {
+      existing.recipes.push(recipeName);
+    }
+  }
+}
+
 export function getStaticPaths() {
   const meals = getAllMeals();
   return meals.map(meal => ({
@@ -15,9 +98,48 @@ const meal = getMeal(slug);
 if (!meal) {
   return Astro.redirect('/404');
 }
+
+const shoppingList = collectIngredients(meal);
 ---
 
 <Layout title={`${meal.name} - Shopping List`}>
   <h1>{meal.name} - Shopping List</h1>
-  <p><em>Shopping list generation coming soon</em></p>
+  
+  {shoppingList.length === 0 ? (
+    <p>No ingredients found.</p>
+  ) : (
+    <table>
+      <thead>
+        <tr>
+          <th>Ingredient</th>
+          <th>Quantity</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {shoppingList.map(item => (
+          <tr>
+            <td>
+              {item.name}
+              {item.preparation && <span class="prep"> ({item.preparation})</span>}
+              {item.homemade && <span class="homemade"> (homemade)</span>}
+            </td>
+            <td>{item.qty} {item.unit}</td>
+            <td>{item.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
 </Layout>
+
+<style>
+  .prep {
+    font-style: italic;
+    color: #666;
+  }
+  .homemade {
+    color: #0066cc;
+    font-weight: 500;
+  }
+</style>
