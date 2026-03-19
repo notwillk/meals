@@ -9,7 +9,7 @@ on:
 jobs:
   compute-image-tag:
     name: Compute Image Tag
-    uses: ./_compute_image_tag.yml@main
+    uses: .github/workflows/_compute_image_tag.yml@main
 
   devcontainer:
     name: Build Devcontainer
