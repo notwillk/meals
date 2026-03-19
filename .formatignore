@@ -1,1 +1,6 @@
+# .formatignore
+# This file lists files to skip during format checks.
+# This is intended for generated files only (e.g., lockfiles, outputs).
+# Regular source files should NOT be added here without good reason.
+
 pnpm-lock.yaml

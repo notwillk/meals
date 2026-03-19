@@ -27,11 +27,15 @@ doctor *args:
 
 [no-exit-message]
 format *args:
-    @case "{{args}}" in \
-        "") git ls-files -- "*.yaml" | grep -v -F -f .formatignore 2>/dev/null | xargs prettier --write ;; \
-        "--check") git ls-files -- "*.yaml" | grep -v -F -f .formatignore 2>/dev/null | xargs prettier --check ;; \
+    #!/bin/bash
+    FILTER_FILE=$(mktemp)
+    sed -e '/^#/d' -e '/^$/d' .formatignore > "$FILTER_FILE"
+    case "{{args}}" in \
+        "") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --write ;; \
+        "--check") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --check ;; \
         *) echo "Usage: just format [--check]" >&2; exit 1 ;; \
     esac
+    rm -f "$FILTER_FILE"
 
 [no-exit-message]
 static *args:
