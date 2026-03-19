@@ -13,7 +13,7 @@ permissions:
 jobs:
   compute-image-tag:
     name: Compute Image Tag
-    uses: .github/workflows/_compute_image_tag.yml@main
+    uses: ./workflows/_compute_image_tag.yml@main
 
   build:
     needs: compute-image-tag
