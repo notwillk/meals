@@ -1,8 +1,9 @@
-name: Grapefruit honey pâte de fruit
+id: honey-orange-pate-de-fruit
+description: Grapefruit honey pâte de fruit
 inspiration:
   - https://bakeschool.com/grapefruit-honey-pate-de-fruit/
 phases:
-  - name: make-pate-de-fruit
+  - id: make-pate-de-fruit
     description: Make pâte de fruit
     steps:
       - instruction: Prepare an 8x8 baking pan by greasing and lininge with parchment, using double sling method
@@ -47,10 +48,13 @@ phases:
       - instruction: Unmold the pâte de fruit, and cut it into 1-inch squares with a large, oiled kitchen knife
     storage: Store the uncoated pâte de fruit between parchment sheets in an airtight container in the refrigerator for up to 1 week
 
-  - description: Service
+  - id: service
+    description: Service
     final: true
     follows:
       - make-pate-de-fruit
+    time: "2026-03-22T14:40:00"
+    duration: "PT5M"
     steps:
       - instruction: Toss the squares in granulated sugar to coat them
         ingredients:

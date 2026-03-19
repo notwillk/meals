@@ -1,11 +1,12 @@
-name: Ricotta and nettle toast with hazelnut pangrattato
+id: ricotta-and-nettle-toast-with-hazelnut-pangrattato
+description: Ricotta and nettle toast with hazelnut pangrattato
 inspiration:
   - https://www.cuisine.co.nz/recipe/brussels-sprouts-with-hazelnut-pangrattato/
   - https://www.bonappetit.com/recipe/ricotta-and-nettle-toast-with-hazelnut-pangrattato
   - https://blog.mountainroseherbs.com/nettle-pesto-recipe
 
 phases:
-  - name: make-spread
+  - id: make-spread
     description: Make ricotta and nettle spread
     steps:
       - instruction: If ricotta is very wet, drain briefly before using
@@ -58,7 +59,7 @@ phases:
             unit: pinch
     storage: Store the spread in an airtight container in the refrigerator for up to 3 days
 
-  - name: make-pangrattato
+  - id: make-pangrattato
     description: Make hazelnut pangrattato
     steps:
       - instruction: Toast the hazelnuts in 200°C oven for 7-8 minutes until golden brown
@@ -94,7 +95,7 @@ phases:
           - name: Black pepper, freshly ground
     storage: Store the pangrattato in an airtight container at room temperature for up to 2 days
 
-  - name: make-shrub-garnish
+  - id: make-shrub-garnish
     description: Green apple shrub (lightly structured)
     ingredients:
       - name: Granny Smith apples
@@ -131,12 +132,15 @@ phases:
 
     storage: Refrigerate up to 2 weeks
 
-  - name: Service
+  - id: Service
     description: Service
     follows:
       - make-spread
       - make-pangrattato
       - make-shrub-garnish
+    final: true
+    time: "2026-03-22T13:25:00"
+    duration: "PT5M"
     steps:
       - instruction: Taste the spread once more before plating and adjust if needed
       - instruction: Slice the bread along the bias with pieces that are around 4" long and 0.75" thick

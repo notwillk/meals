@@ -16,13 +16,7 @@ if (!meal) {
   return Astro.redirect('/404');
 }
 
-const serviceTime = meal.service_time || '19:00';
-const [serviceHours, serviceMinutes] = serviceTime.split(':').map(Number);
-
-function timeToMinutes(time) {
-  const [h, m] = time.split(':').map(Number);
-  return h * 60 + m;
-}
+const serviceTime = meal.start_time ? new Date(meal.start_time).getTime() : new Date().getTime();
 
 function minutesToTime(minutes) {
   const h = Math.floor(minutes / 60);
@@ -30,19 +24,81 @@ function minutesToTime(minutes) {
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }
 
-function formatOffset(minutes) {
-  if (minutes === 0) return 'T=0';
-  const prefix = minutes > 0 ? 'T+' : 'T-';
-  const absMins = Math.abs(minutes);
-  if (absMins >= 60) {
-    const hrs = Math.floor(absMins / 60);
-    const mins = absMins % 60;
-    return mins > 0 ? `${prefix}${hrs}hr ${mins}min` : `${prefix}${hrs}hr`;
-  }
-  return `${prefix}${absMins}min`;
+function formatNumeric(value) {
+  const num = parseFloat(value.toFixed(2));
+  return num.toString();
 }
 
-const serviceMinutesOfDay = serviceHours * 60 + serviceMinutes;
+function formatDateHeader(dateStr) {
+  const dt = new Date(dateStr);
+  const dayName = dt.toLocaleDateString('en-US', { weekday: 'long' });
+  const month = (dt.getMonth() + 1).toString();
+  const day = dt.getDate().toString();
+  return `${dayName} ${month}/${day}`;
+}
+
+function getPhaseOffset(phaseTime) {
+  if (!serviceTime || !phaseTime) return null;
+  const phaseMs = new Date(phaseTime).getTime();
+  const offsetMs = phaseMs - serviceTime;
+  const offsetSec = Math.round(offsetMs / 1000);
+  
+  let offsetStr;
+  if (offsetSec === 0) {
+    offsetStr = 'T=0';
+  } else {
+    const prefix = offsetSec > 0 ? 'T+' : 'T-';
+    const absSec = Math.abs(offsetSec);
+    
+    if (absSec < 60) {
+      offsetStr = `${prefix}${absSec}s`;
+    } else {
+      const absMin = absSec / 60;
+      if (absMin < 60) {
+        offsetStr = `${prefix}${formatNumeric(absMin)}m`;
+      } else {
+        const absHrs = absSec / 3600;
+        offsetStr = `${prefix}${formatNumeric(absHrs)}h`;
+      }
+    }
+  }
+  
+  const dt = new Date(phaseTime);
+  let hours = dt.getHours();
+  const minutes = dt.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12 || 12;
+  
+  return `${offsetStr} ${hours}:${minutes}${ampm}`;
+}
+
+function formatDuration(durationStr) {
+  if (!durationStr) return null;
+  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return durationStr;
+  
+  const hours = parseInt(match[1] || 0);
+  const minutes = parseInt(match[2] || 0);
+  const seconds = parseInt(match[3] || 0);
+  
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  } else if (minutes > 0) {
+    return `${minutes}m`;
+  } else {
+    return `${seconds}s`;
+  }
+}
+
+function parseDurationMs(durationStr) {
+  if (!durationStr) return 0;
+  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return 0;
+  const hours = parseInt(match[1] || 0);
+  const minutes = parseInt(match[2] || 0);
+  const seconds = parseInt(match[3] || 0);
+  return (hours * 3600 + minutes * 60 + seconds) * 1000;
+}
 
 // Collect all phases and errands with time/duration
 const scheduledItems = [];
@@ -55,7 +111,7 @@ meal.courses.forEach(course => {
   course.recipes.forEach(recipe => {
     if (recipe.phases) {
       recipe.phases.forEach(phase => {
-        phaseLookup[`${recipe.slug}:${phase.name}`] = phase;
+        phaseLookup[`${recipe.slug}:${phase.id}`] = phase;
       });
     }
   });
@@ -67,21 +123,25 @@ meal.courses.forEach(course => {
     if (recipe.phases) {
       recipe.phases.forEach(phase => {
         if (phase.time && phase.duration) {
-          const startMinutes = timeToMinutes(phase.time);
-          const endMinutes = startMinutes + phase.duration;
+          const phaseMs = new Date(phase.time).getTime();
+          const offsetMs = phaseMs - serviceTime;
+          const durationMs = parseDurationMs(phase.duration);
           
           // Check dependency violations
           if (phase.follows) {
             phase.follows.forEach(dep => {
               const depPhase = phaseLookup[`${recipe.slug}:${dep}`];
               if (depPhase && depPhase.time && depPhase.duration) {
-                const depEnd = timeToMinutes(depPhase.time) + depPhase.duration;
-                if (startMinutes < depEnd) {
+                const depMs = new Date(depPhase.time).getTime();
+                const depOffsetMs = depMs - serviceTime;
+                const depDurationMs = parseDurationMs(depPhase.duration);
+                const depEndMs = depOffsetMs + depDurationMs;
+                if (offsetMs < depEndMs) {
                   dependencyViolations.push({
-                    phase: phase.name,
-                    recipe: recipe.name,
+                    phase: phase.id,
+                    recipe: recipe.description,
                     dependency: dep,
-                    issue: `Starts at ${phase.time} but ${dep} ends at ${minutesToTime(depEnd)}`
+                    issue: `${getPhaseOffset(phase.time)} but ${dep} ends at ${getPhaseOffset(new Date(serviceTime + depEndMs).toISOString())}`
                   });
                 }
               }
@@ -90,19 +150,23 @@ meal.courses.forEach(course => {
           
           scheduledItems.push({
             type: 'phase',
-            name: phase.name,
-            recipe: recipe.name,
+            name: phase.id,
+            description: phase.description,
+            final: phase.final,
+            recipe: recipe.description,
+            recipeSlug: recipe.slug,
             time: phase.time,
-            startMinutes,
-            endMinutes,
-            duration: phase.duration,
-            day: phase.day || 1
+            offsetMs,
+            durationMs,
+            duration: phase.duration
           });
         } else {
           unscheduledItems.push({
             type: 'phase',
-            name: phase.name,
-            source: recipe.name
+            name: phase.id,
+            description: phase.description,
+            recipeSlug: recipe.slug,
+            source: recipe.description
           });
         }
       });
@@ -114,16 +178,18 @@ meal.courses.forEach(course => {
 if (meal.errands) {
   meal.errands.forEach(errand => {
     if (errand.time && errand.duration) {
-      const startMinutes = timeToMinutes(errand.time);
+      const [h, m] = errand.time.split(':').map(Number);
+      const errandMs = new Date(meal.start_time);
+      errandMs.setHours(h, m, 0, 0);
+      const offsetMs = errandMs.getTime() - serviceTime;
       scheduledItems.push({
         type: 'errand',
         name: errand.name,
         recipe: 'Errands',
         time: errand.time,
-        startMinutes,
-        endMinutes: startMinutes + errand.duration,
-        duration: errand.duration,
-        day: errand.day || 1
+        offsetMs,
+        durationMs: errand.duration * 60000,
+        duration: errand.duration
       });
     } else {
       unscheduledItems.push({
@@ -135,22 +201,49 @@ if (meal.errands) {
   });
 }
 
-// Group by day
-const itemsByDay = {};
+// Group items by date
+const itemsByDate = {};
 scheduledItems.forEach(item => {
-  if (!itemsByDay[item.day]) itemsByDay[item.day] = [];
-  itemsByDay[item.day].push(item);
+  const dt = new Date(item.time);
+  const dateKey = dt.toISOString().split('T')[0];
+  if (!itemsByDate[dateKey]) itemsByDate[dateKey] = [];
+  itemsByDate[dateKey].push(item);
 });
 
-Object.keys(itemsByDay).forEach(day => {
-  itemsByDay[day].sort((a, b) => a.startMinutes - b.startMinutes);
+// Sort items within each date
+Object.keys(itemsByDate).forEach(date => {
+  itemsByDate[date].sort((a, b) => a.offsetMs - b.offsetMs);
 });
+
+const sortedDates = Object.keys(itemsByDate).sort();
+
+// For Gantt chart - find time range
+const allItems = scheduledItems;
+const minOffset = allItems.length > 0 ? Math.min(...allItems.map(i => i.offsetMs)) : 0;
+const maxOffset = allItems.length > 0 ? Math.max(...allItems.map(i => i.offsetMs + i.durationMs)) : 0;
+const totalRange = maxOffset - minOffset;
+
+function getGanttMarkers() {
+  const numMarkers = 10;
+  const markers = [];
+  for (let i = 0; i <= numMarkers; i++) {
+    const offset = minOffset + (totalRange / numMarkers) * i;
+    const dt = new Date(serviceTime + offset);
+    let hours = dt.getHours();
+    const minutes = dt.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12 || 12;
+    markers.push(`${hours}:${minutes}${ampm}`);
+  }
+  return markers;
+}
 ---
 
 <Layout title={`${meal.name} - Schedule`}>
+  <nav class="breadcrumbs">
+    <a href="/">All Meals</a> / <a href={`/meals/${slug}`}>{meal.name}</a> / <span>Schedule</span>
+  </nav>
   <h1>{meal.name} - Schedule</h1>
-  {meal.date && <p><strong>Date:</strong> {meal.date}</p>}
-  <p><strong>Service Time:</strong> {serviceTime} (T=0)</p>
   
   {dependencyViolations.length > 0 && (
     <div class="warning warning-red">
@@ -168,108 +261,105 @@ Object.keys(itemsByDay).forEach(day => {
       <h3>Unscheduled Items</h3>
       <ul>
         {unscheduledItems.map(item => (
-          <li><strong>{item.name}</strong> ({item.source}) - missing time or duration</li>
+          <li>
+            {item.type === 'phase' ? (
+              <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>{item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}</a>
+            ) : (
+              <strong>{item.name}</strong>
+            )}
+          </li>
         ))}
       </ul>
     </div>
   )}
   
-  {Object.keys(itemsByDay).map(day => (
-    <div class="day-schedule">
-      <h2>Day {day}</h2>
-      
-      <div class="gantt-container">
-        <div class="gantt-header">
-          <div class="gantt-label-header"></div>
-          {(() => {
-            const times = [];
-            const dayStart = Math.min(...itemsByDay[day].map(i => i.startMinutes)) - 60;
-            const dayEnd = Math.max(...itemsByDay[day].map(i => i.endMinutes)) + 60;
-            for (let t = Math.floor(dayStart / 60) * 60; t <= dayEnd; t += 60) {
-              times.push(t);
-            }
-            return times.map(t => (
-              <div class="gantt-hour" style="flex: 1;">
-                {minutesToTime(t)}
-              </div>
-            ));
-          })()}
-        </div>
-        
-        <div class="gantt-body">
-          {itemsByDay[day].map(item => {
-            const dayStart = Math.min(...itemsByDay[day].map(i => i.startMinutes)) - 60;
-            const dayEnd = Math.max(...itemsByDay[day].map(i => i.endMinutes)) + 60;
-            const totalMinutes = dayEnd - dayStart;
-            const startOffset = item.startMinutes - dayStart;
-            const widthPercent = (item.duration / totalMinutes) * 100;
-            const leftPercent = (startOffset / totalMinutes) * 100;
-            
-            return (
-              <div class="gantt-row">
-                <div class="gantt-label">
-                  <span class="item-name">{item.name}</span>
-                  <span class="item-recipe">{item.recipe}</span>
-                </div>
-                <div class="gantt-bar-container">
-                  <div 
-                    class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
-                    style={`left: ${leftPercent}%; width: ${widthPercent}%;`}
-                    title={`${item.name} (${item.time} - ${minutesToTime(item.endMinutes)}, ${item.duration}min)`}
-                  >
-                    <span class="bar-label">{formatOffset(item.startMinutes - serviceMinutesOfDay)}</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+  {/* Gantt chart temporarily disabled
+  {allItems.length > 0 && (
+    <div class="gantt-container">
+      <div class="gantt-header">
+        <div class="gantt-label-header"></div>
+        {getGanttMarkers().map(t => (
+          <div class="gantt-hour" style="flex: 1;">{t}</div>
+        ))}
       </div>
       
-      <details>
-        <summary>View table</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Duration</th>
-              <th>T-Offset</th>
-            </tr>
-          </thead>
+      <div class="gantt-body">
+        {allItems.map(item => {
+          const leftPercent = ((item.offsetMs - minOffset) / totalRange) * 100;
+          const widthPercent = (item.durationMs / totalRange) * 100;
+          
+          return (
+            <div class="gantt-row">
+              <div class="gantt-label">
+                <span class="item-name">{item.name}</span>
+                <span class="item-recipe">{item.recipe}</span>
+              </div>
+              <div class="gantt-bar-container">
+                <div 
+                  class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
+                  style={`left: ${leftPercent}%; width: ${Math.max(widthPercent, 1)}%;`}
+                  title={`${item.name} - ${getPhaseOffset(item.time)} - ${formatDuration(item.duration)}`}
+                >
+                  <span class="bar-label">{formatDuration(item.duration)}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  )}
+  */}
+  
+  {sortedDates.map(date => (
+    <div class="schedule-section">
+      <h2>{formatDateHeader(date)}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Start</th>
+            <th>Duration</th>
+            <th>Name</th>
+          </tr>
+        </thead>
           <tbody>
-            {itemsByDay[day].map(item => {
-              const offsetMinutes = item.startMinutes - serviceMinutesOfDay;
-              return (
-                <tr>
-                  <td>
+          {itemsByDate[date].map(item => (
+            <tr>
+              <td class="time-cell">{getPhaseOffset(item.time)}</td>
+              <td>{formatDuration(item.duration)}</td>
+              <td>
+                {item.type === 'phase' ? (
+                  <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>{item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}</a>
+                ) : (
+                  <>
                     {item.type === 'errand' ? '🚗 ' : ''}
                     <strong>{item.name}</strong>
-                    <br/><small>{item.recipe}</small>
-                  </td>
-                  <td>{item.time}</td>
-                  <td>{item.duration} min</td>
-                  <td>{formatOffset(offsetMinutes)}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </details>
+                  </>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   ))}
 </Layout>
 
 <style>
-  .day-schedule {
+  .schedule-section {
     margin-bottom: 2rem;
   }
-  
+
+  .time-cell {
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+
   .gantt-container {
     border: 1px solid #ddd;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
   
   .gantt-header {
@@ -364,22 +454,16 @@ Object.keys(itemsByDay).forEach(day => {
   .gantt-bar:hover {
     opacity: 0.9;
   }
-  
-  summary {
-    cursor: pointer;
-    color: #0066cc;
+
+  .breadcrumbs {
     margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #666;
   }
-  
-  @media (max-width: 600px) {
-    .gantt-label-header,
-    .gantt-label {
-      width: 100px;
-      min-width: 100px;
-    }
-    
-    .item-recipe {
-      display: none;
-    }
+  .breadcrumbs a {
+    color: #0066cc;
+  }
+  .breadcrumbs span {
+    color: #333;
   }
 </style>

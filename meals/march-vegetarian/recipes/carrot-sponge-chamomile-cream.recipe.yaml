@@ -1,11 +1,12 @@
-name: Carrot Sponge with Chamomile Cream
+id: carrot-sponge-chamomile-cream
+description: Carrot Sponge with Chamomile Cream
 
 inspiration:
   - https://ladyandpups.com/2014/05/26/roll-with-chamomile-whipped-cream/
   - https://www.cupcakeproject.com/candied-carrot-curls-unique-carrot/
 
 phases:
-  - name: make-sponge
+  - id: make-sponge
     description: Make the carrot sponge base
     ingredients:
       - name: honey
@@ -101,7 +102,7 @@ phases:
       - instruction: Let cool completely before handling
     storage: Store in an airtight container in the refrigerator for up to 36 hours
 
-  - name: make-candied-carrot-curls
+  - id: make-candied-carrot-curls
     description: Make the candied carrot curls
     steps:
       - instruction: Peel the carrot and use a vegetable peeler to shave it into thin ribbons
@@ -143,7 +144,7 @@ phases:
       - instruction: Let cool completely before handling or removing from the straws
     storage: Store in an airtight container until ready to use.
 
-  - name: make-cream
+  - id: make-cream
     description: Make the chamomile cream
     steps:
       - instruction: Combine the cream and chamomile in a vacuum bag and seal
@@ -189,12 +190,15 @@ phases:
       - instruction: Refrigerate for at least 1–2 hours before service
     storage: Store in siphon whip in the refrigerator for up to 6 hours, shake well before dispensing
 
-  - name: assemble
-    description: Assemble the carrot sponge with chamomile cream
+  - id: service
+    description: Assemble and serve the carrot sponge with chamomile cream
     follows:
       - make-sponge
       - make-candied-carrot-curls
       - make-cream
+    final: true
+    time: "2026-03-22T14:25:00"
+    duration: "PT5M"
     steps:
       - instruction: Cut the sponge using an elliptical cookie cutter (2.5")
         equipment:

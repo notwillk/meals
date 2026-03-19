@@ -23,6 +23,10 @@ export function getAllMeals() {
           const mealFile = path.join(dirPath, mealFileName);
           const meal = yaml.load(fs.readFileSync(mealFile, 'utf-8'));
           meal.slug = entry.name;
+          if (meal.start_time) {
+            const dt = new Date(meal.start_time);
+            meal.date = dt.toISOString().split('T')[0];
+          }
           meals.push(meal);
         }
       }
@@ -31,7 +35,7 @@ export function getAllMeals() {
     console.error('Error loading meals:', e.message, 'MEALS_DIR:', MEALS_DIR);
   }
   
-  return meals.sort((a, b) => new Date(a.date) - new Date(b.date));
+  return meals.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
 }
 
 export function getMeal(slug) {
@@ -49,6 +53,10 @@ export function getMeal(slug) {
   const mealFile = path.join(mealDir, mealFileName);
   const meal = yaml.load(fs.readFileSync(mealFile, 'utf-8'));
   meal.slug = slug;
+  if (meal.start_time) {
+    const dt = new Date(meal.start_time);
+    meal.date = dt.toISOString().split('T')[0];
+  }
   
   // Load recipes
   meal.courses = meal.courses.map(course => {
@@ -61,7 +69,7 @@ export function getMeal(slug) {
         recipe.slug = normalizedPath;
         return recipe;
       }
-      return { name: recipePath, error: 'not found', slug: normalizedPath };
+      return { id: recipePath, description: 'Recipe not found', error: 'not found', slug: normalizedPath };
     });
     return course;
   });

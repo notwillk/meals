@@ -2,7 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { getAllMeals } from '../data/loader.js';
 
-const meals = getAllMeals();
+const meals = getAllMeals().sort((a, b) => new Date(b.start_time) - new Date(a.start_time));
+
+function formatDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return `${month}/${day}/${year}`;
+}
 ---
 
 <Layout title="Meals">
@@ -14,8 +19,8 @@ const meals = getAllMeals();
     <ul>
       {meals.map(meal => (
         <li>
+          {meal.date && <span>{formatDate(meal.date)} - </span>}
           <a href={`/meals/${meal.slug}`}>{meal.name}</a>
-          {meal.date && <span> - {meal.date}</span>}
         </li>
       ))}
     </ul>

@@ -1,5 +1,5 @@
 name: Spring Vegetables
-date: 2026-03-15
+start_time: 2026-03-22T13:00:00
 
 courses:
   - name: Amuse-Bouche
@@ -7,39 +7,47 @@ courses:
     plating: Served in a small shooter glass with a drizzle of chili oil on top
     recipes:
       - "&recipes/celeriac-veloute"
+    duration: PT30M
   - name: Salad
     description: Watercress salad
     plating: Large plate
     recipes:
       - "&recipes/watercress-salad"
+    duration: PT10M
+    first_course: true
   - name: Appetizer
     description: Ricotta and nettle toast with hazelnut pangrattato
     plating: Bread Plate
     recipes:
       - "&recipes/ricotta-and-nettle-toast-with-hazelnut-pangrattato"
+    duration: PT15M
   - name: Intermezzo
-    hidden: true
+    hidden: false
     description: Hot clear mushroom–kombu tea
     plating: Tea cup
     recipes:
       - "&recipes/mushroom-kombu-tea"
-  - name: Green Tonic
+  - name: Second Salad
     description: Charred endive
     plating: Small plate
     recipes:
       - "&recipes/charred-endive"
+    duration: PT20M
   - name: Entrée
     description: Asparagus soufflé with Gruyère & Robiola
     plating: Ramekin with small plate
     recipes:
       - "&recipes/asparagus-soufflé-with-gruyere-and-robiola"
+    duration: PT25M
   - name: Dessert
     description: Carrot Sponge with Chamomile Cream
     plating: Small plate
     recipes:
       - "&recipes/carrot-sponge-chamomile-cream"
+    duration: PT15M
   - name: Mignardise
     description: Honey & orange pâte de fruit
     plating: Oval serving dish
     recipes:
       - "&recipes/honey-orange-pate-de-fruit"
+    duration: PT0M

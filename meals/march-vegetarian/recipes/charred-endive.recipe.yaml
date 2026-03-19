@@ -1,6 +1,8 @@
-name: Charred Endive with Lemon & Olive Oil
+id: charred-endive
+description: Charred Endive with Lemon & Olive Oil
 phases:
-  - name: prep-endive
+  - id: prep-endive
+    description: Prep endive
     steps:
       - instruction: Trim and halve the endive lengthwise, keeping the core intact so each half holds together
         ingredients:
@@ -19,7 +21,8 @@ phases:
       - instruction: Remove from pan and allow to cool completely, cut-side up. Hold at room temperature for up to ~1 hour
     storage: Hold at room temperature, uncovered, for up to ~1 hour
 
-  - name: make-dressing
+  - id: make-dressing
+    description: Make dressing
     steps:
       - instruction: In squeeze bottle, combine lemon juice and olive oil
         ingredients:
@@ -32,11 +35,14 @@ phases:
       - instruction: Shake to combine and reserve
     storage: Refrigerate in squeeze bottle for up to 3 days
 
-  - name: Service
+  - id: service
+    description: Service
     follows:
       - prep-endive
       - make-dressing
     final: true
+    time: "2026-03-22T13:40:00"
+    duration: "PT5M"
     steps:
       - instruction: Return dressing to room temperature if refrigerated
       - instruction: Torch the cut face and edges of the endive to create light, localized char
