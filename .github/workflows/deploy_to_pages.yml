@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Compute image tag
         id: image
-        uses: ./.github/workflows/_compute_image_tag.yml
+        uses: ${{ github.repository }}@/.github/workflows/_compute_image_tag.yml
 
       - name: Login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
