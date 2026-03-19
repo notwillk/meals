@@ -2,12 +2,11 @@
 $schema: ../.schemas/swimlane-ticket.json
 title: 'Add TypeScript to Astro Pages'
 priority: p2
-blocked_by: ["01KM37N5SW0000000000000000", "01KM37NB0E0000000000000000"]
 status: todo
 ready: true
-blocked_by: []
+blocked_by: ["01KM37N5SW0000000000000000", "01KM37NB0E0000000000000000"]
 subtasks: []
-tags: [typescript, astro]
+tags: [typescript, astro, hard]
 
 ---
 

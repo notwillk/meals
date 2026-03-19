@@ -2,12 +2,11 @@
 $schema: ../.schemas/swimlane-ticket.json
 title: 'TypeScript Cleanup'
 priority: p2
-blocked_by: ["01KM37NB0J0000000000000000"]
 status: todo
 ready: true
-blocked_by: []
+blocked_by: ["01KM37NB0J0000000000000000"]
 subtasks: []
-tags: [cleanup, typescript, astro]
+tags: [cleanup, typescript, astro, easy]
 
 ---
 

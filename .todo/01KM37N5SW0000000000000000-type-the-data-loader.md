@@ -2,12 +2,11 @@
 $schema: ../.schemas/swimlane-ticket.json
 title: 'Type the Data Loader'
 priority: p1
-blocked_by: ["01KM37MRGF0000000000000000", "01KM37MZQ50000000000000000"]
 status: todo
 ready: true
-blocked_by: []
+blocked_by: ["01KM37MRGF0000000000000000", "01KM37MZQ50000000000000000"]
 subtasks: []
-tags: [typescript, data-loader]
+tags: [typescript, data-loader, normal]
 
 ---
 

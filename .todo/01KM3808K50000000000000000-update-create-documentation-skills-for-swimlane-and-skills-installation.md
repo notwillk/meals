@@ -6,7 +6,7 @@ status: todo
 ready: true
 blocked_by: []
 subtasks: []
-tags: [documentation, skills, swimlane]
+tags: [documentation, skills, swimlane, normal]
 
 ---
 

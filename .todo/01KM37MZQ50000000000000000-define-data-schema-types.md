@@ -6,7 +6,7 @@ status: todo
 ready: true
 blocked_by: []
 subtasks: []
-tags: [typescript]
+tags: [typescript, hard]
 
 ---
 

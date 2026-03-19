@@ -2,12 +2,11 @@
 $schema: ../.schemas/swimlane-ticket.json
 title: 'Extract Shared Time Utilities'
 priority: p1
-blocked_by: ["01KM37MRGF0000000000000000"]
 status: todo
 ready: true
-blocked_by: []
+blocked_by: ["01KM37MRGF0000000000000000"]
 subtasks: []
-tags: [typescript, refactor]
+tags: [typescript, refactor, easy]
 
 ---
 
