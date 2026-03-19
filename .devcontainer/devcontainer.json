@@ -26,6 +26,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "astro-build.astro-vscode",
         "github.vscode-github-actions",
         "skellock.just",
         "sst-dev.opencode"
