@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getAllMeals } from '../data/loader.ts';
+import type { Meal } from '../types/index.ts';
 
-const meals = getAllMeals().sort((a, b) => new Date(b.start_time) - new Date(a.start_time));
+const meals: Meal[] = getAllMeals().sort((a, b) => new Date(b.start_time ?? 0).getTime() - new Date(a.start_time ?? 0).getTime());
 
-function formatDate(dateStr) {
+function formatDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-');
   return `${month}/${day}/${year}`;
 }

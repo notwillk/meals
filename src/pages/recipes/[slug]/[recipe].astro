@@ -2,17 +2,18 @@
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
 import { formatDuration, formatNumeric } from '../../../utils/time.ts';
+import type { Meal, Course, Recipe, Phase, Step, Ingredient } from '../../../types/index.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  const paths = [];
+  const paths: { params: { slug: string; recipe: string } }[] = [];
   
-  meals.forEach(meal => {
+  meals.forEach((meal: Meal) => {
     const fullMeal = getMeal(meal.slug);
     if (!fullMeal) return;
     
-    fullMeal.courses.forEach(course => {
-      course.recipes.forEach(recipe => {
+    fullMeal.courses.forEach((course: Course) => {
+      course.recipes.forEach((recipe: Recipe) => {
         if (recipe.slug) {
           paths.push({
             params: { slug: meal.slug, recipe: recipe.slug }
@@ -22,7 +23,6 @@ export function getStaticPaths() {
     });
   });
   
-  console.log('Recipe paths:', paths);
   return paths;
 }
 
@@ -34,9 +34,9 @@ if (!meal) {
 }
 
 // Find the recipe
-let recipe = null;
-meal.courses.forEach(course => {
-  course.recipes.forEach(r => {
+let recipe: Recipe | null = null;
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((r: Recipe) => {
     if (r.slug === recipeSlug) {
       recipe = r;
     }
@@ -55,7 +55,7 @@ function getPhaseOffset(phaseTime: string): string | null {
   const offsetMs = phaseMs - mealStartTime;
   const offsetSec = Math.round(offsetMs / 1000);
   
-  let offsetStr;
+  let offsetStr: string;
   if (offsetSec === 0) {
     offsetStr = 'T=0';
   } else {
@@ -87,12 +87,12 @@ function getPhaseOffset(phaseTime: string): string | null {
 }
 
 // Get all equipment used in a phase
-function getPhaseEquipment(phase) {
-  const equipment = new Set();
+function getPhaseEquipment(phase: Phase): string[] {
+  const equipment = new Set<string>();
   if (phase.steps) {
-    phase.steps.forEach(step => {
+    phase.steps.forEach((step: Step) => {
       if (step.equipment) {
-        step.equipment.forEach(eq => equipment.add(eq));
+        step.equipment.forEach((eq: string) => equipment.add(eq));
       }
     });
   }
@@ -100,7 +100,7 @@ function getPhaseEquipment(phase) {
 }
 
 // Get step ingredients
-function getStepIngredients(step) {
+function getStepIngredients(step: Step): Ingredient[] {
   return step.ingredients || [];
 }
 ---
@@ -111,7 +111,7 @@ function getStepIngredients(step) {
   </nav>
   <h1>{recipe.description}</h1>
   
-  {recipe.phases && recipe.phases.map(phase => (
+  {recipe.phases && recipe.phases.map((phase: Phase) => (
     <div class="phase" id={phase.id}>
       <h2>{phase.description || phase.id}</h2>
       
@@ -144,12 +144,12 @@ function getStepIngredients(step) {
             </tr>
           </thead>
           <tbody>
-            {phase.steps.map((step, idx) => (
+            {phase.steps.map((step: Step, idx: number) => (
               <tr>
                 <td class="ingredients-cell">
                   {getStepIngredients(step).length > 0 && (
                     <ul>
-                      {getStepIngredients(step).map(ing => (
+                      {getStepIngredients(step).map((ing: Ingredient) => (
                         <li>
                           {ing.qty} {ing.unit} {ing.name}
                           {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}

@@ -2,10 +2,41 @@
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
 import { formatDuration, formatNumeric, getPhaseOffsetStr, getPhaseTimeStr, parseDurationMs } from '../../../utils/time.ts';
+import type { Meal, Course, Recipe, Phase, Errand } from '../../../types/index.ts';
+
+interface ScheduledItem {
+  type: 'phase' | 'errand';
+  name: string;
+  description?: string;
+  final?: boolean;
+  recipe?: string;
+  recipeSlug?: string;
+  time: string;
+  offsetMs: number;
+  durationMs: number;
+  duration: string;
+}
+
+interface UnscheduledItem {
+  type: 'phase' | 'errand';
+  name: string;
+  description?: string;
+  recipeSlug?: string;
+  source: string;
+  final?: boolean;
+  recipe?: string;
+}
+
+interface DependencyViolation {
+  phase: string;
+  recipe: string;
+  dependency: string;
+  issue: string;
+}
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  return meals.map(meal => ({
+  return meals.map((meal: Meal) => ({
     params: { slug: meal.slug }
   }));
 }
@@ -34,16 +65,16 @@ function formatDateHeader(dateStr: string): string {
 }
 
 // Collect all phases and errands with time/duration
-const scheduledItems = [];
-const unscheduledItems = [];
-const dependencyViolations = [];
+const scheduledItems: ScheduledItem[] = [];
+const unscheduledItems: UnscheduledItem[] = [];
+const dependencyViolations: DependencyViolation[] = [];
 
 // Build phase lookup
-const phaseLookup = {};
-meal.courses.forEach(course => {
-  course.recipes.forEach(recipe => {
+const phaseLookup: Record<string, Phase> = {};
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((recipe: Recipe) => {
     if (recipe.phases) {
-      recipe.phases.forEach(phase => {
+      recipe.phases.forEach((phase: Phase) => {
         phaseLookup[`${recipe.slug}:${phase.id}`] = phase;
       });
     }
@@ -51,10 +82,10 @@ meal.courses.forEach(course => {
 });
 
 // Check phases
-meal.courses.forEach(course => {
-  course.recipes.forEach(recipe => {
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((recipe: Recipe) => {
     if (recipe.phases) {
-      recipe.phases.forEach(phase => {
+      recipe.phases.forEach((phase: Phase) => {
         if (phase.time && phase.duration) {
           const phaseMs = new Date(phase.time).getTime();
           const offsetMs = phaseMs - serviceTime;
@@ -62,7 +93,7 @@ meal.courses.forEach(course => {
           
           // Check dependency violations
           if (phase.follows) {
-            phase.follows.forEach(dep => {
+            phase.follows.forEach((dep: string) => {
               const depPhase = phaseLookup[`${recipe.slug}:${dep}`];
               if (depPhase && depPhase.time && depPhase.duration) {
                 const depMs = new Date(depPhase.time).getTime();
@@ -109,7 +140,7 @@ meal.courses.forEach(course => {
 
 // Check errands
 if (meal.errands) {
-  meal.errands.forEach(errand => {
+  meal.errands.forEach((errand: Errand) => {
     if (errand.time && errand.duration) {
       const errandMs = new Date(errand.time);
       const offsetMs = errandMs.getTime() - serviceTime;
@@ -134,8 +165,8 @@ if (meal.errands) {
 }
 
 // Group items by date
-const itemsByDate = {};
-scheduledItems.forEach(item => {
+const itemsByDate: Record<string, ScheduledItem[]> = {};
+scheduledItems.forEach((item: ScheduledItem) => {
   const dt = new Date(item.time);
   const dateKey = dt.toISOString().split('T')[0];
   if (!itemsByDate[dateKey]) itemsByDate[dateKey] = [];
@@ -143,11 +174,11 @@ scheduledItems.forEach(item => {
 });
 
 // Sort items within each date
-Object.keys(itemsByDate).forEach(date => {
-  itemsByDate[date].sort((a, b) => a.offsetMs - b.offsetMs);
+Object.keys(itemsByDate).forEach((date: string) => {
+  itemsByDate[date].sort((a: ScheduledItem, b: ScheduledItem) => a.offsetMs - b.offsetMs);
 });
 
-const sortedDates = Object.keys(itemsByDate).sort();
+const sortedDates: string[] = Object.keys(itemsByDate).sort();
 ---
 
 <Layout title={`${meal.name} - Schedule`}>

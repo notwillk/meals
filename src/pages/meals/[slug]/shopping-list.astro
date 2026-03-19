@@ -1,8 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import type { Meal, Course, Recipe, Phase, Ingredient, Step } from '../../../types/index.ts';
 
-function parseQty(qty) {
+interface IngredientItem {
+  name: string;
+  qty: number;
+  unitQuantities: [number, string][];
+  note: string;
+  preparation: string;
+  homemade: boolean;
+  recipes: string[];
+}
+
+function parseQty(qty: string | number | undefined): number {
   if (typeof qty === 'number') return qty;
   if (typeof qty === 'string') {
     if (qty.includes('/')) {
@@ -23,8 +34,8 @@ function parseQty(qty) {
   return 0;
 }
 
-function collectIngredientsBySource(meal) {
-  const sourceGroups = new Map();
+function collectIngredientsBySource(meal: Meal): Map<string, IngredientItem[]> {
+  const sourceGroups = new Map<string, Map<string, IngredientItem>>();
 
   for (const course of meal.courses) {
     if (course.hidden) continue;
@@ -49,7 +60,7 @@ function collectIngredientsBySource(meal) {
     }
   }
 
-  const result = new Map();
+  const result = new Map<string, IngredientItem[]>();
   
   for (const [source, ingredientMap] of sourceGroups) {
     const items = Array.from(ingredientMap.values())
@@ -64,7 +75,11 @@ function collectIngredientsBySource(meal) {
   return result;
 }
 
-function addIngredientBySource(sourceGroups, ing, recipeName) {
+function addIngredientBySource(
+  sourceGroups: Map<string, Map<string, IngredientItem>>,
+  ing: Ingredient,
+  recipeName: string
+): void {
   const source = (ing.source && ing.source.trim()) ? ing.source.trim() : 'Grocery Store';
   const key = ing.name.toLowerCase();
   const ingUnit = ing.unit || '';
@@ -73,7 +88,7 @@ function addIngredientBySource(sourceGroups, ing, recipeName) {
   if (!sourceGroups.has(source)) {
     sourceGroups.set(source, new Map());
   }
-  const map = sourceGroups.get(source);
+  const map = sourceGroups.get(source)!;
   
   if (!map.has(key)) {
     map.set(key, {
@@ -86,7 +101,7 @@ function addIngredientBySource(sourceGroups, ing, recipeName) {
       recipes: [recipeName]
     });
   } else {
-    const existing = map.get(key);
+    const existing = map.get(key)!;
     existing.qty += ingQty;
     
     if (!ingUnit) {
@@ -130,7 +145,7 @@ function addIngredientBySource(sourceGroups, ing, recipeName) {
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  return meals.map(meal => ({
+  return meals.map((meal: Meal) => ({
     params: { slug: meal.slug }
   }));
 }

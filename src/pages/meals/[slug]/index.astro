@@ -1,10 +1,11 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import type { Meal, Course } from '../../../types/index.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  return meals.map(meal => ({
+  return meals.map((meal: Meal) => ({
     params: { slug: meal.slug }
   }));
 }
@@ -16,26 +17,26 @@ if (!meal) {
   return Astro.redirect('/404');
 }
 
-function formatDate(dateStr) {
+function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-function formatTime(dateStr) {
+function formatTime(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
-function parseDurationMins(durationStr) {
+function parseDurationMins(durationStr: string | undefined): number {
   if (!durationStr) return 0;
   const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?/);
   if (!match) return 0;
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
+  const hours = parseInt(match[1] || '0');
+  const minutes = parseInt(match[2] || '0');
   return hours * 60 + minutes;
 }
 
-function formatServiceOffset(minutes) {
+function formatServiceOffset(minutes: number): string {
   if (minutes === 0) return 'T+0m';
   const prefix = minutes > 0 ? 'T+' : 'T-';
   const absMins = Math.abs(minutes);
@@ -44,15 +45,15 @@ function formatServiceOffset(minutes) {
 }
 
 // Filter visible courses (not hidden)
-const visibleCourses = meal.courses.filter(c => !c.hidden);
+const visibleCourses: Course[] = meal.courses.filter((c: Course) => !c.hidden);
 
 // Find the first_course (T=0)
-const firstCourseIndex = visibleCourses.findIndex(c => c.first_course);
+const firstCourseIndex: number = visibleCourses.findIndex((c: Course) => c.first_course);
 
 // Calculate offsets relative to first_course
 let offsetFromFirst = 0;
-const coursesWithOffset = visibleCourses.map((course, idx) => {
-  let serviceOffset;
+const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
+  let serviceOffset: number;
   if (idx < firstCourseIndex) {
     // Calculate negative offset from first course
     let preOffset = 0;
