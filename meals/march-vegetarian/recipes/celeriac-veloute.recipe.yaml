@@ -2,9 +2,12 @@ id: celeriac-veloute
 description: Roasted Celeriac Velouté
 inspiration:
   - https://kitcheninspirations.wordpress.com/2013/03/14/celeriac-veloute-or-soup
+
 phases:
   - id: make-stock
     description: Make vegetable stock
+    duration: PT1H30M
+    time: "2026-03-20T18:00:00"
     ingredients:
       - name: various vegetables, such as carrots, celery, onion, garlic, and herbs (whatever looks good)
     steps:
@@ -16,6 +19,8 @@ phases:
 
   - id: make-veloute
     description: Make Velouté
+    time: "2026-03-21T11:30:00"
+    duration: PT1H30M
     follows:
       - make-stock
     steps:
@@ -86,7 +91,7 @@ phases:
     final: true
     follows:
       - make-veloute
-    time: "2026-03-22T12:30:00"
+    time: "2026-03-22T12:15:00"
     duration: "PT5M"
     ingredients:
       - name: chili oil

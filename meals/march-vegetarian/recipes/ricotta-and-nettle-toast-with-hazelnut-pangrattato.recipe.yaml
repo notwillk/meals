@@ -8,6 +8,8 @@ inspiration:
 phases:
   - id: make-spread
     description: Make ricotta and nettle spread
+    time: "2026-03-21T10:00:00"
+    duration: "PT15M"
     steps:
       - instruction: If ricotta is very wet, drain briefly before using
         ingredients:
@@ -61,6 +63,8 @@ phases:
 
   - id: make-pangrattato
     description: Make hazelnut pangrattato
+    time: "2026-03-20T18:30:00"
+    duration: "PT20M"
     steps:
       - instruction: Toast the hazelnuts in 200°C oven for 7-8 minutes until golden brown
         ingredients:
@@ -97,6 +101,8 @@ phases:
 
   - id: make-shrub-garnish
     description: Green apple shrub (lightly structured)
+    time: "2026-03-20T19:30:00"
+    duration: "PT1H30M"
     ingredients:
       - name: Granny Smith apples
         qty: 0.7

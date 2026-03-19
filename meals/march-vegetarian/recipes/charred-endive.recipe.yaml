@@ -3,6 +3,8 @@ description: Charred Endive with Lemon & Olive Oil
 phases:
   - id: prep-endive
     description: Prep endive
+    time: "2026-03-22T12:30:00"
+    duration: "PT15M"
     steps:
       - instruction: Trim and halve the endive lengthwise, keeping the core intact so each half holds together
         ingredients:
@@ -23,6 +25,8 @@ phases:
 
   - id: make-dressing
     description: Make dressing
+    time: "2026-03-22T12:00:00"
+    duration: "PT5M"
     steps:
       - instruction: In squeeze bottle, combine lemon juice and olive oil
         ingredients:

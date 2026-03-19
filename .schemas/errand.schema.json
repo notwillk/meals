@@ -3,7 +3,7 @@
   "$id": "https://example.com/schemas/errand.schema.json",
   "title": "Errand",
   "type": "object",
-  "required": ["name"],
+  "required": ["name", "time", "duration"],
   "additionalProperties": false,
   "properties": {
     "name": {
@@ -12,8 +12,8 @@
     },
     "time": {
       "type": "string",
-      "pattern": "^\\d{2}:\\d{2}$",
-      "description": "24-hour time - when errand starts (e.g., '14:30')"
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})?$",
+      "description": "ISO 8601 timestamp - when errand starts (e.g., '2026-03-21T08:00:00')"
     },
     "duration": {
       "type": "string",

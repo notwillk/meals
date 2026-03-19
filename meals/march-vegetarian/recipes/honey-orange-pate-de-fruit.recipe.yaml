@@ -5,6 +5,8 @@ inspiration:
 phases:
   - id: make-pate-de-fruit
     description: Make pâte de fruit
+    time: "2026-03-21T15:00:00"
+    duration: "PT2H"
     steps:
       - instruction: Prepare an 8x8 baking pan by greasing and lininge with parchment, using double sling method
       - instruction: Open the liquid pectin packets and stand them up in a mug or a glass by the stove for later
