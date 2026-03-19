@@ -1,0 +1,21 @@
+name: Devcontainer Image
+
+on:
+  workflow_call:
+    outputs:
+      image_tag:
+        description: "The devcontainer image tag"
+        value: ${{ jobs.compute.outputs.image_tag }}
+
+jobs:
+  compute:
+    name: Compute Image Tag
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.image_tag.outputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute image tag
+        id: image_tag
+        run: echo "image_tag=${{ hashFiles('.devcontainer/**') }}" >> "$GITHUB_OUTPUT"
