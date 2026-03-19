@@ -30,11 +30,12 @@ export interface Phase {
 }
 
 export interface Recipe {
-  id: string;
+  id?: string;
   slug: string;
   description: string;
   inspiration?: string[];
   phases?: Phase[];
+  error?: string;
 }
 
 export interface RecipeRef {
@@ -46,7 +47,7 @@ export interface Course {
   name: string;
   description?: string;
   plating?: string;
-  recipes: RecipeRef[];
+  recipes: string[] | Recipe[];
   duration?: string;
   hidden?: boolean;
   first_course?: boolean;
