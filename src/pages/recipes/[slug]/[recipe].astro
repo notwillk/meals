@@ -70,8 +70,7 @@ function getStepIngredients(step) {
   
   {recipe.phases && recipe.phases.map(phase => (
     <div class="phase">
-      <h2>{phase.name}</h2>
-      {phase.description && <p><em>{phase.description}</em></p>}
+      <h2>{phase.description || phase.name}</h2>
       
       {phase.follows && (
         <p><strong>Follows:</strong> {phase.follows.join(', ')}</p>
@@ -97,18 +96,17 @@ function getStepIngredients(step) {
             {phase.steps.map((step, idx) => (
               <tr>
                 <td class="ingredients-cell">
-                  {getStepIngredients(step).length > 0 ? (
+                  {getStepIngredients(step).length > 0 && (
                     <ul>
                       {getStepIngredients(step).map(ing => (
                         <li>
                           {ing.qty} {ing.unit} {ing.name}
                           {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}
                           {ing.note && <span style="color: #666;"> ({ing.note})</span>}
+                          {ing.homemade && <span style="color: #0066cc;"> (see above)</span>}
                         </li>
                       ))}
                     </ul>
-                  ) : (
-                    <span style="color: #999;">—</span>
                   )}
                 </td>
                 <td class="instruction-cell">

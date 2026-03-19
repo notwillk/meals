@@ -16,22 +16,26 @@ if (!meal) {
   return Astro.redirect('/404');
 }
 
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+}
+
 // Filter visible courses (not hidden)
 const visibleCourses = meal.courses.filter(c => !c.hidden);
 ---
 
 <Layout title={meal.name}>
   <h1>{meal.name}</h1>
-  {meal.date && <p><strong>Date:</strong> {meal.date}</p>}
+  {meal.date && <p><strong>Date:</strong> {formatDate(meal.date)}</p>}
   {meal.service_time && <p><strong>Service:</strong> {meal.service_time}</p>}
   
   <h2>Courses</h2>
   <ul>
     {visibleCourses.map(course => (
       <li>
-        <strong>{course.name}</strong>
+        <strong>{course.name}</strong>{course.description && ` (${course.description})`}
         {course.service_offset && <span> ({course.service_offset})</span>}
-        <p>{course.description}</p>
         <ul>
           {course.recipes.map(recipe => (
             <li>

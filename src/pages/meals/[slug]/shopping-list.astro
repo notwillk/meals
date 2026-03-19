@@ -49,19 +49,23 @@ function collectIngredients(meal) {
     }
   }
 
-  return Array.from(ingredientMap.values()).sort((a, b) => 
-    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-  );
+  return Array.from(ingredientMap.values())
+    .filter(item => !item.homemade)
+    .sort((a, b) => 
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
 }
 
 function addIngredient(map, ing, recipeName) {
-  const key = `${ing.name.toLowerCase()}-${(ing.unit || '').toLowerCase()}`;
+  const key = ing.name.toLowerCase();
+  const ingUnit = ing.unit || '';
+  const ingQty = parseQty(ing.qty);
   
   if (!map.has(key)) {
     map.set(key, {
       name: ing.name,
-      qty: parseQty(ing.qty),
-      unit: ing.unit || '',
+      qty: ingQty,
+      unitQuantities: ingUnit ? [[ingQty, ingUnit]] : [],
       note: ing.note || '',
       preparation: ing.preparation || '',
       homemade: ing.homemade || false,
@@ -69,7 +73,32 @@ function addIngredient(map, ing, recipeName) {
     });
   } else {
     const existing = map.get(key);
-    existing.qty += parseQty(ing.qty);
+    existing.qty += ingQty;
+    
+    if (!ingUnit) {
+      if (ing.note && !existing.note.includes(ing.note)) {
+        existing.note = existing.note ? `${existing.note}; ${ing.note}` : ing.note;
+      }
+      if (ing.preparation && !existing.preparation.includes(ing.preparation)) {
+        existing.preparation = existing.preparation ? `${existing.preparation}; ${ing.preparation}` : ing.preparation;
+      }
+      if (ing.homemade) {
+        existing.homemade = true;
+      }
+      if (!existing.recipes.includes(recipeName)) {
+        existing.recipes.push(recipeName);
+      }
+      return;
+    }
+    
+    const lastUnitEntry = existing.unitQuantities.length > 0 ? existing.unitQuantities[existing.unitQuantities.length - 1] : null;
+    
+    if (lastUnitEntry && lastUnitEntry[1].toLowerCase() === ingUnit.toLowerCase()) {
+      lastUnitEntry[0] += ingQty;
+    } else {
+      existing.unitQuantities.push([ingQty, ingUnit]);
+    }
+    
     if (ing.note && !existing.note.includes(ing.note)) {
       existing.note = existing.note ? `${existing.note}; ${ing.note}` : ing.note;
     }
@@ -122,9 +151,12 @@ const shoppingList = collectIngredients(meal);
             <td>
               {item.name}
               {item.preparation && <span class="prep"> ({item.preparation})</span>}
-              {item.homemade && <span class="homemade"> (homemade)</span>}
             </td>
-            <td>{item.qty} {item.unit}</td>
+            <td>
+              {item.unitQuantities && item.unitQuantities.length > 0 
+                ? item.unitQuantities.filter(uq => uq[0] > 0).map(uq => `${uq[0]} ${uq[1]}`).join(' + ')
+                : (item.qty > 0 ? item.qty : '')}
+            </td>
             <td>{item.note}</td>
           </tr>
         ))}

@@ -14,6 +14,9 @@ importers:
       js-yaml:
         specifier: ^4.1.1
         version: 4.1.1
+      slugify:
+        specifier: ^1.6.8
+        version: 1.6.8
 
 packages:
 
@@ -1172,6 +1175,10 @@ packages:
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
+
+  slugify@1.6.8:
+    resolution: {integrity: sha512-HVk9X1E0gz3mSpoi60h/saazLKXKaZThMLU3u/aNwoYn8/xQyX2MGxL0ui2eaokkD7tF+Zo+cKTHUbe1mmmGzA==}
+    engines: {node: '>=8.0.0'}
 
   smol-toml@1.6.0:
     resolution: {integrity: sha512-4zemZi0HvTnYwLfrpk/CF9LOd9Lt87kAt50GnqhMpyF9U3poDAP2+iukq2bZsO/ufegbYehBkqINbsWxj4l4cw==}
@@ -2813,6 +2820,8 @@ snapshots:
       '@types/hast': 3.0.4
 
   sisteransi@1.0.5: {}
+
+  slugify@1.6.8: {}
 
   smol-toml@1.6.0: {}
 
