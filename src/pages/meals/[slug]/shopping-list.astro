@@ -158,9 +158,22 @@ if (!meal) {
 }
 
 const shoppingListBySource = collectIngredientsBySource(meal);
+
+function formatMealDescription(meal: Meal): string {
+  const parts: string[] = [];
+  if (meal.date) {
+    const dt = new Date(meal.date);
+    parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+  }
+  if (meal.start_time) {
+    const date = new Date(meal.start_time);
+    parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
+  }
+  return parts.join(' · ');
+}
 ---
 
-<Layout title={`${meal.name} - Shopping List`}>
+<Layout title={`${meal.name} - Shopping List`} description={formatMealDescription(meal)}>
   <nav class="breadcrumbs">
     <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>Shopping List</span>
   </nav>

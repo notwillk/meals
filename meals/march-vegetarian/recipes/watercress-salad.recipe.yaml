@@ -10,6 +10,8 @@ phases:
     duration: "PT5M"
     steps:
       - instruction: Combine olive oil, lemon juice, and salt in a salad dressing shaker
+        equipment:
+          - salad dressing shaker
         ingredients:
           - name: olive oil
             qty: 3
@@ -28,6 +30,8 @@ phases:
     duration: "PT10M"
     steps:
       - instruction: Trim the fennel bulb and remove the thick outer stalks. Reserve the fronds for garnish. Using a mandoline or very sharp knife, thinly shave the fennel bulb
+        equipment:
+          - mandoline
         ingredients:
           - name: fennel bulb, very thinly shaved
             qty: 40
@@ -42,6 +46,8 @@ phases:
     duration: "PT10M"
     steps:
       - instruction: Core the apple and cut into matchsticks using julienne blade on mandoline
+        equipment:
+          - mandoline
         ingredients:
           - name: green apple, julienned (matchsticks)
             qty: 25
@@ -59,6 +65,8 @@ phases:
     duration: "PT10M"
     steps:
       - instruction: Wash and trim the watercress, removing thick stems. Spin dry in a salad spinner or pat dry with tea towels
+        equipment:
+          - salad spinner
         ingredients:
           - name: watercress, trimmed (thick stems removed)
             qty: 90

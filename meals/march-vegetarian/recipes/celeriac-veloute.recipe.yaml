@@ -14,6 +14,8 @@ phases:
           - name: various vegetables, such as carrots, celery, onion, garlic, and herbs (whatever looks good)
             source: Rainbow Grocery
       - instruction: Place the vegetables in instant pot and cover with water
+        equipment:
+          - instant pot
       - instruction: Cook at pressure for 45 minutes, with natural release
       - instruction: Strain the vegetables, reserving the liquid as vegetable stock.
     storage: Store vegetable stock in an airtight container in the refrigerator for up to 1 week.
@@ -26,6 +28,8 @@ phases:
       - make-stock
     steps:
       - instruction: Pre-heat oven to 400°F
+        equipment:
+          - oven
       - instruction: Toss the onion and celeriac cubes in neutral oil and salt, distribute evenly on sheet pan
         equipment:
           - half sheet pan

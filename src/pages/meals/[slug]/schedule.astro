@@ -58,6 +58,19 @@ function formatDateHeader(dateStr: string): string {
   return `${dayName} ${month}/${day}`;
 }
 
+function formatMealDescription(meal: Meal): string {
+  const parts: string[] = [];
+  if (meal.date) {
+    const dt = new Date(meal.date);
+    parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+  }
+  if (meal.start_time) {
+    const date = new Date(meal.start_time);
+    parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
+  }
+  return parts.join(' · ');
+}
+
 // Collect all phases and errands with time/duration
 const scheduledItems: ScheduledItem[] = [];
 const unscheduledItems: UnscheduledItem[] = [];
@@ -175,7 +188,7 @@ Object.keys(itemsByDate).forEach((date: string) => {
 const sortedDates: string[] = Object.keys(itemsByDate).sort();
 ---
 
-<Layout title={`${meal.name} - Schedule`}>
+<Layout title={`${meal.name} - Schedule`} description={formatMealDescription(meal)}>
   <nav class="breadcrumbs">
     <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>Schedule</span>
   </nav>
