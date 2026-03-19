@@ -148,27 +148,6 @@ Object.keys(itemsByDate).forEach(date => {
 });
 
 const sortedDates = Object.keys(itemsByDate).sort();
-
-// For Gantt chart - find time range
-const allItems = scheduledItems;
-const minOffset = allItems.length > 0 ? Math.min(...allItems.map(i => i.offsetMs)) : 0;
-const maxOffset = allItems.length > 0 ? Math.max(...allItems.map(i => i.offsetMs + i.durationMs)) : 0;
-const totalRange = maxOffset - minOffset;
-
-function getGanttMarkers() {
-  const numMarkers = 10;
-  const markers = [];
-  for (let i = 0; i <= numMarkers; i++) {
-    const offset = minOffset + (totalRange / numMarkers) * i;
-    const dt = new Date(serviceTime + offset);
-    let hours = dt.getHours();
-    const minutes = dt.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12 || 12;
-    markers.push(`${hours}:${minutes}${ampm}`);
-  }
-  return markers;
-}
 ---
 
 <Layout title={`${meal.name} - Schedule`}>
@@ -204,44 +183,6 @@ function getGanttMarkers() {
       </ul>
     </div>
   )}
-  
-  {/* Gantt chart temporarily disabled
-  {allItems.length > 0 && (
-    <div class="gantt-container">
-      <div class="gantt-header">
-        <div class="gantt-label-header"></div>
-        {getGanttMarkers().map(t => (
-          <div class="gantt-hour" style="flex: 1;">{t}</div>
-        ))}
-      </div>
-      
-      <div class="gantt-body">
-        {allItems.map(item => {
-          const leftPercent = ((item.offsetMs - minOffset) / totalRange) * 100;
-          const widthPercent = (item.durationMs / totalRange) * 100;
-          
-          return (
-            <div class="gantt-row">
-              <div class="gantt-label">
-                <span class="item-name">{item.name}</span>
-                <span class="item-recipe">{item.recipe}</span>
-              </div>
-              <div class="gantt-bar-container">
-                <div 
-                  class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
-                  style={`left: ${leftPercent}%; width: ${Math.max(widthPercent, 1)}%;`}
-                  title={`${item.name} - ${getPhaseOffsetStr(item.time, serviceTime)} - ${formatDuration(item.duration)}`}
-                >
-                  <span class="bar-label">{formatDuration(item.duration)}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  )}
-  */}
   
   {sortedDates.map(date => (
     <div class="schedule-section">
@@ -282,106 +223,6 @@ function getGanttMarkers() {
   .time-cell {
     font-family: monospace;
     font-size: 0.875rem;
-  }
-
-  .gantt-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-  
-  .gantt-header {
-    display: flex;
-    background: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .gantt-label-header {
-    width: 150px;
-    min-width: 150px;
-    padding: 0.5rem;
-    font-weight: 600;
-    border-right: 1px solid #ddd;
-  }
-  
-  .gantt-hour {
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #666;
-    border-right: 1px solid #eee;
-  }
-  
-  .gantt-row {
-    display: flex;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .gantt-row:last-child {
-    border-bottom: none;
-  }
-  
-  .gantt-label {
-    width: 150px;
-    min-width: 150px;
-    padding: 0.5rem;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    background: #fafafa;
-  }
-  
-  .item-name {
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
-  
-  .item-recipe {
-    font-size: 0.75rem;
-    color: #666;
-  }
-  
-  .gantt-bar-container {
-    flex: 1;
-    position: relative;
-    padding: 0.5rem 0;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 19%,
-      #f0f0f0 19%,
-      #f0f0f0 20%
-    );
-  }
-  
-  .gantt-bar {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 24px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-  }
-  
-  .gantt-bar.phase {
-    background: #4a90d9;
-  }
-  
-  .gantt-bar.errand {
-    background: #d98c4a;
-  }
-  
-  .gantt-bar:hover {
-    opacity: 0.9;
   }
 
   .breadcrumbs {
