@@ -5,7 +5,7 @@ export default defineConfig({
   outDir: './dist',
   publicDir: './public',
   output: 'static',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
   server: {
     host: true,
     port: 3000,

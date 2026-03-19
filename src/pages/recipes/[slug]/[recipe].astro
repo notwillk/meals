@@ -1,17 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.js';
+import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import { formatDuration, formatNumeric } from '../../../utils/time.ts';
+import type { Meal, Course, Recipe, Phase, Step, Ingredient } from '../../../types/index.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  const paths = [];
+  const paths: { params: { slug: string; recipe: string } }[] = [];
   
-  meals.forEach(meal => {
+  meals.forEach((meal: Meal) => {
     const fullMeal = getMeal(meal.slug);
     if (!fullMeal) return;
     
-    fullMeal.courses.forEach(course => {
-      course.recipes.forEach(recipe => {
+    fullMeal.courses.forEach((course: Course) => {
+      course.recipes.forEach((recipe: Recipe) => {
         if (recipe.slug) {
           paths.push({
             params: { slug: meal.slug, recipe: recipe.slug }
@@ -21,7 +23,6 @@ export function getStaticPaths() {
     });
   });
   
-  console.log('Recipe paths:', paths);
   return paths;
 }
 
@@ -33,9 +34,9 @@ if (!meal) {
 }
 
 // Find the recipe
-let recipe = null;
-meal.courses.forEach(course => {
-  course.recipes.forEach(r => {
+let recipe: Recipe | null = null;
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((r: Recipe) => {
     if (r.slug === recipeSlug) {
       recipe = r;
     }
@@ -48,18 +49,13 @@ if (!recipe) {
 
 const mealStartTime = meal.start_time ? new Date(meal.start_time).getTime() : null;
 
-function formatNumeric(value) {
-  const num = parseFloat(value.toFixed(2));
-  return num.toString();
-}
-
-function getPhaseOffset(phaseTime) {
+function getPhaseOffset(phaseTime: string): string | null {
   if (!mealStartTime || !phaseTime) return null;
   const phaseMs = new Date(phaseTime).getTime();
   const offsetMs = phaseMs - mealStartTime;
   const offsetSec = Math.round(offsetMs / 1000);
   
-  let offsetStr;
+  let offsetStr: string;
   if (offsetSec === 0) {
     offsetStr = 'T=0';
   } else {
@@ -90,31 +86,13 @@ function getPhaseOffset(phaseTime) {
   return `${offsetStr} (${month}/${day} ${hours}:${minutes}${ampm})`;
 }
 
-function formatDuration(durationStr) {
-  if (!durationStr) return null;
-  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return durationStr;
-  
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
-  const seconds = parseInt(match[3] || 0);
-  
-  if (hours > 0) {
-    return `${hours}h ${minutes}m`;
-  } else if (minutes > 0) {
-    return `${minutes}m`;
-  } else {
-    return `${seconds}s`;
-  }
-}
-
 // Get all equipment used in a phase
-function getPhaseEquipment(phase) {
-  const equipment = new Set();
+function getPhaseEquipment(phase: Phase): string[] {
+  const equipment = new Set<string>();
   if (phase.steps) {
-    phase.steps.forEach(step => {
+    phase.steps.forEach((step: Step) => {
       if (step.equipment) {
-        step.equipment.forEach(eq => equipment.add(eq));
+        step.equipment.forEach((eq: string) => equipment.add(eq));
       }
     });
   }
@@ -122,7 +100,7 @@ function getPhaseEquipment(phase) {
 }
 
 // Get step ingredients
-function getStepIngredients(step) {
+function getStepIngredients(step: Step): Ingredient[] {
   return step.ingredients || [];
 }
 ---
@@ -133,7 +111,7 @@ function getStepIngredients(step) {
   </nav>
   <h1>{recipe.description}</h1>
   
-  {recipe.phases && recipe.phases.map(phase => (
+  {recipe.phases && recipe.phases.map((phase: Phase) => (
     <div class="phase" id={phase.id}>
       <h2>{phase.description || phase.id}</h2>
       
@@ -166,12 +144,12 @@ function getStepIngredients(step) {
             </tr>
           </thead>
           <tbody>
-            {phase.steps.map((step, idx) => (
+            {phase.steps.map((step: Step, idx: number) => (
               <tr>
                 <td class="ingredients-cell">
                   {getStepIngredients(step).length > 0 && (
                     <ul>
-                      {getStepIngredients(step).map(ing => (
+                      {getStepIngredients(step).map((ing: Ingredient) => (
                         <li>
                           {ing.qty} {ing.unit} {ing.name}
                           {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}

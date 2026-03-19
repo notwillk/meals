@@ -1,10 +1,42 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.js';
+import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import { formatDuration, formatNumeric, getPhaseOffsetStr, getPhaseTimeStr, parseDurationMs } from '../../../utils/time.ts';
+import type { Meal, Course, Recipe, Phase, Errand } from '../../../types/index.ts';
+
+interface ScheduledItem {
+  type: 'phase' | 'errand';
+  name: string;
+  description?: string;
+  final?: boolean;
+  recipe?: string;
+  recipeSlug?: string;
+  time: string;
+  offsetMs: number;
+  durationMs: number;
+  duration: string;
+}
+
+interface UnscheduledItem {
+  type: 'phase' | 'errand';
+  name: string;
+  description?: string;
+  recipeSlug?: string;
+  source: string;
+  final?: boolean;
+  recipe?: string;
+}
+
+interface DependencyViolation {
+  phase: string;
+  recipe: string;
+  dependency: string;
+  issue: string;
+}
 
 export function getStaticPaths() {
   const meals = getAllMeals();
-  return meals.map(meal => ({
+  return meals.map((meal: Meal) => ({
     params: { slug: meal.slug }
   }));
 }
@@ -18,18 +50,13 @@ if (!meal) {
 
 const serviceTime = meal.start_time ? new Date(meal.start_time).getTime() : new Date().getTime();
 
-function minutesToTime(minutes) {
+function minutesToTime(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }
 
-function formatNumeric(value) {
-  const num = parseFloat(value.toFixed(2));
-  return num.toString();
-}
-
-function formatDateHeader(dateStr) {
+function formatDateHeader(dateStr: string): string {
   const dt = new Date(dateStr);
   const dayName = dt.toLocaleDateString('en-US', { weekday: 'long' });
   const month = (dt.getMonth() + 1).toString();
@@ -37,81 +64,17 @@ function formatDateHeader(dateStr) {
   return `${dayName} ${month}/${day}`;
 }
 
-function getPhaseOffsetStr(phaseTime) {
-  if (!serviceTime || !phaseTime) return null;
-  const phaseMs = new Date(phaseTime).getTime();
-  const offsetMs = phaseMs - serviceTime;
-  const offsetSec = Math.round(offsetMs / 1000);
-  
-  if (offsetSec === 0) {
-    return 'T=0';
-  }
-  
-  const prefix = offsetSec > 0 ? 'T+' : 'T-';
-  const absSec = Math.abs(offsetSec);
-  
-  if (absSec < 60) {
-    return `${prefix}${absSec}s`;
-  }
-  
-  const absMin = absSec / 60;
-  if (absMin < 60) {
-    return `${prefix}${formatNumeric(absMin)}m`;
-  }
-  
-  const absHrs = absSec / 3600;
-  return `${prefix}${formatNumeric(absHrs)}h`;
-}
-
-function getPhaseTimeStr(phaseTime) {
-  if (!phaseTime) return null;
-  const dt = new Date(phaseTime);
-  let hours = dt.getHours();
-  const minutes = dt.getMinutes().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12 || 12;
-  return `${hours}:${minutes}${ampm}`;
-}
-
-function formatDuration(durationStr) {
-  if (!durationStr) return null;
-  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return durationStr;
-  
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
-  const seconds = parseInt(match[3] || 0);
-  
-  if (hours > 0) {
-    return `${hours}h ${minutes}m`;
-  } else if (minutes > 0) {
-    return `${minutes}m`;
-  } else {
-    return `${seconds}s`;
-  }
-}
-
-function parseDurationMs(durationStr) {
-  if (!durationStr) return 0;
-  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return 0;
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
-  const seconds = parseInt(match[3] || 0);
-  return (hours * 3600 + minutes * 60 + seconds) * 1000;
-}
-
 // Collect all phases and errands with time/duration
-const scheduledItems = [];
-const unscheduledItems = [];
-const dependencyViolations = [];
+const scheduledItems: ScheduledItem[] = [];
+const unscheduledItems: UnscheduledItem[] = [];
+const dependencyViolations: DependencyViolation[] = [];
 
 // Build phase lookup
-const phaseLookup = {};
-meal.courses.forEach(course => {
-  course.recipes.forEach(recipe => {
+const phaseLookup: Record<string, Phase> = {};
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((recipe: Recipe) => {
     if (recipe.phases) {
-      recipe.phases.forEach(phase => {
+      recipe.phases.forEach((phase: Phase) => {
         phaseLookup[`${recipe.slug}:${phase.id}`] = phase;
       });
     }
@@ -119,10 +82,10 @@ meal.courses.forEach(course => {
 });
 
 // Check phases
-meal.courses.forEach(course => {
-  course.recipes.forEach(recipe => {
+meal.courses.forEach((course: Course) => {
+  course.recipes.forEach((recipe: Recipe) => {
     if (recipe.phases) {
-      recipe.phases.forEach(phase => {
+      recipe.phases.forEach((phase: Phase) => {
         if (phase.time && phase.duration) {
           const phaseMs = new Date(phase.time).getTime();
           const offsetMs = phaseMs - serviceTime;
@@ -130,7 +93,7 @@ meal.courses.forEach(course => {
           
           // Check dependency violations
           if (phase.follows) {
-            phase.follows.forEach(dep => {
+            phase.follows.forEach((dep: string) => {
               const depPhase = phaseLookup[`${recipe.slug}:${dep}`];
               if (depPhase && depPhase.time && depPhase.duration) {
                 const depMs = new Date(depPhase.time).getTime();
@@ -142,7 +105,7 @@ meal.courses.forEach(course => {
                     phase: phase.id,
                     recipe: recipe.description,
                     dependency: dep,
-                    issue: `${getPhaseOffsetStr(phase.time)} but ${dep} ends at ${getPhaseOffsetStr(new Date(serviceTime + depEndMs).toISOString())}`
+                    issue: `${getPhaseOffsetStr(phase.time, serviceTime)} but ${dep} ends at ${getPhaseOffsetStr(new Date(serviceTime + depEndMs).toISOString(), serviceTime)}`
                   });
                 }
               }
@@ -177,7 +140,7 @@ meal.courses.forEach(course => {
 
 // Check errands
 if (meal.errands) {
-  meal.errands.forEach(errand => {
+  meal.errands.forEach((errand: Errand) => {
     if (errand.time && errand.duration) {
       const errandMs = new Date(errand.time);
       const offsetMs = errandMs.getTime() - serviceTime;
@@ -202,8 +165,8 @@ if (meal.errands) {
 }
 
 // Group items by date
-const itemsByDate = {};
-scheduledItems.forEach(item => {
+const itemsByDate: Record<string, ScheduledItem[]> = {};
+scheduledItems.forEach((item: ScheduledItem) => {
   const dt = new Date(item.time);
   const dateKey = dt.toISOString().split('T')[0];
   if (!itemsByDate[dateKey]) itemsByDate[dateKey] = [];
@@ -211,32 +174,11 @@ scheduledItems.forEach(item => {
 });
 
 // Sort items within each date
-Object.keys(itemsByDate).forEach(date => {
-  itemsByDate[date].sort((a, b) => a.offsetMs - b.offsetMs);
+Object.keys(itemsByDate).forEach((date: string) => {
+  itemsByDate[date].sort((a: ScheduledItem, b: ScheduledItem) => a.offsetMs - b.offsetMs);
 });
 
-const sortedDates = Object.keys(itemsByDate).sort();
-
-// For Gantt chart - find time range
-const allItems = scheduledItems;
-const minOffset = allItems.length > 0 ? Math.min(...allItems.map(i => i.offsetMs)) : 0;
-const maxOffset = allItems.length > 0 ? Math.max(...allItems.map(i => i.offsetMs + i.durationMs)) : 0;
-const totalRange = maxOffset - minOffset;
-
-function getGanttMarkers() {
-  const numMarkers = 10;
-  const markers = [];
-  for (let i = 0; i <= numMarkers; i++) {
-    const offset = minOffset + (totalRange / numMarkers) * i;
-    const dt = new Date(serviceTime + offset);
-    let hours = dt.getHours();
-    const minutes = dt.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12 || 12;
-    markers.push(`${hours}:${minutes}${ampm}`);
-  }
-  return markers;
-}
+const sortedDates: string[] = Object.keys(itemsByDate).sort();
 ---
 
 <Layout title={`${meal.name} - Schedule`}>
@@ -273,44 +215,6 @@ function getGanttMarkers() {
     </div>
   )}
   
-  {/* Gantt chart temporarily disabled
-  {allItems.length > 0 && (
-    <div class="gantt-container">
-      <div class="gantt-header">
-        <div class="gantt-label-header"></div>
-        {getGanttMarkers().map(t => (
-          <div class="gantt-hour" style="flex: 1;">{t}</div>
-        ))}
-      </div>
-      
-      <div class="gantt-body">
-        {allItems.map(item => {
-          const leftPercent = ((item.offsetMs - minOffset) / totalRange) * 100;
-          const widthPercent = (item.durationMs / totalRange) * 100;
-          
-          return (
-            <div class="gantt-row">
-              <div class="gantt-label">
-                <span class="item-name">{item.name}</span>
-                <span class="item-recipe">{item.recipe}</span>
-              </div>
-              <div class="gantt-bar-container">
-                <div 
-                  class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
-                  style={`left: ${leftPercent}%; width: ${Math.max(widthPercent, 1)}%;`}
-                  title={`${item.name} - ${getPhaseOffsetStr(item.time)} - ${formatDuration(item.duration)}`}
-                >
-                  <span class="bar-label">{formatDuration(item.duration)}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  )}
-  */}
-  
   {sortedDates.map(date => (
     <div class="schedule-section">
       <h2>{formatDateHeader(date)}</h2>
@@ -325,7 +229,7 @@ function getGanttMarkers() {
           <tbody>
           {itemsByDate[date].map(item => (
             <tr>
-              <td class="time-cell">{getPhaseOffsetStr(item.time)}</td>
+              <td class="time-cell">{getPhaseOffsetStr(item.time, serviceTime)}</td>
               <td class="time-cell">{getPhaseTimeStr(item.time)}</td>
               <td>
                 {item.type === 'phase' ? (
@@ -350,106 +254,6 @@ function getGanttMarkers() {
   .time-cell {
     font-family: monospace;
     font-size: 0.875rem;
-  }
-
-  .gantt-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-  
-  .gantt-header {
-    display: flex;
-    background: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .gantt-label-header {
-    width: 150px;
-    min-width: 150px;
-    padding: 0.5rem;
-    font-weight: 600;
-    border-right: 1px solid #ddd;
-  }
-  
-  .gantt-hour {
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #666;
-    border-right: 1px solid #eee;
-  }
-  
-  .gantt-row {
-    display: flex;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .gantt-row:last-child {
-    border-bottom: none;
-  }
-  
-  .gantt-label {
-    width: 150px;
-    min-width: 150px;
-    padding: 0.5rem;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    background: #fafafa;
-  }
-  
-  .item-name {
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
-  
-  .item-recipe {
-    font-size: 0.75rem;
-    color: #666;
-  }
-  
-  .gantt-bar-container {
-    flex: 1;
-    position: relative;
-    padding: 0.5rem 0;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 19%,
-      #f0f0f0 19%,
-      #f0f0f0 20%
-    );
-  }
-  
-  .gantt-bar {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 24px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-  }
-  
-  .gantt-bar.phase {
-    background: #4a90d9;
-  }
-  
-  .gantt-bar.errand {
-    background: #d98c4a;
-  }
-  
-  .gantt-bar:hover {
-    opacity: 0.9;
   }
 
   .breadcrumbs {
