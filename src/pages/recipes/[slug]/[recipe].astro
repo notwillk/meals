@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import { formatDuration, formatNumeric } from '../../../utils/time.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();
@@ -48,12 +49,7 @@ if (!recipe) {
 
 const mealStartTime = meal.start_time ? new Date(meal.start_time).getTime() : null;
 
-function formatNumeric(value) {
-  const num = parseFloat(value.toFixed(2));
-  return num.toString();
-}
-
-function getPhaseOffset(phaseTime) {
+function getPhaseOffset(phaseTime: string): string | null {
   if (!mealStartTime || !phaseTime) return null;
   const phaseMs = new Date(phaseTime).getTime();
   const offsetMs = phaseMs - mealStartTime;
@@ -88,24 +84,6 @@ function getPhaseOffset(phaseTime) {
   hours = hours % 12 || 12;
   
   return `${offsetStr} (${month}/${day} ${hours}:${minutes}${ampm})`;
-}
-
-function formatDuration(durationStr) {
-  if (!durationStr) return null;
-  const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return durationStr;
-  
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
-  const seconds = parseInt(match[3] || 0);
-  
-  if (hours > 0) {
-    return `${hours}h ${minutes}m`;
-  } else if (minutes > 0) {
-    return `${minutes}m`;
-  } else {
-    return `${seconds}s`;
-  }
 }
 
 // Get all equipment used in a phase
