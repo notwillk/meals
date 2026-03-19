@@ -27,6 +27,7 @@ courses:
     plating: Tea cup
     recipes:
       - "&recipes/mushroom-kombu-tea"
+    duration: PT10M
   - name: Second Salad
     description: Charred endive
     plating: Small plate

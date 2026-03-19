@@ -37,39 +37,40 @@ function formatDateHeader(dateStr) {
   return `${dayName} ${month}/${day}`;
 }
 
-function getPhaseOffset(phaseTime) {
+function getPhaseOffsetStr(phaseTime) {
   if (!serviceTime || !phaseTime) return null;
   const phaseMs = new Date(phaseTime).getTime();
   const offsetMs = phaseMs - serviceTime;
   const offsetSec = Math.round(offsetMs / 1000);
   
-  let offsetStr;
   if (offsetSec === 0) {
-    offsetStr = 'T=0';
-  } else {
-    const prefix = offsetSec > 0 ? 'T+' : 'T-';
-    const absSec = Math.abs(offsetSec);
-    
-    if (absSec < 60) {
-      offsetStr = `${prefix}${absSec}s`;
-    } else {
-      const absMin = absSec / 60;
-      if (absMin < 60) {
-        offsetStr = `${prefix}${formatNumeric(absMin)}m`;
-      } else {
-        const absHrs = absSec / 3600;
-        offsetStr = `${prefix}${formatNumeric(absHrs)}h`;
-      }
-    }
+    return 'T=0';
   }
   
+  const prefix = offsetSec > 0 ? 'T+' : 'T-';
+  const absSec = Math.abs(offsetSec);
+  
+  if (absSec < 60) {
+    return `${prefix}${absSec}s`;
+  }
+  
+  const absMin = absSec / 60;
+  if (absMin < 60) {
+    return `${prefix}${formatNumeric(absMin)}m`;
+  }
+  
+  const absHrs = absSec / 3600;
+  return `${prefix}${formatNumeric(absHrs)}h`;
+}
+
+function getPhaseTimeStr(phaseTime) {
+  if (!phaseTime) return null;
   const dt = new Date(phaseTime);
   let hours = dt.getHours();
   const minutes = dt.getMinutes().toString().padStart(2, '0');
   const ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12 || 12;
-  
-  return `${offsetStr} ${hours}:${minutes}${ampm}`;
+  return `${hours}:${minutes}${ampm}`;
 }
 
 function formatDuration(durationStr) {
@@ -141,7 +142,7 @@ meal.courses.forEach(course => {
                     phase: phase.id,
                     recipe: recipe.description,
                     dependency: dep,
-                    issue: `${getPhaseOffset(phase.time)} but ${dep} ends at ${getPhaseOffset(new Date(serviceTime + depEndMs).toISOString())}`
+                    issue: `${getPhaseOffsetStr(phase.time)} but ${dep} ends at ${getPhaseOffsetStr(new Date(serviceTime + depEndMs).toISOString())}`
                   });
                 }
               }
@@ -178,17 +179,16 @@ meal.courses.forEach(course => {
 if (meal.errands) {
   meal.errands.forEach(errand => {
     if (errand.time && errand.duration) {
-      const [h, m] = errand.time.split(':').map(Number);
-      const errandMs = new Date(meal.start_time);
-      errandMs.setHours(h, m, 0, 0);
+      const errandMs = new Date(errand.time);
       const offsetMs = errandMs.getTime() - serviceTime;
+      const durationMs = parseDurationMs(errand.duration);
       scheduledItems.push({
         type: 'errand',
         name: errand.name,
         recipe: 'Errands',
-        time: errand.time,
+        time: errandMs.toISOString(),
         offsetMs,
-        durationMs: errand.duration * 60000,
+        durationMs,
         duration: errand.duration
       });
     } else {
@@ -298,7 +298,7 @@ function getGanttMarkers() {
                 <div 
                   class={`gantt-bar ${item.type === 'errand' ? 'errand' : 'phase'}`}
                   style={`left: ${leftPercent}%; width: ${Math.max(widthPercent, 1)}%;`}
-                  title={`${item.name} - ${getPhaseOffset(item.time)} - ${formatDuration(item.duration)}`}
+                  title={`${item.name} - ${getPhaseOffsetStr(item.time)} - ${formatDuration(item.duration)}`}
                 >
                   <span class="bar-label">{formatDuration(item.duration)}</span>
                 </div>
@@ -317,24 +317,21 @@ function getGanttMarkers() {
       <table>
         <thead>
           <tr>
-            <th>Start</th>
-            <th>Duration</th>
+            <th>T-Offset</th>
+            <th>Time</th>
             <th>Name</th>
           </tr>
         </thead>
           <tbody>
           {itemsByDate[date].map(item => (
             <tr>
-              <td class="time-cell">{getPhaseOffset(item.time)}</td>
-              <td>{formatDuration(item.duration)}</td>
+              <td class="time-cell">{getPhaseOffsetStr(item.time)}</td>
+              <td class="time-cell">{getPhaseTimeStr(item.time)}</td>
               <td>
                 {item.type === 'phase' ? (
                   <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>{item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}</a>
                 ) : (
-                  <>
-                    {item.type === 'errand' ? '🚗 ' : ''}
-                    <strong>{item.name}</strong>
-                  </>
+                  <strong>{item.name}</strong>
                 )}
               </td>
             </tr>

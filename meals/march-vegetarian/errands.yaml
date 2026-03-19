@@ -1,0 +1,9 @@
+- name: Go to farmer's market
+  time: "2026-03-21T08:00:00"
+  duration: "PT1H"
+- name: Go to Rainbow Grocery
+  time: "2026-03-20T17:00:00"
+  duration: "PT1H"
+- name: Shower
+  time: "2026-03-22T10:00:00"
+  duration: "PT30M"

@@ -6,6 +6,8 @@ inspiration:
 phases:
   - id: make-tea
     description: Make tea ahead of time
+    time: "2026-03-21T16:00:00"
+    duration: "PT1H30M"
     steps:
       - instruction: Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
         ingredients:
