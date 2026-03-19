@@ -11,6 +11,7 @@ Explain the project's structure, directories, and checks configuration.
 **Directories:**
 - `.schemas/` — JSON Schema files for validating config/data. Generated schemas go here so editors and validators have a single known location. Cleared by `just clean --deep`.
 - `.testignore` — file patterns excluded from triggering test re-runs in watch mode (`just test --watch`). Uses the same format as `.gitignore`. Add paths for files whose changes should not re-run tests (documentation, editor config, etc.).
+- `.todo/` — swimlane task files. Each file is a Markdown ticket with YAML frontmatter. See `task-management` skill for workflow.
 
 **Checks:**
 
