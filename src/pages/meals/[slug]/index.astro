@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.js';
+import { getAllMeals, getMeal } from '../../../data/loader.ts';
 
 export function getStaticPaths() {
   const meals = getAllMeals();

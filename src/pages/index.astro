@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAllMeals } from '../data/loader.js';
+import { getAllMeals } from '../data/loader.ts';
 
 const meals = getAllMeals().sort((a, b) => new Date(b.start_time) - new Date(a.start_time));
 
