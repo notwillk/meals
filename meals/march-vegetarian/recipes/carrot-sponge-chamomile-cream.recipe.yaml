@@ -28,6 +28,8 @@ phases:
             qty: 2
             unit: gram
       - instruction: Preheat oven to 325°F
+        equipment:
+          - oven
       - instruction: Line a quarter sheet pan with parchment paper using the "double sling" method, lightly grease.
         equipment:
           - quarter sheet pan
@@ -130,6 +132,8 @@ phases:
       - instruction: Simmer gently for 3–5 minutes, until just pliable
       - instruction: Remove from heat and strain, reserving the syrup
       - instruction: Preheat oven to 225°F
+        equipment:
+          - oven
       - instruction: Arrange the candied carrot ribbons in a single layer without overlapping on a silpat lined baking sheet and bake for 25–35 minutes, until dry on surface but still flexible
         equipment:
           - silpat

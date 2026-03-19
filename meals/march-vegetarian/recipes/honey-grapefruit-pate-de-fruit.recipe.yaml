@@ -25,6 +25,8 @@ phases:
       - instruction: Let cool slightly, then cut the boiled grapefruit in half, wrap for unrelated future use
       - instruction: Cut remaining grapefruit half in large chunks, removing any seeds along the way
       - instruction: Place the grapefruit (pith, zest, and flesh) in a food processor and blend for at least a full minute to completely purée the fruit and to chop all the fibers/skin
+        equipment:
+          - food processor
       - instruction: Transfer the fruit purée to a large pot, along with the juice, honey, and granulated sugar. Bring the mixture to a boil on high, stirring constantly
         ingredients:
           - name: Pink grapefruit, freshly squeezed juice
@@ -51,6 +53,8 @@ phases:
       - instruction: Immediately take the pot off the stove and dump in the liquid pectin. Stir well to make sure it gets evenly mixed in, then transfer the hot mixture to the prepared pan
       - instruction: Let the pâte de fruit set overnight, uncovered, until it is completely set
       - instruction: Unmold the pâte de fruit, and cut it into 1-inch squares with a large, oiled kitchen knife
+        equipment:
+          - kitchen knife
     storage: Store the uncoated pâte de fruit between parchment sheets in an airtight container in the refrigerator for up to 1 week
 
   - id: service

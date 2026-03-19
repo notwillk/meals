@@ -132,9 +132,21 @@ function getStepIngredients(step: Step): Ingredient[] {
   });
 }
 
+function formatMealDescription(meal: Meal): string {
+  const parts: string[] = [];
+  if (meal.date) {
+    const dt = new Date(meal.date);
+    parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+  }
+  if (meal.start_time) {
+    const date = new Date(meal.start_time);
+    parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
+  }
+  return parts.join(' · ');
+}
 ---
 
-<Layout title={recipe.description}>
+<Layout title={recipe.description} description={formatMealDescription(meal)}>
   <nav class="breadcrumbs">
     <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>{recipe.description}</span>
   </nav>
@@ -185,6 +197,7 @@ function getStepIngredients(step: Step): Ingredient[] {
                       <li class="ingredient">
                         {ing.qty && <span class="mono">{ing.qty} </span>}
                         {ing.unit && <span>{ing.unit} </span>}
+                        {(ing.qty || ing.unit) && <span class="sep">&ndash; </span>}
                         <span class="ingredient-name">{ing.name}</span>
                         {ing.preparation && <span class="ingredient-prep muted"> ({ing.preparation})</span>}
                       </li>
@@ -364,15 +377,11 @@ function getStepIngredients(step: Step): Ingredient[] {
     }
     
     @media print {
-      .breadcrumbs {
+      .breadcrumbs,
+      .recipe-header {
         display: none;
       }
-      
-      .recipe-header h1 {
-        font-size: 16pt;
-        margin-bottom: 0.5rem;
-      }
-      
+
       .phase {
         border: 1pt solid #000;
         border-radius: 0;

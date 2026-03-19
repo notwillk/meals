@@ -10,6 +10,9 @@ phases:
     duration: "PT1H30M"
     steps:
       - instruction: Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
+        equipment:
+          - sous vide immersion circulator
+          - vacuum sealer
         ingredients:
           - name: maple syrup, grade A
             qty: 100
@@ -26,6 +29,9 @@ phases:
             qty: 2
             unit: drops
       - instruction: In a new vacuum bag, add the dried mushrooms, dried kombu, water, and 5 teaspoons of the soy mixture, seal and cook at 150°F for precisely 20 minutes without going longer than 20 minutes (use second bath if the first one is still too hot)
+        equipment:
+          - vacuum sealer
+          - sous vide immersion circulator
         ingredients:
           - name: soy mixture
             homemade: true
@@ -57,6 +63,8 @@ phases:
     duration: "PT5M"
     steps:
       - instruction: Reheat via sous vide at 150°F until hot (~20 minutes). Hold at temperature for up to 60 minutes if absolutely needed (flavor will gradually dull over time).
+        equipment:
+          - sous vide immersion circulator
       - instruction: Prep a "refresher" bag with dried kombu and water only
         ingredients:
           - name: dried kombu, broken into small pieces

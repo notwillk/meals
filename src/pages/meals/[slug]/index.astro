@@ -27,6 +27,17 @@ function formatTime(dateStr: string): string {
   return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
+function formatMealDescription(meal: Meal): string {
+  const parts: string[] = [];
+  if (meal.date) {
+    parts.push(formatDate(meal.date));
+  }
+  if (meal.start_time) {
+    parts.push(formatTime(meal.start_time));
+  }
+  return parts.join(' · ');
+}
+
 function parseDurationMins(durationStr: string | undefined): number {
   if (!durationStr) return 0;
   const match = durationStr.match(/^PT(?:(\d+)H)?(?:(\d+)M)?/);
@@ -70,7 +81,7 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
 });
 ---
 
-<Layout title={meal.name}>
+<Layout title={meal.name} description={formatMealDescription(meal)}>
   <nav class="breadcrumbs">
     <a href="/">Meals</a><span class="sep">/</span><span>{meal.name}</span>
   </nav>
@@ -185,7 +196,7 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
       justify-content: center;
       align-items: center;
       gap: 0.4em;
-      margin-top: var(--space-xs);
+      margin-top: var(--space-md);
       font-size: 0.95rem;
     }
 

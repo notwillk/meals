@@ -37,6 +37,8 @@ phases:
             qty: 1
             unit: tablespoon
       - instruction: Purée asparagus and shallots, garlic and thyme together in a blender
+        equipment:
+          - blender
       - instruction: Over medium-low heat, make a white roux from butter and cake flour
         ingredients:
           - name: unsalted butter
@@ -96,7 +98,12 @@ phases:
     steps:
       - instruction: Ensure the soufflé base is at room temperature before folding in egg whites
       - instruction: Preheat oven to 400°F
+        equipment:
+          - oven
       - instruction: Butter six 8-ounce ramekins with upward strokes. Coat well with finely grated parmesan cheese, tapping out the excess. Place the ramekins on a baking sheet and set aside
+        equipment:
+          - ramekins
+          - baking sheet
         ingredients:
           - name: unsalted butter
           - name: parmesan cheese

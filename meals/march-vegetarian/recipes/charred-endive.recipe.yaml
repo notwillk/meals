@@ -19,6 +19,8 @@ phases:
             qty: 1
             unit: teaspoon
       - instruction: Heat a cast iron pan over medium-high heat
+        equipment:
+          - cast iron pan
       - instruction: Without moving, sear endive in cast iron pan, cut-side down until deeply golden brown, about 3–5 minutes
       - instruction: Flip and cook for 30–60 seconds on the second side to warm through
       - instruction: Remove from pan and allow to cool completely, cut-side up. Hold at room temperature for up to ~1 hour
