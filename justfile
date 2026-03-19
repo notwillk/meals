@@ -1,16 +1,20 @@
 [no-exit-message]
 build *args:
     @case "{{args}}" in \
-        "") echo "building..." ;; \
-        "--watch") echo "building (with watch)..." ;; \
+        "") pnpm run build ;; \
+        "--watch") pnpm run dev ;; \
         *) echo "Usage: just build [--watch]" >&2; exit 1 ;; \
     esac
+
+[no-exit-message]
+dev:
+    pnpm run dev
 
 [no-exit-message]
 clean *args:
     @case "{{args}}" in \
         "") echo "cleaning..." ;; \
-        "--deep") echo "cleaning..." && echo "deep cleaning..." && rm -f .schemas/*.json ;; \
+        "--deep") echo "cleaning..." && echo "deep cleaning..." && rm -rf node_modules && rm -rf .pnpm-store ;; \
         *) echo "Usage: just clean [--deep]" >&2; exit 1 ;; \
     esac
 
@@ -23,11 +27,15 @@ doctor *args:
 
 [no-exit-message]
 format *args:
-    @case "{{args}}" in \
-        "") prettier --write $(git ls-files -- "*.yaml") ;; \
-        "--check") prettier --check $(git ls-files -- "*.yaml") ;; \
+    #!/bin/bash
+    FILTER_FILE=$(mktemp)
+    sed -e '/^#/d' -e '/^$/d' .formatignore > "$FILTER_FILE"
+    case "{{args}}" in \
+        "") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --write ;; \
+        "--check") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --check ;; \
         *) echo "Usage: just format [--check]" >&2; exit 1 ;; \
     esac
+    rm -f "$FILTER_FILE"
 
 [no-exit-message]
 static *args:

@@ -1,0 +1,29 @@
+{
+  "name": "meals",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notwillk/meals.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notwillk/meals/issues"
+  },
+  "homepage": "https://github.com/notwillk/meals#readme",
+  "dependencies": {
+    "astro": "^6.0.6",
+    "js-yaml": "^4.1.1",
+    "slugify": "^1.6.8"
+  }
+}

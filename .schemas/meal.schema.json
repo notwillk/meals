@@ -15,6 +15,10 @@
       "format": "date",
       "description": "Date of the meal (YYYY-MM-DD)"
     },
+    "service_time": {
+      "type": "string",
+      "description": "Service time in ISO 24-hour format (e.g., '19:00')"
+    },
     "courses": {
       "type": "array",
       "items": {
@@ -44,6 +48,10 @@
           "hidden": {
             "type": "boolean",
             "description": "Whether this course is hidden (e.g., Intermezzo)"
+          },
+          "service_offset": {
+            "type": "string",
+            "description": "Service offset relative to service time (e.g., 'T+10min', 'T+2hr', 'T-20min')"
           }
         }
       }

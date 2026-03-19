@@ -19,3 +19,18 @@ vendor/
 # Schemas
 .schemas/
 !.schemas/.gitkeep
+!.schemas/*.schema.json
+
+# Generated files
+artifacts/
+!artifacts/.gitkeep
+
+# Temp files
+.tmp/
+!.tmp/.gitkeep
+
+# pnpm
+.pnpm-store
+
+# astro
+.astro/*

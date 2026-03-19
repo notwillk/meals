@@ -1,0 +1,165 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllMeals, getMeal } from '../../../data/loader.js';
+
+export function getStaticPaths() {
+  const meals = getAllMeals();
+  const paths = [];
+  
+  meals.forEach(meal => {
+    const fullMeal = getMeal(meal.slug);
+    if (!fullMeal) return;
+    
+    fullMeal.courses.forEach(course => {
+      course.recipes.forEach(recipe => {
+        if (recipe.slug) {
+          paths.push({
+            params: { slug: meal.slug, recipe: recipe.slug }
+          });
+        }
+      });
+    });
+  });
+  
+  console.log('Recipe paths:', paths);
+  return paths;
+}
+
+const { slug, recipe: recipeSlug } = Astro.params;
+const meal = getMeal(slug);
+
+if (!meal) {
+  return Astro.redirect('/404');
+}
+
+// Find the recipe
+let recipe = null;
+meal.courses.forEach(course => {
+  course.recipes.forEach(r => {
+    if (r.slug === recipeSlug) {
+      recipe = r;
+    }
+  });
+});
+
+if (!recipe) {
+  return Astro.redirect('/404');
+}
+
+// Get all equipment used in a phase
+function getPhaseEquipment(phase) {
+  const equipment = new Set();
+  if (phase.steps) {
+    phase.steps.forEach(step => {
+      if (step.equipment) {
+        step.equipment.forEach(eq => equipment.add(eq));
+      }
+    });
+  }
+  return Array.from(equipment);
+}
+
+// Get step ingredients
+function getStepIngredients(step) {
+  return step.ingredients || [];
+}
+---
+
+<Layout title={recipe.name}>
+  <h1>{recipe.name}</h1>
+  
+  {recipe.phases && recipe.phases.map(phase => (
+    <div class="phase">
+      <h2>{phase.description || phase.name}</h2>
+      
+      {phase.follows && (
+        <p><strong>Follows:</strong> {phase.follows.join(', ')}</p>
+      )}
+      
+      {phase.storage && (
+        <p><strong>Storage:</strong> {phase.storage}</p>
+      )}
+      
+      {getPhaseEquipment(phase).length > 0 && (
+        <p><strong>Equipment:</strong> {getPhaseEquipment(phase).join(', ')}</p>
+      )}
+      
+      {phase.steps && phase.steps.length > 0 && (
+        <table class="steps-table">
+          <thead>
+            <tr>
+              <th style="width: 35%;">Ingredients</th>
+              <th style="width: 65%;">Steps</th>
+            </tr>
+          </thead>
+          <tbody>
+            {phase.steps.map((step, idx) => (
+              <tr>
+                <td class="ingredients-cell">
+                  {getStepIngredients(step).length > 0 && (
+                    <ul>
+                      {getStepIngredients(step).map(ing => (
+                        <li>
+                          {ing.qty} {ing.unit} {ing.name}
+                          {ing.preparation && <span style="color: #666;"> - {ing.preparation}</span>}
+                          {ing.note && <span style="color: #666;"> ({ing.note})</span>}
+                          {ing.homemade && <span style="color: #0066cc;"> (see above)</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </td>
+                <td class="instruction-cell">
+                  <strong>{idx + 1}.</strong> {step.instruction}
+                  {step.note && <p style="color: #666; font-style: italic; margin-top: 0.5rem;">{step.note}</p>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  ))}
+  
+  <style>
+    .phase {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .steps-table {
+      margin-top: 1rem;
+    }
+    
+    .steps-table th {
+      background: #f0f0f0;
+    }
+    
+    .ingredients-cell {
+      vertical-align: top;
+    }
+    
+    .ingredients-cell ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    
+    .ingredients-cell li {
+      margin-bottom: 0.25rem;
+    }
+    
+    .instruction-cell {
+      vertical-align: top;
+    }
+    
+    @media (max-width: 600px) {
+      .steps-table th:first-child {
+        width: 40%;
+      }
+      .steps-table th:last-child {
+        width: 60%;
+      }
+    }
+  </style>
+</Layout>
