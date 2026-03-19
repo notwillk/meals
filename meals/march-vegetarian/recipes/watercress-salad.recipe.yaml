@@ -50,7 +50,7 @@ phases:
       - instruction: Toss with a squeeze of lemon juice to prevent browning
         ingredients:
           - name: lemon juice
-            source: Rainbow Grocery 
+            source: Rainbow Grocery
     storage: Store apples in an airtight container in the refrigerator for up to 4-6 hours
 
   - id: mise-en-place-watercress
