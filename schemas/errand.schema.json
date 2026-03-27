@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/errand.schema.json",
+  "title": "Errand",
+  "oneOf": [
+    {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "time", "duration"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the errand (e.g., 'Go grocery shopping')"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})?$",
+            "description": "ISO 8601 timestamp - when errand starts (e.g., '2026-03-21T08:00:00')"
+          },
+          "duration": {
+            "type": "string",
+            "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "ISO 8601 duration - how long the errand takes (e.g., 'PT5M' for 5 minutes, 'PT1H' for 1 hour)"
+          },
+          "day": {
+            "type": "number",
+            "description": "Day number for multi-day events (default: 1)"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about the errand"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["name", "time", "duration"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the errand (e.g., 'Go grocery shopping')"
+        },
+        "time": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})?$",
+          "description": "ISO 8601 timestamp - when errand starts (e.g., '2026-03-21T08:00:00')"
+        },
+        "duration": {
+          "type": "string",
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+          "description": "ISO 8601 duration - how long the errand takes (e.g., 'PT5M' for 5 minutes, 'PT1H' for 1 hour)"
+        },
+        "day": {
+          "type": "number",
+          "description": "Day number for multi-day events (default: 1)"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about the errand"
+        }
+      }
+    }
+  ]
+}

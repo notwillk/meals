@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "description": { "type": "string" },
+    "inspiration": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "preparations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "description": { "type": "string" },
+                "time": { "type": "string" },
+                "duration": { "type": "string" },
+                "follows": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "final": { "type": "boolean" },
+                "storage": { "type": "string" },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "qty": { "type": ["number", "string"] },
+                      "unit": { "type": "string" },
+                      "note": { "type": "string" },
+                      "source": { "type": "string" },
+                      "preparation": { "type": "string" },
+                      "homemade": { "type": "boolean" }
+                    },
+                    "required": ["name"]
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "instruction": { "type": "string" },
+                      "ingredients": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": { "type": "string" },
+                            "qty": { "type": ["number", "string"] },
+                            "unit": { "type": "string" },
+                            "note": { "type": "string" },
+                            "source": { "type": "string" },
+                            "preparation": { "type": "string" },
+                            "homemade": { "type": "boolean" }
+                          },
+                          "required": ["name"]
+                        }
+                      },
+                      "equipment": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      },
+                      "note": { "type": "string" }
+                    },
+                    "required": ["instruction"]
+                  }
+                }
+              },
+              "required": ["id"]
+            }
+          }
+        },
+        "required": ["id"]
+      }
+    }
+  },
+  "required": ["id", "description"]
+}
