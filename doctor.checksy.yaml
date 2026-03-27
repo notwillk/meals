@@ -52,6 +52,18 @@ rules:
     severity: error
     fix: swimlane schema-json ticket > .schemas/swimlane-ticket.json
 
+  - name: git ssh key is valid to github
+    check: 'ssh -o ConnectTimeout=5 -T git@github.com 2>&1 | grep -q "successfully authenticated"'
+    severity: info
+
+  - name: git signing key is installed and valid
+    check: 'gpg --list-secret-keys 2>/dev/null | grep -q "^sec" || git config --get user.signingkey | grep -q .'
+    severity: info
+
+  - name: github cli has authenticated session
+    check: 'gh auth status 2>&1 | grep -q "Logged in to github.com"'
+    severity: info
+
   - name: pnpm packages installed
     check: pnpm install --frozen-lockfile --prefer-offline
     severity: error

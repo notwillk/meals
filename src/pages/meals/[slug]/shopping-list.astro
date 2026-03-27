@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.ts';
-import type { Meal, Course, Recipe, Phase, Ingredient, Step } from '../../../types/index.ts';
+import { getAllMenus, getMenu } from '../../../data/loader.ts';
+import type { Menu, Course, Dish, Component, Preparation, Ingredient, Step } from '../../../types/index.ts';
 
 interface IngredientItem {
   name: string;
@@ -10,7 +10,7 @@ interface IngredientItem {
   note: string;
   preparation: string;
   homemade: boolean;
-  recipes: string[];
+  dishes: string[];
 }
 
 function parseQty(qty: string | number | undefined): number {
@@ -34,26 +34,30 @@ function parseQty(qty: string | number | undefined): number {
   return 0;
 }
 
-function collectIngredientsBySource(meal: Meal): Map<string, IngredientItem[]> {
+function collectIngredientsBySource(menu: Menu): Map<string, IngredientItem[]> {
   const sourceGroups = new Map<string, Map<string, IngredientItem>>();
 
-  for (const course of meal.courses) {
+  for (const course of menu.courses) {
     if (course.hidden) continue;
     
-    for (const recipe of course.recipes) {
-      if (!recipe.phases) continue;
+    for (const dish of course.dishes) {
+      if (!dish.components) continue;
 
-      for (const phase of recipe.phases) {
-        const phaseIngredients = phase.ingredients || [];
-        for (const ing of phaseIngredients) {
-          addIngredientBySource(sourceGroups, ing, recipe.description);
-        }
+      for (const component of dish.components) {
+        if (!component.preparations) continue;
+        
+        for (const preparation of component.preparations) {
+          const prepIngredients = preparation.ingredients || [];
+          for (const ing of prepIngredients) {
+            addIngredientBySource(sourceGroups, ing, dish.description);
+          }
 
-        const stepIngredients = phase.steps || [];
-        for (const step of stepIngredients) {
-          const stepIngs = step.ingredients || [];
-          for (const ing of stepIngs) {
-            addIngredientBySource(sourceGroups, ing, recipe.description);
+          const stepIngredients = preparation.steps || [];
+          for (const step of stepIngredients) {
+            const stepIngs = step.ingredients || [];
+            for (const ing of stepIngs) {
+              addIngredientBySource(sourceGroups, ing, dish.description);
+            }
           }
         }
       }
@@ -78,7 +82,7 @@ function collectIngredientsBySource(meal: Meal): Map<string, IngredientItem[]> {
 function addIngredientBySource(
   sourceGroups: Map<string, Map<string, IngredientItem>>,
   ing: Ingredient,
-  recipeName: string
+  dishName: string
 ): void {
   const source = (ing.source && ing.source.trim()) ? ing.source.trim() : 'Grocery Store';
   const key = ing.name.toLowerCase();
@@ -98,7 +102,7 @@ function addIngredientBySource(
       note: ing.note || '',
       preparation: ing.preparation || '',
       homemade: ing.homemade || false,
-      recipes: [recipeName]
+      dishes: [dishName]
     });
   } else {
     const existing = map.get(key)!;
@@ -114,8 +118,8 @@ function addIngredientBySource(
       if (ing.homemade) {
         existing.homemade = true;
       }
-      if (!existing.recipes.includes(recipeName)) {
-        existing.recipes.push(recipeName);
+      if (!existing.dishes.includes(dishName)) {
+        existing.dishes.push(dishName);
       }
       return;
     }
@@ -137,49 +141,49 @@ function addIngredientBySource(
     if (ing.homemade) {
       existing.homemade = true;
     }
-    if (!existing.recipes.includes(recipeName)) {
-      existing.recipes.push(recipeName);
+    if (!existing.dishes.includes(dishName)) {
+      existing.dishes.push(dishName);
     }
   }
 }
 
 export function getStaticPaths() {
-  const meals = getAllMeals();
-  return meals.map((meal: Meal) => ({
-    params: { slug: meal.slug }
+  const menus = getAllMenus();
+  return menus.map((menu: Menu) => ({
+    params: { slug: menu.slug }
   }));
 }
 
 const { slug } = Astro.params;
-const meal = getMeal(slug);
+const menu = getMenu(slug);
 
-if (!meal) {
+if (!menu) {
   return Astro.redirect('/404');
 }
 
-const shoppingListBySource = collectIngredientsBySource(meal);
+const shoppingListBySource = collectIngredientsBySource(menu);
 
-function formatMealDescription(meal: Meal): string {
+function formatMenuDescription(menu: Menu): string {
   const parts: string[] = [];
-  if (meal.date) {
-    const dt = new Date(meal.date);
+  if (menu.date) {
+    const dt = new Date(menu.date);
     parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
   }
-  if (meal.start_time) {
-    const date = new Date(meal.start_time);
+  if (menu.start_time) {
+    const date = new Date(menu.start_time);
     parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
   }
   return parts.join(' · ');
 }
 ---
 
-<Layout title={`${meal.name} - Shopping List`} description={formatMealDescription(meal)}>
+<Layout title={`${menu.name} - Shopping List`} description={formatMenuDescription(menu)}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>Shopping List</span>
+    <a href="/">Menus</a><span class="sep">/</span><a href={`/meals/${slug}`}>{menu.name}</a><span class="sep">/</span><span>Shopping List</span>
   </nav>
   
   <h1>Shopping List</h1>
-  <p class="subtitle muted">{meal.name}</p>
+  <p class="subtitle muted">{menu.name}</p>
   
   {shoppingListBySource.size === 0 ? (
     <p>No ingredients found.</p>

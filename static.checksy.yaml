@@ -5,11 +5,14 @@ rules:
   - name: yamllint checks on all yaml files
     check: yamllint --strict $(git ls-files -- "*.yaml")
     severity: debug
-  - name: check yaml schema (receipe)
-    check: git ls-files -- "*.recipe.yaml" | xargs check-jsonschema --schemafile .schemas/recipe.schema.json
+  - name: check yaml schema (dish)
+    check: git ls-files -- "*.dish.yaml" | xargs check-jsonschema --schemafile schemas/dish.schema.json
     severity: error
-  - name: check yaml schema (meal)
-    check: git ls-files -- "*.meal.yaml" | xargs check-jsonschema --schemafile .schemas/meal.schema.json
+  - name: check yaml schema (menu)
+    check: git ls-files -- "*.menu.yaml" | xargs check-jsonschema --schemafile schemas/menu.schema.json
+    severity: error
+  - name: check yaml schema (errand)
+    check: git ls-files -- "meals/**/errands.yaml" | xargs check-jsonschema --schemafile schemas/errand.schema.json
     severity: error
   - name: no pending format issues
     check: just format --check

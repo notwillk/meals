@@ -17,7 +17,7 @@ export interface Step {
   note?: string;
 }
 
-export interface Phase {
+export interface Preparation {
   id: string;
   description?: string;
   time?: string;
@@ -29,16 +29,22 @@ export interface Phase {
   steps?: Step[];
 }
 
-export interface Recipe {
+export interface Component {
+  id: string;
+  description?: string;
+  preparations?: Preparation[];
+}
+
+export interface Dish {
   id?: string;
   slug: string;
   description: string;
   inspiration?: string[];
-  phases?: Phase[];
+  components?: Component[];
   error?: string;
 }
 
-export interface RecipeRef {
+export interface DishRef {
   slug: string;
   description: string;
 }
@@ -47,7 +53,7 @@ export interface Course {
   name: string;
   description?: string;
   plating?: string;
-  recipes: string[] | Recipe[];
+  dishes: string[] | Dish[];
   duration?: string;
   hidden?: boolean;
   first_course?: boolean;
@@ -59,7 +65,7 @@ export interface Errand {
   duration?: string;
 }
 
-export interface Meal {
+export interface Menu {
   name: string;
   start_time?: string;
   slug?: string;
@@ -68,10 +74,10 @@ export interface Meal {
   errands?: Errand[];
 }
 
-export function isMeal(v: unknown): v is Meal {
+export function isMenu(v: unknown): v is Menu {
   if (typeof v !== 'object' || v === null) {
     return false;
   }
-  const m = v as Partial<Meal>;
+  const m = v as Partial<Menu>;
   return typeof m.name === 'string' && Array.isArray(m.courses);
 }

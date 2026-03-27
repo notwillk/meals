@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAllMeals } from '../data/loader.ts';
-import type { Meal } from '../types/index.ts';
+import { getAllMenus } from '../data/loader.ts';
+import type { Menu } from '../types/index.ts';
 
-const meals: Meal[] = getAllMeals().sort((a, b) => new Date(b.start_time ?? 0).getTime() - new Date(a.start_time ?? 0).getTime());
+const menus: Menu[] = getAllMenus().sort((a, b) => new Date(b.start_time ?? 0).getTime() - new Date(a.start_time ?? 0).getTime());
 
 function formatDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-');
@@ -11,18 +11,18 @@ function formatDate(dateStr: string): string {
 }
 ---
 
-<Layout title="Meals">
-  <h1>Meals</h1>
+<Layout title="Menus">
+  <h1>Menus</h1>
   
-  {meals.length === 0 ? (
-    <p>No meals found.</p>
+  {menus.length === 0 ? (
+    <p>No menus found.</p>
   ) : (
-    <ul class="meal-list">
-      {meals.map(meal => (
-        <li class="meal-item">
-          <a href={`/meals/${meal.slug}`}>
-            <span class="meal-date mono">{meal.date && formatDate(meal.date)}</span>
-            <span class="meal-name">{meal.name}</span>
+    <ul class="menu-list">
+      {menus.map(menu => (
+        <li class="menu-item">
+          <a href={`/meals/${menu.slug}`}>
+            <span class="menu-date mono">{menu.date && formatDate(menu.date)}</span>
+            <span class="menu-name">{menu.name}</span>
           </a>
         </li>
       ))}
@@ -30,13 +30,13 @@ function formatDate(dateStr: string): string {
   )}
   
   <style>
-    .meal-list {
+    .menu-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
     
-    .meal-item {
+    .menu-item {
       margin-bottom: var(--space-md);
       padding: var(--space-md) var(--space-lg);
       background: var(--color-surface);
@@ -45,11 +45,11 @@ function formatDate(dateStr: string): string {
       transition: border-color 0.15s ease;
     }
     
-    .meal-item:hover {
+    .menu-item:hover {
       border-color: var(--color-accent);
     }
     
-    .meal-item a {
+    .menu-item a {
       display: flex;
       align-items: baseline;
       gap: var(--space-md);
@@ -57,32 +57,32 @@ function formatDate(dateStr: string): string {
       text-decoration: none;
     }
     
-    .meal-item a:hover {
+    .menu-item a:hover {
       text-decoration: none;
       opacity: 1;
     }
     
-    .meal-date {
+    .menu-date {
       color: var(--color-text-muted);
       font-size: 0.9rem;
       min-width: 5.5rem;
       flex-shrink: 0;
     }
     
-    .meal-name {
+    .menu-name {
       font-size: 1.1rem;
       font-weight: 500;
     }
     
     @media (max-width: 600px) {
-      .meal-item a {
+      .menu-item a {
         flex-direction: column;
         gap: var(--space-xs);
       }
     }
     
     @media print {
-      .meal-item {
+      .menu-item {
         background: white;
         border: none;
         border-bottom: 0.5pt solid #999;
@@ -91,12 +91,12 @@ function formatDate(dateStr: string): string {
         margin-bottom: 0.2rem;
       }
       
-      .meal-item a {
+      .menu-item a {
         flex-direction: row;
         gap: 1rem;
       }
       
-      .meal-item:last-child {
+      .menu-item:last-child {
         border-bottom: none;
       }
     }

@@ -1,22 +1,22 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import { getAllMenus, getMenu } from '../../../data/loader.ts';
 import { formatDuration, formatNumeric } from '../../../utils/time.ts';
-import type { Meal, Course, Recipe, Phase, Step, Ingredient } from '../../../types/index.ts';
+import type { Menu, Course, Dish, Component, Preparation, Step, Ingredient } from '../../../types/index.ts';
 
 export function getStaticPaths() {
-  const meals = getAllMeals();
+  const menus = getAllMenus();
   const paths: { params: { slug: string; recipe: string } }[] = [];
   
-  meals.forEach((meal: Meal) => {
-    const fullMeal = getMeal(meal.slug);
-    if (!fullMeal) return;
+  menus.forEach((menu: Menu) => {
+    const fullMenu = getMenu(menu.slug);
+    if (!fullMenu) return;
     
-    fullMeal.courses.forEach((course: Course) => {
-      course.recipes.forEach((recipe: Recipe) => {
-        if (recipe.slug) {
+    fullMenu.courses.forEach((course: Course) => {
+      course.dishes.forEach((dish: Dish) => {
+        if (dish.slug) {
           paths.push({
-            params: { slug: meal.slug, recipe: recipe.slug }
+            params: { slug: menu.slug, recipe: dish.slug }
           });
         }
       });
@@ -27,32 +27,31 @@ export function getStaticPaths() {
 }
 
 const { slug, recipe: recipeSlug } = Astro.params;
-const meal = getMeal(slug);
+const menu = getMenu(slug);
 
-if (!meal) {
+if (!menu) {
   return Astro.redirect('/404');
 }
 
-// Find the recipe
-let recipe: Recipe | null = null;
-meal.courses.forEach((course: Course) => {
-  course.recipes.forEach((r: Recipe) => {
-    if (r.slug === recipeSlug) {
-      recipe = r;
+let dish: Dish | null = null;
+menu.courses.forEach((course: Course) => {
+  course.dishes.forEach((d: Dish) => {
+    if (d.slug === recipeSlug) {
+      dish = d;
     }
   });
 });
 
-if (!recipe) {
+if (!dish) {
   return Astro.redirect('/404');
 }
 
-const mealStartTime = meal.start_time ? new Date(meal.start_time).getTime() : null;
+const menuStartTime = menu.start_time ? new Date(menu.start_time).getTime() : null;
 
-function getPhaseOffset(phaseTime: string): string | null {
-  if (!mealStartTime || !phaseTime) return null;
-  const phaseMs = new Date(phaseTime).getTime();
-  const offsetMs = phaseMs - mealStartTime;
+function getPreparationOffset(preparationTime: string): string | null {
+  if (!menuStartTime || !preparationTime) return null;
+  const prepMs = new Date(preparationTime).getTime();
+  const offsetMs = prepMs - menuStartTime;
   const offsetSec = Math.round(offsetMs / 1000);
   
   let offsetStr: string;
@@ -75,7 +74,7 @@ function getPhaseOffset(phaseTime: string): string | null {
     }
   }
   
-  const dt = new Date(phaseTime);
+  const dt = new Date(preparationTime);
   const month = (dt.getMonth() + 1).toString().padStart(2, '0');
   const day = dt.getDate().toString().padStart(2, '0');
   let hours = dt.getHours();
@@ -86,10 +85,10 @@ function getPhaseOffset(phaseTime: string): string | null {
   return `${offsetStr} (${month}/${day} ${hours}:${minutes}${ampm})`;
 }
 
-function getPhaseEquipment(phase: Phase): string[] {
+function getPreparationEquipment(preparation: Preparation): string[] {
   const equipment = new Set<string>();
-  if (phase.steps) {
-    phase.steps.forEach((step: Step) => {
+  if (preparation.steps) {
+    preparation.steps.forEach((step: Step) => {
       if (step.equipment) {
         step.equipment.forEach((eq: string) => equipment.add(eq));
       }
@@ -101,7 +100,6 @@ function getPhaseEquipment(phase: Phase): string[] {
 function parseQty(qty: number | string | undefined): number | null {
   if (qty === undefined) return null;
   if (typeof qty === 'number') return qty;
-  // Handle fraction strings like "1/2", "3/4"
   if (typeof qty === 'string') {
     const trimmed = qty.trim();
     if (trimmed.includes('/')) {
@@ -132,99 +130,125 @@ function getStepIngredients(step: Step): Ingredient[] {
   });
 }
 
-function formatMealDescription(meal: Meal): string {
+function formatMenuDescription(menu: Menu): string {
   const parts: string[] = [];
-  if (meal.date) {
-    const dt = new Date(meal.date);
+  if (menu.date) {
+    const dt = new Date(menu.date);
     parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
   }
-  if (meal.start_time) {
-    const date = new Date(meal.start_time);
+  if (menu.start_time) {
+    const date = new Date(menu.start_time);
     parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
   }
   return parts.join(' · ');
 }
 ---
 
-<Layout title={recipe.description} description={formatMealDescription(meal)}>
+<Layout title={dish.description} description={formatMenuDescription(menu)}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>{recipe.description}</span>
+    <a href="/">Menus</a><span class="sep">/</span><a href={`/meals/${slug}`}>{menu.name}</a><span class="sep">/</span><span>{dish.description}</span>
   </nav>
   
-  <header class="recipe-header">
-    <h1>{recipe.description}</h1>
+  <header class="dish-header">
+    <h1>{dish.description}</h1>
   </header>
   
-  {recipe.phases && recipe.phases.map((phase: Phase) => (
-    <article class="phase" id={phase.id}>
-      <header class="phase-header">
-        <div class="phase-title-row">
-          <h2 class="phase-title">{phase.description || phase.id}</h2>
-          {(phase.time || phase.duration) && (
-            <p class="phase-meta mono">
-              {phase.time && (
-                <span class="offset">{getPhaseOffset(phase.time)}</span>
-              )}
-              {phase.duration && (
-                <span class="duration"> &middot; {formatDuration(phase.duration)}</span>
-              )}
-            </p>
-          )}
-        </div>
-        
-        {phase.storage && (
-          <p class="phase-storage">
-            <strong>Storage:</strong> {phase.storage}
-          </p>
-        )}
-        
-        {getPhaseEquipment(phase).length > 0 && (
-          <p class="phase-equipment muted">
-            <strong>Equipment:</strong> {getPhaseEquipment(phase).join(', ')}
-          </p>
-        )}
+  {dish.components && dish.components.map((component: Component) => (
+    <section class="component">
+      <header class="component-header">
+        <h2 class="component-title">{component.description || component.id}</h2>
       </header>
       
-      {phase.steps && phase.steps.length > 0 && (
-        <div class="steps">
-          {phase.steps.map((step: Step, idx: number) => (
-            <div class="step">
-              <div class="step-number">{idx + 1}</div>
-              <div class="step-content">
-                {getStepIngredients(step).length > 0 && (
-                  <ul class="step-ingredients">
-                    {getStepIngredients(step).map((ing: Ingredient) => (
-                      <li class="ingredient">
-                        {ing.qty && <span class="mono">{ing.qty} </span>}
-                        {ing.unit && <span>{ing.unit} </span>}
-                        {(ing.qty || ing.unit) && <span class="sep">&ndash; </span>}
-                        <span class="ingredient-name">{ing.name}</span>
-                        {ing.preparation && <span class="ingredient-prep muted"> ({ing.preparation})</span>}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <p class={`step-instruction${getStepIngredients(step).length > 0 ? ' after-ingredients' : ''}`}>{step.instruction}</p>
-                {step.note && <p class="step-note muted">{step.note}</p>}
-              </div>
+      {component.preparations && component.preparations.map((preparation: Preparation) => (
+        <article class="preparation" id={preparation.id}>
+          <header class="preparation-header">
+            <div class="preparation-title-row">
+              <h3 class="preparation-title">{preparation.description || preparation.id}</h3>
+              {(preparation.time || preparation.duration) && (
+                <p class="preparation-meta mono">
+                  {preparation.time && (
+                    <span class="offset">{getPreparationOffset(preparation.time)}</span>
+                  )}
+                  {preparation.duration && (
+                    <span class="duration"> &middot; {formatDuration(preparation.duration)}</span>
+                  )}
+                </p>
+              )}
             </div>
-          ))}
-        </div>
-      )}
-    </article>
+            
+            {preparation.storage && (
+              <p class="preparation-storage">
+                <strong>Storage:</strong> {preparation.storage}
+              </p>
+            )}
+            
+            {getPreparationEquipment(preparation).length > 0 && (
+              <p class="preparation-equipment muted">
+                <strong>Equipment:</strong> {getPreparationEquipment(preparation).join(', ')}
+              </p>
+            )}
+          </header>
+          
+          {preparation.steps && preparation.steps.length > 0 && (
+            <div class="steps">
+              {preparation.steps.map((step: Step, idx: number) => (
+                <div class="step">
+                  <div class="step-number">{idx + 1}</div>
+                  <div class="step-content">
+                    {getStepIngredients(step).length > 0 && (
+                      <ul class="step-ingredients">
+                        {getStepIngredients(step).map((ing: Ingredient) => (
+                          <li class="ingredient">
+                            {ing.qty && <span class="mono">{ing.qty} </span>}
+                            {ing.unit && <span>{ing.unit} </span>}
+                            {(ing.qty || ing.unit) && <span class="sep">&ndash; </span>}
+                            <span class="ingredient-name">{ing.name}</span>
+                            {ing.preparation && <span class="ingredient-prep muted"> ({ing.preparation})</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <p class={`step-instruction${getStepIngredients(step).length > 0 ? ' after-ingredients' : ''}`}>{step.instruction}</p>
+                    {step.note && <p class="step-note muted">{step.note}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </section>
   ))}
   
   <style>
-    .recipe-header {
+    .dish-header {
       margin-top: var(--space-md);
       margin-bottom: var(--space-xl);
     }
     
-    .recipe-header h1 {
+    .dish-header h1 {
       margin-bottom: var(--space-sm);
     }
     
-    .phase {
+    .component {
+      margin-bottom: var(--space-xl);
+    }
+    
+    .component-header {
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-accent);
+    }
+    
+    .component-title {
+      margin: 0;
+      font-size: 1.4rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    
+    .preparation {
       border: 1px solid var(--color-border);
       border-radius: 4px;
       padding: var(--space-lg);
@@ -234,17 +258,17 @@ function formatMealDescription(meal: Meal): string {
       background: var(--color-surface);
     }
     
-    .phase-header {
+    .preparation-header {
       margin-bottom: var(--space-md);
       padding-bottom: var(--space-sm);
       border-bottom: 1px solid var(--color-border);
     }
     
-    .phase-title-row {
+    .preparation-title-row {
       margin-bottom: var(--space-sm);
     }
     
-    .phase-title-row {
+    .preparation-title-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
@@ -252,14 +276,14 @@ function formatMealDescription(meal: Meal): string {
       flex-wrap: wrap;
     }
     
-    .phase-title {
+    .preparation-title {
       margin: 0;
       font-size: 1.25rem;
       font-family: var(--font-body);
       font-weight: 600;
     }
     
-    .phase-meta {
+    .preparation-meta {
       margin: 0;
       font-size: 0.9rem;
       white-space: nowrap;
@@ -271,8 +295,8 @@ function formatMealDescription(meal: Meal): string {
       font-weight: 500;
     }
     
-    .phase-storage,
-    .phase-equipment {
+    .preparation-storage,
+    .preparation-equipment {
       margin: var(--space-xs) 0 0 0;
       font-size: 0.9rem;
     }
@@ -371,18 +395,18 @@ function formatMealDescription(meal: Meal): string {
     }
     
     @media (max-width: 600px) {
-      .phase {
+      .preparation {
         padding: var(--space-md);
       }
     }
     
     @media print {
       .breadcrumbs,
-      .recipe-header {
+      .dish-header {
         display: none;
       }
 
-      .phase {
+      .preparation {
         border: 1pt solid #000;
         border-radius: 0;
         padding: 0.6rem;
@@ -392,25 +416,25 @@ function formatMealDescription(meal: Meal): string {
         page-break-inside: avoid;
       }
       
-      .phase-header {
+      .preparation-header {
         border-bottom: 0.5pt solid #999;
         padding-bottom: 0.4rem;
         margin-bottom: 0.4rem;
       }
       
-      .phase-title-row {
+      .preparation-title-row {
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 0.5rem;
         margin-bottom: 0.3rem;
       }
       
-      .phase-title {
+      .preparation-title {
         font-size: 12pt;
         margin-bottom: 0;
       }
       
-      .phase-meta {
+      .preparation-meta {
         font-size: 9pt;
         color: #333;
       }
@@ -420,8 +444,8 @@ function formatMealDescription(meal: Meal): string {
         font-weight: 600;
       }
       
-      .phase-storage,
-      .phase-equipment {
+      .preparation-storage,
+      .preparation-equipment {
         font-size: 9pt;
         color: #333;
       }

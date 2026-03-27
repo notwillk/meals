@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import yaml from 'js-yaml';
 import slugify from 'slugify';
-import type { Meal, Recipe, Course, Errand } from '../types/index.ts';
+import type { Menu, Dish, Course, Errand } from '../types/index.ts';
 
 const MEALS_DIR = path.join(process.cwd(), 'meals');
 
@@ -10,8 +10,8 @@ export function normalizeSlug(str: string): string {
   return slugify(str, { lower: true, locale: 'en' });
 }
 
-export function getAllMeals(): Meal[] {
-  const meals: Meal[] = [];
+export function getAllMenus(): Menu[] {
+  const menus: Menu[] = [];
   try {
     const entries = fs.readdirSync(MEALS_DIR, { withFileTypes: true });
     
@@ -19,78 +19,86 @@ export function getAllMeals(): Meal[] {
       if (entry.isDirectory()) {
         const dirPath = path.join(MEALS_DIR, entry.name);
         const dirFiles = fs.readdirSync(dirPath);
-        const mealFileName = dirFiles.find(f => f.endsWith('.meal.yaml'));
-        if (mealFileName) {
-          const mealFile = path.join(dirPath, mealFileName);
-          const meal = yaml.load(fs.readFileSync(mealFile, 'utf-8')) as Meal;
-          meal.slug = entry.name;
-          if (meal.start_time) {
-            const dt = new Date(meal.start_time);
-            meal.date = dt.toISOString().split('T')[0];
+        const menuFileName = dirFiles.find(f => f.endsWith('.menu.yaml'));
+        if (menuFileName) {
+          const menuFile = path.join(dirPath, menuFileName);
+          const menu = yaml.load(fs.readFileSync(menuFile, 'utf-8')) as Menu;
+          menu.slug = entry.name;
+          if (menu.start_time) {
+            const dt = new Date(menu.start_time);
+            menu.date = dt.toISOString().split('T')[0];
           }
-          meals.push(meal);
+          menus.push(menu);
         }
       }
     }
   } catch (e) {
-    console.error('Error loading meals:', (e as Error).message, 'MEALS_DIR:', MEALS_DIR);
+    console.error('Error loading menus:', (e as Error).message, 'MEALS_DIR:', MEALS_DIR);
   }
   
-  return meals.sort((a, b) => new Date(a.start_time ?? 0).getTime() - new Date(b.start_time ?? 0).getTime());
+  return menus.sort((a, b) => new Date(a.start_time ?? 0).getTime() - new Date(b.start_time ?? 0).getTime());
 }
 
-export function getMeal(slug: string): Meal | null {
-  const mealDir = path.join(MEALS_DIR, slug);
-  if (!fs.existsSync(mealDir)) {
+export function getMenu(slug: string): Menu | null {
+  const menuDir = path.join(MEALS_DIR, slug);
+  if (!fs.existsSync(menuDir)) {
     return null;
   }
   
-  const dirFiles = fs.readdirSync(mealDir);
-  const mealFileName = dirFiles.find(f => f.endsWith('.meal.yaml'));
-  if (!mealFileName) {
+  const dirFiles = fs.readdirSync(menuDir);
+  const menuFileName = dirFiles.find(f => f.endsWith('.menu.yaml'));
+  if (!menuFileName) {
     return null;
   }
   
-  const mealFile = path.join(mealDir, mealFileName);
-  const meal = yaml.load(fs.readFileSync(mealFile, 'utf-8')) as Meal;
-  meal.slug = slug;
-  if (meal.start_time) {
-    const dt = new Date(meal.start_time);
-    meal.date = dt.toISOString().split('T')[0];
+  const menuFile = path.join(menuDir, menuFileName);
+  const menu = yaml.load(fs.readFileSync(menuFile, 'utf-8')) as Menu;
+  menu.slug = slug;
+  if (menu.start_time) {
+    const dt = new Date(menu.start_time);
+    menu.date = dt.toISOString().split('T')[0];
   }
   
-  // Load recipes
-  meal.courses = meal.courses.map((course: Course) => {
-    course.recipes = course.recipes.map((recipeRef: string) => {
-      const recipePath = recipeRef.replace('&recipes/', '');
-      const normalizedPath = normalizeSlug(recipePath);
-      const fullPath = path.join(mealDir, 'recipes', normalizedPath + '.recipe.yaml');
+  // Load dishes
+  menu.courses = menu.courses.map((course: Course) => {
+    course.dishes = course.dishes.map((dishRef: string) => {
+      const dishPath = dishRef.replace('&dishes/', '');
+      const normalizedPath = normalizeSlug(dishPath);
+      const fullPath = path.join(menuDir, 'dishes', normalizedPath + '.dish.yaml');
       if (fs.existsSync(fullPath)) {
-        const recipe = yaml.load(fs.readFileSync(fullPath, 'utf-8')) as Recipe;
-        recipe.slug = normalizedPath;
-        return recipe;
+        const dish = yaml.load(fs.readFileSync(fullPath, 'utf-8')) as Dish;
+        dish.slug = normalizedPath;
+        return dish;
       }
-      return { id: recipePath, description: 'Recipe not found', error: 'not found', slug: normalizedPath } as Recipe;
+      return { id: dishPath, description: 'Dish not found', error: 'not found', slug: normalizedPath } as Dish;
     });
     return course;
   });
   
   // Load errands if exists
-  const errandsFile = path.join(mealDir, 'errands.yaml');
+  const errandsFile = path.join(menuDir, 'errands.yaml');
   if (fs.existsSync(errandsFile)) {
-    meal.errands = yaml.load(fs.readFileSync(errandsFile, 'utf-8')) as Errand[];
+    menu.errands = yaml.load(fs.readFileSync(errandsFile, 'utf-8')) as Errand[];
   }
   
-  return meal;
+  return menu;
 }
 
-export function getRecipe(mealSlug: string, recipeSlug: string): Recipe | null {
-  const recipePath = path.join(MEALS_DIR, mealSlug, 'recipes', recipeSlug + '.recipe.yaml');
-  if (!fs.existsSync(recipePath)) {
+export function getDish(menuSlug: string, dishSlug: string): Dish | null {
+  const dishPath = path.join(MEALS_DIR, menuSlug, 'dishes', dishSlug + '.dish.yaml');
+  if (!fs.existsSync(dishPath)) {
     return null;
   }
   
-  const recipe = yaml.load(fs.readFileSync(recipePath, 'utf-8')) as Recipe;
-  recipe.slug = recipeSlug;
-  return recipe;
+  const dish = yaml.load(fs.readFileSync(dishPath, 'utf-8')) as Dish;
+  dish.slug = dishSlug;
+  return dish;
+}
+
+export function getAllMeals(): Menu[] {
+  return getAllMenus();
+}
+
+export function getMeal(slug: string): Menu | null {
+  return getMenu(slug);
 }

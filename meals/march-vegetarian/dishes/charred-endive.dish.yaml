@@ -1,0 +1,73 @@
+id: charred-endive
+description: Charred Endive with Lemon & Olive Oil
+
+components:
+  - id: endive
+    description: Charred Endive
+    preparations:
+      - id: prep-endive
+        description: Prep endive
+        time: "2026-03-22T12:30:00"
+        duration: "PT15M"
+        steps:
+          - instruction: Trim and halve the endive lengthwise, keeping the core intact so each half holds together
+            ingredients:
+              - name: endive
+                qty: 3
+                unit: count
+                source: Rainbow Grocery
+          - instruction: Lightly oil the cut face of each endive and season lightly with salt
+            ingredients:
+              - name: Kosher salt
+              - name: neutral oil
+                qty: 1
+                unit: teaspoon
+          - instruction: Heat a cast iron pan over medium-high heat
+            equipment:
+              - cast iron pan
+          - instruction: Without moving, sear endive in cast iron pan, cut-side down until deeply golden brown, about 3–5 minutes
+          - instruction: Flip and cook for 30–60 seconds on the second side to warm through
+          - instruction: Remove from pan and allow to cool completely, cut-side up. Hold at room temperature for up to ~1 hour
+        storage: Hold at room temperature, uncovered, for up to ~1 hour
+
+  - id: dressing
+    description: Lemon Olive Oil Dressing
+    preparations:
+      - id: make-dressing
+        description: Make dressing
+        time: "2026-03-22T12:00:00"
+        duration: "PT5M"
+        steps:
+          - instruction: In squeeze bottle, combine lemon juice and olive oil
+            ingredients:
+              - name: lemon juice, fresh
+                qty: 2
+                unit: teaspoon
+                source: Rainbow Grocery
+              - name: extra virgin olive oil
+                qty: 3
+                unit: teaspoon
+          - instruction: Shake to combine and reserve
+        storage: Refrigerate in squeeze bottle for up to 3 days
+
+  - id: service
+    description: Service
+    preparations:
+      - id: service
+        description: Service
+        follows:
+          - prep-endive
+          - make-dressing
+        final: true
+        time: "2026-03-22T13:40:00"
+        duration: "PT5M"
+        steps:
+          - instruction: Return dressing to room temperature if refrigerated
+          - instruction: Torch the cut face and edges of the endive to create light, localized char
+            equipment:
+              - kitchen torch
+          - instruction: Immediately brush or spoon a thin layer of the lemon–olive oil dressing onto the cut face
+          - instruction: Finish with Maldon salt
+            ingredients:
+              - name: Maldon salt
+          - instruction: Serve immediately

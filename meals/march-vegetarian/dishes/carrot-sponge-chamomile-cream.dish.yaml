@@ -1,0 +1,241 @@
+id: carrot-sponge-chamomile-cream
+description: Carrot Sponge with Chamomile Cream
+
+inspiration:
+  - https://ladyandpups.com/2014/05/26/roll-with-chamomile-whipped-cream/
+  - https://www.cupcakeproject.com/candied-carrot-curls-unique-carrot/
+
+components:
+  - id: sponge
+    description: Carrot Sponge
+    preparations:
+      - id: make-sponge
+        description: Make the carrot sponge base
+        duration: PT1H45M
+        time: "2026-03-21T14:00:00"
+        steps:
+          - instruction: Peel and finely grate the carrots with microplane
+            equipment:
+              - microplane
+            ingredients:
+              - name: carrots
+                preparation: peeled and very finely grated
+                unit: lbs
+                qty: 0.5
+                source: Rainbow Grocery
+          - instruction: Vacuum seal carrots and salt, let sit for 30 minutes, gently squeeze to remove excess liquid (carrots should remain moist, not dry)
+            equipment:
+              - vacuum sealer
+            ingredients:
+              - name: Kosher Salt
+                qty: 2
+                unit: gram
+          - instruction: Preheat oven to 325°F
+            equipment:
+              - oven
+          - instruction: Line a quarter sheet pan with parchment paper using the "double sling" method, lightly grease.
+            equipment:
+              - quarter sheet pan
+              - parchment paper
+            ingredients:
+              - name: neutral oil
+                note: vegetable or grapeseed oil
+          - instruction: In a medium bowl, whisk together the buttermilk, lillet blanc, and vanilla extract.
+            equipment:
+              - medium bowl
+            ingredients:
+              - name: buttermilk
+                qty: 90
+                unit: gram
+              - name: lillet blanc
+                qty: 49
+                unit: gram
+              - name: vanilla extract
+                qty: 1
+                unit: teaspoon
+          - instruction: In a separate large bowl, whisk together the flour, baking powder, baking soda, and salt.
+            ingredients:
+              - name: cake flour
+                qty: 100
+                unit: gram
+              - name: baking powder
+                qty: 0.75
+                unit: teaspoon
+              - name: baking soda
+                qty: 0.25
+                unit: teaspoon
+              - name: Kosher Salt
+                qty: 2.5
+                unit: gram
+          - instruction: In a stand mixer fitted with the whisk attachment, beat the eggs and sugar on medium-high speed to ribbon stage (until pale, thick, and the batter falls in a ribbon that briefly holds on the surface)
+            equipment:
+              - stand mixer
+              - whisk attachment
+            ingredients:
+              - name: large eggs
+                qty: 2
+                unit: count
+                source: Farmer's Market
+              - name: granulated sugar
+                qty: 110
+                unit: gram
+          - instruction: Drizzle honey in slowly on medium speed while preserving as much volume as possible (do not overmix)
+            ingredients:
+              - name: honey
+                qty: 20
+                unit: gram
+          - instruction: Emulsify the oil by pouring in a thin stream while mixing on medium speed, reducing to low as the emulsion forms
+            ingredients:
+              - name: neutral oil
+                qty: 100
+                unit: gram
+                note: vegetable or grapeseed oil
+          - instruction: Using the paddle attachment on low speed, incorporate the dry ingredients in 3 additions, alternating with the wet ingredients, beginning and ending with dry ingredients, until just combined
+            equipment:
+              - stand mixer
+              - paddle attachment
+          - instruction: Incorporating the grated, drained carrots by hand with a spatula, folding gently to avoid deflating the batter
+          - instruction: Rest the batter for 10-15 minutes to allow the flour to fully hydrate
+          - instruction: Pour the batter into the prepared pan, spread evenly to ~½–¾ inch thickness, and bake for 12–18 minutes, until a cake tester inserted in the center comes out with just a few moist crumbs, and the surface springs back lightly when pressed
+            equipment:
+              - quarter sheet pan
+            note: Check on the cake frequently after 10 minutes
+          - instruction: Let cool completely before handling
+        storage: Store in an airtight container in the refrigerator for up to 36 hours
+
+  - id: carrot-curls
+    description: Candied Carrot Curls
+    preparations:
+      - id: make-candied-carrot-curls
+        description: Make the candied carrot curls
+        duration: PT1H45M
+        time: "2026-03-21T13:30:00"
+        steps:
+          - instruction: Peel the carrot and use a vegetable peeler to shave it into thin ribbons
+            equipment:
+              - vegetable peeler
+            ingredients:
+              - name: purple carrot
+                preparation: peeled
+                unit: count
+                qty: 1
+                source: Rainbow Grocery
+          - instruction: In a small saucepan on high heat, bring lemon juice, water, and sugar to a boil, stirring until sugar has dissolved
+            equipment:
+              - small saucepan
+            ingredients:
+              - name: lemon juice, fresh
+                qty: 1.5
+                unit: tablespoon
+                source: Rainbow Grocery
+              - name: water
+                qty: 0.5
+                unit: cup
+              - name: granulated sugar
+                qty: 0.5
+                unit: cup
+          - instruction: Add carrot strips and reduce heat to medium-low, stir to ensure all ribbons are coated in syrup
+          - instruction: Simmer gently for 3–5 minutes, until just pliable
+          - instruction: Remove from heat and strain, reserving the syrup
+          - instruction: Preheat oven to 225°F
+            equipment:
+              - oven
+          - instruction: Arrange the candied carrot ribbons in a single layer without overlapping on a silpat lined baking sheet and bake for 25–35 minutes, until dry on surface but still flexible
+            equipment:
+              - silpat
+              - half sheet pan
+          - instruction: Allow ribbons to cool briefly until warm but not hot to the touch
+          - instruction: While still warm and pliable, curl the carrot ribbons around a metal straw (lightly greased) to form tight spirals. Let cool completely to set the shape.
+            equipment:
+              - metal straw
+          - instruction: Being careful not to brown them, return to sheet pan and bake for an additional 30–45 minutes, checking and turning every 15–20 minutes, until completely dry and crisp with no tackiness
+            equipment:
+              - half sheet pan
+          - instruction: Let cool completely before handling or removing from the straws
+        storage: Store in an airtight container until ready to use.
+
+  - id: cream
+    description: Chamomile Cream
+    preparations:
+      - id: make-cream
+        description: Make the chamomile cream
+        duration: PT4H30M
+        time: "2026-03-21T13:00:00"
+        steps:
+          - instruction: Combine the cream and chamomile in a vacuum bag and seal
+            equipment:
+              - vacuum sealer
+            ingredients:
+              - name: heavy cream
+                qty: 60
+                unit: gram
+              - name: chamomile
+                qty: 8
+                unit: gram
+                source: Rainbow Grocery
+          - instruction: Cook sealed bag in sous vide bath at 60°C / 140°F for 45–60 minutes.
+            equipment:
+              - sous vide immersion circulator
+          - instruction: Strain very well with coffee filter
+            equipment:
+              - coffee filter
+          - instruction: While still warm, stir in honey and a pinch of salt to taste
+            ingredients:
+              - name: honey
+                qty: 25
+                unit: gram
+              - name: Kosher Salt
+          - instruction: Whisk mascarpone into warm base until fully smooth
+            ingredients:
+              - name: mascarpone
+                qty: 30
+                unit: gram
+                source: Whole Foods
+          - instruction: Add remaining cold cream and whisk until fully combined
+            ingredients:
+              - name: heavy cream
+                qty: 240
+                unit: gram
+          - instruction: Chill completely in fridge, at least 2 hours (or until ≤4°C)
+          - instruction: Pass through a fine mesh strainer into the siphon whip canister, to ensure the cream is perfectly smooth
+            equipment:
+              - fine mesh strainer
+              - 2 cup siphon whip
+          - instruction: Charge with N₂O cartridge, shake well
+            equipment:
+              - 1 N₂O cartridge
+          - instruction: Refrigerate for at least 1–2 hours before service
+        storage: Store in siphon whip in the refrigerator for up to 6 hours, shake well before dispensing
+
+  - id: service
+    description: Service
+    preparations:
+      - id: service
+        description: Assemble and serve the carrot sponge with chamomile cream
+        duration: PT5M
+        follows:
+          - make-sponge
+          - make-candied-carrot-curls
+          - make-cream
+        final: true
+        time: "2026-03-22T14:25:00"
+        steps:
+          - instruction: Cut the sponge using an elliptical cookie cutter (2.5")
+            equipment:
+              - elliptical cookie cutter
+          - instruction: Place the carrot sponge slightly off-center on the plate
+            ingredients:
+              - name: carrot sponge
+                homemade: true
+          - instruction: Very lightly brush (do not saturate) the sponge with the reserved syrup from the candied carrot curls, allow syrup to absorb for ~1 minute
+            ingredients:
+              - name: reserved syrup from candied carrot curls
+                homemade: true
+          - instruction: Dispense a small, centered mound of chamomile cream on top of the carrot sponge directly from the siphon (do not spread)
+            ingredients:
+              - name: chamomile cream
+                homemade: true
+          - instruction: Garnish with 2–3 candied carrot curls as a single cohesive element, building vertical height, on top of the cream
+            ingredients:
+              - name: candied carrot curls
+                homemade: true
