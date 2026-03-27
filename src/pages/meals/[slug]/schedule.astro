@@ -1,16 +1,17 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.ts';
+import { getAllMenus, getMenu } from '../../../data/loader.ts';
 import { formatDuration, formatNumeric, getPhaseOffsetStr, getPhaseTimeStr, parseDurationMs } from '../../../utils/time.ts';
-import type { Meal, Course, Recipe, Phase, Errand } from '../../../types/index.ts';
+import type { Menu, Course, Dish, Component, Preparation, Errand } from '../../../types/index.ts';
 
 interface ScheduledItem {
-  type: 'phase' | 'errand';
+  type: 'preparation' | 'errand';
   name: string;
   description?: string;
   final?: boolean;
-  recipe?: string;
-  recipeSlug?: string;
+  dish?: string;
+  dishSlug?: string;
+  component?: string;
   time: string;
   offsetMs: number;
   durationMs: number;
@@ -18,37 +19,38 @@ interface ScheduledItem {
 }
 
 interface UnscheduledItem {
-  type: 'phase' | 'errand';
+  type: 'preparation' | 'errand';
   name: string;
   description?: string;
-  recipeSlug?: string;
+  dishSlug?: string;
+  component?: string;
   source: string;
   final?: boolean;
-  recipe?: string;
+  dish?: string;
 }
 
 interface DependencyViolation {
-  phase: string;
-  recipe: string;
+  preparation: string;
+  dish: string;
   dependency: string;
   issue: string;
 }
 
 export function getStaticPaths() {
-  const meals = getAllMeals();
-  return meals.map((meal: Meal) => ({
-    params: { slug: meal.slug }
+  const menus = getAllMenus();
+  return menus.map((menu: Menu) => ({
+    params: { slug: menu.slug }
   }));
 }
 
 const { slug } = Astro.params;
-const meal = getMeal(slug);
+const menu = getMenu(slug);
 
-if (!meal) {
+if (!menu) {
   return Astro.redirect('/404');
 }
 
-const serviceTime = meal.start_time ? new Date(meal.start_time).getTime() : new Date().getTime();
+const serviceTime = menu.start_time ? new Date(menu.start_time).getTime() : new Date().getTime();
 
 function formatDateHeader(dateStr: string): string {
   const dt = new Date(dateStr);
@@ -58,86 +60,31 @@ function formatDateHeader(dateStr: string): string {
   return `${dayName} ${month}/${day}`;
 }
 
-function formatMealDescription(meal: Meal): string {
+function formatMenuDescription(menu: Menu): string {
   const parts: string[] = [];
-  if (meal.date) {
-    const dt = new Date(meal.date);
+  if (menu.date) {
+    const dt = new Date(menu.date);
     parts.push(dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
   }
-  if (meal.start_time) {
-    const date = new Date(meal.start_time);
+  if (menu.start_time) {
+    const date = new Date(menu.start_time);
     parts.push(date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
   }
   return parts.join(' · ');
 }
 
-// Collect all phases and errands with time/duration
 const scheduledItems: ScheduledItem[] = [];
 const unscheduledItems: UnscheduledItem[] = [];
 const dependencyViolations: DependencyViolation[] = [];
 
-// Build phase lookup
-const phaseLookup: Record<string, Phase> = {};
-meal.courses.forEach((course: Course) => {
-  course.recipes.forEach((recipe: Recipe) => {
-    if (recipe.phases) {
-      recipe.phases.forEach((phase: Phase) => {
-        phaseLookup[`${recipe.slug}:${phase.id}`] = phase;
-      });
-    }
-  });
-});
-
-// Check phases
-meal.courses.forEach((course: Course) => {
-  course.recipes.forEach((recipe: Recipe) => {
-    if (recipe.phases) {
-      recipe.phases.forEach((phase: Phase) => {
-        if (phase.time && phase.duration) {
-          const phaseMs = new Date(phase.time).getTime();
-          const offsetMs = phaseMs - serviceTime;
-          const durationMs = parseDurationMs(phase.duration);
-          
-          // Check dependency violations
-          if (phase.follows) {
-            phase.follows.forEach((dep: string) => {
-              const depPhase = phaseLookup[`${recipe.slug}:${dep}`];
-              if (depPhase && depPhase.time && depPhase.duration) {
-                const depMs = new Date(depPhase.time).getTime();
-                const depOffsetMs = depMs - serviceTime;
-                const depDurationMs = parseDurationMs(depPhase.duration);
-                const depEndMs = depOffsetMs + depDurationMs;
-                if (offsetMs < depEndMs) {
-                  dependencyViolations.push({
-                    phase: phase.id,
-                    recipe: recipe.description,
-                    dependency: dep,
-                    issue: `${getPhaseOffsetStr(phase.time, serviceTime)} but ${dep} ends at ${getPhaseOffsetStr(new Date(serviceTime + depEndMs).toISOString(), serviceTime)}`
-                  });
-                }
-              }
-            });
-          }
-          
-          scheduledItems.push({
-            type: 'phase',
-            name: phase.id,
-            description: phase.description,
-            final: phase.final,
-            recipe: recipe.description,
-            recipeSlug: recipe.slug,
-            time: phase.time,
-            offsetMs,
-            durationMs,
-            duration: phase.duration
-          });
-        } else {
-          unscheduledItems.push({
-            type: 'phase',
-            name: phase.id,
-            description: phase.description,
-            recipeSlug: recipe.slug,
-            source: recipe.description
+const preparationLookup: Record<string, Preparation> = {};
+menu.courses.forEach((course: Course) => {
+  course.dishes.forEach((dish: Dish) => {
+    if (dish.components) {
+      dish.components.forEach((component: Component) => {
+        if (component.preparations) {
+          component.preparations.forEach((prep: Preparation) => {
+            preparationLookup[`${dish.slug}:${prep.id}`] = prep;
           });
         }
       });
@@ -145,9 +92,69 @@ meal.courses.forEach((course: Course) => {
   });
 });
 
-// Check errands
-if (meal.errands) {
-  meal.errands.forEach((errand: Errand) => {
+menu.courses.forEach((course: Course) => {
+  course.dishes.forEach((dish: Dish) => {
+    if (dish.components) {
+      dish.components.forEach((component: Component) => {
+        if (component.preparations) {
+          component.preparations.forEach((prep: Preparation) => {
+            if (prep.time && prep.duration) {
+              const prepMs = new Date(prep.time).getTime();
+              const offsetMs = prepMs - serviceTime;
+              const durationMs = parseDurationMs(prep.duration);
+              
+              if (prep.follows) {
+                prep.follows.forEach((dep: string) => {
+                  const depPrep = preparationLookup[`${dish.slug}:${dep}`];
+                  if (depPrep && depPrep.time && depPrep.duration) {
+                    const depMs = new Date(depPrep.time).getTime();
+                    const depOffsetMs = depMs - serviceTime;
+                    const depDurationMs = parseDurationMs(depPrep.duration);
+                    const depEndMs = depOffsetMs + depDurationMs;
+                    if (offsetMs < depEndMs) {
+                      dependencyViolations.push({
+                        preparation: prep.id,
+                        dish: dish.description,
+                        dependency: dep,
+                        issue: `${getPhaseOffsetStr(prep.time, serviceTime)} but ${dep} ends at ${getPhaseOffsetStr(new Date(serviceTime + depEndMs).toISOString(), serviceTime)}`
+                      });
+                    }
+                  }
+                });
+              }
+              
+              scheduledItems.push({
+                type: 'preparation',
+                name: prep.id,
+                description: prep.description,
+                final: prep.final,
+                dish: dish.description,
+                dishSlug: dish.slug,
+                component: component.id,
+                time: prep.time,
+                offsetMs,
+                durationMs,
+                duration: prep.duration
+              });
+            } else {
+              unscheduledItems.push({
+                type: 'preparation',
+                name: prep.id,
+                description: prep.description,
+                dishSlug: dish.slug,
+                component: component.id,
+                source: dish.description
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
+if (menu.errands) {
+  menu.errands.forEach((errand: Errand) => {
     if (errand.time && errand.duration) {
       const errandMs = new Date(errand.time);
       const offsetMs = errandMs.getTime() - serviceTime;
@@ -155,7 +162,7 @@ if (meal.errands) {
       scheduledItems.push({
         type: 'errand',
         name: errand.name,
-        recipe: 'Errands',
+        dish: 'Errands',
         time: errandMs.toISOString(),
         offsetMs,
         durationMs,
@@ -171,7 +178,6 @@ if (meal.errands) {
   });
 }
 
-// Group items by date
 const itemsByDate: Record<string, ScheduledItem[]> = {};
 scheduledItems.forEach((item: ScheduledItem) => {
   const dt = new Date(item.time);
@@ -180,7 +186,6 @@ scheduledItems.forEach((item: ScheduledItem) => {
   itemsByDate[dateKey].push(item);
 });
 
-// Sort items within each date
 Object.keys(itemsByDate).forEach((date: string) => {
   itemsByDate[date].sort((a: ScheduledItem, b: ScheduledItem) => a.offsetMs - b.offsetMs);
 });
@@ -188,20 +193,20 @@ Object.keys(itemsByDate).forEach((date: string) => {
 const sortedDates: string[] = Object.keys(itemsByDate).sort();
 ---
 
-<Layout title={`${meal.name} - Schedule`} description={formatMealDescription(meal)}>
+<Layout title={`${menu.name} - Schedule`} description={formatMenuDescription(menu)}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a><span class="sep">/</span><a href={`/meals/${slug}`}>{meal.name}</a><span class="sep">/</span><span>Schedule</span>
+    <a href="/">Menus</a><span class="sep">/</span><a href={`/meals/${slug}`}>{menu.name}</a><span class="sep">/</span><span>Schedule</span>
   </nav>
   
   <h1>Schedule</h1>
-  <p class="subtitle muted mono">{meal.name}</p>
+  <p class="subtitle muted mono">{menu.name}</p>
   
   {dependencyViolations.length > 0 && (
     <div class="warning warning-red">
       <h3>Dependency Violations</h3>
       <ul>
         {dependencyViolations.map(v => (
-          <li><strong>{v.phase}</strong> ({v.recipe}): {v.issue}</li>
+          <li><strong>{v.preparation}</strong> ({v.dish}): {v.issue}</li>
         ))}
       </ul>
     </div>
@@ -213,8 +218,8 @@ const sortedDates: string[] = Object.keys(itemsByDate).sort();
       <ul>
         {unscheduledItems.map(item => (
           <li>
-            {item.type === 'phase' ? (
-              <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>{item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}</a>
+            {item.type === 'preparation' ? (
+              <a href={`/recipes/${slug}/${item.dishSlug}#${item.name}`}>{item.final ? `Serve: ${item.dish}` : (item.description || item.name)}</a>
             ) : (
               <strong>{item.name}</strong>
             )}
@@ -241,9 +246,9 @@ const sortedDates: string[] = Object.keys(itemsByDate).sort();
               <td class="mono">{getPhaseOffsetStr(item.time, serviceTime)}</td>
               <td class="mono muted">{getPhaseTimeStr(item.time)}</td>
               <td>
-                {item.type === 'phase' ? (
-                  <a href={`/recipes/${slug}/${item.recipeSlug}#${item.name}`}>
-                    {item.final ? `Serve: ${item.recipe}` : (item.description || item.name)}
+                {item.type === 'preparation' ? (
+                  <a href={`/recipes/${slug}/${item.dishSlug}#${item.name}`}>
+                    {item.final ? `Serve: ${item.dish}` : (item.description || item.name)}
                   </a>
                 ) : (
                   <span>{item.name}</span>

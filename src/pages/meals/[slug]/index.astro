@@ -1,19 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getAllMeals, getMeal } from '../../../data/loader.ts';
-import type { Meal, Course, Recipe } from '../../../types/index.ts';
+import { getAllMenus, getMenu } from '../../../data/loader.ts';
+import type { Menu, Course, Dish } from '../../../types/index.ts';
 
 export function getStaticPaths() {
-  const meals = getAllMeals();
-  return meals.map((meal: Meal) => ({
-    params: { slug: meal.slug }
+  const menus = getAllMenus();
+  return menus.map((menu: Menu) => ({
+    params: { slug: menu.slug }
   }));
 }
 
 const { slug } = Astro.params;
-const meal = getMeal(slug);
+const menu = getMenu(slug);
 
-if (!meal) {
+if (!menu) {
   return Astro.redirect('/404');
 }
 
@@ -27,13 +27,13 @@ function formatTime(dateStr: string): string {
   return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
-function formatMealDescription(meal: Meal): string {
+function formatMenuDescription(menu: Menu): string {
   const parts: string[] = [];
-  if (meal.date) {
-    parts.push(formatDate(meal.date));
+  if (menu.date) {
+    parts.push(formatDate(menu.date));
   }
-  if (meal.start_time) {
-    parts.push(formatTime(meal.start_time));
+  if (menu.start_time) {
+    parts.push(formatTime(menu.start_time));
   }
   return parts.join(' · ');
 }
@@ -55,13 +55,10 @@ function formatServiceOffset(minutes: number): string {
   return `${prefix}${num}m`;
 }
 
-// Filter visible courses (not hidden)
-const visibleCourses: Course[] = meal.courses.filter((c: Course) => !c.hidden);
+const visibleCourses: Course[] = menu.courses.filter((c: Course) => !c.hidden);
 
-// Find the first_course (T=0)
 const firstCourseIndex: number = visibleCourses.findIndex((c: Course) => c.first_course);
 
-// Calculate offsets relative to first_course
 let offsetFromFirst = 0;
 const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
   let serviceOffset: number;
@@ -81,17 +78,17 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
 });
 ---
 
-<Layout title={meal.name} description={formatMealDescription(meal)}>
+<Layout title={menu.name} description={formatMenuDescription(menu)}>
   <nav class="breadcrumbs">
-    <a href="/">Meals</a><span class="sep">/</span><span>{meal.name}</span>
+    <a href="/">Menus</a><span class="sep">/</span><span>{menu.name}</span>
   </nav>
   
-  <header class="meal-header">
-    <h1>{meal.name}</h1>
-    <div class="meal-meta">
-      {meal.date && <span class="mono">{formatDate(meal.date)}</span>}
-      {meal.start_time && (
-        <span class="muted"> &middot; Service at {formatTime(meal.start_time)}</span>
+  <header class="menu-header">
+    <h1>{menu.name}</h1>
+    <div class="menu-meta">
+      {menu.date && <span class="mono">{formatDate(menu.date)}</span>}
+      {menu.start_time && (
+        <span class="muted"> &middot; Service at {formatTime(menu.start_time)}</span>
       )}
     </div>
   </header>
@@ -113,11 +110,11 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
               <span class="course-desc muted">{course.description}</span>
             )}
           </div>
-          <div class="course-recipes">
-            {course.recipes.map((recipe: Recipe, i: number) => (
+          <div class="course-dishes">
+            {course.dishes.map((dish: Dish, i: number) => (
               <>
                 {i > 0 && <span class="dot muted">&middot;</span>}
-                <a href={`/recipes/${slug}/${recipe.slug}`}>{recipe.description}</a>
+                <a href={`/recipes/${slug}/${dish.slug}`}>{dish.description}</a>
               </>
             ))}
           </div>
@@ -131,16 +128,16 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
       margin-bottom: var(--space-lg);
     }
 
-    .meal-header {
+    .menu-header {
       margin-top: var(--space-md);
       margin-bottom: var(--space-xl);
     }
     
-    .meal-header h1 {
+    .menu-header h1 {
       margin-bottom: var(--space-sm);
     }
     
-    .meal-meta {
+    .menu-meta {
       font-size: 0.95rem;
     }
     
@@ -191,7 +188,7 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
       margin-left: auto;
     }
 
-    .course-recipes {
+    .course-dishes {
       display: flex;
       justify-content: center;
       align-items: center;
