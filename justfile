@@ -21,8 +21,8 @@ clean *args:
 [no-exit-message]
 doctor *args:
     @case "{{args}}" in \
-        ""|"--fix") checksy --config=doctor.checksy.yaml diagnose {{args}} ;; \
-        *) echo "Usage: just doctor [--fix]" >&2; exit 1 ;; \
+        ""|"--fix"|--check-severity=*) checksy --config=doctor.checksy.yaml diagnose {{args}} ;; \
+        *) echo "Usage: just doctor [--fix] [--check-severity=debug|info|warn|error]" >&2; exit 1 ;; \
     esac
 
 [no-exit-message]
@@ -59,6 +59,7 @@ help:
     @printf "%-24s %s\n" "clean --deep" "remove build artifacts and generated files"
     @printf "%-24s %s\n" "doctor" "check environment health"
     @printf "%-24s %s\n" "doctor --fix" "check environment health and auto-fix"
+    @printf "%-24s %s\n" "doctor --check-severity=xxx" "check with custom severity filter (debug|info|warn|error)"
     @printf "%-24s %s\n" "format" "format code in-place"
     @printf "%-24s %s\n" "format --check" "check formatting without modifying files"
     @printf "%-24s %s\n" "static" "run static checks including format check"
