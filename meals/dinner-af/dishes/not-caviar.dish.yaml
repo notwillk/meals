@@ -1,0 +1,161 @@
+id: not-caviar
+description: Not Caviar
+
+components:
+  - id: dashi-pearls
+    description: Black Garlic Dashi Pearls
+    preparations:
+      - id: make-dashi-pearls
+        description: Create spherified black garlic dashi pearls
+        steps:
+          - instruction: Combine kombu and water in a saucepan, let soak for 20 minutes
+            ingredients:
+              - name: kombu
+                qty: 5
+                unit: gram
+              - name: water
+                qty: 120
+                unit: ml
+          - instruction: Heat gently to 70°C (160°F), remove from heat
+          - instruction: Add dried shiitake mushrooms, steep for 5 minutes
+            ingredients:
+              - name: dried shiitake mushrooms
+                qty: 10
+                unit: gram
+          - instruction: Strain dashi through fine mesh strainer, reserve liquid
+            equipment:
+              - fine mesh strainer
+          - instruction: Blend black garlic into dashi until smooth
+            ingredients:
+              - name: black garlic
+                qty: 2
+                unit: clove
+            equipment:
+              - immersion blender
+          - instruction: Strain again through fine mesh strainer
+            equipment:
+              - fine mesh strainer
+            note: Dashi should be smooth with no bits
+          - instruction: Weigh finished dashi and ensure it is cold (below 10°C / 50°F)
+            note: Required for correct hydrocolloid hydration and ratio calculations. Expected yield ~100–120g dashi after straining.
+          - instruction: Add sodium citrate (0.75% of total dashi weight) and blend until fully dissolved
+            ingredients:
+              - name: sodium citrate
+            note: |
+              Buffers the liquid so direct spherification works reliably without measuring pH.
+              Example — 100g dashi → 0.75g sodium citrate.
+          - instruction: Weigh sodium alginate (0.5% of total dashi weight)
+            ingredients:
+              - name: sodium alginate
+            note: Example — 100g dashi → 0.5g sodium alginate. Calculate from the actual measured weight of your finished dashi. If pearls float or deform, increase slightly to ~0.6%.
+          - instruction: Sprinkle sodium alginate onto dashi while blending with immersion blender
+            equipment:
+              - immersion blender
+          - instruction: Continue blending until fully dispersed, about 2-3 minutes
+          - instruction: Pass through fine mesh strainer to remove any undissolved particles
+            equipment:
+              - fine mesh strainer
+          - instruction: Let rest in refrigerator for at least 1 hour to eliminate air bubbles
+            note: Air bubbles will cause uneven membrane or weak spots
+          - instruction: Before use, pass through strainer again
+          - instruction: Prepare calcium bath — dissolve calcium chloride in distilled water (0.5% by weight)
+            ingredients:
+              - name: calcium chloride
+              - name: distilled water
+            note: Example — 100g water → 0.5g calcium chloride. Prepare at least 500g total solution to allow proper pearl formation (e.g., 500g water + 2.5g calcium chloride).
+          - instruction: Prepare a second bowl with plain water for rinsing
+            ingredients:
+              - name: water
+                qty: 100
+                unit: ml
+          - instruction: Fill syringe or squeeze bottle with sodium alginate dashi solution
+            equipment:
+              - syringe
+              - squeeze bottle
+              - caviar maker
+            note: Use 18–22 gauge tip for caviar-sized pearls (3–4mm)
+          - instruction: Hold syringe about 3 inches above calcium bath
+          - instruction: Drop small amounts of solution into calcium bath, spacing them apart
+            note: Pearl size depends on nozzle diameter
+          - instruction: Let pearls sit in bath for 1-2 minutes
+            note: Longer time = thicker membrane
+          - instruction: Carefully remove pearls with slotted spoon
+            equipment:
+              - slotted spoon
+          - instruction: Rinse pearls thoroughly in clean water to remove calcium chloride
+            note: Inadequate rinsing will cause continued gelation during storage
+          - instruction: Carefully transfer pearls to container with leftover dashi
+            equipment:
+              - airtight container
+            note: Store pearls submerged in dashi to maintain texture
+        storage: |
+          Store pearls submerged in leftover dashi in airtight container in refrigerator.
+          Best within 24 hours. Beyond this, membranes will continue to thicken and texture will degrade.
+
+  - id: puffed-rice
+    description: Puffed Rice Base
+    preparations:
+      - id: prep-rice
+        description: Prepare puffed rice using fried method
+        steps:
+          - instruction: Cook rice until fully tender (use steam or boil method)
+            ingredients:
+              - name: rice
+                qty: 0.25
+                unit: cup
+                note: short-grain or medium-grain white rice
+            equipment:
+              - pot
+          - instruction: Spread cooked rice on baking sheet, dry in low oven (150°F) or dehydrator until completely moisture-free
+            equipment:
+              - baking sheet
+              - oven
+            note: Rice must be fully dehydrated to puff properly — this may take 1-2 hours. Rice should feel completely hard and dry with no internal softness before frying.
+          - instruction: Heat neutral oil in pot or deep fryer to 190°C (375°F)
+            ingredients:
+              - name: neutral oil
+            equipment:
+              - pot
+              - thermometer
+            note: Use at least 2–3 inches of oil to allow proper puffing
+          - instruction: Carefully add dried rice to hot oil
+            note: Stand back — oil will splatter vigorously
+          - instruction: Fry for 10-20 seconds until rice puffs and turns light golden
+            note: Watch carefully; rice burns quickly
+          - instruction: Immediately drain rice on paper towels
+            equipment:
+              - paper towels
+          - instruction: Let cool completely
+            note: Rice will become crispier as it cools
+          - instruction: Season lightly with salt if desired
+            ingredients:
+              - name: Kosher Salt
+        storage: Store in airtight container until service
+
+  - id: plate-amuse
+    description: Service
+    preparations:
+      - id: plate-amuse
+        description: Plate amuse-bouche
+        final: true
+        follows:
+          - make-dashi-pearls
+          - prep-rice
+        steps:
+          - instruction: Place small amount of puffed rice on each serving spoon
+            ingredients:
+              - name: puffed rice
+                homemade: true
+          - instruction: Optionally brush puffed rice lightly with sesame oil for flavor
+            ingredients:
+              - name: sesame oil
+            note: Adds umami anchor and flavor depth
+          - instruction: Carefully arrange dashi pearls on top of rice
+            ingredients:
+              - name: dashi pearls
+                homemade: true
+            note: Handle gently — pearls are delicate
+          - instruction: Garnish with tiny pinch of black garlic powder or micro herb (optional)
+            note: Optional finishing touch
+          - instruction: Serve immediately
+            note: Ideal service window — within 10 minutes of plating. Pearls will continue to firm up.

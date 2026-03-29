@@ -22,6 +22,7 @@
     "FIREWORKS_API_KEY": "${localEnv:FIREWORKS_API_KEY}",
     "OPENCODE_API_KEY": "${localEnv:OPENCODE_API_KEY}",
     "OPENCODE_CONFIG": "${containerWorkspaceFolder}/opencode.json",
+    "OPENCODE_ENABLE_EXA": "1",
     "OPENCODE_TELEMETRY_DISABLED": "1",
     "REPO_PATH": "${containerWorkspaceFolder}"
   },

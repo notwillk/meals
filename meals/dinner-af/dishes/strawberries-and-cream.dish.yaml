@@ -1,0 +1,113 @@
+id: strawberries-and-cream
+description: Strawberries & Cream
+
+components:
+  - id: strawberries
+    description: Roasted Strawberries
+    preparations:
+      - id: roast-strawberries
+        description: Roast strawberries
+        duration: PT30M
+        time: "2026-04-01T15:00:00"
+        steps:
+          - instruction: Heat oven to 400°F / 205°C
+          - instruction: Toss strawberries with olive oil, vinegar, and salt
+            ingredients:
+              - name: strawberries, hulled and halved
+                qty: 900
+                unit: gram
+                note: slightly underripe preferred
+              - name: olive oil
+                qty: 2.5
+                unit: teaspoon
+              - name: white balsamic vinegar
+                qty: 2.5
+                unit: teaspoon
+                note: or very light aged balsamic
+              - name: kosher salt
+                qty: 1
+                unit: pinch
+          - instruction: Arrange cut-side down on parchment-lined trays
+          - instruction: Roast 8–12 minutes until just softened, glossy, still holding shape, and not browned
+          - instruction: Cool to room temperature
+        storage: Hold at cool room temperature up to 2 hours; for longer holding, refrigerate up to 24 hours and bring back to cool room temperature before service
+
+  - id: cream
+    description: Stracciatella Base
+    preparations:
+      - id: make-cream
+        description: Make stracciatella cream
+        duration: PT15M
+        time: "2026-04-01T14:00:00"
+        steps:
+          - instruction: Drain stracciatella in a sieve 5–10 minutes
+            ingredients:
+              - name: stracciatella
+                qty: 600
+                unit: gram
+          - instruction: Transfer to tall container
+          - instruction: Add heavy cream, mascarpone, and salt
+            ingredients:
+              - name: heavy cream
+                qty: 60
+                unit: gram
+              - name: mascarpone
+                qty: 75
+                unit: gram
+                note: optional, but strongly recommended for yield and stability
+              - name: fine salt
+                qty: 1
+                unit: pinch
+          - instruction: Blitz in short pulses (total 5–10 sec) until smooth
+          - instruction: Whisk lightly to finish
+        storage: Refrigerate in an airtight container up to 24 hours; stir or whisk lightly before use to restore texture
+
+  - id: crumb
+    description: Pistachio Crumb
+    preparations:
+      - id: make-crumb
+        description: Make pistachio crumb
+        duration: PT10M
+        time: "2026-04-01T16:00:00"
+        steps:
+          - instruction: Chop or pulse pistachios to a coarse crumb
+            ingredients:
+              - name: shelled pistachios, unsalted
+                qty: 75
+                unit: gram
+          - instruction: Toast in a dry pan over medium heat 2–3 minutes until fragrant
+          - instruction: Toss with olive oil and salt while warm
+            ingredients:
+              - name: olive oil
+                qty: 2.5
+                unit: teaspoon
+              - name: salt
+                qty: 1
+                unit: pinch
+          - instruction: Cool completely
+        storage: Store in an airtight container at room temperature up to 2 days
+
+  - id: assemble
+    description: Service
+    preparations:
+      - id: plate-strawberries-and-cream
+        description: Assemble strawberries and cream
+        final: true
+        follows:
+          - roast-strawberries
+          - make-cream
+          - make-crumb
+        time: "2026-04-01T19:10:00"
+        duration: PT10M
+        steps:
+          - instruction: Add ~100g cream to the bottom of each coupe, smoothing or forming a low quenelle
+          - instruction: Top with ~150g roasted strawberries, arranged cleanly
+          - instruction: Sprinkle with ~1 tbsp pistachio crumb
+          - instruction: Drizzle lightly with peppery extra virgin olive oil
+            ingredients:
+              - name: extra virgin olive oil, peppery
+          - instruction: Finish with flaky salt and a small amount of coarse black pepper
+            ingredients:
+              - name: flaky salt
+              - name: coarse black pepper
+        storage: Serve cool, not cold; build just before serving; do not hold once assembled
