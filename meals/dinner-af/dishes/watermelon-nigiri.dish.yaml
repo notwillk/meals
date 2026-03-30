@@ -1,0 +1,270 @@
+id: watermelon-nigiri
+description: Watermelon Nigiri
+
+yield:
+  qty: 5
+  unit: servings
+
+components:
+  - id: watermelon
+    description: Vacuum-Compressed Watermelon
+    preparations:
+      - id: compress-watermelon
+        description: Compress watermelon to mimic tuna texture
+        duration: PT1H
+        steps:
+          - instruction: Trim rind from seedless watermelon; cut into rectangular block
+            ingredients:
+              - name: watermelon, seedless
+                qty: 500
+                unit: gram
+                preparation: trimmed
+            equipment:
+              - knife
+              - cutting board
+          - instruction: Portion 5 slices approximately 6 × 2.5 × 1.5 cm
+          - instruction: Distribute salt and lime zest evenly over slices; optionally brush with soy sauce
+            ingredients:
+              - name: fine salt
+                qty: 4
+                unit: gram
+              - name: lime zest
+                qty: 1
+                unit: lime
+                preparation: from 1 lime
+              - name: soy sauce, light
+                qty: 5
+                unit: ml
+                note: optional
+            equipment:
+              - microplane
+              - brush
+          - instruction: Vacuum seal on high pressure
+            equipment:
+              - vacuum sealer
+              - vacuum bags
+          - instruction: Rest chilled for 30-60 minutes
+            note: Can rest up to 4 hours for deeper effect
+        storage: Refrigerate up to 4 hours
+
+  - id: rice
+    description: Sushi Rice (thin wrap)
+    preparations:
+      - id: make-sushi-rice
+        description: Prepare sushi rice for thin wraps
+        duration: PT1H
+        steps:
+          - instruction: Rinse Japanese short-grain rice until mostly clear; drain
+            ingredients:
+              - name: Japanese short-grain rice
+                qty: 150
+                unit: gram
+                preparation: dry
+            equipment:
+              - bowl
+          - instruction: Cook with water in rice cooker or saucepan with lid
+            ingredients:
+              - name: water
+                qty: 180
+                unit: ml
+            equipment:
+              - rice cooker or saucepan with lid
+          - instruction: While warm, fold in rice vinegar, sugar, and salt
+            ingredients:
+              - name: rice vinegar
+                qty: 15
+                unit: ml
+              - name: sugar
+                qty: 10
+                unit: gram
+              - name: salt
+                qty: 3
+                unit: gram
+            equipment:
+              - rice paddle
+              - spatula
+          - instruction: Cool to approximately 40°C (104°F) or until comfortable to handle
+          - instruction: Divide into 5 portions (approximately 25-30 g each); keep covered
+        storage: Keep covered at room temperature up to 2 hours
+
+  - id: tapioca-core
+    description: Mochi-Style Tapioca Core
+    preparations:
+      - id: make-tapioca-core
+        description: Create elastic tapioca core for nigiri
+        duration: PT2H
+        steps:
+          - instruction: Simmer tapioca pearls 10-15 minutes until fully translucent (no white centers)
+            ingredients:
+              - name: small tapioca pearls
+                qty: 80
+                unit: gram
+              - name: water
+                qty: 400
+                unit: ml
+            equipment:
+              - saucepan
+          - instruction: Drain thoroughly through fine strainer
+            equipment:
+              - fine strainer
+          - instruction: Blend pearls with salt, lime zest, and optional sugar until smooth paste
+            ingredients:
+              - name: fine salt
+                qty: 2
+                unit: gram
+              - name: lime zest
+                qty: 1
+                unit: pinch
+              - name: sugar
+                qty: 3
+                unit: gram
+                note: optional, minimal amount
+            equipment:
+              - blender
+          - instruction: Add tapioca starch; blend until fully smooth
+            ingredients:
+              - name: tapioca starch
+                qty: 12
+                unit: gram
+          - instruction: Cook over low heat, stirring constantly, until thick, glossy, and elastic
+            equipment:
+              - saucepan
+              - spatula
+          - instruction: Spread 1-1.5 cm thick on small tray or container; chill until set
+          - instruction: Cut into 5 cubes (approximately 1-1.5 cm each)
+        storage: Refrigerate up to 24 hours
+
+  - id: black-garlic-shoyu
+    description: Black Garlic Shoyu
+    preparations:
+      - id: make-black-garlic-shoyu
+        description: Create black garlic shoyu sauce
+        duration: PT1H
+        steps:
+          - instruction: Reduce watermelon juice by 60% to approximately 100 ml
+            ingredients:
+              - name: watermelon juice
+                qty: 250
+                unit: ml
+                note: extract from trim of watermelon used for compression
+            equipment:
+              - saucepan
+          - instruction: Blend reduced juice with black garlic until smooth
+            ingredients:
+              - name: black garlic
+                qty: 20
+                unit: gram
+            equipment:
+              - blender
+          - instruction: Add soy sauce, rice vinegar, lime juice, and optional balsamic vinegar
+            ingredients:
+              - name: soy sauce
+                qty: 10
+                unit: ml
+              - name: rice vinegar
+                qty: 15
+                unit: ml
+              - name: lime juice
+                qty: 10
+                unit: ml
+              - name: balsamic vinegar
+                qty: 5
+                unit: ml
+                note: optional
+          - instruction: Adjust salt to taste
+            ingredients:
+              - name: salt
+          - instruction: Strain through fine mesh sieve
+            equipment:
+              - fine strainer
+          - instruction: Reduce by 1/3 volume or until nappe consistency (coats back of spoon)
+          - instruction: Chill before use
+        storage: Refrigerate up to 48 hours
+
+  - id: basil-lime-wasabi
+    description: Basil-Lime "Wasabi"
+    preparations:
+      - id: make-basil-lime-wasabi
+        description: Create basil-lime paste with xanthan gum
+        duration: PT30M
+        steps:
+          - instruction: Blanch basil and spinach for 10-15 seconds; shock in ice bath
+            ingredients:
+              - name: basil leaves
+                qty: 40
+                unit: gram
+              - name: spinach
+                qty: 15
+                unit: gram
+                note: or parsley
+            equipment:
+              - saucepan
+              - ice bath
+          - instruction: Squeeze dry thoroughly
+          - instruction: Blend with lime zest, lime juice, salt, sugar, and optional horseradish until very smooth
+            ingredients:
+              - name: lime zest
+                qty: 1
+                unit: lime
+                preparation: from 1 lime
+              - name: lime juice
+                qty: 10
+                unit: ml
+                note: 10 ml (adjust based on lime size)
+              - name: salt
+                qty: 2
+                unit: gram
+              - name: sugar
+                qty: 1
+                unit: gram
+                note: 1-2 g
+              - name: fresh horseradish
+                qty: 2
+                unit: gram
+                note: optional
+            equipment:
+              - blender
+          - instruction: Sprinkle in xanthan gum while blending to achieve dense, glossy paste
+            ingredients:
+              - name: xanthan gum
+                qty: 0.1
+                unit: gram
+                note: 0.15% of total weight (approximately 0.1-0.2 g)
+          - instruction: Adjust seasoning to taste
+            ingredients:
+              - name: salt
+              - name: sugar
+              - name: lime juice
+          - instruction: Adjust with 2-3 drops of water if needed
+          - instruction: Chill before use
+        storage: Refrigerate up to 24 hours
+
+  - id: assembly
+    description: Final Assembly & Service
+    preparations:
+      - id: assemble-watermelon-nigiri
+        description: Assemble nigiri pieces
+        duration: PT15M
+        final: true
+        follows:
+          - compress-watermelon
+          - make-sushi-rice
+          - make-tapioca-core
+          - make-black-garlic-shoyu
+          - make-basil-lime-wasabi
+        steps:
+          - instruction: Flatten one rice portion into thin oval (approximately 5-7 mm thick)
+          - instruction: Place tapioca cube in center; wrap rice fully around it; reshape into nigiri base
+          - instruction: Lightly brush or dip watermelon in black garlic shoyu
+          - instruction: Place watermelon on rice; press gently to adhere
+            note: If needed, use extra shoyu as adhesive between rice and watermelon
+          - instruction: Add pea-sized dab of basil-lime paste
+          - instruction: Optionally finish with pinch of flaky salt on watermelon and microplaned lime zest
+            ingredients:
+              - name: flaky salt
+                note: optional
+              - name: lime zest
+                note: optional
+          - instruction: Serve on sushi plate slightly cool (not cold)
+            note: Assemble à la minute; do not pre-mix paste into sauce
+        storage: Best served immediately

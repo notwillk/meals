@@ -1,0 +1,47 @@
+name: Dinner AF
+start_time: 2026-04-01T19:00:00
+
+courses:
+  - name: Amuse
+    description: Not Caviar — Black garlic dashi pearls on puffed rice
+    plating: Small spoon or shooter
+    dishes:
+      - "&dishes/not-caviar"
+    duration: PT5M
+    first_course: true
+  - name: Salad
+    description: Strawberries & Cream — Looks like dessert, eats like caprese
+    plating: Coupe glass
+    dishes:
+      - "&dishes/strawberries-and-cream"
+    duration: PT10M
+  - name: Appetizer
+    description: Bastiolo — Moroccan-Italian hybrid pastry
+    plating: Small plate
+    dishes:
+      - "&dishes/bastiolo"
+    duration: PT15M
+  - name: Interlude
+    description: Ice Cream Stroganoff — Savory frozen cream
+    plating: Small bowl
+    dishes:
+      - "&dishes/ice-cream-stroganoff"
+    duration: PT10M
+  - name: Entrée
+    description: Chicken Pot Pie — The honest control course
+    plating: Baking dish
+    dishes:
+      - "&dishes/chicken-pot-pie"
+    duration: PT30M
+  - name: Dessert
+    description: Kunafe — Sweet cheese in shredded phyllo
+    plating: Small plate
+    dishes:
+      - "&dishes/kunafe"
+    duration: PT15M
+  - name: Mignardise
+    description: Watermelon Nigiri — Fruit nigiri with mochi core and black garlic shoyu
+    plating: Sushi plate
+    dishes:
+      - "&dishes/watermelon-nigiri"
+    duration: PT5M

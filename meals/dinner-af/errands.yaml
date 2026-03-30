@@ -1,0 +1,15 @@
+- name: Shop for April Fool's dinner ingredients
+  time: "2026-03-31T10:00:00"
+  duration: PT2H
+- name: Prep black garlic and dashi
+  time: "2026-04-01T14:00:00"
+  duration: PT1H
+- name: Roast strawberries
+  time: "2026-04-01T15:00:00"
+  duration: PT30M
+- name: Make stracciatella cream
+  time: "2026-04-01T14:00:00"
+  duration: PT15M
+- name: Prep kitchen for final plating
+  time: "2026-04-01T18:00:00"
+  duration: PT30M

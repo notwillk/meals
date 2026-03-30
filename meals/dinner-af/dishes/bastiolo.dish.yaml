@@ -1,0 +1,236 @@
+id: bastiolo
+description: Bastiolo
+
+yield:
+  qty: 5
+  unit: ravioli
+
+components:
+  - id: chicken-base
+    description: Spiced Chicken and Onion Filling
+    preparations:
+      - id: make-chicken-base
+        description: Create deeply reduced chicken-onion mixture with bastilla spices
+        duration: PT1H30M
+        steps:
+          - instruction: Heat olive oil and butter in a wide pan over medium-high heat
+            ingredients:
+              - name: olive oil
+                qty: 2.5
+                unit: tablespoon
+              - name: butter
+                qty: 2.5
+                unit: tablespoon
+            equipment:
+              - wide pan
+          - instruction: Sear chicken thighs until lightly browned on both sides (not fully cooked)
+            ingredients:
+              - name: chicken thighs, bone-in, skin-on preferred
+                qty: 1000
+                unit: gram
+            note: About 3-4 minutes per side
+          - instruction: Add sliced onions and minced garlic to the pan
+            ingredients:
+              - name: yellow onions
+                qty: 470
+                unit: gram
+                preparation: finely sliced
+              - name: garlic
+                qty: 4
+                unit: clove
+                preparation: minced
+            equipment:
+              - cutting board
+              - knife
+          - instruction: Cook onions and garlic until soft and starting to collapse, about 10-15 minutes
+          - instruction: Add all spices and saffron water, stir to toast briefly (30-60 seconds)
+            ingredients:
+              - name: ground ginger
+                qty: 1.25
+                unit: teaspoon
+              - name: turmeric
+                qty: 1.25
+                unit: teaspoon
+              - name: cinnamon
+                qty: 1.25
+                unit: teaspoon
+              - name: black pepper
+                qty: 1.25
+                unit: teaspoon
+              - name: saffron
+                qty: 1
+                unit: large pinch
+                preparation: bloomed in 2.5 tablespoon warm water
+              - name: salt
+                qty: 1.25
+                unit: teaspoon
+                note: to taste
+          - instruction: Add approximately 310ml water, cover, and simmer gently for 30-40 minutes until chicken is tender
+            ingredients:
+              - name: water
+                qty: 310
+                unit: ml
+          - instruction: Remove chicken from pan, let cool slightly, then shred finely and chop to small uniform pieces
+            equipment:
+              - shredding forks
+              - knife
+            note: Critical — pieces must be small and cohesive for filling stability
+          - instruction: Continue cooking onions and braising liquid uncovered, reducing until thick, jammy, with almost no free liquid
+            note: This creates the concentrated flavor base
+          - instruction: Return chopped chicken to the pan, add chopped parsley and cilantro, and butter; cook for 2-3 minutes to integrate
+            ingredients:
+              - name: parsley
+                qty: 0.6
+                unit: cup
+                preparation: finely chopped
+              - name: cilantro
+                qty: 0.6
+                unit: cup
+                preparation: finely chopped
+              - name: butter
+                qty: 1.25
+                unit: tablespoon
+          - instruction: Check texture — mixture should be moist but not wet, cohesive enough to mound, with no visible pooling liquid
+            note: If too wet, continue reducing; if too dry, add a splash of reserved braising liquid
+          - instruction: Reserve 180-220ml of braising liquid for egg custard before storing
+            note: Critical — reserve this liquid before refrigerating the filling
+        storage: Refrigerate up to 2 days; rewarm gently before use (or use cold for easier shaping)
+
+  - id: egg-custard
+    description: Bastilla Egg Custard
+    preparations:
+      - id: make-egg-custard
+        description: Create rich egg custard from reserved braising liquid
+        duration: PT20M
+        follows:
+          - make-chicken-base
+        steps:
+          - instruction: Reduce reserved braising liquid to 180-220ml until concentrated and slightly syrupy
+          - instruction: Lightly beat eggs in a bowl (do not fully homogenize)
+            ingredients:
+              - name: eggs
+                qty: 5
+                unit: large
+            equipment:
+              - whisk
+              - bowl
+          - instruction: Slowly temper eggs by whisking in warm braising liquid gradually
+          - instruction: Melt butter in a small saucepan over low heat
+            ingredients:
+              - name: butter
+                qty: 1.25
+                unit: tablespoon
+            equipment:
+              - small saucepan
+          - instruction: Return egg mixture to saucepan and cook gently over low heat, stirring constantly, until soft custard curds form and mixture thickens
+            note: Do NOT scramble — maintain low temperature
+          - instruction: Remove from heat while slightly underdone (carryover will finish setting)
+          - instruction: Let cool slightly before using, or refrigerate if preparing ahead
+        storage: Refrigerate up to 24 hours; rewarm very gently or use slightly chilled for assembly
+
+  - id: pasta-dough
+    description: Almond-Flour Pasta Dough (10%)
+    preparations:
+      - id: make-pasta-dough
+        description: Prepare egg pasta dough with almond flour
+        duration: PT1H
+        steps:
+          - instruction: Combine 00 flour and almond flour in a large bowl, mix thoroughly
+            ingredients:
+              - name: 00 flour
+                qty: 395
+                unit: gram
+              - name: almond flour
+                qty: 45
+                unit: gram
+                note: fine texture
+            equipment:
+              - mixing bowl
+          - instruction: Create a well in the center, add eggs, olive oil, and salt
+            ingredients:
+              - name: eggs
+                qty: 5
+                unit: large
+              - name: olive oil
+                qty: 1.25
+                unit: teaspoon
+              - name: salt
+                qty: 1
+                unit: pinch
+          - instruction: Mix to a shaggy dough, then knead for 10-12 minutes until smooth and elastic
+            equipment:
+              - bench scraper
+          - instruction: Adjust hydration as needed (00 flour only for dusting)
+          - instruction: Wrap tightly and rest for at least 60 minutes at room temperature
+          - instruction: Roll dough to approximately 0.8-1.0mm thickness
+            note: On an Atlas pasta machine, this corresponds roughly to setting 5–6 (stop one setting thicker than typical thin pasta)
+            equipment:
+              - pasta machine
+              - rolling pin
+          - instruction: Cut into 11-12cm squares
+            equipment:
+              - pasta cutter
+              - knife
+        storage: Wrap and refrigerate up to 24 hours; bring to room temperature before use
+
+  - id: assembly
+    description: Assembly, Cooking, and Service
+    preparations:
+      - id: assemble-bastiolo
+        description: Layer, seal, cook, and plate the doppio raviolo
+        duration: PT30M
+        final: true
+        follows:
+          - make-chicken-base
+          - make-egg-custard
+          - make-pasta-dough
+        steps:
+          - instruction: Toast almonds until fragrant, then finely grind
+            ingredients:
+              - name: blanched almonds
+                qty: 125
+                unit: gram
+            equipment:
+              - dry pan
+              - spice grinder
+          - instruction: Mix ground almonds with powdered sugar and cinnamon
+            ingredients:
+              - name: powdered sugar
+                qty: 2.5
+                unit: tablespoon
+              - name: cinnamon
+                qty: 0.6
+                unit: teaspoon
+          - instruction: Add a few drops of orange blossom water (optional)
+            ingredients:
+              - name: orange blossom water
+                qty: 2
+                unit: drop
+          - instruction: Place 60-75g chicken filling in center of each pasta square and form a shallow well
+          - instruction: Add 1 tablespoon egg custard into the well
+          - instruction: Add a small layer of almond mixture beneath the custard (not on top)
+          - instruction: Brush edges with water, place second square on top
+            equipment:
+              - pastry brush
+          - instruction: Seal starting from center outward to remove air, then firmly press edges with at least 1.5cm margin
+          - instruction: Trim to approximately 9-10cm square
+            equipment:
+              - pasta cutter
+          - instruction: Bring water to a bare simmer (85–90°C), not a rolling boil
+            equipment:
+              - pot
+          - instruction: Cook ravioli gently for 3-4 minutes until tender
+          - instruction: Transfer to sauté pan with melted butter and lightly glaze
+            ingredients:
+              - name: butter
+                qty: 2.5
+                unit: tablespoon
+            equipment:
+              - sauté pan
+              - slotted spoon
+          - instruction: Plate one raviolo per serving
+          - instruction: Finish with light butter glaze and a very light dusting of powdered sugar and cinnamon
+            ingredients:
+              - name: powdered sugar
+              - name: cinnamon
+        storage: Do not hold assembled ravioli more than 30-60 minutes; cook immediately after assembly

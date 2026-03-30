@@ -1,0 +1,353 @@
+id: chicken-pot-pie
+description: Chicken Pot Pie
+
+yield:
+  qty: 6
+  unit: servings
+
+components:
+  - id: chicken-stock
+    description: Pressure-Cooked Chicken Stock
+    preparations:
+      - id: make-chicken-stock-pressure
+        description: Create deeply flavorful chicken stock using pressure cooker
+        duration: PT2H
+        steps:
+          - instruction: Preheat oven to 220°C (425°F)
+            equipment:
+              - oven
+          - instruction: Spread chicken backs and wings on a sheet pan, roast until deeply browned (about 45 minutes)
+            ingredients:
+              - name: chicken backs and wings
+                qty: 1.5
+                unit: kg
+            note: This develops the stock's deep color and flavor
+          - instruction: Roast fennel chunks and halved garlic alongside chicken until well caramelized (35-40 minutes)
+            ingredients:
+              - name: fennel
+                qty: 200
+                unit: gram
+                preparation: large rough chunks
+              - name: garlic
+                qty: 1
+                unit: head
+                preparation: halved
+          - instruction: Transfer all roasted solids to pressure cooker
+            equipment:
+              - pressure cooker
+          - instruction: Add thyme, parsley stems, and peppercorns
+            ingredients:
+              - name: thyme
+                qty: 5
+                unit: sprig
+              - name: parsley stems
+                qty: 10
+                unit: gram
+              - name: black peppercorns
+                qty: 10
+                unit: count
+          - instruction: Add water to just cover solids (approximately 2.2 liters), do not exceed max fill line
+            ingredients:
+              - name: water
+                qty: 2.2
+                unit: liter
+          - instruction: Cook on High Pressure for 60 minutes
+            equipment:
+              - pressure cooker
+          - instruction: Allow natural pressure release
+          - instruction: Strain stock through fine mesh sieve, do not press solids
+            equipment:
+              - fine mesh strainer
+            note: Pressing solids will make the stock cloudy
+          - instruction: Skim surface fat while warm, then optionally chill and remove remaining solidified fat
+            note: Final stock should be low-fat to prevent greasy sauce
+          - instruction: Reduce strained stock on stovetop until volume reaches approximately 750 ml
+            note: Measure final volume; reduction is required for proper gelatin concentration
+        storage: Refrigerate up to 3 days or freeze up to 1 month
+
+  - id: chicken
+    description: Poached and Roasted Chicken
+    preparations:
+      - id: cook-chicken
+        description: Cook chicken thighs with stock then brown
+        duration: PT45M
+        follows:
+          - make-chicken-stock-pressure
+        steps:
+          - instruction: Lightly season chicken thighs with salt (approximately 1% by weight)
+            ingredients:
+              - name: chicken thighs, bone-in, skin-on
+                qty: 900
+                unit: gram
+              - name: salt
+                qty: 9
+                unit: gram
+          - instruction: Bring chicken stock to 80-85°C (just below simmer)
+            ingredients:
+              - name: chicken stock
+                qty: 500
+                unit: ml
+          - instruction: Maintain stock at 80-85°C over low heat (do not simmer; no visible bubbling)
+            note: Use smallest burner or heat diffuser to maintain temperature stability
+          - instruction: Poach chicken gently at 80-85°C until just cooked through (about 25 minutes)
+            note: Internal temperature should reach 74°C (165°F)
+          - instruction: Remove chicken and rest briefly
+          - instruction: Remove meat from bones, tear into rustic 3-4 cm pieces
+          - instruction: Spread chicken pieces in a single layer with space between pieces, roast at 220°C for 8-10 minutes until lightly browned
+            note: Do not overcrowd; use multiple pans if necessary
+            equipment:
+              - oven
+          - instruction: Reserve chicken with a small amount of stock to prevent drying
+            ingredients:
+              - name: chicken stock
+                qty: 50
+                unit: ml
+        storage: Use same day for best texture
+
+  - id: vegetables
+    description: Prepared Vegetables
+    preparations:
+      - id: cook-vegetables
+        description: Prepare vegetables for filling
+        duration: PT30M
+        steps:
+          - instruction: Sweat carrots and celery in butter over medium heat until just tender
+            ingredients:
+              - name: carrots
+                qty: 150
+                unit: gram
+                preparation: 1 cm dice
+              - name: celery
+                qty: 120
+                unit: gram
+                preparation: 1 cm dice
+              - name: butter
+                qty: 40
+                unit: gram
+            equipment:
+              - sauté pan
+          - instruction: Add leeks, cook until softened without browning
+            ingredients:
+              - name: leeks
+                qty: 150
+                unit: gram
+                preparation: white and light green parts, half-moons
+          - instruction: Separately sauté mushrooms over high heat until browned and moisture driven off
+            ingredients:
+              - name: mushrooms
+                qty: 200
+                unit: gram
+                preparation: cremini or maitake, torn
+            note: High heat develops color and removes excess moisture
+          - instruction: Blanch pearl onions in salted boiling water for 2-3 minutes, then shock in ice water
+            ingredients:
+              - name: pearl onions
+                qty: 150
+                unit: gram
+                preparation: peeled
+              - name: salt
+                qty: 1
+                unit: teaspoon
+            equipment:
+              - pot
+              - ice bath
+          - instruction: Ensure each vegetable component is dry before combining (no visible liquid in pan)
+            note: Excess moisture will thin the final filling
+          - instruction: Combine all vegetables, season lightly with salt
+          - instruction: Reserve vegetables
+        storage: Can be prepared up to 1 day ahead, refrigerate
+
+  - id: roasted-fennel-garlic
+    description: Roasted Fennel-Garlic Puree
+    preparations:
+      - id: make-fennel-garlic-puree
+        description: Create deeply caramelized fennel and garlic puree
+        duration: PT1H
+        follows:
+          - make-chicken-stock-pressure
+        steps:
+          - instruction: Toss fennel and garlic with olive oil and salt
+            ingredients:
+              - name: fennel
+                qty: 150
+                unit: gram
+              - name: garlic
+                qty: 1
+                unit: head
+              - name: olive oil
+                qty: 15
+                unit: gram
+              - name: salt
+                qty: 5
+                unit: gram
+            equipment:
+              - sheet pan
+          - instruction: Roast at 220°C until deeply caramelized (35-40 minutes)
+            equipment:
+              - oven
+            note: Fennel and garlic should have deeply browned edges
+          - instruction: Squeeze roasted garlic cloves out of skins before blending
+          - instruction: Blend roasted fennel and garlic with chicken stock until completely smooth
+            ingredients:
+              - name: chicken stock
+                qty: 120
+                unit: ml
+            equipment:
+              - blender
+          - instruction: Pass through fine mesh sieve to ensure silky texture
+            equipment:
+              - fine mesh strainer
+        storage: Refrigerate up to 3 days
+
+  - id: veloute-sauce
+    description: Fennel-Garlic Veloute Sauce
+    preparations:
+      - id: make-veloute
+        description: Create veloute with fennel-garlic puree and sherry
+        duration: PT30M
+        follows:
+          - make-chicken-stock-pressure
+          - make-fennel-garlic-puree
+        steps:
+          - instruction: Melt butter over medium heat
+            ingredients:
+              - name: butter
+                qty: 60
+                unit: gram
+            equipment:
+              - saucepan
+          - instruction: Add flour, cook for 3-4 minutes to form blond roux (no browning)
+            ingredients:
+              - name: flour
+                qty: 60
+                unit: gram
+            note: Stir continuously to prevent uneven coloring
+          - instruction: Gradually whisk in warm chicken stock until smooth
+            ingredients:
+              - name: chicken stock
+                qty: 600
+                unit: ml
+                note: Warm stock incorporates more smoothly
+          - instruction: Simmer while stirring frequently until sauce coats the back of a spoon (nappe consistency)
+            note: This indicates proper thickening
+          - instruction: Add fennel-garlic puree, whisk to fully incorporate
+            ingredients:
+              - name: fennel-garlic puree
+                qty: 120
+                unit: gram
+                homemade: true
+          - instruction: Add dry sherry and simmer briefly to integrate
+            ingredients:
+              - name: dry sherry
+                qty: 40
+                unit: ml
+          - instruction: Remove from heat and season to taste with salt and white pepper
+            ingredients:
+              - name: salt
+              - name: white pepper
+        storage: Use same day for best quality
+
+  - id: pastry
+    description: Rough-Puff Pastry Crust
+    preparations:
+      - id: make-rough-puff
+        description: Prepare rough-puff pastry for topping
+        duration: PT1H30M
+        steps:
+          - instruction: Combine all-purpose flour and salt in a large bowl
+            ingredients:
+              - name: all-purpose flour
+                qty: 250
+                unit: gram
+              - name: salt
+                qty: 5
+                unit: gram
+          - instruction: Cut in cold butter, leaving large irregular pieces
+            ingredients:
+              - name: butter
+                qty: 200
+                unit: gram
+                note: cold, cubed
+            equipment:
+              - pastry cutter
+          - instruction: Add cold water, bring together into rough dough
+            ingredients:
+              - name: cold water
+                qty: 120
+                unit: ml
+                note: adjust as needed
+          - instruction: Roll into rectangle, fold into thirds (single fold)
+            equipment:
+              - rolling pin
+          - instruction: Repeat folding 3-4 times, resting in refrigerator if dough becomes warm
+            note: Rest 15-20 minutes between folds if needed
+          - instruction: Chill for at least 1 hour before using
+            equipment:
+              - plastic wrap
+          - instruction: Roll to approximately 3-4mm thickness
+            note: Should be thick enough to hold up but thin enough to cook through
+        storage: Refrigerate up to 3 days or freeze up to 1 month
+
+  - id: assembly-and-bake
+    description: Assembly and Baking
+    preparations:
+      - id: assemble-and-bake
+        description: Assemble filling, top with pastry, bake
+        duration: PT1H
+        final: true
+        follows:
+          - cook-chicken
+          - cook-vegetables
+          - make-veloute
+          - make-rough-puff
+        steps:
+          - instruction: Preheat oven to 200°C (400°F)
+            equipment:
+              - oven
+          - instruction: Warm chicken, vegetables, and veloute over low heat (do not boil)
+            ingredients:
+              - name: chicken
+                homemade: true
+              - name: vegetables
+                homemade: true
+              - name: veloute sauce
+                homemade: true
+            note: Sauce should coat solids but not pool at bottom of dish
+          - instruction: Fold in crème fraîche and cold butter cubes until just melted and emulsified
+            ingredients:
+              - name: crème fraîche
+                qty: 80
+                unit: gram
+              - name: butter
+                qty: 30
+                unit: gram
+                note: cold, cubed
+          - instruction: Adjust consistency — mixture should be cohesive, lightly creamy, not stiff or soupy
+            note: If too thick, add stock; if too loose, simmer to reduce
+          - instruction: Transfer filling into 8-inch square baking dish, fill slightly above level
+            equipment:
+              - 8-inch square baking dish
+            note: Target total filling weight ~1.4–1.6 kg
+          - instruction: Lay pastry over top, allow 2-3cm overhang
+            ingredients:
+              - name: rough-puff pastry
+                homemade: true
+          - instruction: Crimp edges casually for rustic appearance
+          - instruction: Lightly dock pastry surface with knife or fork (avoid edges)
+          - instruction: Cut steam vents in pastry
+          - instruction: Apply uneven egg wash to pastry
+            ingredients:
+              - name: egg
+                qty: 1
+                preparation: beaten
+            equipment:
+              - pastry brush
+          - instruction: Optionally sprinkle with flaky salt
+            ingredients:
+              - name: flaky salt
+                note: optional
+          - instruction: Bake on lower-middle oven rack for 35-45 minutes until crust is deeply golden and filling is visibly bubbling at edges
+            note: Filling must be actively bubbling at edges before removal; this indicates proper internal temperature and sauce activation. If crust browns too quickly, tent with foil.
+          - instruction: Rest 10-15 minutes before serving
+            note: Allows filling to set slightly
+        storage: Best served immediately; leftovers can be refrigerated and reheated
