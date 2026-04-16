@@ -18,9 +18,9 @@ The goal is not just surprise, but **progressive loss of interpretive confidence
 
 ## Menu
 
-### Amuse — *Not Caviar*
-Black garlic dashi pearls served on puffed rice  
-A visual and textural imitation of caviar that delivers warm umami instead of saline burst
+### Amuse — *Watermelon Tartar*
+Compressed watermelon diced like raw tuna, topped with black garlic dashi caviar and chiffonade basil  
+Savory preparation of fruit masquerading as fish tartar — the identity deception starts immediately
 
 ---
 
@@ -117,26 +117,26 @@ No deception — the “control” course that induces doubt by its normalcy
 
 ---
 
-### Dessert — *Kunafe*
-Shredded phyllo pastry with melted cheese and syrup  
-Presented as a savory cheese course but revealed as dessert through sweetness
+### Dessert — *Tres Maíces*
+White chocolate corn cremoux topped with candy corn crumble and blackened corn husk powder  
+Three forms of corn — the vegetable in the cremoux, the candy in the crumble, and the burnt husks as powder — a study in transformation and the suspension of disbelief
 
 ---
 
-### Mignardise — *Watermelon Nigiri*
-Compressed watermelon styled as tuna over sushi rice with traditional accompaniments  
-Ingredient identity deception — fruit masquerading as fish with delayed realization
+### Mignardise — *Violently Clarified Consommé*
+Crystal clear chicken consommé served in cordial glasses  
+After an evening of elaborate deception, this is pure, honest, transparent — made using the "violence plus raw chicken" clarification method from the pot pie stock
 
 ---
 
 ## Narrative Arc
-1. **Immediate deception** (caviar illusion)
+1. **Immediate identity deception** (watermelon tartar — fruit as fish)
 2. **Flavor contradiction** (dessert-looking salad)
 3. **Cultural displacement** (bastiolo)
 4. **Sensory disruption** (cold savory stroganoff)
 5. **Trust reset** (completely normal pot pie)
-6. **Course betrayal** (kunafe)
-7. **Identity collapse** (watermelon nigiri)
+6. **Ingredient transfiguration** (tres maíces — corn as candy, candy as powder, husk as ash)
+7. **Radical honesty** (crystal clear consommé — transparency as the final trick)
 
 ---
 

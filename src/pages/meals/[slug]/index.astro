@@ -71,8 +71,8 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
   } else if (idx === firstCourseIndex) {
     serviceOffset = 0;
   } else {
+    offsetFromFirst += parseDurationMins(visibleCourses[idx - 1].duration);
     serviceOffset = offsetFromFirst;
-    offsetFromFirst += parseDurationMins(course.duration);
   }
   return { ...course, serviceOffset };
 });

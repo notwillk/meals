@@ -1,0 +1,94 @@
+id: violently-clarified-consomme
+description: Violently Clarified Consommé
+
+yield:
+  qty: 5
+  unit: servings
+
+components:
+  - id: clarified-consomme
+    description: Crystal Clear Chicken Consommé
+    preparations:
+      - id: make-consomme
+        description: Clarify chicken stock using the "violence plus raw chicken" method
+        time: "2026-04-17T17:30:00"
+        duration: PT45M
+        follows:
+          - make-chicken-stock
+        steps:
+          - instruction: Ensure chicken stock from pot pie preparation is chilled and cloudy
+            ingredients:
+              - name: chicken stock
+                qty: 500
+                unit: ml
+                homemade: true
+                note: from chicken pot pie preparation, chilled, cloudy
+            equipment:
+              - large pot
+          - instruction: Take raw boneless skinless chicken thighs and cut into rough chunks
+            ingredients:
+              - name: chicken thighs, boneless skinless
+                qty: 150
+                unit: gram
+                note: raw, for clarification raft
+            equipment:
+              - knife
+              - cutting board
+          - instruction: Place raw chicken chunks into high-speed blender with a small portion (100ml) of the cold stock
+            equipment:
+              - high-speed blender
+            note: This is the "violence" — blending obliterates the meat, releasing myosin and whipping in air bubbles
+          - instruction: Blend on high speed until completely smooth, pink, and frothy — a "chicken smoothie"
+            note: Myosin is released (sticky muscle protein), thousands of tiny air bubbles are whipped in
+          - instruction: Pour this frothy pink mixture back into the main pot of cold stock
+          - instruction: Stir thoroughly to integrate — mixture will look milky and unappetizing
+          - instruction: Transfer to pressure cooker and seal
+            equipment:
+              - pressure cooker
+          - instruction: Bring to high pressure, then immediately turn off heat and let pressure release naturally
+            note: |
+              The scrubbing action: as stock heats, myosin denatures forming a microscopic net that grabs particles.
+              Buoyancy: Air bubbles make the protein network float to top, "scrubbing" liquid clean as it rises.
+              The raft becomes incredibly stable compared to traditional methods.
+          - instruction: Once pressure is released, open carefully
+            note: A solid grey spongy raft will be floating on crystal-clear liquid
+          - instruction: Pour through fine sieve lined with cheesecloth into clean container
+            equipment:
+              - fine sieve
+              - cheesecloth
+          - instruction: Squeeze the raft firmly to extract every drop of liquid
+            note: The protein net is so tight that impurities stay trapped even when squeezed
+          - instruction: Season consommé lightly with salt if needed
+            ingredients:
+              - name: kosher salt
+                note: to taste, sparingly
+          - instruction: Keep warm for service or chill and reheat gently
+        storage: Refrigerate up to 2 days; reheat gently without boiling
+
+  - id: service
+    description: Final Assembly & Service
+    preparations:
+      - id: serve-consomme
+        description: Serve consommé in cordial glasses
+        time: "2026-04-18T18:50:00"
+        duration: PT10M
+        final: true
+        follows:
+          - make-consomme
+        steps:
+          - instruction: Warm consommé gently to serving temperature (hot but not boiling)
+            equipment:
+              - small saucepan
+            note: Do not boil or clarity will be lost
+          - instruction: Pour into small cordial glasses or shot glasses
+            equipment:
+              - cordial glasses
+              - small ladle or pitcher
+            note: Approximately 45-60ml per serving
+          - instruction: Garnish with single small herb leaf if desired (chervil, micro cilantro, or tiny parsley)
+            ingredients:
+              - name: chervil or micro herb
+                note: optional, for visual contrast
+            note: The surprise — after a full dinner of deception, this is completely honest, clear, pure
+          - instruction: Serve immediately while hot
+        storage: Serve immediately after warming

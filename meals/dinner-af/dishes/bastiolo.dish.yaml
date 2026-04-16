@@ -11,7 +11,8 @@ components:
     preparations:
       - id: make-chicken-base
         description: Create deeply reduced chicken-onion mixture with bastilla spices
-        duration: PT1H30M
+        time: "2026-04-17T13:00:00"
+        duration: PT2H
         steps:
           - instruction: Heat olive oil and butter in a wide pan over medium-high heat
             ingredients:
@@ -25,7 +26,7 @@ components:
               - wide pan
           - instruction: Sear chicken thighs until lightly browned on both sides (not fully cooked)
             ingredients:
-              - name: chicken thighs, bone-in, skin-on preferred
+              - name: chicken thighs, bone-in, skin-on
                 qty: 1000
                 unit: gram
             note: About 3-4 minutes per side
@@ -61,7 +62,7 @@ components:
                 qty: 1
                 unit: large pinch
                 preparation: bloomed in 2.5 tablespoon warm water
-              - name: salt
+              - name: kosher salt
                 qty: 1.25
                 unit: teaspoon
                 note: to taste
@@ -101,7 +102,8 @@ components:
     preparations:
       - id: make-egg-custard
         description: Create rich egg custard from reserved braising liquid
-        duration: PT20M
+        time: "2026-04-17T15:30:00"
+        duration: PT30M
         follows:
           - make-chicken-base
         steps:
@@ -133,6 +135,7 @@ components:
     preparations:
       - id: make-pasta-dough
         description: Prepare egg pasta dough with almond flour
+        time: "2026-04-17T16:00:00"
         duration: PT1H
         steps:
           - instruction: Combine 00 flour and almond flour in a large bowl, mix thoroughly
@@ -154,7 +157,7 @@ components:
               - name: olive oil
                 qty: 1.25
                 unit: teaspoon
-              - name: salt
+              - name: kosher salt
                 qty: 1
                 unit: pinch
           - instruction: Mix to a shaggy dough, then knead for 10-12 minutes until smooth and elastic
@@ -178,22 +181,22 @@ components:
     preparations:
       - id: assemble-bastiolo
         description: Layer, seal, cook, and plate the doppio raviolo
-        duration: PT30M
+        time: "2026-04-18T17:40:00"
+        duration: PT1H
         final: true
         follows:
           - make-chicken-base
           - make-egg-custard
           - make-pasta-dough
         steps:
-          - instruction: Toast almonds until fragrant, then finely grind
+          - instruction: Lightly toast almond flour until fragrant (2-3 minutes, watch closely)
             ingredients:
-              - name: blanched almonds
+              - name: almond flour
                 qty: 125
                 unit: gram
             equipment:
               - dry pan
-              - spice grinder
-          - instruction: Mix ground almonds with powdered sugar and cinnamon
+          - instruction: Mix toasted almond flour with powdered sugar and cinnamon
             ingredients:
               - name: powdered sugar
                 qty: 2.5

@@ -2,7 +2,7 @@ id: chicken-pot-pie
 description: Chicken Pot Pie
 
 yield:
-  qty: 6
+  qty: 5-6
   unit: servings
 
 components:
@@ -11,343 +11,254 @@ components:
     preparations:
       - id: make-chicken-stock-pressure
         description: Create deeply flavorful chicken stock using pressure cooker
-        duration: PT2H
+        time: "2026-04-16T10:00:00"
+        duration: PT2H30M
         steps:
-          - instruction: Preheat oven to 220°C (425°F)
+          - instruction: Preheat oven to 450°F (230°C)
             equipment:
               - oven
-          - instruction: Spread chicken backs and wings on a sheet pan, roast until deeply browned (about 45 minutes)
+          - instruction: Spread chicken backs and feet on a sheet pan, roast until deeply browned (about 25-30 minutes)
             ingredients:
-              - name: chicken backs and wings
-                qty: 1.5
+              - name: chicken backs
+                qty: 1.6
                 unit: kg
-            note: This develops the stock's deep color and flavor
-          - instruction: Roast fennel chunks and halved garlic alongside chicken until well caramelized (35-40 minutes)
-            ingredients:
-              - name: fennel
-                qty: 200
-                unit: gram
-                preparation: large rough chunks
-              - name: garlic
-                qty: 1
-                unit: head
-                preparation: halved
-          - instruction: Transfer all roasted solids to pressure cooker
+              - name: chicken feet
+                qty: 1.6
+                unit: kg
+            note: This develops the stock's deep color and flavor; include pan drippings
+          - instruction: Transfer all roasted solids and drippings to pressure cooker
             equipment:
               - pressure cooker
-          - instruction: Add thyme, parsley stems, and peppercorns
-            ingredients:
-              - name: thyme
-                qty: 5
-                unit: sprig
-              - name: parsley stems
-                qty: 10
-                unit: gram
-              - name: black peppercorns
-                qty: 10
-                unit: count
-          - instruction: Add water to just cover solids (approximately 2.2 liters), do not exceed max fill line
+          - instruction: Add water to cover solids (approximately 3 liters)
             ingredients:
               - name: water
-                qty: 2.2
+                qty: 3
                 unit: liter
           - instruction: Cook on High Pressure for 60 minutes
             equipment:
               - pressure cooker
           - instruction: Allow natural pressure release
-          - instruction: Strain stock through fine mesh sieve, do not press solids
+          - instruction: Strain stock through fine mesh sieve
             equipment:
               - fine mesh strainer
-            note: Pressing solids will make the stock cloudy
-          - instruction: Skim surface fat while warm, then optionally chill and remove remaining solidified fat
-            note: Final stock should be low-fat to prevent greasy sauce
-          - instruction: Reduce strained stock on stovetop until volume reaches approximately 750 ml
-            note: Measure final volume; reduction is required for proper gelatin concentration
+          - instruction: Refrigerate until ready for use
         storage: Refrigerate up to 3 days or freeze up to 1 month
 
-  - id: chicken
-    description: Poached and Roasted Chicken
+  - id: rotisserie-chicken
+    description: Rotisserie Chicken (Store-Bought)
     preparations:
-      - id: cook-chicken
-        description: Cook chicken thighs with stock then brown
-        duration: PT45M
-        follows:
-          - make-chicken-stock-pressure
-        steps:
-          - instruction: Lightly season chicken thighs with salt (approximately 1% by weight)
-            ingredients:
-              - name: chicken thighs, bone-in, skin-on
-                qty: 900
-                unit: gram
-              - name: salt
-                qty: 9
-                unit: gram
-          - instruction: Bring chicken stock to 80-85°C (just below simmer)
-            ingredients:
-              - name: chicken stock
-                qty: 500
-                unit: ml
-          - instruction: Maintain stock at 80-85°C over low heat (do not simmer; no visible bubbling)
-            note: Use smallest burner or heat diffuser to maintain temperature stability
-          - instruction: Poach chicken gently at 80-85°C until just cooked through (about 25 minutes)
-            note: Internal temperature should reach 74°C (165°F)
-          - instruction: Remove chicken and rest briefly
-          - instruction: Remove meat from bones, tear into rustic 3-4 cm pieces
-          - instruction: Spread chicken pieces in a single layer with space between pieces, roast at 220°C for 8-10 minutes until lightly browned
-            note: Do not overcrowd; use multiple pans if necessary
-            equipment:
-              - oven
-          - instruction: Reserve chicken with a small amount of stock to prevent drying
-            ingredients:
-              - name: chicken stock
-                qty: 50
-                unit: ml
-        storage: Use same day for best texture
-
-  - id: vegetables
-    description: Prepared Vegetables
-    preparations:
-      - id: cook-vegetables
-        description: Prepare vegetables for filling
+      - id: prep-rotisserie-chicken
+        description: Debone and dice rotisserie chicken
+        time: "2026-04-18T16:00:00"
         duration: PT30M
         steps:
-          - instruction: Sweat carrots and celery in butter over medium heat until just tender
+          - instruction: Purchase 1 rotisserie chicken from grocery store (approximately 3.5-4 lb / 1.5-1.8 kg)
             ingredients:
-              - name: carrots
-                qty: 150
-                unit: gram
-                preparation: 1 cm dice
-              - name: celery
-                qty: 120
-                unit: gram
-                preparation: 1 cm dice
-              - name: butter
-                qty: 40
-                unit: gram
-            equipment:
-              - sauté pan
-          - instruction: Add leeks, cook until softened without browning
-            ingredients:
-              - name: leeks
-                qty: 150
-                unit: gram
-                preparation: white and light green parts, half-moons
-          - instruction: Separately sauté mushrooms over high heat until browned and moisture driven off
-            ingredients:
-              - name: mushrooms
-                qty: 200
-                unit: gram
-                preparation: cremini or maitake, torn
-            note: High heat develops color and removes excess moisture
-          - instruction: Blanch pearl onions in salted boiling water for 2-3 minutes, then shock in ice water
-            ingredients:
-              - name: pearl onions
-                qty: 150
-                unit: gram
-                preparation: peeled
-              - name: salt
+              - name: rotisserie chicken
                 qty: 1
-                unit: teaspoon
-            equipment:
-              - pot
-              - ice bath
-          - instruction: Ensure each vegetable component is dry before combining (no visible liquid in pan)
-            note: Excess moisture will thin the final filling
-          - instruction: Combine all vegetables, season lightly with salt
-          - instruction: Reserve vegetables
-        storage: Can be prepared up to 1 day ahead, refrigerate
+                unit: whole
+                note: 3.5-4lb / 1.5-1.8kg; store-bought, fully cooked
+          - instruction: Allow chicken to rest 20-30 minutes if warm, then debone
+          - instruction: Remove all meat from bones, dice into 2-3cm pieces
+          - instruction: Reserve 650g diced chicken for filling (save any extra for other uses)
+            note: 650g is approximately all the meat from a 3.5-4lb chicken
+        storage: Refrigerate up to 2 days; bring to room temperature before adding to filling
 
-  - id: roasted-fennel-garlic
-    description: Roasted Fennel-Garlic Puree
+  - id: pie-filling
+    description: Classic Pot Pie Filling
     preparations:
-      - id: make-fennel-garlic-puree
-        description: Create deeply caramelized fennel and garlic puree
+      - id: make-pie-filling
+        description: Make vegetable filling with roux-based sauce
+        time: "2026-04-18T17:00:00"
         duration: PT1H
         follows:
-          - make-chicken-stock-pressure
+          - prep-rotisserie-chicken
         steps:
-          - instruction: Toss fennel and garlic with olive oil and salt
-            ingredients:
-              - name: fennel
-                qty: 150
-                unit: gram
-              - name: garlic
-                qty: 1
-                unit: head
-              - name: olive oil
-                qty: 15
-                unit: gram
-              - name: salt
-                qty: 5
-                unit: gram
+          - instruction: Preheat large heavy-bottomed pot over medium-high heat
             equipment:
-              - sheet pan
-          - instruction: Roast at 220°C until deeply caramelized (35-40 minutes)
-            equipment:
-              - oven
-            note: Fennel and garlic should have deeply browned edges
-          - instruction: Squeeze roasted garlic cloves out of skins before blending
-          - instruction: Blend roasted fennel and garlic with chicken stock until completely smooth
-            ingredients:
-              - name: chicken stock
-                qty: 120
-                unit: ml
-            equipment:
-              - blender
-          - instruction: Pass through fine mesh sieve to ensure silky texture
-            equipment:
-              - fine mesh strainer
-        storage: Refrigerate up to 3 days
-
-  - id: veloute-sauce
-    description: Fennel-Garlic Veloute Sauce
-    preparations:
-      - id: make-veloute
-        description: Create veloute with fennel-garlic puree and sherry
-        duration: PT30M
-        follows:
-          - make-chicken-stock-pressure
-          - make-fennel-garlic-puree
-        steps:
-          - instruction: Melt butter over medium heat
+              - large pot or Dutch oven
+          - instruction: Add butter to pot, then add vegetables (onion, celery, carrot, leek, fennel, garlic) and large pinch of kosher salt
             ingredients:
               - name: butter
-                qty: 60
+                qty: 113
                 unit: gram
-            equipment:
-              - saucepan
-          - instruction: Add flour, cook for 3-4 minutes to form blond roux (no browning)
-            ingredients:
-              - name: flour
-                qty: 60
+                note: 1 stick, unsalted
+              - name: onion
+                qty: 225
                 unit: gram
-            note: Stir continuously to prevent uneven coloring
-          - instruction: Gradually whisk in warm chicken stock until smooth
-            ingredients:
-              - name: chicken stock
-                qty: 600
-                unit: ml
-                note: Warm stock incorporates more smoothly
-          - instruction: Simmer while stirring frequently until sauce coats the back of a spoon (nappe consistency)
-            note: This indicates proper thickening
-          - instruction: Add fennel-garlic puree, whisk to fully incorporate
-            ingredients:
-              - name: fennel-garlic puree
-                qty: 120
+                preparation: medium diced
+                note: approximately 1 large onion
+              - name: celery
+                qty: 115
                 unit: gram
-                homemade: true
-          - instruction: Add dry sherry and simmer briefly to integrate
+                preparation: medium diced
+                note: about 2 large ribs
+              - name: carrots
+                qty: 115
+                unit: gram
+                preparation: medium diced
+                note: about 2 large carrots
+              - name: leeks
+                qty: 75
+                unit: gram
+                preparation: diced and rinsed
+                note: white and light green parts
+              - name: fennel
+                qty: 75
+                unit: gram
+                preparation: medium diced
+              - name: garlic
+                qty: 10
+                unit: gram
+                preparation: minced
+                note: about 3-4 cloves
+              - name: kosher salt
+                qty: 5
+                unit: gram
+                note: large pinch
+          - instruction: Sweat vegetables for 5-6 minutes, stirring to combine
+          - instruction: Add potatoes and continue to cook for 3 minutes
             ingredients:
-              - name: dry sherry
-                qty: 40
-                unit: ml
-          - instruction: Remove from heat and season to taste with salt and white pepper
-            ingredients:
-              - name: salt
-              - name: white pepper
-        storage: Use same day for best quality
-
-  - id: pastry
-    description: Rough-Puff Pastry Crust
-    preparations:
-      - id: make-rough-puff
-        description: Prepare rough-puff pastry for topping
-        duration: PT1H30M
-        steps:
-          - instruction: Combine all-purpose flour and salt in a large bowl
-            ingredients:
-              - name: all-purpose flour
+              - name: yukon gold potatoes
                 qty: 250
                 unit: gram
-              - name: salt
-                qty: 5
-                unit: gram
-          - instruction: Cut in cold butter, leaving large irregular pieces
+                preparation: medium diced
+                note: about 1-1.5 large potatoes
+          - instruction: Add flour and stir to coat all vegetables
             ingredients:
-              - name: butter
-                qty: 200
+              - name: all-purpose flour
+                qty: 115
                 unit: gram
-                note: cold, cubed
-            equipment:
-              - pastry cutter
-          - instruction: Add cold water, bring together into rough dough
+                note: approximately 1/2 cup
+          - instruction: Continue stirring frequently for 2-3 minutes to cook off raw flour taste
+          - instruction: Add dry sherry and cook for about 1 minute
             ingredients:
-              - name: cold water
-                qty: 120
+              - name: dry sherry
+                qty: 150
                 unit: ml
-                note: adjust as needed
-          - instruction: Roll into rectangle, fold into thirds (single fold)
+                note: approximately 2/3 cup
+          - instruction: Add chicken stock, stir well, and reduce heat to medium-low
+            ingredients:
+              - name: chicken stock
+                qty: 900
+                unit: ml
+                note: approximately 4 cups; warm stock incorporates more smoothly
+          - instruction: Bring to a simmer, cover, and cook 15-20 minutes until potatoes are tender
+          - instruction: Once potatoes are tender, add frozen peas and diced chicken
+            ingredients:
+              - name: frozen peas
+                qty: 140
+                unit: gram
+                note: approximately 1 cup
+              - name: rotisserie chicken
+                qty: 650
+                unit: gram
+                preparation: diced
+                homemade: true
+          - instruction: When peas and chicken are heated through (3-5 minutes), remove from heat
+          - instruction: Taste for seasoning and adjust with kosher salt and plenty of black pepper
+            ingredients:
+              - name: kosher salt
+                note: to taste
+              - name: black pepper
+                note: to taste; be generous
+              - name: fresh thyme
+                qty: 1
+                unit: gram
+                preparation: chopped
+                note: approximately 1 teaspoon fresh thyme leaves
+        storage: Use immediately for assembly; do not hold long after adding chicken
+
+  - id: pie-crust
+    description: Sour Cream Pie Crust
+    preparations:
+      - id: make-pie-crust
+        description: Make pie crust with sour cream in food processor
+        time: "2026-04-18T14:00:00"
+        duration: PT45M
+        steps:
+          - instruction: Add flour, salt, and sliced butter to food processor
+            ingredients:
+              - name: all-purpose flour
+                qty: 400
+                unit: gram
+                note: approximately 2 1/2 cups
+              - name: kosher salt
+                qty: 8
+                unit: gram
+                note: approximately 1 1/2 teaspoons
+              - name: butter
+                qty: 170
+                unit: gram
+                note: 12 tablespoons, sliced, cold
             equipment:
-              - rolling pin
-          - instruction: Repeat folding 3-4 times, resting in refrigerator if dough becomes warm
-            note: Rest 15-20 minutes between folds if needed
-          - instruction: Chill for at least 1 hour before using
+              - food processor
+          - instruction: Process for 15 seconds until mixture looks pebbly
+          - instruction: Add sour cream and egg, process just until dough becomes yellow and starts to look like dough
+            ingredients:
+              - name: sour cream
+                qty: 85
+                unit: gram
+                note: approximately 1/3 cup
+              - name: eggs
+                qty: 1
+                unit: large
+          - instruction: Flip out onto work surface and gently combine, pressing into a rectangle
+          - instruction: Wrap and refrigerate for 20 minutes minimum
             equipment:
               - plastic wrap
-          - instruction: Roll to approximately 3-4mm thickness
-            note: Should be thick enough to hold up but thin enough to cook through
-        storage: Refrigerate up to 3 days or freeze up to 1 month
+          - instruction: Remove from refrigerator, slice off a portion for rolling
+            note: For 8-inch casserole dish, use approximately 300-350g dough for top crust
+        storage: Refrigerate up to 2 days; bring to cool room temperature before rolling
 
   - id: assembly-and-bake
-    description: Assembly and Baking
+    description: Build and Bake
     preparations:
       - id: assemble-and-bake
-        description: Assemble filling, top with pastry, bake
-        duration: PT1H
+        description: Assemble pot pie in casserole dish and bake
+        time: "2026-04-18T18:05:00"
+        duration: PT45M
         final: true
         follows:
-          - cook-chicken
-          - cook-vegetables
-          - make-veloute
-          - make-rough-puff
+          - make-pie-filling
+          - make-pie-crust
         steps:
-          - instruction: Preheat oven to 200°C (400°F)
+          - instruction: Preheat oven to 405°F (205°C)
             equipment:
               - oven
-          - instruction: Warm chicken, vegetables, and veloute over low heat (do not boil)
-            ingredients:
-              - name: chicken
-                homemade: true
-              - name: vegetables
-                homemade: true
-              - name: veloute sauce
-                homemade: true
-            note: Sauce should coat solids but not pool at bottom of dish
-          - instruction: Fold in crème fraîche and cold butter cubes until just melted and emulsified
-            ingredients:
-              - name: crème fraîche
-                qty: 80
-                unit: gram
-              - name: butter
-                qty: 30
-                unit: gram
-                note: cold, cubed
-          - instruction: Adjust consistency — mixture should be cohesive, lightly creamy, not stiff or soupy
-            note: If too thick, add stock; if too loose, simmer to reduce
-          - instruction: Transfer filling into 8-inch square baking dish, fill slightly above level
+          - instruction: Roll out pie crust dough until approximately 3mm (1/8 inch) thick round
+            note: Should be slightly larger than the 8-inch (2qt) casserole dish
             equipment:
-              - 8-inch square baking dish
-            note: Target total filling weight ~1.4–1.6 kg
-          - instruction: Lay pastry over top, allow 2-3cm overhang
+              - rolling pin
+          - instruction: Fill 8-inch (2qt) casserole dish most of the way full with pot pie filling
+            equipment:
+              - 8-inch (2qt) casserole dish
+            note: Target approximately 1.4-1.6kg filling
+          - instruction: Prepare egg wash by whisking equal parts egg and cream
             ingredients:
-              - name: rough-puff pastry
-                homemade: true
-          - instruction: Crimp edges casually for rustic appearance
-          - instruction: Lightly dock pastry surface with knife or fork (avoid edges)
-          - instruction: Cut steam vents in pastry
-          - instruction: Apply uneven egg wash to pastry
-            ingredients:
-              - name: egg
+              - name: eggs
                 qty: 1
-                preparation: beaten
+                unit: large
+                note: use half for egg wash
+              - name: heavy cream
+                qty: 30
+                unit: ml
+                note: equal parts to egg
+          - instruction: Coat rim and sides of casserole dish with egg wash using pastry brush
             equipment:
               - pastry brush
-          - instruction: Optionally sprinkle with flaky salt
+          - instruction: Top filling with rolled-out dough round, allowing overhang around edges
             ingredients:
-              - name: flaky salt
-                note: optional
-          - instruction: Bake on lower-middle oven rack for 35-45 minutes until crust is deeply golden and filling is visibly bubbling at edges
-            note: Filling must be actively bubbling at edges before removal; this indicates proper internal temperature and sauce activation. If crust browns too quickly, tent with foil.
-          - instruction: Rest 10-15 minutes before serving
+              - name: pie crust dough
+                homemade: true
+          - instruction: Pinch dough to adhere to casserole dish rim
+          - instruction: Cut slits in top of dough for steam vents
+          - instruction: Brush dough surface with egg wash
+          - instruction: Place casserole on a sheet tray to catch drips
+            equipment:
+              - sheet tray
+          - instruction: Bake in preheated oven for 25 minutes until crust is cooked and golden brown
+            note: Pies are finished when crust is deeply golden and filling is visibly bubbling
+          - instruction: Allow to cool slightly 10-15 minutes before serving
             note: Allows filling to set slightly
         storage: Best served immediately; leftovers can be refrigerated and reheated

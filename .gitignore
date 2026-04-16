@@ -15,6 +15,7 @@ out/
 # Dependencies
 node_modules/
 vendor/
+.opencode/package-lock.json
 
 # Schemas
 .schemas/

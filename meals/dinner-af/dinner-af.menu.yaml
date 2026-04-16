@@ -1,20 +1,20 @@
 name: Dinner AF
-start_time: 2026-04-01T19:00:00
+start_time: 2026-04-18T17:30:00
 
 courses:
-  - name: Amuse
-    description: Not Caviar — Black garlic dashi pearls on puffed rice
-    plating: Small spoon or shooter
+  - name: Amuse-bouche
+    description: Watermelon Tartar — Compressed watermelon like raw tuna with black garlic dashi caviar and chiffonade basil
+    plating: Small ring mold on plate
     dishes:
-      - "&dishes/not-caviar"
-    duration: PT5M
-    first_course: true
+      - "&dishes/watermelon-tartar"
+    duration: PT30M
   - name: Salad
     description: Strawberries & Cream — Looks like dessert, eats like caprese
     plating: Coupe glass
     dishes:
       - "&dishes/strawberries-and-cream"
     duration: PT10M
+    first_course: true
   - name: Appetizer
     description: Bastiolo — Moroccan-Italian hybrid pastry
     plating: Small plate
@@ -34,14 +34,14 @@ courses:
       - "&dishes/chicken-pot-pie"
     duration: PT30M
   - name: Dessert
-    description: Kunafe — Sweet cheese in shredded phyllo
-    plating: Small plate
+    description: Tres Maíces — White chocolate corn cremoux (corn cob-infused, crémeux technique) with candy corn crumble and burnt corn husk powder
+    plating: Artful dessert plate
     dishes:
-      - "&dishes/kunafe"
+      - "&dishes/tres-maices"
     duration: PT15M
   - name: Mignardise
-    description: Watermelon Nigiri — Fruit nigiri with mochi core and black garlic shoyu
-    plating: Sushi plate
+    description: Violently Clarified Consommé — Crystal clear, the final act of honesty after deception, served in cordial glasses
+    plating: Cordial glass
     dishes:
-      - "&dishes/watermelon-nigiri"
-    duration: PT5M
+      - "&dishes/violently-clarified-consomme"
+    duration: PT10M

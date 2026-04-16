@@ -8,7 +8,7 @@ components:
       - id: roast-strawberries
         description: Roast strawberries
         duration: PT30M
-        time: "2026-04-01T15:00:00"
+        time: "2026-04-18T11:00:00"
         steps:
           - instruction: Heat oven to 400°F / 205°C
           - instruction: Toss strawberries with olive oil, vinegar, and salt
@@ -17,6 +17,7 @@ components:
                 qty: 900
                 unit: gram
                 note: slightly underripe preferred
+                source: farmer's market
               - name: olive oil
                 qty: 2.5
                 unit: teaspoon
@@ -38,13 +39,14 @@ components:
       - id: make-cream
         description: Make stracciatella cream
         duration: PT15M
-        time: "2026-04-01T14:00:00"
+        time: "2026-04-18T11:30:00"
         steps:
           - instruction: Drain stracciatella in a sieve 5–10 minutes
             ingredients:
               - name: stracciatella
                 qty: 600
                 unit: gram
+                source: farmer's market
           - instruction: Transfer to tall container
           - instruction: Add heavy cream, mascarpone, and salt
             ingredients:
@@ -55,7 +57,7 @@ components:
                 qty: 75
                 unit: gram
                 note: optional, but strongly recommended for yield and stability
-              - name: fine salt
+              - name: kosher salt
                 qty: 1
                 unit: pinch
           - instruction: Blitz in short pulses (total 5–10 sec) until smooth
@@ -68,7 +70,7 @@ components:
       - id: make-crumb
         description: Make pistachio crumb
         duration: PT10M
-        time: "2026-04-01T16:00:00"
+        time: "2026-04-18T10:30:00"
         steps:
           - instruction: Chop or pulse pistachios to a coarse crumb
             ingredients:
@@ -81,7 +83,7 @@ components:
               - name: olive oil
                 qty: 2.5
                 unit: teaspoon
-              - name: salt
+              - name: kosher salt
                 qty: 1
                 unit: pinch
           - instruction: Cool completely
@@ -97,7 +99,7 @@ components:
           - roast-strawberries
           - make-cream
           - make-crumb
-        time: "2026-04-01T19:10:00"
+        time: "2026-04-18T17:30:00"
         duration: PT10M
         steps:
           - instruction: Add ~100g cream to the bottom of each coupe, smoothing or forming a low quenelle
@@ -105,7 +107,7 @@ components:
           - instruction: Sprinkle with ~1 tbsp pistachio crumb
           - instruction: Drizzle lightly with peppery extra virgin olive oil
             ingredients:
-              - name: extra virgin olive oil, peppery
+              - name: olive oil
           - instruction: Finish with flaky salt and a small amount of coarse black pepper
             ingredients:
               - name: flaky salt

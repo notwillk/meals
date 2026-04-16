@@ -1,12 +1,58 @@
-id: not-caviar
-description: Not Caviar
+id: watermelon-tartar
+description: Watermelon Tartar
+
+yield:
+  qty: 5
+  unit: servings
 
 components:
-  - id: dashi-pearls
-    description: Black Garlic Dashi Pearls
+  - id: watermelon-tartar-base
+    description: Watermelon Tartar Base
     preparations:
-      - id: make-dashi-pearls
+      - id: prep-watermelon-tartar
+        description: Prepare watermelon tartar to mimic raw tuna
+        time: "2026-04-18T10:00:00"
+        duration: PT1H
+        steps:
+          - instruction: Trim rind from seedless watermelon; cut flesh into 6mm dice
+            ingredients:
+              - name: watermelon, seedless
+                qty: 400
+                unit: gram
+                preparation: trimmed, 6mm dice
+            equipment:
+              - knife
+              - cutting board
+          - instruction: Season diced watermelon with salt, lime zest, and light soy sauce
+            ingredients:
+              - name: kosher salt
+                qty: 2
+                unit: gram
+              - name: lime zest
+                qty: 1
+                unit: lime
+                preparation: from 1 lime
+              - name: soy sauce, light
+                qty: 5
+                unit: ml
+            equipment:
+              - microplane
+              - bowl
+          - instruction: Vacuum seal on high pressure to compress and intensify texture
+            equipment:
+              - vacuum sealer
+              - vacuum bags
+          - instruction: Rest chilled for 30-60 minutes
+            note: Compression firms texture and concentrates flavor
+        storage: Refrigerate up to 4 hours
+
+  - id: black-garlic-dashi-caviar
+    description: Black Garlic Dashi Caviar
+    preparations:
+      - id: make-dashi-caviar
         description: Create spherified black garlic dashi pearls
+        time: "2026-04-17T11:00:00"
+        duration: PT2H
         steps:
           - instruction: Combine kombu and water in a saucepan, let soak for 20 minutes
             ingredients:
@@ -37,17 +83,15 @@ components:
               - fine mesh strainer
             note: Dashi should be smooth with no bits
           - instruction: Weigh finished dashi and ensure it is cold (below 10°C / 50°F)
-            note: Required for correct hydrocolloid hydration and ratio calculations. Expected yield ~100–120g dashi after straining.
+            note: Required for correct hydrocolloid hydration and ratio calculations
           - instruction: Add sodium citrate (0.75% of total dashi weight) and blend until fully dissolved
             ingredients:
               - name: sodium citrate
-            note: |
-              Buffers the liquid so direct spherification works reliably without measuring pH.
-              Example — 100g dashi → 0.75g sodium citrate.
+            note: Buffers the liquid for reliable spherification
           - instruction: Weigh sodium alginate (0.5% of total dashi weight)
             ingredients:
               - name: sodium alginate
-            note: Example — 100g dashi → 0.5g sodium alginate. Calculate from the actual measured weight of your finished dashi. If pearls float or deform, increase slightly to ~0.6%.
+            note: If pearls float or deform, increase slightly to ~0.6%
           - instruction: Sprinkle sodium alginate onto dashi while blending with immersion blender
             equipment:
               - immersion blender
@@ -57,12 +101,11 @@ components:
               - fine mesh strainer
           - instruction: Let rest in refrigerator for at least 1 hour to eliminate air bubbles
             note: Air bubbles will cause uneven membrane or weak spots
-          - instruction: Before use, pass through strainer again
           - instruction: Prepare calcium bath — dissolve calcium chloride in distilled water (0.5% by weight)
             ingredients:
               - name: calcium chloride
               - name: distilled water
-            note: Example — 100g water → 0.5g calcium chloride. Prepare at least 500g total solution to allow proper pearl formation (e.g., 500g water + 2.5g calcium chloride).
+            note: Prepare at least 500g total solution
           - instruction: Prepare a second bowl with plain water for rinsing
             ingredients:
               - name: water
@@ -90,72 +133,61 @@ components:
             note: Store pearls submerged in dashi to maintain texture
         storage: |
           Store pearls submerged in leftover dashi in airtight container in refrigerator.
-          Best within 24 hours. Beyond this, membranes will continue to thicken and texture will degrade.
+          Best within 24 hours.
 
-  - id: puffed-rice
-    description: Puffed Rice Base
+  - id: chiffonade-basil
+    description: Chiffonade Basil Garnish
     preparations:
-      - id: prep-rice
-        description: Prepare puffed rice using fried method
+      - id: prep-basil-garnish
+        description: Prepare chiffonade basil for garnish
+        time: "2026-04-18T16:45:00"
+        duration: PT5M
         steps:
-          - instruction: Cook rice until fully tender (use steam or boil method)
+          - instruction: Stack basil leaves and roll tightly into a cigar
             ingredients:
-              - name: rice
-                qty: 0.25
-                unit: cup
-                note: short-grain or medium-grain white rice
+              - name: basil
+                qty: 10
+                unit: gram
             equipment:
-              - pot
-          - instruction: Spread cooked rice on baking sheet, dry in low oven (150°F) or dehydrator until completely moisture-free
-            equipment:
-              - baking sheet
-              - oven
-            note: Rice must be fully dehydrated to puff properly — this may take 1-2 hours. Rice should feel completely hard and dry with no internal softness before frying.
-          - instruction: Heat neutral oil in pot or deep fryer to 190°C (375°F)
-            ingredients:
-              - name: neutral oil
-            equipment:
-              - pot
-              - thermometer
-            note: Use at least 2–3 inches of oil to allow proper puffing
-          - instruction: Carefully add dried rice to hot oil
-            note: Stand back — oil will splatter vigorously
-          - instruction: Fry for 10-20 seconds until rice puffs and turns light golden
-            note: Watch carefully; rice burns quickly
-          - instruction: Immediately drain rice on paper towels
-            equipment:
-              - paper towels
-          - instruction: Let cool completely
-            note: Rice will become crispier as it cools
-          - instruction: Season lightly with salt if desired
-            ingredients:
-              - name: Kosher Salt
-        storage: Store in airtight container until service
+              - knife
+          - instruction: Cut crosswise into thin ribbons (chiffonade)
+            note: Cut just before service to prevent browning
+        storage: Keep wrapped in damp paper towel until service
 
   - id: plate-amuse
     description: Service
     preparations:
-      - id: plate-amuse
-        description: Plate amuse-bouche
+      - id: plate-watermelon-tartar
+        description: Plate watermelon tartar amuse-bouche
+        time: "2026-04-18T17:00:00"
+        duration: PT5M
         final: true
         follows:
-          - make-dashi-pearls
-          - prep-rice
+          - prep-watermelon-tartar
+          - make-dashi-caviar
+          - prep-basil-garnish
         steps:
-          - instruction: Place small amount of puffed rice on each serving spoon
+          - instruction: Place small ring mold or spoon on serving plate
+            equipment:
+              - small ring mold or spoon
+          - instruction: Fill with compressed watermelon tartar, gently pressing to form
             ingredients:
-              - name: puffed rice
+              - name: watermelon tartar
                 homemade: true
-          - instruction: Optionally brush puffed rice lightly with sesame oil for flavor
+            note: Approximately 40-50g per portion
+          - instruction: Carefully top with black garlic dashi caviar pearls
             ingredients:
-              - name: sesame oil
-            note: Adds umami anchor and flavor depth
-          - instruction: Carefully arrange dashi pearls on top of rice
-            ingredients:
-              - name: dashi pearls
+              - name: black garlic dashi caviar
                 homemade: true
-            note: Handle gently — pearls are delicate
-          - instruction: Garnish with tiny pinch of black garlic powder or micro herb (optional)
-            note: Optional finishing touch
+            note: Handle gently — pearls are delicate. Use approximately 1 tsp per portion.
+          - instruction: Garnish with chiffonade basil
+            ingredients:
+              - name: basil
+                note: chiffonade cut
+          - instruction: Finish with light drizzle of high-quality olive oil (optional)
+            ingredients:
+              - name: olive oil
+                note: optional
           - instruction: Serve immediately
-            note: Ideal service window — within 10 minutes of plating. Pearls will continue to firm up.
+            note: Ideal service window — within 10 minutes of plating
+        storage: Assemble à la minute

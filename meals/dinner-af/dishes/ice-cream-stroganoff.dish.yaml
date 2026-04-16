@@ -6,11 +6,12 @@ yield:
   unit: servings
 
 components:
-  - id: choux-ring
-    description: Neutral Choux Ring (base)
+  - id: choux-ball
+    description: Neutral Choux Balls (profiteroles)
     preparations:
-      - id: make-choux-ring
-        description: Prepare savory choux ring base
+      - id: make-choux-balls
+        description: Prepare savory choux balls
+        time: "2026-04-18T14:00:00"
         duration: PT45M
         steps:
           - instruction: Combine water, milk, butter, and salt in saucepan
@@ -24,7 +25,7 @@ components:
               - name: butter
                 qty: 90
                 unit: gram
-              - name: fine salt
+              - name: kosher salt
                 qty: 3
                 unit: gram
               - name: white pepper
@@ -58,12 +59,12 @@ components:
                 note: 3-4 large eggs; quantity may vary; add until ribbon stage reached
             equipment:
               - stand mixer or hand mixer
-          - instruction: Transfer dough to piping bag fitted with 1cm round tip
+          - instruction: Transfer dough to piping bag fitted with 1.5cm round tip
             equipment:
               - piping bag
-              - 1cm round piping tip
-          - instruction: Pipe 10-12 cm ring (approximately 1-1.5 cm thick) on parchment-lined baking sheet, overlap seam and smooth with wet finger
-            note: Orient seam at 6 o'clock during service or cover with garnish if visible
+              - 1.5cm round piping tip
+          - instruction: Pipe 5-6 cm mounds (approximately 2.5-3 cm tall) on parchment-lined baking sheet, leaving 5cm space between each
+            note: Creates profiterole-sized balls; smooth tops with wet finger if needed
             equipment:
               - baking sheet
               - parchment paper
@@ -85,6 +86,7 @@ components:
     preparations:
       - id: make-kombu-milk
         description: Prepare kombu-infused milk base
+        time: "2026-04-16T16:00:00"
         duration: PT1H
         steps:
           - instruction: Combine 150g milk with kombu in sous vide bag or heat-safe container
@@ -110,11 +112,12 @@ components:
 
       - id: make-duxelles
         description: Cook duxelles for ice cream base
+        time: "2026-04-16T17:00:00"
         duration: PT30M
         steps:
           - instruction: Finely chop mushrooms to near-paste consistency (food processor or knife)
             ingredients:
-              - name: mushrooms (cremini or button)
+              - name: mushrooms
                 qty: 150
                 unit: gram
             equipment:
@@ -125,7 +128,7 @@ components:
                 qty: 15
                 unit: gram
                 note: required for flavor integration and fat balance; do not omit
-              - name: fine salt
+              - name: kosher salt
                 qty: 2
                 unit: gram
             note: Mushrooms must release all moisture and reduce to approximately 50g dry paste; final duxelles should be spreadable and nearly dry with no visible free moisture; use all of this in the base; approximately 15-20 minutes
@@ -135,7 +138,8 @@ components:
           - instruction: Cool completely before adding to ice cream base
 
       - id: make-stroganoff-ice-cream
-        description: Prepare savory custard base with stabilization
+        description: Prepare savory custard base with duxelles, split for dual texture approach
+        time: "2026-04-16T18:00:00"
         duration: PT4H
         follows:
           - make-kombu-milk
@@ -172,7 +176,7 @@ components:
               - tall narrow container
           - instruction: Whisk egg yolks in separate bowl until smooth
             ingredients:
-              - name: egg yolks
+              - name: eggs
                 qty: 90
                 unit: gram
             equipment:
@@ -202,7 +206,7 @@ components:
               - name: Dijon mustard
                 qty: 4
                 unit: gram
-              - name: fine salt
+              - name: kosher salt
                 qty: 1.8
                 unit: gram
                 note: adjust after tasting; soy sauce and vegan fish sauce contribute salt
@@ -218,65 +222,50 @@ components:
             equipment:
               - ice bath
               - refrigerator
-          - instruction: Churn in ice cream maker according to manufacturer's instructions until soft-serve consistency
+          - instruction: Churn in traditional ice cream maker according to manufacturer's instructions until soft-serve consistency
             equipment:
               - ice cream maker
-          - instruction: Transfer to freezer-safe container, press parchment directly to surface to prevent ice crystals, freeze until scoopable
-            note: Ice cream should soften quickly and melt into sauce; if too firm, allow additional tempering before service
-        storage: Frozen in airtight container with parchment pressed to surface; best 1-3 days, up to 1 week with xanthan stabilization
+            note: Traditional machine produces classic ice cream texture
+          - instruction: Divide churned ice cream evenly between two freezer-safe containers
+            note: Split for dual texture approach — one for Ninja Creami superfine processing, one for traditional texture
+          - instruction: Transfer one portion to Ninja Creami pint container, freeze until solid (level with lid, do not overfill)
+            note: This is the Creami batch — must freeze solid overnight before processing
+            equipment:
+              - Ninja Creami pint container with lid
+          - instruction: Transfer second portion to standard freezer-safe container, press parchment directly to surface to prevent ice crystals, freeze until scoopable
+            note: This is the traditional batch — standard ice cream texture
+            equipment:
+              - freezer-safe container with parchment
+        storage: Frozen with parchment pressed to surface (traditional) or in Creami pint (Creami batch); best 1-3 days, up to 1 week with xanthan stabilization
 
-  - id: creme-fraiche-syrup
-    description: Crème Fraîche "Syrup" (acid element)
-    preparations:
-      - id: make-creme-fraiche-syrup
-        description: Prepare stabilized acidic syrup
-        duration: PT30M
+      - id: process-creami-ice-cream
+        description: Process Creami batch through Ninja Creami for superfine texture (next day)
+        time: "2026-04-17T10:00:00"
+        duration: PT15M
+        follows:
+          - make-stroganoff-ice-cream
         steps:
-          - instruction: Pre-mix xanthan gum with sugar for even dispersion
-            ingredients:
-              - name: granulated sugar
-                qty: 25
-                unit: gram
-              - name: xanthan gum
-                qty: 0.6
-                unit: gram
-                note: optional but recommended; prevents separation in acidic environment
+          - instruction: Remove frozen Creami pint from freezer and check that ice cream is solid throughout
+            note: Must be frozen solid overnight (minimum 24 hours for best results)
+          - instruction: Install pint into Ninja Creami outer bowl with paddle attachment
             equipment:
-              - small bowl
-          - instruction: Combine crème fraîche, vinegar, and salt in container, whisk until smooth
-            ingredients:
-              - name: crème fraîche
-                qty: 200
-                unit: gram
-              - name: white wine vinegar
-                qty: 20
-                unit: gram
-                note: or champagne vinegar; adjust to taste between 15-25g
-              - name: fine salt
-                qty: 2
-                unit: gram
-            equipment:
-              - mixing bowl
-              - whisk
-          - instruction: With immersion blender running, slowly sprinkle xanthan-sugar mixture into crème fraîche mixture, blend 1-2 minutes until completely smooth
-            note: Blend until glossy and uniform; acidic medium requires thorough incorporation
-            equipment:
-              - immersion blender
-          - instruction: Rest at room temperature 15-30 minutes to allow full hydration and stabilization
-            note: Syrup will thicken slightly as it rests; final texture should be slow-flowing and glossy (nappe), coating a spoon and holding a clean drizzle; should read as sour cream, not vinegar
-          - instruction: Strain through fine mesh sieve into squeeze bottle or airtight container
-            note: Ensures smooth, lump-free consistency for drizzling
-            equipment:
-              - fine mesh strainer
-              - squeeze bottle or storage container
-        storage: Refrigerated in squeeze bottle or airtight container up to 4 days; shake or stir before use, adjust viscosity if needed
+              - Ninja Creami machine
+              - Creami paddle attachment (spoon-shaped)
+          - instruction: Lock lid in place and select "Ice Cream" program
+            note: Program runs approximately 2 minutes
+          - instruction: After cycle completes, check texture — should be superfine, smooth, and creamy
+            note: If texture is crumbly, respin using "Re-Spin" function; if too soft, add small amount of liquid (milk or cream) and respin
+          - instruction: Scoop processed superfine ice cream into serving container or hold briefly
+            note: Creami texture is best served immediately after processing; if holding, refreeze 10-15 minutes maximum
+        storage: Process immediately before service; hold maximum 15 minutes before texture degrades
 
   - id: filet-mignon
     description: Filet Mignon Cubes (garnish)
     preparations:
-      - id: cook-filet-mignon
-        description: Sear beef cubes for garnish
-        duration: PT20M
+      - id: sous-vide-filet-mignon
+        description: Sous vide filet mignon cubes to medium rare
+        time: "2026-04-18T14:00:00"
+        duration: PT1H30M
         steps:
           - instruction: Dice filet mignon into approximately 1 cm cubes
             ingredients:
@@ -286,80 +275,103 @@ components:
             equipment:
               - knife
               - cutting board
-          - instruction: Pat cubes thoroughly dry with paper towels; moisture prevents proper searing
-            note: Critical step - beef must be completely dry
+          - instruction: Season cubes lightly with kosher salt
+            ingredients:
+              - name: kosher salt
+                qty: 3
+                unit: gram
+                note: to taste
+            note: Light seasoning now; will season again after searing
+          - instruction: Place cubes in sous vide bag in single layer, vacuum seal
+            equipment:
+              - sous vide bags
+              - vacuum sealer
+            note: Do not overcrowd; use multiple bags if necessary for even cooking
+          - instruction: Sous vide at 130°F (54°C) for 45-60 minutes until uniformly medium rare
+            equipment:
+              - sous vide circulator
+              - water bath container
+            note: 130°F produces perfect medium rare; cubes cook quickly due to small size
+          - instruction: Remove from water bath, pat cubes thoroughly dry with paper towels
             equipment:
               - paper towels
-          - instruction: Heat heavy pan with neutral oil over high heat until nearly smoking
+            note: Critical step - beef must be completely dry before searing to develop crust
+          - instruction: Hold at room temperature or refrigerate until ready to sear (up to 2 hours)
+        storage: Refrigerate sealed bag up to 2 days; bring to room temperature before searing
+
+      - id: sear-filet-mignon
+        description: Pan sear sous vide beef cubes for crust
+        time: "2026-04-18T17:30:00"
+        duration: PT15M
+        follows:
+          - sous-vide-filet-mignon
+        steps:
+          - instruction: Remove sous vide beef from bag, pat extremely dry with paper towels
+            equipment:
+              - paper towels
+            note: Moisture is the enemy of browning; be thorough
+          - instruction: Heat heavy pan (cast iron or stainless steel) with neutral oil over high heat until nearly smoking
             ingredients:
               - name: neutral oil (grapeseed or canola)
                 qty: 15
                 unit: gram
             equipment:
               - heavy saute pan or cast iron skillet
-          - instruction: Sear cubes in small batches (do not crowd pan) until browned on all sides, interior rare to medium-rare
-            note: Approximately 1-2 minutes per batch; high heat is essential; remove slightly under desired doneness as carryover heat will continue cooking
-          - instruction: Salt immediately upon removing from pan
+          - instruction: Sear cubes in small batches without crowding, 30-45 seconds per side until deep brown crust forms
+            note: Sous vide beef is already cooked; searing is purely for crust development. High heat, quick sear, do not overcook.
+          - instruction: Season immediately with flaky or kosher salt upon removing from pan
             ingredients:
-              - name: fine salt
-                qty: 3
+              - name: kosher salt
+                qty: 2
                 unit: gram
                 note: to taste
             note: Season while hot so salt adheres
           - instruction: Optional - for last batch, add butter and brandy to deglaze, creating light pan sauce to drizzle over beef
             ingredients:
-              - name: butter
-                qty: 20
-                unit: gram
-                note: optional
-              - name: brandy or cognac
-                qty: 15
-                unit: ml
-                note: optional
+               - name: butter
+                 qty: 20
+                 unit: gram
+                 note: optional
+               - name: brandy or cognac
+                 qty: 15
+                 unit: ml
+                 note: optional
             note: Be careful of flare-up when adding alcohol to hot pan; light glazing with reduced pan juices improves integration with cream elements
           - instruction: Hold beef cubes warm (not hot) until assembly
-            note: Approximately 50-55 degrees C; do not overcook during holding
-        storage: Raw beef - refrigerate on tray lined with paper towel, loosely covered, up to 24 hours; Cooked beef - not ideal, but may refrigerate in airtight container up to 1 day and gently rewarm
+            note: Approximately 50-55°C; do not hold hot or carryover will overcook
+        storage: Best used immediately after searing; if necessary hold loosely covered at room temperature up to 30 minutes
 
   - id: service
     description: Final Assembly & Service
     preparations:
       - id: assemble-stroganoff
         description: Assemble ice cream stroganoff with temperature contrast
+        time: "2026-04-18T17:55:00"
         duration: PT15M
         final: true
         follows:
-          - make-choux-ring
-          - make-stroganoff-ice-cream
-          - make-creme-fraiche-syrup
-          - cook-filet-mignon
+           - make-choux-balls
+           - make-stroganoff-ice-cream
+           - process-creami-ice-cream
+           - make-creme-fraiche-syrup
+           - sear-filet-mignon
         steps:
-          - instruction: Reheat choux ring if necessary - place in 160 degrees C oven for 5-8 minutes until warm and crisp
-            note: Choux should be warm for optimal contrast
-            equipment:
-              - oven
-          - instruction: Lightly brush interior of choux ring with melted butter just before plating
-            note: Enhances aroma and helps integrate melting ice cream into base
-          - instruction: Place warm choux ring centered on serving plate
-          - instruction: Optional - add milk gel "noodles" loosely inside choux ring if using
-            note: Milk gel noodles (lightly buttered) are optional component for texture play
-          - instruction: Scatter filet mignon cubes over noodles and partially on choux ring
-            note: Beef should be warm, approximately 50-55 degrees C
-          - instruction: Using warm spoon dipped in hot water, form quenelle of ice cream and place slightly off-center on plate
-            note: Ice cream should be cold and scoopable but not rock-hard; temper 3-5 minutes before scooping if needed
-            equipment:
-              - warm spoon
-          - instruction: Drizzle crème fraîche syrup across ice cream and noodles in artistic pattern, add a few dots to plate
-            note: Syrup should be cool or room temperature; approximately 15-20ml per plate
-          - instruction: Optional - garnish with fine chives or dill for fresh contrast and visual color
-            ingredients:
-              - name: fresh chives
-                qty: 1
-                unit: gram
-                note: finely chopped; optional
-              - name: fresh dill
-                qty: 1
-                unit: gram
-                note: optional
-          - instruction: Serve immediately with temperature contrast intact
-            note: Target - choux warm, beef warm, noodles neutral/warm, ice cream cold, syrup cool; reads as dessert, eats as stroganoff
+           - instruction: Reheat choux balls if necessary - place in 160 degrees C oven for 5-8 minutes until warm and crisp
+             note: Choux should be warm for optimal contrast
+             equipment:
+               - oven
+           - instruction: Using a serrated knife, cut the top 1/3 off each choux ball to create a lid
+             note: Cut horizontally with a sawing motion; reserve lids for garnish or discard
+             equipment:
+               - serrated knife
+           - instruction: Lightly brush interior of choux ball with melted butter just before plating
+             note: Enhances aroma and helps integrate melting ice cream into base
+           - instruction: Place warm choux ball (bottom portion) centered on serving plate
+           - instruction: Scatter filet mignon cubes into and around the choux ball
+             note: Beef should be warm, approximately 50-55 degrees C
+           - instruction: Using warm spoon dipped in hot water, form quenelle of ice cream and place slightly off-center on plate
+             note: Ice cream should be cold and scoopable but not rock-hard; temper 3-5 minutes before scooping if needed
+             equipment:
+             - warm spoon
+           - instruction: Serve immediately with temperature contrast intact
+             note: Target - choux warm, beef warm, ice cream cold, syrup cool; reads as dessert, eats as stroganoff

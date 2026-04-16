@@ -1,0 +1,215 @@
+id: tres-maices
+description: Tres Maíces
+
+yield:
+  qty: 5
+  unit: servings
+
+components:
+  - id: corn-cremoux
+    description: White Chocolate and Corn Cremoux
+    preparations:
+      - id: make-corn-puree
+        description: Create smooth corn puree from kernels
+        time: "2026-04-16T21:00:00"
+        duration: PT30M
+        steps:
+          - instruction: Remove kernels from corn cobs, reserve cobs for later infusion
+            ingredients:
+              - name: corn ears
+                qty: 3
+                unit: ears
+                note: fresh, reserve cobs after removing kernels
+            equipment:
+              - knife
+              - cutting board
+          - instruction: Cook corn kernels in simmering water until tender, 8-10 minutes
+            ingredients:
+              - name: corn kernels
+                qty: 200
+                unit: gram
+                note: from the 3 ears
+              - name: water
+                qty: 500
+                unit: ml
+            equipment:
+              - saucepan
+          - instruction: Drain kernels, transfer to blender
+          - instruction: Add small amount of cooking liquid and blend until completely smooth
+            note: Add just enough liquid to help blending; should be thick
+            equipment:
+              - blender
+          - instruction: Pass through fine sieve to remove any solids, pushing with spatula
+            equipment:
+              - fine sieve
+              - spatula
+            note: Should yield smooth, vibrant yellow corn puree
+        storage: Refrigerate up to 24 hours
+
+      - id:: make-cremoux
+        description: Create white chocolate corn cremoux (based on Matt Adlard's white chocolate crémeux with corn cob infusion)
+        time: "2026-04-17T19:00:00"
+        duration: PT40M
+        follows:
+          - make-corn-puree
+        steps:
+          - instruction: Bloom powdered gelatin in cold water and set aside
+            ingredients:
+              - name: powdered gelatin (platinum bloom)
+                qty: 2.5
+                unit: gram
+                note: or gold/silver leaf gelatin equivalent — see notes for conversion
+              - name: cold water
+                qty: 15
+                unit: ml
+                note: for blooming
+            equipment:
+              - small bowl
+          - instruction: Combine whole milk, heavy cream, and reserved corn cobs in saucepan
+            ingredients:
+              - name: whole milk
+                qty: 150
+                unit: gram
+              - name: heavy cream
+                qty: 150
+                unit: gram
+            note: Corn cobs infuse the dairy during heating
+            equipment:
+              - saucepan
+          - instruction: Heat milk, cream, and corn cobs over medium heat until steamy and just beginning to simmer — do not boil
+            note: Heat to approximately 80°C. Remove and discard corn cobs once hot
+          - instruction: Meanwhile, whisk egg yolks and sugar together for 1 minute until slightly pale
+            ingredients:
+              - name: eggs
+                qty: 60
+                unit: gram
+                note: approximately 3 large yolks
+              - name: granulated sugar
+                qty: 27
+                unit: gram
+            equipment:
+              - whisk
+              - bowl
+          - instruction: Slowly pour the hot corn-infused cream mixture over the yolk-sugar mixture while whisking constantly to temper
+            note: Pour in a thin stream to prevent scrambling the eggs
+          - instruction: Return the combined mixture to the saucepan and cook to 80-85°C while stirring constantly
+            equipment:
+              - saucepan
+              - thermometer
+            note: Do not exceed 85°C or eggs may curdle. Mixture will thicken slightly
+          - instruction: Once at temperature, pour through a fine sieve directly onto the Valrhona white chocolate and bloomed gelatin
+            ingredients:
+              - name: Valrhona white chocolate (Ivoire or similar)
+                qty: 216
+                unit: gram
+                note: chopped or pistoles. Valrhona specifically for optimal emulsion and flavor
+            equipment:
+              - fine sieve
+              - immersion blender or whisk
+          - instruction: Whisk or blend with immersion blender until completely smooth and emulsified
+            note: Hand blender produces best results — smooth, glossy, no streaks
+            equipment:
+              - immersion blender
+          - instruction: Fold in corn puree until fully incorporated
+            ingredients:
+              - name: corn puree
+                qty: 60
+                unit: gram
+                homemade: true
+            note: Cremoux should be smooth, pale yellow, with distinct corn and white chocolate flavor
+          - instruction: Pour into container, press plastic wrap directly onto the surface to prevent skin formation
+          - instruction: Chill overnight or at least 6 hours until fully set
+        storage: Refrigerate up to 3 days
+        note: |
+          Before service: whisk by hand to medium peaks for piping/quenelle.
+          Gelatin conversions: 2.5g powdered (platinum) ≈ 1.5 gold leaf sheets ≈ 2 silver leaf sheets.
+          Valrhona Ivoire 35% recommended for best flavor and emulsion.
+
+  - id: candy-corn-crumble
+    description: Candy Corn Crumble
+    preparations:
+      - id: make-candy-corn-crumble
+        description: Chop candy corn into crumble consistency
+        time: "2026-04-18T16:00:00"
+        duration: PT10M
+        steps:
+          - instruction: Roughly chop candy corn into small pieces (3-5mm)
+            ingredients:
+              - name: candy corn
+                qty: 100
+                unit: gram
+            equipment:
+              - knife
+              - cutting board
+            note: Or pulse briefly in food processor, careful not to over-process into paste
+          - instruction: Spread on parchment-lined tray to dry slightly, 15-20 minutes at room temperature
+            note: Helps firm up the crumble for better texture
+        storage: Store in airtight container at room temperature up to 1 week
+
+  - id: blackened-corn-husk-powder
+    description: Burnt Corn Husk Powder
+    preparations:
+      - id: make-husk-powder
+        description: Burn and powder corn husks from the cremoux corn cobs
+        time: "2026-04-17T09:00:00"
+        duration: PT30M
+        steps:
+          - instruction: Remove and reserve outer dry corn husks from the ears used for cremoux
+            note: Use the dry husks (like those for tamales), not the silk. Ensure they are completely dry — damp husks will steam rather than burn properly
+          - instruction: Spread husks in a single layer on a baking sheet
+          - instruction: Bake at 205°C (400°F) under broiler or high-heat oven, checking every 5 minutes
+            equipment:
+              - oven
+              - baking sheet
+            note: |
+              WARNING — This will create significant smoke. Ensure kitchen is well-ventilated and exhaust fan is on high.
+              Bake until husks are completely black, brittle, and carbonized (not just browned). Should snap easily when touched. Total time approximately 15 minutes.
+          - instruction: Remove from oven and let cool completely at room temperature
+            note: Husks must be bone-dry and cold to grind into powder rather than paste
+          - instruction: Break charred husks into smaller pieces, place in spice grinder, and pulse to fine jet-black dust
+            equipment:
+              - spice grinder
+          - instruction: Optional — sift through fine-mesh sieve to remove larger chunks for a velvet texture
+            equipment:
+              - fine sieve
+        storage: Store in airtight container up to 3 days
+
+  - id: assembly
+    description: Final Assembly & Service
+    preparations:
+      - id: plate-tres-maices
+        description: Plate the Tres Maíces dessert
+        time: "2026-04-18T18:35:00"
+        duration: PT15M
+        final: true
+        follows:
+          - make-cremoux
+          - make-candy-corn-crumble
+          - make-husk-powder
+        steps:
+          - instruction: Create decorative pattern on plate using blackened corn husk powder
+            ingredients:
+              - name: blackened corn husk powder
+                homemade: true
+            note: Use stencils, freehand dusting, or swooshes — contrast with the pale yellow cremoux
+            equipment:
+              - stencil (optional)
+              - fine sieve
+          - instruction: Form rocher (quenelle) of white chocolate corn cremoux using two spoons
+            ingredients:
+              - name: white chocolate corn cremoux
+                homemade: true
+            note: Approximately 60-70g per portion. Warm spoons in hot water, dry, then scoop for smooth finish
+            equipment:
+              - two spoons
+              - hot water
+          - instruction: Place cremoux rocher on the powder pattern
+          - instruction: Generously top with candy corn crumble
+            ingredients:
+              - name: candy corn crumble
+                homemade: true
+            note: Should cover top and cascade slightly down sides
+          - instruction: Add small accent of fresh corn elements if desired (micro corn shoots, corn silk tuile)
+            note: Optional garnish for texture and visual interest
+          - instruction: Serve immediately
+        storage: Assemble à la minute; components hold separately but assemble just before service
