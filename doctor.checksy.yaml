@@ -1,3 +1,4 @@
+failSeverity: error
 rules:
   - name: running in devcontainer
     check: '[ "$DEVCONTAINER" = "true" ]'
@@ -68,3 +69,8 @@ rules:
     check: pnpm install --frozen-lockfile --prefer-offline
     severity: error
     fix: pnpm install --frozen-lockfile
+
+  - name: Install checksy schema
+    check: '[ -f .schemas/checksy.schema.json ]'
+    severity: info
+    fix: checksy schema > .schemas/checksy.schema.json
