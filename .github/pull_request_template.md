@@ -1,7 +1,5 @@
 ## Summary
 
-
-
 ## Checklist
 
 - [ ] `just static` passes

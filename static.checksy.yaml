@@ -2,9 +2,6 @@ rules:
   - name: no trailing whitespace in yaml/json
     check: '! git ls-files -- "*.yaml" "*.json" | xargs grep -Hn " $"'
     severity: error
-  - name: yamllint checks on all yaml files
-    check: yamllint --strict $(git ls-files -- "*.yaml")
-    severity: debug
   - name: check yaml schema (dish)
     check: git ls-files -- "*.dish.yaml" | xargs check-jsonschema --schemafile schemas/dish.schema.json
     severity: error

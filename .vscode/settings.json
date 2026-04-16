@@ -6,7 +6,7 @@
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "[just]": {
-    "editor.tabSize": 4,
+    "editor.tabSize": 4
   },
   "json.schemaDownload.trustedDomains": {
     "https://models.dev/model-schema.json": true,

@@ -31,8 +31,8 @@ format *args:
     FILTER_FILE=$(mktemp)
     sed -e '/^#/d' -e '/^$/d' .formatignore > "$FILTER_FILE"
     case "{{args}}" in \
-        "") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --write ;; \
-        "--check") git ls-files -- "*.yaml" | grep -v -F -f "$FILTER_FILE" | xargs prettier --check ;; \
+        "") prettier . --write ;; \
+        "--check") prettier .--check ;; \
         *) echo "Usage: just format [--check]" >&2; exit 1 ;; \
     esac
     rm -f "$FILTER_FILE"

@@ -6,42 +6,42 @@ courses:
     description: Watermelon Tartar — Compressed watermelon like raw tuna with black garlic dashi caviar and chiffonade basil
     plating: Small ring mold on plate
     dishes:
-      - "&dishes/watermelon-tartar"
+      - '&dishes/watermelon-tartar'
     duration: PT30M
   - name: Salad
     description: Strawberries & Cream — Looks like dessert, eats like caprese
     plating: Coupe glass
     dishes:
-      - "&dishes/strawberries-and-cream"
+      - '&dishes/strawberries-and-cream'
     duration: PT10M
     first_course: true
   - name: Appetizer
     description: Bastiolo — Moroccan-Italian hybrid pastry
     plating: Small plate
     dishes:
-      - "&dishes/bastiolo"
+      - '&dishes/bastiolo'
     duration: PT15M
   - name: Interlude
     description: Ice Cream Stroganoff — Savory frozen cream
     plating: Small bowl
     dishes:
-      - "&dishes/ice-cream-stroganoff"
+      - '&dishes/ice-cream-stroganoff'
     duration: PT10M
   - name: Entrée
     description: Chicken Pot Pie — The honest control course
     plating: Baking dish
     dishes:
-      - "&dishes/chicken-pot-pie"
+      - '&dishes/chicken-pot-pie'
     duration: PT30M
   - name: Dessert
     description: Tres Maíces — White chocolate corn cremoux (corn cob-infused, crémeux technique) with candy corn crumble and burnt corn husk powder
     plating: Artful dessert plate
     dishes:
-      - "&dishes/tres-maices"
+      - '&dishes/tres-maices'
     duration: PT15M
   - name: Mignardise
     description: Violently Clarified Consommé — Crystal clear, the final act of honesty after deception, served in cordial glasses
     plating: Cordial glass
     dishes:
-      - "&dishes/violently-clarified-consomme"
+      - '&dishes/violently-clarified-consomme'
     duration: PT10M

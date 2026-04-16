@@ -114,15 +114,15 @@
   --font-body: 'Source Sans 3', 'Source Sans Pro', sans-serif;
 
   /* Type scale */
-  --text-xs: 0.75rem;    /* 12px - fine print */
-  --text-sm: 0.875rem;   /* 14px - captions */
-  --text-base: 1rem;     /* 16px - body */
-  --text-lg: 1.125rem;   /* 18px - lead text */
-  --text-xl: 1.25rem;    /* 20px - subheadings */
-  --text-2xl: 1.5rem;    /* 24px - section heads */
-  --text-3xl: 2rem;      /* 32px - page titles */
-  --text-4xl: 2.5rem;    /* 40px - cover title */
-  --text-5xl: 3rem;      /* 48px - hero title */
+  --text-xs: 0.75rem; /* 12px - fine print */
+  --text-sm: 0.875rem; /* 14px - captions */
+  --text-base: 1rem; /* 16px - body */
+  --text-lg: 1.125rem; /* 18px - lead text */
+  --text-xl: 1.25rem; /* 20px - subheadings */
+  --text-2xl: 1.5rem; /* 24px - section heads */
+  --text-3xl: 2rem; /* 32px - page titles */
+  --text-4xl: 2.5rem; /* 40px - cover title */
+  --text-5xl: 3rem; /* 48px - hero title */
 }
 ```
 
@@ -130,9 +130,9 @@
 
 ```css
 :root {
-  --color-primary: #CA3553;
+  --color-primary: #ca3553;
   --color-secondary: #000000;
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-text: #2d2a28;
   --color-muted: #666666;
   --color-border: #e5e5e5;

@@ -8,7 +8,7 @@ components:
       - id: roast-strawberries
         description: Roast strawberries
         duration: PT30M
-        time: "2026-04-18T11:00:00"
+        time: '2026-04-18T11:00:00'
         steps:
           - instruction: Heat oven to 400°F / 205°C
           - instruction: Toss strawberries with olive oil, vinegar, and salt
@@ -39,7 +39,7 @@ components:
       - id: make-cream
         description: Make stracciatella cream
         duration: PT15M
-        time: "2026-04-18T11:30:00"
+        time: '2026-04-18T11:30:00'
         steps:
           - instruction: Drain stracciatella in a sieve 5–10 minutes
             ingredients:
@@ -70,7 +70,7 @@ components:
       - id: make-crumb
         description: Make pistachio crumb
         duration: PT10M
-        time: "2026-04-18T10:30:00"
+        time: '2026-04-18T10:30:00'
         steps:
           - instruction: Chop or pulse pistachios to a coarse crumb
             ingredients:
@@ -99,7 +99,7 @@ components:
           - roast-strawberries
           - make-cream
           - make-crumb
-        time: "2026-04-18T17:30:00"
+        time: '2026-04-18T17:30:00'
         duration: PT10M
         steps:
           - instruction: Add ~100g cream to the bottom of each coupe, smoothing or forming a low quenelle

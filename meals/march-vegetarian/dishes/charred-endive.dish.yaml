@@ -7,8 +7,8 @@ components:
     preparations:
       - id: prep-endive
         description: Prep endive
-        time: "2026-03-22T12:30:00"
-        duration: "PT15M"
+        time: '2026-03-22T12:30:00'
+        duration: 'PT15M'
         steps:
           - instruction: Trim and halve the endive lengthwise, keeping the core intact so each half holds together
             ingredients:
@@ -35,8 +35,8 @@ components:
     preparations:
       - id: make-dressing
         description: Make dressing
-        time: "2026-03-22T12:00:00"
-        duration: "PT5M"
+        time: '2026-03-22T12:00:00'
+        duration: 'PT5M'
         steps:
           - instruction: In squeeze bottle, combine lemon juice and olive oil
             ingredients:
@@ -59,8 +59,8 @@ components:
           - prep-endive
           - make-dressing
         final: true
-        time: "2026-03-22T13:40:00"
-        duration: "PT5M"
+        time: '2026-03-22T13:40:00'
+        duration: 'PT5M'
         steps:
           - instruction: Return dressing to room temperature if refrigerated
           - instruction: Torch the cut face and edges of the endive to create light, localized char

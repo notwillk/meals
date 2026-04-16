@@ -8,19 +8,19 @@ rules:
     severity: info
 
   - name: just is available
-    check: "which just > /dev/null 2>&1"
+    check: 'which just > /dev/null 2>&1'
     severity: error
 
   - name: jq is available
-    check: "which jq > /dev/null 2>&1"
+    check: 'which jq > /dev/null 2>&1'
     severity: error
 
   - name: watchexec is available
-    check: "which watchexec > /dev/null 2>&1"
+    check: 'which watchexec > /dev/null 2>&1'
     severity: error
 
   - name: opencode is available
-    check: "which opencode > /dev/null 2>&1"
+    check: 'which opencode > /dev/null 2>&1'
     severity: error
 
   - name: Opencode config set to workspace
@@ -43,12 +43,12 @@ rules:
       jq --argjson u "$UNION" '.customizations.vscode.extensions = $u' .devcontainer/devcontainer.json > /tmp/_dc_ext.json && mv /tmp/_dc_ext.json .devcontainer/devcontainer.json
 
   - name: swimlane schema-json config exists
-    check: "[ -f .schemas/swimlane-config.json ]"
+    check: '[ -f .schemas/swimlane-config.json ]'
     severity: error
     fix: swimlane schema-json config > .schemas/swimlane-config.json
 
   - name: swimlane schema-json ticket exists
-    check: "[ -f .schemas/swimlane-ticket.json ]"
+    check: '[ -f .schemas/swimlane-ticket.json ]'
     severity: error
     fix: swimlane schema-json ticket > .schemas/swimlane-ticket.json
 

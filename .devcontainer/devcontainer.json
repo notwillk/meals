@@ -13,7 +13,6 @@
     "ghcr.io/notwillk/devcontainer-features/opencode": {},
     "ghcr.io/notwillk/devcontainer-features/prettier": {},
     "ghcr.io/notwillk/devcontainer-features/watchexec": {},
-    "ghcr.io/notwillk/devcontainer-features/yamllint": {},
     "ghcr.io/rocker-org/devcontainer-features/pandoc": {}
   },
   "containerEnv": {

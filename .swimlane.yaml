@@ -1,8 +1,8 @@
-tickets: ".todo/**/*.md"
+tickets: '.todo/**/*.md'
 default_path: .todo
 
 default:
-  $schema: "../.schemas/swimlane-ticket.json"
+  $schema: '../.schemas/swimlane-ticket.json'
   priority: p2
   ready: true
   tags: []

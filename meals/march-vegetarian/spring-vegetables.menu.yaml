@@ -6,48 +6,48 @@ courses:
     description: Warm roasted celeriac velouté shooter
     plating: Served in a small shooter glass with a drizzle of chili oil on top
     dishes:
-      - "&dishes/celeriac-veloute"
+      - '&dishes/celeriac-veloute'
     duration: PT30M
   - name: Salad
     description: Watercress salad
     plating: Large plate
     dishes:
-      - "&dishes/watercress-salad"
+      - '&dishes/watercress-salad'
     duration: PT10M
     first_course: true
   - name: Appetizer
     description: Ricotta and nettle toast with hazelnut pangrattato
     plating: Bread Plate
     dishes:
-      - "&dishes/ricotta-and-nettle-toast-with-hazelnut-pangrattato"
+      - '&dishes/ricotta-and-nettle-toast-with-hazelnut-pangrattato'
     duration: PT15M
   - name: Intermezzo
     hidden: false
     description: Hot clear mushroom–kombu tea
     plating: Tea cup
     dishes:
-      - "&dishes/mushroom-kombu-tea"
+      - '&dishes/mushroom-kombu-tea'
     duration: PT10M
   - name: Second Salad
     description: Charred endive
     plating: Small plate
     dishes:
-      - "&dishes/charred-endive"
+      - '&dishes/charred-endive'
     duration: PT20M
   - name: Entrée
     description: Asparagus soufflé with Gruyère & Robiola
     plating: Ramekin with small plate
     dishes:
-      - "&dishes/asparagus-soufflé-with-gruyere-and-robiola"
+      - '&dishes/asparagus-soufflé-with-gruyere-and-robiola'
     duration: PT25M
   - name: Dessert
     description: Carrot Sponge with Chamomile Cream
     plating: Small plate
     dishes:
-      - "&dishes/carrot-sponge-chamomile-cream"
+      - '&dishes/carrot-sponge-chamomile-cream'
     duration: PT15M
   - name: Mignardise
     description: Honey grapefruit pâte de fruit
     plating: Oval serving dish
     dishes:
-      - "&dishes/honey-grapefruit-pate-de-fruit"
+      - '&dishes/honey-grapefruit-pate-de-fruit'

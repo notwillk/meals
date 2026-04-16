@@ -1,12 +1,12 @@
 - name: Go to farmer's market
-  time: "2026-03-21T08:00:00"
-  duration: "PT1H"
+  time: '2026-03-21T08:00:00'
+  duration: 'PT1H'
 - name: Go to Rainbow Grocery
-  time: "2026-03-20T17:00:00"
-  duration: "PT1H"
+  time: '2026-03-20T17:00:00'
+  duration: 'PT1H'
 - name: Shower
-  time: "2026-03-22T11:00:00"
-  duration: "PT30M"
+  time: '2026-03-22T11:00:00'
+  duration: 'PT30M'
 - name: Last minute grocery run
-  time: "2026-03-22T09:00:00"
-  duration: "PT30M"
+  time: '2026-03-22T09:00:00'
+  duration: 'PT30M'

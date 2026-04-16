@@ -12,7 +12,7 @@ components:
       - id: make-sponge
         description: Make the carrot sponge base
         duration: PT1H45M
-        time: "2026-03-21T14:00:00"
+        time: '2026-03-21T14:00:00'
         steps:
           - instruction: Peel and finely grate the carrots with microplane
             equipment:
@@ -109,7 +109,7 @@ components:
       - id: make-candied-carrot-curls
         description: Make the candied carrot curls
         duration: PT1H45M
-        time: "2026-03-21T13:30:00"
+        time: '2026-03-21T13:30:00'
         steps:
           - instruction: Peel the carrot and use a vegetable peeler to shave it into thin ribbons
             equipment:
@@ -160,7 +160,7 @@ components:
       - id: make-cream
         description: Make the chamomile cream
         duration: PT4H30M
-        time: "2026-03-21T13:00:00"
+        time: '2026-03-21T13:00:00'
         steps:
           - instruction: Combine the cream and chamomile in a vacuum bag and seal
             equipment:
@@ -218,7 +218,7 @@ components:
           - make-candied-carrot-curls
           - make-cream
         final: true
-        time: "2026-03-22T14:25:00"
+        time: '2026-03-22T14:25:00'
         steps:
           - instruction: Cut the sponge using an elliptical cookie cutter (2.5")
             equipment:

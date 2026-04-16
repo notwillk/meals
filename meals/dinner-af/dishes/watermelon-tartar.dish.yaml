@@ -11,7 +11,7 @@ components:
     preparations:
       - id: prep-watermelon-tartar
         description: Prepare watermelon tartar to mimic raw tuna
-        time: "2026-04-18T10:00:00"
+        time: '2026-04-18T10:00:00'
         duration: PT1H
         steps:
           - instruction: Trim rind from seedless watermelon; cut flesh into 6mm dice
@@ -51,7 +51,7 @@ components:
     preparations:
       - id: make-dashi-caviar
         description: Create spherified black garlic dashi pearls
-        time: "2026-04-17T11:00:00"
+        time: '2026-04-17T11:00:00'
         duration: PT2H
         steps:
           - instruction: Combine kombu and water in a saucepan, let soak for 20 minutes
@@ -140,7 +140,7 @@ components:
     preparations:
       - id: prep-basil-garnish
         description: Prepare chiffonade basil for garnish
-        time: "2026-04-18T16:45:00"
+        time: '2026-04-18T16:45:00'
         duration: PT5M
         steps:
           - instruction: Stack basil leaves and roll tightly into a cigar
@@ -159,7 +159,7 @@ components:
     preparations:
       - id: plate-watermelon-tartar
         description: Plate watermelon tartar amuse-bouche
-        time: "2026-04-18T17:00:00"
+        time: '2026-04-18T17:00:00'
         duration: PT5M
         final: true
         follows:

@@ -11,8 +11,8 @@ components:
     preparations:
       - id: make-spread
         description: Make ricotta and nettle spread
-        time: "2026-03-21T10:00:00"
-        duration: "PT15M"
+        time: '2026-03-21T10:00:00'
+        duration: 'PT15M'
         steps:
           - instruction: If ricotta is very wet, drain briefly before using
             ingredients:
@@ -79,8 +79,8 @@ components:
     preparations:
       - id: make-pangrattato
         description: Make hazelnut pangrattato
-        time: "2026-03-20T18:30:00"
-        duration: "PT20M"
+        time: '2026-03-20T18:30:00'
+        duration: 'PT20M'
         steps:
           - instruction: Toast the hazelnuts in 200°C oven for 7-8 minutes until golden brown
             equipment:
@@ -129,8 +129,8 @@ components:
     preparations:
       - id: make-shrub-garnish
         description: Green apple shrub (lightly structured)
-        time: "2026-03-20T19:30:00"
-        duration: "PT1H30M"
+        time: '2026-03-20T19:30:00'
+        duration: 'PT1H30M'
         steps:
           - instruction: Core and roughly chop apples (leave skins on for structure and tannin)
             ingredients:
@@ -172,7 +172,7 @@ components:
                 note: ~0.1% by weight
                 source: Amazon
           - instruction: Rest 15 minutes to hydrate and stabilize
-          - instruction: "Taste and adjust (optional: tiny splash water if too sharp)"
+          - instruction: 'Taste and adjust (optional: tiny splash water if too sharp)'
         storage: Refrigerate up to 2 weeks
 
   - id: service
@@ -185,8 +185,8 @@ components:
           - make-pangrattato
           - make-shrub-garnish
         final: true
-        time: "2026-03-22T13:25:00"
-        duration: "PT5M"
+        time: '2026-03-22T13:25:00'
+        duration: 'PT5M'
         steps:
           - instruction: Taste the spread once more before plating and adjust if needed
           - instruction: Slice the bread along the bias with pieces that are around 4" long and 0.75" thick

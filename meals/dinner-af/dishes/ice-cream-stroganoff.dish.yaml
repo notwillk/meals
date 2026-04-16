@@ -11,7 +11,7 @@ components:
     preparations:
       - id: make-choux-balls
         description: Prepare savory choux balls
-        time: "2026-04-18T14:00:00"
+        time: '2026-04-18T14:00:00'
         duration: PT45M
         steps:
           - instruction: Combine water, milk, butter, and salt in saucepan
@@ -86,7 +86,7 @@ components:
     preparations:
       - id: make-kombu-milk
         description: Prepare kombu-infused milk base
-        time: "2026-04-16T16:00:00"
+        time: '2026-04-16T16:00:00'
         duration: PT1H
         steps:
           - instruction: Combine 150g milk with kombu in sous vide bag or heat-safe container
@@ -112,7 +112,7 @@ components:
 
       - id: make-duxelles
         description: Cook duxelles for ice cream base
-        time: "2026-04-16T17:00:00"
+        time: '2026-04-16T17:00:00'
         duration: PT30M
         steps:
           - instruction: Finely chop mushrooms to near-paste consistency (food processor or knife)
@@ -139,7 +139,7 @@ components:
 
       - id: make-stroganoff-ice-cream
         description: Prepare savory custard base with duxelles, split for dual texture approach
-        time: "2026-04-16T18:00:00"
+        time: '2026-04-16T18:00:00'
         duration: PT4H
         follows:
           - make-kombu-milk
@@ -240,7 +240,7 @@ components:
 
       - id: process-creami-ice-cream
         description: Process Creami batch through Ninja Creami for superfine texture (next day)
-        time: "2026-04-17T10:00:00"
+        time: '2026-04-17T10:00:00'
         duration: PT15M
         follows:
           - make-stroganoff-ice-cream
@@ -264,7 +264,7 @@ components:
     preparations:
       - id: sous-vide-filet-mignon
         description: Sous vide filet mignon cubes to medium rare
-        time: "2026-04-18T14:00:00"
+        time: '2026-04-18T14:00:00'
         duration: PT1H30M
         steps:
           - instruction: Dice filet mignon into approximately 1 cm cubes
@@ -301,7 +301,7 @@ components:
 
       - id: sear-filet-mignon
         description: Pan sear sous vide beef cubes for crust
-        time: "2026-04-18T17:30:00"
+        time: '2026-04-18T17:30:00'
         duration: PT15M
         follows:
           - sous-vide-filet-mignon
@@ -328,14 +328,14 @@ components:
             note: Season while hot so salt adheres
           - instruction: Optional - for last batch, add butter and brandy to deglaze, creating light pan sauce to drizzle over beef
             ingredients:
-               - name: butter
-                 qty: 20
-                 unit: gram
-                 note: optional
-               - name: brandy or cognac
-                 qty: 15
-                 unit: ml
-                 note: optional
+              - name: butter
+                qty: 20
+                unit: gram
+                note: optional
+              - name: brandy or cognac
+                qty: 15
+                unit: ml
+                note: optional
             note: Be careful of flare-up when adding alcohol to hot pan; light glazing with reduced pan juices improves integration with cream elements
           - instruction: Hold beef cubes warm (not hot) until assembly
             note: Approximately 50-55°C; do not hold hot or carryover will overcook
@@ -346,32 +346,32 @@ components:
     preparations:
       - id: assemble-stroganoff
         description: Assemble ice cream stroganoff with temperature contrast
-        time: "2026-04-18T17:55:00"
+        time: '2026-04-18T17:55:00'
         duration: PT15M
         final: true
         follows:
-           - make-choux-balls
-           - make-stroganoff-ice-cream
-           - process-creami-ice-cream
-           - make-creme-fraiche-syrup
-           - sear-filet-mignon
+          - make-choux-balls
+          - make-stroganoff-ice-cream
+          - process-creami-ice-cream
+          - make-creme-fraiche-syrup
+          - sear-filet-mignon
         steps:
-           - instruction: Reheat choux balls if necessary - place in 160 degrees C oven for 5-8 minutes until warm and crisp
-             note: Choux should be warm for optimal contrast
-             equipment:
-               - oven
-           - instruction: Using a serrated knife, cut the top 1/3 off each choux ball to create a lid
-             note: Cut horizontally with a sawing motion; reserve lids for garnish or discard
-             equipment:
-               - serrated knife
-           - instruction: Lightly brush interior of choux ball with melted butter just before plating
-             note: Enhances aroma and helps integrate melting ice cream into base
-           - instruction: Place warm choux ball (bottom portion) centered on serving plate
-           - instruction: Scatter filet mignon cubes into and around the choux ball
-             note: Beef should be warm, approximately 50-55 degrees C
-           - instruction: Using warm spoon dipped in hot water, form quenelle of ice cream and place slightly off-center on plate
-             note: Ice cream should be cold and scoopable but not rock-hard; temper 3-5 minutes before scooping if needed
-             equipment:
-             - warm spoon
-           - instruction: Serve immediately with temperature contrast intact
-             note: Target - choux warm, beef warm, ice cream cold, syrup cool; reads as dessert, eats as stroganoff
+          - instruction: Reheat choux balls if necessary - place in 160 degrees C oven for 5-8 minutes until warm and crisp
+            note: Choux should be warm for optimal contrast
+            equipment:
+              - oven
+          - instruction: Using a serrated knife, cut the top 1/3 off each choux ball to create a lid
+            note: Cut horizontally with a sawing motion; reserve lids for garnish or discard
+            equipment:
+              - serrated knife
+          - instruction: Lightly brush interior of choux ball with melted butter just before plating
+            note: Enhances aroma and helps integrate melting ice cream into base
+          - instruction: Place warm choux ball (bottom portion) centered on serving plate
+          - instruction: Scatter filet mignon cubes into and around the choux ball
+            note: Beef should be warm, approximately 50-55 degrees C
+          - instruction: Using warm spoon dipped in hot water, form quenelle of ice cream and place slightly off-center on plate
+            note: Ice cream should be cold and scoopable but not rock-hard; temper 3-5 minutes before scooping if needed
+            equipment:
+              - warm spoon
+          - instruction: Serve immediately with temperature contrast intact
+            note: Target - choux warm, beef warm, ice cream cold, syrup cool; reads as dessert, eats as stroganoff

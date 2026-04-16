@@ -181,4 +181,3 @@ Repositories following this workflow should have:
 - minimal branching complexity
 - CI-enforced quality
 - simple release management
-

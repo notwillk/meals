@@ -11,7 +11,7 @@ components:
     preparations:
       - id: make-chicken-stock-pressure
         description: Create deeply flavorful chicken stock using pressure cooker
-        time: "2026-04-16T10:00:00"
+        time: '2026-04-16T10:00:00'
         duration: PT2H30M
         steps:
           - instruction: Preheat oven to 450°F (230°C)
@@ -49,7 +49,7 @@ components:
     preparations:
       - id: prep-rotisserie-chicken
         description: Debone and dice rotisserie chicken
-        time: "2026-04-18T16:00:00"
+        time: '2026-04-18T16:00:00'
         duration: PT30M
         steps:
           - instruction: Purchase 1 rotisserie chicken from grocery store (approximately 3.5-4 lb / 1.5-1.8 kg)
@@ -69,7 +69,7 @@ components:
     preparations:
       - id: make-pie-filling
         description: Make vegetable filling with roux-based sauce
-        time: "2026-04-18T17:00:00"
+        time: '2026-04-18T17:00:00'
         duration: PT1H
         follows:
           - prep-rotisserie-chicken
@@ -174,7 +174,7 @@ components:
     preparations:
       - id: make-pie-crust
         description: Make pie crust with sour cream in food processor
-        time: "2026-04-18T14:00:00"
+        time: '2026-04-18T14:00:00'
         duration: PT45M
         steps:
           - instruction: Add flour, salt, and sliced butter to food processor
@@ -216,7 +216,7 @@ components:
     preparations:
       - id: assemble-and-bake
         description: Assemble pot pie in casserole dish and bake
-        time: "2026-04-18T18:05:00"
+        time: '2026-04-18T18:05:00'
         duration: PT45M
         final: true
         follows:

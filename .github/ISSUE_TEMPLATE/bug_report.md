@@ -6,16 +6,13 @@ labels: bug
 
 **Describe the bug**
 
-
 **Steps to reproduce**
 
 1.
 
 **Expected behaviour**
 
-
 **Actual behaviour**
-
 
 **Environment**
 

@@ -11,12 +11,12 @@ User needs TypeScript expertise — from basic typing to advanced generics. Agen
 
 ## Quick Reference
 
-| Topic | File |
-|-------|------|
-| Generic patterns | `generics.md` |
-| Utility types | `utility-types.md` |
-| Declaration files | `declarations.md` |
-| Migration from JS | `migration.md` |
+| Topic             | File               |
+| ----------------- | ------------------ |
+| Generic patterns  | `generics.md`      |
+| Utility types     | `utility-types.md` |
+| Declaration files | `declarations.md`  |
+| Migration from JS | `migration.md`     |
 
 ## Stop Using `any`
 

@@ -15,11 +15,13 @@ compatibility: opencode
 Skills must install **only at the project level** (`/workspaces/meals/.opencode/skills/`), never globally.
 
 **Why:**
+
 - Global skills (`~/.openclaw/skills/`, `~/.opencode/skills/`, etc.) are not git-tracked
 - They are lost when the container is rebuilt
 - Project-level installation ensures skills are version-controlled and shared across machines
 
 **How:**
+
 ```bash
 npx -y @lobehub/market-cli skills install <identifier> --dir /workspaces/meals/.opencode/skills
 ```

@@ -10,8 +10,8 @@ components:
     preparations:
       - id: prep-souffle
         description: Prepare the soufflé base
-        time: "2026-03-21T17:00:00"
-        duration: "PT35M"
+        time: '2026-03-21T17:00:00'
+        duration: 'PT35M'
         steps:
           - instruction: Blanch the asparagus for 2 minutes in boiling salted water. Rinse immediately in ice water to stop cooking. Drain and set aside to let cool
             ingredients:
@@ -100,8 +100,8 @@ components:
         final: true
         follows:
           - prep-souffle
-        time: "2026-03-22T14:00:00"
-        duration: "PT5M"
+        time: '2026-03-22T14:00:00'
+        duration: 'PT5M'
         steps:
           - instruction: Ensure the soufflé base is at room temperature before folding in egg whites
           - instruction: Preheat oven to 400°F

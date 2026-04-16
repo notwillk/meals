@@ -4,7 +4,7 @@ on:
   workflow_call:
     outputs:
       image_tag:
-        description: "The image tag"
+        description: 'The image tag'
         value: ${{ jobs.compute.outputs.image_tag }}
 
 jobs:

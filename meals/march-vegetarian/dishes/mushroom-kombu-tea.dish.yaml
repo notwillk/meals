@@ -10,8 +10,8 @@ components:
     preparations:
       - id: make-tea
         description: Make tea ahead of time
-        time: "2026-03-21T16:00:00"
-        duration: "PT1H30M"
+        time: '2026-03-21T16:00:00'
+        duration: 'PT1H30M'
         steps:
           - instruction: Add the maple syrup, light soy sauce, water, and rice vinegar to a vacuum-sealed bag and cook sous vide at 85°C (185°F) for 1 hour
             equipment:
@@ -66,8 +66,8 @@ components:
       - id: service
         description: Service
         final: true
-        time: "2026-03-22T13:40:00"
-        duration: "PT5M"
+        time: '2026-03-22T13:40:00'
+        duration: 'PT5M'
         steps:
           - instruction: Reheat via sous vide at 150°F until hot (~20 minutes). Hold at temperature for up to 60 minutes if absolutely needed (flavor will gradually dull over time).
             equipment:

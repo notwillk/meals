@@ -6,9 +6,6 @@ labels: enhancement
 
 **Problem or motivation**
 
-
 **Proposed solution**
 
-
 **Alternatives considered**
-

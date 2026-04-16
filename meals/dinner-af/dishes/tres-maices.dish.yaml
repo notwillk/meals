@@ -11,7 +11,7 @@ components:
     preparations:
       - id: make-corn-puree
         description: Create smooth corn puree from kernels
-        time: "2026-04-16T21:00:00"
+        time: '2026-04-16T21:00:00'
         duration: PT30M
         steps:
           - instruction: Remove kernels from corn cobs, reserve cobs for later infusion
@@ -46,9 +46,9 @@ components:
             note: Should yield smooth, vibrant yellow corn puree
         storage: Refrigerate up to 24 hours
 
-      - id:: make-cremoux
+      - id: make-cremoux
         description: Create white chocolate corn cremoux (based on Matt Adlard's white chocolate crémeux with corn cob infusion)
-        time: "2026-04-17T19:00:00"
+        time: '2026-04-17T19:00:00'
         duration: PT40M
         follows:
           - make-corn-puree
@@ -130,7 +130,7 @@ components:
     preparations:
       - id: make-candy-corn-crumble
         description: Chop candy corn into crumble consistency
-        time: "2026-04-18T16:00:00"
+        time: '2026-04-18T16:00:00'
         duration: PT10M
         steps:
           - instruction: Roughly chop candy corn into small pieces (3-5mm)
@@ -151,7 +151,7 @@ components:
     preparations:
       - id: make-husk-powder
         description: Burn and powder corn husks from the cremoux corn cobs
-        time: "2026-04-17T09:00:00"
+        time: '2026-04-17T09:00:00'
         duration: PT30M
         steps:
           - instruction: Remove and reserve outer dry corn husks from the ears used for cremoux
@@ -179,7 +179,7 @@ components:
     preparations:
       - id: plate-tres-maices
         description: Plate the Tres Maíces dessert
-        time: "2026-04-18T18:35:00"
+        time: '2026-04-18T18:35:00'
         duration: PT15M
         final: true
         follows:
