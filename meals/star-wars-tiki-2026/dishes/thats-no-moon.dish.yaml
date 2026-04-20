@@ -1,0 +1,41 @@
+id: thats-no-moon
+description: That's No Moon
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Plantation 3 star rum
+                qty: 1.5
+                unit: oz
+              - name: Hotaling Apple brandy
+                qty: 1
+                unit: oz
+              - name: Sherry
+                qty: 0.5
+                unit: oz
+              - name: Gin
+                qty: 0.5
+                unit: oz
+              - name: Orgeat
+                qty: 0.5
+                unit: oz
+              - name: Orange juice
+                qty: 1.5
+                unit: oz
+              - name: Lemon juice
+                qty: 1.5
+                unit: oz
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with mint sprig
+        storage: Serve immediately

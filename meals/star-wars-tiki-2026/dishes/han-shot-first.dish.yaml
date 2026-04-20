@@ -1,0 +1,35 @@
+id: han-shot-first
+description: Han Shot First
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Appleton estate rum
+                qty: 2
+                unit: oz
+              - name: Pierre Ferrand dry curacao
+                qty: 0.5
+                unit: oz
+              - name: Orgeat
+                qty: 0.5
+                unit: oz
+              - name: Simple syrup
+                qty: 0.25
+                unit: oz
+              - name: Lime juice
+                qty: 1
+                unit: oz
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with lime wheel and mint sprig
+        storage: Serve immediately

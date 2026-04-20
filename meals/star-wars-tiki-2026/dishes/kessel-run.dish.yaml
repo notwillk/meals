@@ -1,0 +1,44 @@
+id: kessel-run
+description: Kessel Run
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Avuá Cachaça
+                qty: 1.5
+                unit: oz
+              - name: Kraken rum
+                qty: 0.5
+                unit: oz
+              - name: St. Elizabeth allspice dram
+                qty: 0.25
+                unit: oz
+              - name: California falernum
+                qty: 0.25
+                unit: oz
+              - name: Angostura bitters
+                qty: 1
+                unit: dash
+              - name: Honey syrup
+                qty: 0.5
+                unit: oz
+              - name: Lime juice
+                qty: 0.5
+                unit: oz
+              - name: Orange juice
+                qty: 0.5
+                unit: oz
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with pineapple frond and 3 cherries
+        storage: Serve immediately

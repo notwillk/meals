@@ -1,0 +1,38 @@
+id: jawa-juice
+description: Jawa Juice
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Plantation 3 star rum
+                qty: 1.5
+                unit: oz
+              - name: Pierre Ferrand dry curacao
+                qty: 0.75
+                unit: oz
+              - name: Pineapple juice
+                qty: 2
+                unit: oz
+              - name: Lemon juice
+                qty: 0.5
+                unit: oz
+              - name: Creme of coconut
+                qty: 0.75
+                unit: oz
+              - name: blue food coloring
+                qty: 1
+                unit: drop
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with pineapple wedge and cherry
+        storage: Serve immediately

@@ -1,0 +1,40 @@
+id: mango-ginger-shrub
+description: Mango-Ginger Shrub
+
+yield:
+  qty: 500
+  unit: ml
+
+components:
+  - id: prep-mango-ginger-shrub
+    description: Make mango-ginger shrub
+    preparations:
+      - id: make-mango-ginger-shrub
+        description: Make mango-ginger shrub
+        steps:
+          - instruction: Add all ingredients to vacuum seal bag
+            ingredients:
+              - name: mango
+                qty: 454
+                unit: g
+                note: frozen, chunks or pulp
+              - name: monkfruit extract
+                qty: 1.5
+                unit: g
+              - name: rice vinegar
+                qty: 200
+                unit: g
+              - name: ginger
+                qty: 80
+                unit: g
+                note: fresh, peeled, sliced thin
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 145°F / 63°C for 3 hours
+          - instruction: Remove from water bath
+          - instruction: Run entire bag contents through masticating juicer
+          - instruction: No straining needed after juicing
+        notes:
+          - If it punches too hard: add 20–40 g water post-juice
+          - If it doesn't punch hard enough: you underdid the ginger, not the process
+          - Ginger-forward, aggressive ginger with bright acid
+          - Fridge-stable for weeks

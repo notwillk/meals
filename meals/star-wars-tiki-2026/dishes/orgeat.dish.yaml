@@ -1,0 +1,47 @@
+id: orgeat
+description: Orgeat
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-orgeat
+    description: Make orgeat syrup
+    preparations:
+      - id: make-orgeat
+        description: Make orgeat syrup
+        steps:
+          - instruction: Combine sugar and almond milk in a vacuum seal bag
+            ingredients:
+              - name: sugar
+                qty: 100
+                unit: g
+              - name: almond milk
+                qty: 100
+                unit: g
+                note: unsweetened, shake well before using
+          - instruction: Add almond extract if using
+            ingredients:
+              - name: almond extract
+                qty: 0.5
+                unit: tsp
+                note: optional but recommended for punch
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 140°F / 60°C for 1.5–2 hours
+          - instruction: Massage bag once midway through cooking to fully dissolve sugar
+          - instruction: Remove from water bath, let cool
+          - instruction: Add 5 ml orange flower water + 10 ml neutral spirit (optional)
+            ingredients:
+              - name: orange flower water
+                qty: 5
+                unit: ml
+              - name: neutral spirit
+                qty: 10
+                unit: ml
+                note: optional, extends shelf life
+        notes:
+          - No straining needed
+          - Shake before use (natural separation can happen)
+          - Must be refrigerated; shelf life ~1–2 weeks
+          - 'For richer flavor: swap 20–30 g almond milk for lightly toasted almond paste in the bag'

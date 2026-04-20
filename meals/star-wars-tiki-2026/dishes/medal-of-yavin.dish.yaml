@@ -1,0 +1,31 @@
+id: medal-of-yavin
+description: Medal of Yavin
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in mixing glass with ice
+            ingredients:
+              - name: Pierre Ferrand cognac
+                qty: 2
+                unit: oz
+              - name: Chambord
+                qty: 0.75
+                unit: oz
+              - name: Peychaud's bitters
+                qty: 2
+                unit: dashes
+              - name: Vanilla Syrup
+                qty: 0.5
+                unit: oz
+          - instruction: Stir well, strain into Nick & Nora glass
+        storage: Serve immediately

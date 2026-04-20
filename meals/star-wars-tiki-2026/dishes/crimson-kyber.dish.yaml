@@ -1,0 +1,25 @@
+id: crimson-kyber
+description: Crimson Kyber
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Build over ice in highball
+            ingredients:
+              - name: Cherry-sage shrub
+                qty: 2
+                unit: oz
+              - name: Soda water
+                qty: 8
+                unit: oz
+          - instruction: Garnish with flower
+        storage: Serve immediately

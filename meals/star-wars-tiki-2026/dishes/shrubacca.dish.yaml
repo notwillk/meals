@@ -1,0 +1,24 @@
+id: shrubacca
+description: Shrubacca
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: make-drink
+    description: Make drink
+    preparations:
+      - id: make-drink
+        description: Make drink
+        final: true
+        steps:
+          - instruction: Build over ice in highball
+            ingredients:
+              - name: Mango-ginger shrub
+                qty: 2
+                unit: oz
+              - name: Soda water
+                qty: 8
+                unit: oz
+          - instruction: Garnish with flower

@@ -1,0 +1,37 @@
+id: cherry-sage-shrub
+description: Cherry-Sage Shrub
+
+yield:
+  qty: 500
+  unit: ml
+
+components:
+  - id: prep-cherry-sage-shrub
+    description: Make cherry-sage shrub
+    preparations:
+      - id: make-cherry-sage-shrub
+        description: Make cherry-sage shrub
+        steps:
+          - instruction: Add all ingredients to vacuum seal bag
+            ingredients:
+              - name: frozen cherries
+                qty: 454
+                unit: g
+                note: pitted
+              - name: monkfruit extract
+                qty: 1.5
+                unit: g
+              - name: red wine vinegar
+                qty: 200
+                unit: g
+              - name: fresh sage leaves
+                qty: 20
+                unit: g
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 140°F / 60°C for 2–2.5 hours
+          - instruction: Remove sage leaves before juicing
+          - instruction: Run contents through masticating juicer
+        notes:
+          - If too tannic: add 10–20 g simple syrup post
+          - Dark + herbal; sage ramps quickly—err low
+          - Fridge-stable for weeks

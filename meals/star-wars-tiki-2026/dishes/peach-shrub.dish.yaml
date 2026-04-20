@@ -1,0 +1,40 @@
+id: peach-shrub
+description: Peach Shrub
+
+yield:
+  qty: 500
+  unit: ml
+
+components:
+  - id: prep-peach-shrub
+    description: Make peach shrub
+    preparations:
+      - id: make-peach-shrub
+        description: Make peach shrub
+        steps:
+          - instruction: Add all ingredients to vacuum seal bag (remove peel before juicing if using)
+            ingredients:
+              - name: peach
+                qty: 454
+                unit: g
+                note: frozen
+              - name: monkfruit extract
+                qty: 1.5
+                unit: g
+              - name: white wine vinegar
+                qty: 200
+                unit: g
+              - name: lemon peel
+                qty: 1
+                unit: strip
+                note: optional, no pith
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 145°F / 63°C for 2.5 hours
+          - instruction: Remove from water bath
+          - instruction: Remove lemon peel before juicing if used
+          - instruction: Run contents through masticating juicer
+        notes:
+          - If too soft: add 10–20 g lemon juice after
+          - Round, soft, slightly floral
+          - White wine vinegar keeps it lifted
+          - Fridge-stable for weeks

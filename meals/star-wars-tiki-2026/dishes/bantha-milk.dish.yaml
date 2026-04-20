@@ -1,0 +1,28 @@
+id: bantha-milk
+description: Bantha milk
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine milk, vanilla syrup, and blue food coloring in glass
+            ingredients:
+              - name: Milk
+                qty: 8
+                unit: oz
+              - name: Vanilla syrup
+                qty: 0.5
+                unit: oz
+              - name: blue food coloring
+                qty: 1
+                unit: drop
+          - instruction: Stir well, serve
+        storage: Serve immediately

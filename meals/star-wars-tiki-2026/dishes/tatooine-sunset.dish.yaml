@@ -1,0 +1,41 @@
+id: tatooine-sunset
+description: Tatooine Sunset
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Wild Turkey 101
+                qty: 1
+                unit: oz
+              - name: Angostura bitters
+                qty: 1
+                unit: dash
+              - name: Demerara syrup
+                qty: 0.5
+                unit: oz
+              - name: Pomegranate molasses
+                qty: 1
+                unit: bar spoon
+              - name: Pineapple juice
+                qty: 0.5
+                unit: oz
+              - name: Orange juice
+                qty: 0.5
+                unit: oz
+              - name: Lemon juice
+                qty: 0.5
+                unit: oz
+          - instruction: Shake well, strain into highball with ice
+          - instruction: Garnish with pineapple fronds
+        storage: Serve immediately

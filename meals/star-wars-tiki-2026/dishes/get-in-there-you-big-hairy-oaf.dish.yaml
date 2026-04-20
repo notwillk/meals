@@ -1,0 +1,50 @@
+id: get-in-there-you-big-hairy-oaf
+description: Get in there you big hairy oaf, I don't care what you smell
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Plantation 3 star rum
+                qty: 1.5
+                unit: oz
+              - name: Appleton estate rum
+                qty: 1.5
+                unit: oz
+              - name: Plantation OFTD rum
+                qty: 1
+                unit: oz
+              - name: California falernum
+                qty: 0.5
+                unit: oz
+              - name: Pernod
+                qty: 1
+                unit: bar spoon
+              - name: Cinnamon syrup
+                qty: 0.25
+                unit: oz
+              - name: Grenadine
+                qty: 1
+                unit: tsp
+              - name: Lime juice
+                qty: 0.75
+                unit: oz
+              - name: Grapefruit juice
+                qty: 0.5
+                unit: oz
+              - name: Angostura bitters
+                qty: 1
+                unit: dash
+          - instruction: Shake well, float Plantation OFTD rum on top
+          - instruction: Garnish with grated cinnamon
+        storage: Serve immediately

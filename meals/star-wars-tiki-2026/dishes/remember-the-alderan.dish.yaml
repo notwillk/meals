@@ -1,0 +1,35 @@
+id: remember-the-alderan
+description: Remember the Alderan
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Gin
+                qty: 1.25
+                unit: oz
+              - name: California falernum
+                qty: 0.25
+                unit: oz
+              - name: Passionfruit Syrup
+                qty: 0.5
+                unit: oz
+              - name: Orgeat
+                qty: 0.25
+                unit: oz
+              - name: Lemon juice
+                qty: 0.5
+                unit: oz
+          - instruction: Shake well, strain into coupe glass
+          - instruction: Garnish with orange wheel and flower
+        storage: Serve immediately

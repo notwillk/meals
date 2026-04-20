@@ -1,0 +1,37 @@
+id: dagoba-swamp-water
+description: Dagoba Swamp Water
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Vodka
+                qty: 1.5
+                unit: oz
+              - name: Midori
+                qty: 0.5
+                unit: oz
+              - name: Vanilla syrup
+                qty: 1
+                unit: oz
+              - name: Pineapple juice
+                qty: 2
+                unit: oz
+              - name: Lime juice
+                qty: 1
+                unit: oz
+              - name: Lemon juice
+                qty: 0.5
+                unit: oz
+          - instruction: Shake well, strain into Nick & Nora glass
+        storage: Serve immediately

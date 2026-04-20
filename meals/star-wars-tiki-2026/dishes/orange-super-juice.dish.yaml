@@ -1,0 +1,60 @@
+id: orange-super-juice
+description: Orange Super Juice
+
+yield:
+  qty: 1000
+  unit: ml
+
+equipment:
+  - Precision scale (0.1g accuracy)
+  - Vegetable peeler
+  - Vacuum sealer and bags
+  - Blender
+  - Nut milk bag
+  - Storage bottle (glass preferred)
+
+components:
+  - id: prep-orange-super-juice
+    description: Make orange super juice
+    preparations:
+      - id: make-orange-super-juice
+        description: Make orange super juice
+        steps:
+          - instruction: Peel oranges carefully with vegetable peeler, avoiding the bitter white pith
+            ingredients:
+              - name: oranges, organic
+                qty: 2
+                unit: count
+            note: Use organic oranges
+          - instruction: Record peel weight (target ~60g), calculate and record the citric/malic acid quantities.  Place peels and acid powders into vacuum seal bag
+            ingredients:
+              - name: orange peels
+                qty: 100
+                unit: '%'
+                note: ~1.5 oranges, peel carefully avoiding white pith
+              - name: citric acid
+                qty: 90
+                unit: '%'
+                note: 90% of 60g = 54g
+              - name: malic acid
+                qty: 11
+                unit: '%'
+                note: 11% of 60g = 6.6g
+          - instruction: Vacuum seal the bag, massage bag vigorously for 60 seconds to press acid into peels
+          - instruction: Let sit for 15–20 minutes
+            note: Acid turns into liquid syrup drawing out essential oils
+          - instruction: Juice the naked fruit, refrigerate until required
+          - instruction: Cut open bag, pour Oleo Citrate into blender with water
+            ingredients:
+              - name: water
+                qty: 1000
+                unit: g
+                note: room temperature, distilled or filtered
+            note: rinse the bag with the water to get every last drop of the oleo citrate
+          - instruction: Add fresh orange juice from juiced fruit
+          - instruction: Blend on high for 30–60 seconds until milky/opaque
+          - instruction: Pour into nut milk bag over large bowl, squeezing bag firmly to extract every drop
+          - instruction: Discard dry pulp, bottle liquid
+        notes:
+          - 'Storage: Refrigerate, stays bright for 1-2 weeks (vs 4-6 hours for fresh juice)'
+          - 'Yield: ~1000ml from ~1.5 oranges'

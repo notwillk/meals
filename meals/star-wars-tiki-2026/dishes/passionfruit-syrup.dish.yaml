@@ -1,0 +1,34 @@
+id: passionfruit-syrup
+description: Passionfruit Syrup
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-passionfruit-syrup
+    description: Make passionfruit syrup
+    preparations:
+      - id: make-passionfruit-syrup
+        description: Make passionfruit syrup
+        steps:
+          - instruction: Combine sugar and water in a vacuum seal bag, stir to dissolve
+            ingredients:
+              - name: sugar
+                qty: 200
+                unit: g
+              - name: water
+                qty: 100
+                unit: g
+          - instruction: Add passionfruit pulp to the bag
+            ingredients:
+              - name: passionfruit pulp
+                qty: 397
+                unit: g
+                note: Goya pulp
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 140°F / 60°C for 1.5–2 hours
+          - instruction: Remove from water bath, stir well to combine
+          - instruction: Strain optional - depends on seeds preference
+        notes:
+          - Store refrigerated

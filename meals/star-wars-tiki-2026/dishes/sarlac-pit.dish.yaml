@@ -1,0 +1,47 @@
+id: sarlac-pit
+description: Sarlac Pit
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Appleton estate rum
+                qty: 1.5
+                unit: oz
+              - name: Plantation OFTD rum
+                qty: 0.5
+                unit: oz
+              - name: California falernum
+                qty: 0.5
+                unit: oz
+              - name: Pernod
+                qty: 1
+                unit: dash
+              - name: Angostura bitters
+                qty: 1
+                unit: dash
+              - name: Strawberry syrup
+                qty: 0.25
+                unit: oz
+              - name: Passionfruit syrup
+                qty: 0.25
+                unit: oz
+              - name: Orange juice
+                qty: 0.5
+                unit: oz
+              - name: Lime juice
+                qty: 0.5
+                unit: oz
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with lime wheel and mint sprig
+        storage: Serve immediately

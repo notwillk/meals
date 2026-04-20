@@ -1,0 +1,35 @@
+id: vanilla-syrup
+description: Vanilla Syrup
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-vanilla-syrup
+    description: Make vanilla syrup
+    preparations:
+      - id: make-vanilla-syrup
+        description: Make vanilla syrup
+        steps:
+          - instruction: Combine sugar and water in a vacuum seal bag, stir to dissolve slightly
+            ingredients:
+              - name: sugar
+                qty: 133
+                unit: g
+              - name: water
+                qty: 67
+                unit: g
+          - instruction: Add split vanilla bean to the bag
+            ingredients:
+              - name: vanilla bean
+                qty: 1
+                unit: whole
+                note: split
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 140°F / 60°C for 2 hours
+          - instruction: Remove from water bath, let cool slightly
+          - instruction: Leave bean in for stronger flavor or strain out
+        notes:
+          - Strain optional - leave bean in for infusion or fine strain
+          - Store refrigerated

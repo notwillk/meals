@@ -1,0 +1,28 @@
+id: honey-syrup
+description: Honey Syrup
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-honey-syrup
+    description: Make honey syrup
+    preparations:
+      - id: make-honey-syrup
+        description: Make honey syrup
+        steps:
+          - instruction: Combine honey and water in a vacuum seal bag
+            ingredients:
+              - name: honey
+                qty: 150
+                unit: g
+              - name: water
+                qty: 50
+                unit: g
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 130°F / 54°C for 1 hour
+          - instruction: Remove from water bath, massage bag to combine thoroughly
+        notes:
+          - No strain needed
+          - Flows like 2:1 sugar syrup, better stability - store refrigerated

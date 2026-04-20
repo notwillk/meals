@@ -1,0 +1,38 @@
+id: ewok-like-an-egyptian
+description: Ewok Like an Egyptian
+
+yield:
+  qty: 1
+  unit: serving
+
+components:
+  - id: build-drink
+    description: Build drink
+    preparations:
+      - id: build
+        description: Build drink
+        final: true
+        steps:
+          - instruction: Combine all ingredients in shaking tin with ice
+            ingredients:
+              - name: Appleton estate rum
+                qty: 2
+                unit: oz
+              - name: Heering cherry liqueur
+                qty: 0.5
+                unit: oz
+              - name: Campari
+                qty: 0.25
+                unit: oz
+              - name: Passionfruit syrup
+                qty: 0.75
+                unit: oz
+              - name: Pineapple juice
+                qty: 0.5
+                unit: oz
+              - name: Lime juice
+                qty: 0.75
+                unit: oz
+          - instruction: Shake well, strain into glass
+          - instruction: Garnish with flower
+        storage: Serve immediately

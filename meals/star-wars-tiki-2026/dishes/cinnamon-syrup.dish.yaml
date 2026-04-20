@@ -1,0 +1,34 @@
+id: cinnamon-syrup
+description: Cinnamon Syrup
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-cinnamon-syrup
+    description: Make cinnamon syrup
+    preparations:
+      - id: make-cinnamon-syrup
+        description: Make cinnamon syrup
+        steps:
+          - instruction: Combine sugar and water in a vacuum seal bag
+            ingredients:
+              - name: sugar
+                qty: 133
+                unit: g
+              - name: water
+                qty: 67
+                unit: g
+          - instruction: Add cracked cinnamon sticks to the bag
+            ingredients:
+              - name: cinnamon sticks
+                qty: 2
+                unit: whole
+                note: cracked
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 155°F / 68°C for 2.5–3 hours
+          - instruction: Remove from water bath, let steep briefly
+          - instruction: Use very fine strainer to remove cinnamon particles
+        notes:
+          - Store refrigerated

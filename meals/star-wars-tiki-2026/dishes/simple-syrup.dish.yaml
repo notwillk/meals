@@ -1,0 +1,28 @@
+id: simple-syrup
+description: Rich Simple Syrup
+
+yield:
+  qty: 200
+  unit: ml
+
+components:
+  - id: prep-simple-syrup
+    description: Make simple syrup
+    preparations:
+      - id: make-simple-syrup
+        description: Make simple syrup
+        steps:
+          - instruction: Combine white sugar and water in a vacuum seal bag
+            ingredients:
+              - name: sugar
+                qty: 200
+                unit: g
+              - name: water
+                qty: 100
+                unit: g
+          - instruction: Seal bag using vacuum sealer
+          - instruction: Sous vide at 140°F / 60°C for 45–60 minutes
+          - instruction: Remove from water bath, shake to combine
+        notes:
+          - No strain needed
+          - Store at room temperature short-term, refrigerate long-term
