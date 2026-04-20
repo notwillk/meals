@@ -110,14 +110,13 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
               <span class="course-desc muted">{course.description}</span>
             )}
           </div>
-          <div class="course-dishes">
-            {course.dishes.map((dish: Dish, i: number) => (
-              <>
-                {i > 0 && <span class="dot muted">&middot;</span>}
+          <ul class="course-dish-list">
+            {course.dishes.map((dish: Dish) => (
+              <li>
                 <a href={`/recipes/${slug}/${dish.slug}`}>{dish.description}</a>
-              </>
+              </li>
             ))}
-          </div>
+          </ul>
         </li>
       ))}
     </ul>
@@ -188,17 +187,16 @@ const coursesWithOffset = visibleCourses.map((course: Course, idx: number) => {
       margin-left: auto;
     }
 
-    .course-dishes {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.4em;
-      margin-top: var(--space-md);
+    .course-dish-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-md) 0 0;
       font-size: 0.95rem;
+      text-align: center;
     }
 
-    .dot {
-      margin: 0 0.2em;
+    .course-dish-list li {
+      margin: 0.3em 0;
     }
 
     @media (max-width: 600px) {
