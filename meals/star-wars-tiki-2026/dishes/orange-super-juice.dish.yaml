@@ -19,6 +19,8 @@ components:
     preparations:
       - id: make-orange-super-juice
         description: Make orange super juice
+        time: '2026-05-02T12:30:00'
+        duration: 'PT30M'
         steps:
           - instruction: Peel oranges carefully with vegetable peeler, avoiding the bitter white pith
             ingredients:

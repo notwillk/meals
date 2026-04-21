@@ -12,6 +12,8 @@ components:
       - id: make-lime-super-juice
         description: Make lime super juice
         final: true
+        time: '2026-05-02T12:30:00'
+        duration: 'PT30M'
         steps:
           - instruction: Peel limes carefully with vegetable peeler, avoiding the bitter white pith
             ingredients:

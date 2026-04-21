@@ -11,6 +11,8 @@ components:
     preparations:
       - id: make-peach-shrub
         description: Make peach shrub
+        time: '2026-05-02T12:00:00'
+        duration: 'PT300M'
         steps:
           - instruction: Add all ingredients to vacuum seal bag (remove peel before juicing if using)
             ingredients:
@@ -29,7 +31,7 @@ components:
                 unit: strip
                 note: optional, no pith
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 145°F / 63°C for 2.5 hours
+          - instruction: Sous vide at 130°F / 54°C for 4–5 hours
           - instruction: Remove from water bath
           - instruction: Remove lemon peel before juicing if used
           - instruction: Run contents through masticating juicer

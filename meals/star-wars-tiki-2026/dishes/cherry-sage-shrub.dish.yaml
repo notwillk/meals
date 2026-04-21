@@ -11,6 +11,8 @@ components:
     preparations:
       - id: make-cherry-sage-shrub
         description: Make cherry-sage shrub
+        time: '2026-05-02T12:00:00'
+        duration: 'PT300M'
         steps:
           - instruction: Add all ingredients to vacuum seal bag
             ingredients:
@@ -28,7 +30,7 @@ components:
                 qty: 20
                 unit: g
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 140°F / 60°C for 2–2.5 hours
+          - instruction: Sous vide at 130°F / 54°C for 4–5 hours
           - instruction: Remove sage leaves before juicing
           - instruction: Run contents through masticating juicer
         notes:

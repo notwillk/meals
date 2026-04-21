@@ -2,34 +2,6 @@ name: May the Fourth
 start_time: 2026-05-03T13:30:00
 
 courses:
-  - name: Drinks
-    description: Star Wars Tiki Cocktails — A galaxy of themed drinks
-    plating: Tiki mugs and glasses
-    dishes:
-      - '&dishes/the-droids-caboose'
-      - '&dishes/remember-the-alderan'
-      - '&dishes/bantha-milk'
-      - '&dishes/carbonite-cooler'
-      - '&dishes/dagoba-swamp-water'
-      - '&dishes/ewok-like-an-egyptian'
-      - '&dishes/flying-porg'
-      - '&dishes/shrubacca'
-      - '&dishes/geonosis-grog'
-      - '&dishes/get-in-there-you-big-hairy-oaf'
-      - '&dishes/han-shot-first'
-      - '&dishes/niamos-nectar'
-      - '&dishes/its-a-trap'
-      - '&dishes/jawa-juice'
-      - '&dishes/kessel-run'
-      - '&dishes/medal-of-yavin'
-      - '&dishes/sarlac-pit'
-      - '&dishes/sith-sling'
-      - '&dishes/tatooine-sunset'
-      - '&dishes/tauntaun-tiki'
-      - '&dishes/thats-no-moon'
-      - '&dishes/crimson-kyber'
-    duration: PT4H
-    first_course: true
   - name: Prep
     description: Batch-prepped ingredients — Syrups, shrubs, and super juice
     plating: Labeled containers
@@ -48,4 +20,32 @@ courses:
       - '&dishes/simple-syrup'
       - '&dishes/strawberry-syrup'
       - '&dishes/vanilla-syrup'
-    duration: PT8H
+    duration: PT4H
+  - name: Drinks
+    description: Star Wars Tiki Cocktails — A galaxy of themed drinks
+    plating: Tiki mugs and glasses
+    dishes:
+      - '&dishes/bantha-milk'
+      - '&dishes/carbonite-cooler'
+      - '&dishes/crimson-kyber'
+      - '&dishes/dagoba-swamp-water'
+      - '&dishes/the-droids-caboose'
+      - '&dishes/ewok-like-an-egyptian'
+      - '&dishes/flying-porg'
+      - '&dishes/geonosis-grog'
+      - '&dishes/get-in-there-you-big-hairy-oaf'
+      - '&dishes/han-shot-first'
+      - '&dishes/its-a-trap'
+      - '&dishes/jawa-juice'
+      - '&dishes/kessel-run'
+      - '&dishes/medal-of-yavin'
+      - '&dishes/niamos-nectar'
+      - '&dishes/remember-the-alderan'
+      - '&dishes/sarlac-pit'
+      - '&dishes/shrubacca'
+      - '&dishes/sith-sling'
+      - '&dishes/tatooine-sunset'
+      - '&dishes/tauntaun-tiki'
+      - '&dishes/thats-no-moon'
+    duration: PT4H
+    first_course: true

@@ -10,6 +10,8 @@ components:
     description: Make demerara syrup
     preparations:
       - id: make-demerara-syrup
+        time: '2026-05-02T12:00:00'
+        duration: 'PT60M'
         description: Make demerara syrup
         steps:
           - instruction: Combine demerara sugar and water in a vacuum seal bag
@@ -21,7 +23,7 @@ components:
                 qty: 67
                 unit: g
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 150°F / 65°C for 1 hour
+          - instruction: Sous vide at 155°F / 68°C for 1 hour
           - instruction: Remove from water bath, shake or massage bag to combine
         notes:
           - No strain needed - syrup is naturally smooth

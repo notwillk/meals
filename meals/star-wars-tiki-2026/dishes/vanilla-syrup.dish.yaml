@@ -10,6 +10,8 @@ components:
     description: Make vanilla syrup
     preparations:
       - id: make-vanilla-syrup
+        time: '2026-05-02T12:00:00'
+        duration: 'PT120M'
         description: Make vanilla syrup
         steps:
           - instruction: Combine sugar and water in a vacuum seal bag, stir to dissolve slightly
@@ -27,7 +29,7 @@ components:
                 unit: whole
                 note: split
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 140°F / 60°C for 2 hours
+          - instruction: Sous vide at 130°F / 54°C for 2 hours
           - instruction: Remove from water bath, let cool slightly
           - instruction: Leave bean in for stronger flavor or strain out
         notes:

@@ -1,0 +1,6 @@
+- name: Go Mi Ranchito
+  time: '2026-05-02T10:00:00'
+  duration: 'PT1H'
+- name: Shower
+  time: '2026-05-03T12:00:00'
+  duration: 'PT30M'

@@ -10,6 +10,8 @@ components:
     description: Make honey syrup
     preparations:
       - id: make-honey-syrup
+        time: '2026-05-02T12:00:00'
+        duration: 'PT60M'
         description: Make honey syrup
         steps:
           - instruction: Combine honey and water in a vacuum seal bag

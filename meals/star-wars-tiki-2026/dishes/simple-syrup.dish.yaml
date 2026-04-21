@@ -10,6 +10,8 @@ components:
     description: Make simple syrup
     preparations:
       - id: make-simple-syrup
+        time: '2026-05-02T12:00:00'
+        duration: 'PT60M'
         description: Make simple syrup
         steps:
           - instruction: Combine white sugar and water in a vacuum seal bag
@@ -21,7 +23,7 @@ components:
                 qty: 100
                 unit: g
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 140°F / 60°C for 45–60 minutes
+          - instruction: Sous vide at 130°F / 54°C for 45–60 minutes
           - instruction: Remove from water bath, shake to combine
         notes:
           - No strain needed

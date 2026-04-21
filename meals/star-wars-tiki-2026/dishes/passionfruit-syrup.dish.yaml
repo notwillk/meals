@@ -11,6 +11,8 @@ components:
     preparations:
       - id: make-passionfruit-syrup
         description: Make passionfruit syrup
+        time: '2026-05-02T12:00:00'
+        duration: 'PT120M'
         steps:
           - instruction: Combine sugar and water in a vacuum seal bag, stir to dissolve
             ingredients:
@@ -27,7 +29,7 @@ components:
                 unit: g
                 note: Goya pulp
           - instruction: Seal bag using vacuum sealer
-          - instruction: Sous vide at 140°F / 60°C for 1.5–2 hours
+          - instruction: Sous vide at 130°F / 54°C for 1.5–2 hours
           - instruction: Remove from water bath, stir well to combine
           - instruction: Strain optional - depends on seeds preference
         notes:
