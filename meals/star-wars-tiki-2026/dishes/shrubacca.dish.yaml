@@ -6,11 +6,13 @@ yield:
   unit: serving
 
 components:
-  - id: make-drink
-    description: Make drink
+  - id: build-drink
+    description: Build drink
     preparations:
       - id: make-drink
-        description: Make drink
+        description: Build drink
+        time: '2026-05-03T13:30:00'
+        duration: 'PT2M'
         final: true
         steps:
           - instruction: Build over ice in highball
